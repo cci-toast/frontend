@@ -1,5 +1,5 @@
 # frontend
 Repo for hosting the React app
 
-# Starting the application
+#### Starting the application
 `npm start`
