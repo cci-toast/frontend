@@ -1,150 +1,137 @@
 import React, { Component } from "react";
-import Modal from "./components/Modal";
+import {
+  Route,
+  Switch,
+  BrowserRouter as Router
+} from 'react-router-dom';
 
-const todoItems = [{
-        id: 1,
-        title: "Go to Market",
-        description: "Buy ingredients to prepare dinner",
-        completed: true
-    },
-    {
-        id: 2,
-        title: "Study",
-        description: "Read Algebra and History textbook for upcoming test",
-        completed: false
-    },
-    {
-        id: 3,
-        title: "Sally's books",
-        description: "Go to library to rent sally's books",
-        completed: true
-    },
-    {
-        id: 4,
-        title: "Article",
-        description: "Write article on how to use django with react",
-        completed: false
-    }
-];
+import Logo from "./logo.png"
+import "./index.css";
+
+import Login from './routes/Login';
+
+//Client Portal Screens
+import ClientForm from './routes/ClientForm';
+import ClientPlan from './routes/ClientPlan';
+import ClientAdvisorContact from './routes/ClientAdvisorContact';
+import ClientActionItems from './routes/ClientActionItems';
+
+import { faUser, faChartBar, faCheckCircle, faAddressCard, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import SideNav, { NavItem, NavIcon } from '@trendmicro/react-sidenav';
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import Center from 'react-center';
+
+const LoginContainer = () => (
+  <div className="App-header" style={{ backgroundColor: 'white' }}>
+    <div className="App-intro">
+      <div>
+        <Route path="/" component={Login} />
+      </div>
+    </div>
+  </div>
+)
+
+const ClientContainer = () => (
+
+  <div className="App-header" style={{ backgroundColor: '#CCCCCC' }}>
+    <div className="App-intro">
+      <div>
+        <Router>
+          <Route render={({ location, history }) => (
+            <div className="container">
+              <SideNav
+                onSelect={(selected) => {
+                  const to = '/' + selected;
+                  if (location.pathname !== to) {
+                    history.push(to);
+                  }
+
+                }} >
+                <Center>
+                  <img src={Logo} rel="icon" alt="" style={{ width: '50px', paddingTop: '10px', paddingBottom: '5px' }} />
+                </Center>
+                <SideNav.Nav>
+                  <NavItem eventKey="clientform" >
+                    <NavIcon classnastyle={{ flexDirection: 'column' }} >
+                      <FontAwesomeIcon icon={faUser} />
+                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '17px' }}>Profile</span>
+                    </NavIcon>
+
+                  </NavItem>
+
+                  <NavItem eventKey="clientplan" >
+                    <NavIcon>
+                      <FontAwesomeIcon icon={faChartBar} />
+                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '22px' }}>Plan</span>
+                    </NavIcon>
+                  </NavItem>
+
+
+                  <NavItem eventKey="clientactionitems">
+                    <NavIcon>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '4px' }}>Action Items</span>
+                    </NavIcon>
+                  </NavItem>
+
+                  <NavItem eventKey="clientadvisorcontact">
+                    <NavIcon>
+                      <FontAwesomeIcon icon={faAddressCard} />
+                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '4px' }}>Advisor Contact</span>
+                    </NavIcon>
+                  </NavItem>
+
+                  <div style={{ paddingBottom: '40vh' }}></div>
+
+                  {/*TODO*/}
+                  <NavItem eventKey="logout">
+                    <NavIcon>
+                      <FontAwesomeIcon icon={faPowerOff} />
+                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '17px' }}>Logout</span>
+                    </NavIcon>
+                  </NavItem>
+
+                </SideNav.Nav>
+              </SideNav>
+              <Route exact path="/clientform" component={ClientForm} />
+              <Route exact path="/clientplan" component={ClientPlan} />
+              <Route exact path="/clientadvisorcontact" component={ClientAdvisorContact} />
+              <Route exact path="/clientactionitems" component={ClientActionItems} />
+
+            </div>
+
+          )}
+          />
+        </Router>
+      </div>
+    </div>
+  </div>
+)
+
+
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modal: false,
-            viewCompleted: false,
-            activeItem: {
-                title: "",
-                description: "",
-                completed: false
-            },
-            todoList: todoItems
-        };
-    }
-    toggle = () => {
-        this.setState({ modal: !this.state.modal });
-    };
-    handleSubmit = item => {
-        this.toggle();
-        alert("save" + JSON.stringify(item));
-    };
-    handleDelete = item => {
-        alert("delete" + JSON.stringify(item));
-    };
-    createItem = () => {
-        const item = { title: "", description: "", completed: false };
-        this.setState({ activeItem: item, modal: !this.state.modal });
-    };
-    editItem = item => {
-        this.setState({ activeItem: item, modal: !this.state.modal });
-    };
-    displayCompleted = status => {
-        if (status) {
-            return this.setState({ viewCompleted: true });
-        }
-        return this.setState({ viewCompleted: false });
-    };
-    renderTabList = () => {
-        return ( <
-            div className = "my-5 tab-list" >
-            <
-            span onClick = {
-                () => this.displayCompleted(true) }
-            className = { this.state.viewCompleted ? "active" : "" } >
-            complete { " " } <
-            /span>{" "} <
-            span onClick = {
-                () => this.displayCompleted(false) }
-            className = { this.state.viewCompleted ? "" : "active" } >
-            Incomplete { " " } <
-            /span>{" "} <
-            /div>
-        );
-    };
-    renderItems = () => {
-        const { viewCompleted } = this.state;
-        const newItems = this.state.todoList.filter(
-            item => item.completed === viewCompleted
-        );
-        return newItems.map(item => ( <
-            li key = { item.id }
-            className = "list-group-item d-flex justify-content-between align-items-center" >
-            <
-            span className = { `todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
-          }` }
-            title = { item.description } >
-            { item.title } { " " } <
-            /span>{" "} <
-            span >
-            <
-            button onClick = {
-                () => this.editItem(item) }
-            className = "btn btn-secondary mr-2" >
-            Edit { " " } <
-            /button>{" "} <
-            button onClick = {
-                () => this.handleDelete(item) }
-            className = "btn btn-danger" >
-            Delete { " " } <
-            /button>{" "} <
-            /span>{" "} <
-            /li>
-        ));
-    };
-    render() {
-        return ( <
-            main className = "content" >
-            <
-            h1 className = "text-white text-uppercase text-center my-4" > { " " }
-            Todo app { " " } <
-            /h1>{" "} <
-            div className = "row " >
-            <
-            div className = "col-md-6 col-sm-10 mx-auto p-0" >
-            <
-            div className = "card p-3" >
-            <
-            div className = "" >
-            <
-            button onClick = { this.createItem }
-            className = "btn btn-primary" >
-            Add task { " " } <
-            /button>{" "} <
-            /div>{" "} { this.renderTabList() } { " " } <
-            ul className = "list-group list-group-flush" > { " " } { this.renderItems() } { " " } <
-            /ul>{" "} <
-            /div>{" "} <
-            /div>{" "} <
-            /div>{" "} {
-                this.state.modal ? ( <
-                    Modal activeItem = { this.state.activeItem }
-                    toggle = { this.toggle }
-                    onSave = { this.handleSubmit }
-                    />
-                ) : null
-            } { " " } <
-            /main>
-        );
-    }
+
+
+  render() {
+    return (
+      <Switch>
+        <Route exact path="/" component={LoginContainer} />
+        <Route exact path="/clientform" component={ClientContainer} />
+        <Route exact path="/clientplan" component={ClientContainer} />
+        <Route exact path="/clientadvisorcontact" component={ClientContainer} />
+        <Route exact path="/clientactionitems" component={ClientContainer} />
+        <Route />
+
+      </Switch>
+
+
+
+
+    );
+  }
 }
+
 export default App;
+
