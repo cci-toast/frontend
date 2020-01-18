@@ -1,24 +1,31 @@
-
 import React, { Component } from "react";
-import { Row, Col } from 'reactstrap';
-import Center from 'react-center';
-import {
-  Link
-} from 'react-router-dom';
+import { Row, Col } from "reactstrap";
+import Center from "react-center";
+import { Link } from "react-router-dom";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Logo from "./logo.png"
+import Logo from "./logo.png";
 
 class Login extends Component {
   render() {
+    const leftContent = {
+      justifyContent: "center",
+      alignItems: "center"
+    };
+
+    const logo = {
+      width: "30%",
+      paddingTop: "40px"
+    };
+
     return (
       <div>
         <Row>
-          <Col className="col-md-6 blue-purple-gradient" >
-            <div style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Col className="col-md-6 blue-purple-gradient">
+            <div style={leftContent}>
               <Center>
-                <img src={Logo} rel="icon" alt="" style={{ width: '30%', paddingTop: '40px' }} />
+                <img src={Logo} rel="icon" alt="" style={logo} />
               </Center>
 
               <Center>
@@ -28,14 +35,14 @@ class Login extends Component {
                 <h6 className="white-text">Financial planning made easier</h6>
               </Center>
             </div>
-
           </Col>
 
-          <Col className="col-md-6" >
-
+          <Col className="col-md-6">
             <form onSubmit={this.submitHandler}>
               <Col className="mb-3">
-                <h4 className="black-text" style={{ fontWeight: "bold" }}>Sign In </h4>
+                <h4 className="black-text" style={{ fontWeight: "bold" }}>
+                  Sign In{" "}
+                </h4>
 
                 <br />
                 <label className="black-text">Email</label>
@@ -45,7 +52,13 @@ class Login extends Component {
                       <FontAwesomeIcon icon={faUser} />
                     </span>
                   </div>
-                  <input type="email" className="form-control" name="email" placeholder="Type in your email" required />
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    placeholder="Type in your email"
+                    required
+                  />
                 </div>
               </Col>
               <br />
@@ -57,22 +70,30 @@ class Login extends Component {
                       <FontAwesomeIcon icon={faLock} />
                     </span>
                   </div>
-                  <input type="password" className="form-control" name="password" placeholder="Type in your password" required />
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    placeholder="Type in your password"
+                    required
+                  />
                 </div>
               </Col>
               <br />
               <Center>
                 <Link to="/clientform">
-                  <button className="btn blue-purple-gradient white-text" type="submit" >Sign In</button>
+                  <button
+                    className="btn blue-purple-gradient white-text"
+                    type="submit"
+                  >
+                    Sign In
+                  </button>
                 </Link>
               </Center>
             </form>
-
           </Col>
-
         </Row>
       </div>
-
     );
   }
 }
