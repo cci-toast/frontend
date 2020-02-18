@@ -9,8 +9,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 ReactDOM.render(
-    <BrowserRouter>
-            
+    <BrowserRouter>     
         <App />
     </BrowserRouter>
     , document.getElementById('root')
