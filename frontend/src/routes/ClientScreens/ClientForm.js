@@ -65,7 +65,7 @@ class ClientForm extends Component {
 
   saveButton() {
     let currentStep = this.state.currentStep;
-    if (currentStep == 6) {
+    if (currentStep === 6) {
       return (
         <PrimaryButton type="button" label="Save" />
 

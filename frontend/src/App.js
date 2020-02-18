@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   Route,
-  Switch, Redirect,
+  Switch,
   BrowserRouter as Router
 } from 'react-router-dom';
 
@@ -26,9 +26,9 @@ import Center from 'react-center';
 import Card from './routes/Components/Card'
 
 const logo = {
-  width: '50px', 
-  paddingTop: '10px', 
-  paddingBottom: '5px'
+  width: '3.125rem', 
+  paddingTop: '0.625rem', 
+  paddingBottom: '0.3125rem'
 }
 
 const paddingBottom={
@@ -69,7 +69,7 @@ const ClientContainer = () => (
                   <NavItem eventKey="clientform" active={location.pathname === '/clientform'} >
                     <NavIcon>
                       <FontAwesomeIcon icon={faUser} />
-                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '17px' }}>Profile</span>
+                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '1.0625rem' }}>Profile</span>
                     </NavIcon>
 
                   </NavItem>
@@ -77,7 +77,7 @@ const ClientContainer = () => (
                   <NavItem eventKey="clientplan" active={location.pathname === '/clientplan'}>
                     <NavIcon>
                       <FontAwesomeIcon icon={faChartBar} />
-                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '22px' }}>Plan</span>
+                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '1.375rem' }}>Plan</span>
                     </NavIcon>
                   </NavItem>
 
@@ -85,14 +85,14 @@ const ClientContainer = () => (
                   <NavItem eventKey="clientactionitems" active={location.pathname === '/clientactionitems'} >
                     <NavIcon>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '4px' }}>Action Items</span>
+                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '0.25rem' }}>Action Items</span>
                     </NavIcon>
                   </NavItem>
 
                   <NavItem eventKey="clientadvisorcontact" active={location.pathname === '/clientadvisorcontact'}>
                     <NavIcon>
                       <FontAwesomeIcon icon={faAddressCard} />
-                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '4px' }}>Advisor Contact</span>
+                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '0.25rem' }}>Advisor Contact</span>
                     </NavIcon>
                   </NavItem>
 
@@ -102,7 +102,7 @@ const ClientContainer = () => (
                   <NavItem eventKey="/" onClick={() => window.location.reload(history.push("/"))} >
                     <NavIcon>
                       <FontAwesomeIcon icon={faPowerOff} />
-                      <span style={{ fontSize: '10px', position: 'absolute', top: '15px', left: '17px' }}>Logout</span>
+                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '1.0625rem' }}>Logout</span>
                       </NavIcon>
                       </NavItem>
                 </SideNav.Nav>

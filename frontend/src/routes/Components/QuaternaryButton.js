@@ -4,7 +4,7 @@ class QuaternaryButton extends Component {
     const quaternary={
       color:"#1A1A1A",
       borderRadius: "0.625rem",
-      border: "1px solid #0364FF",
+      border: "0.0625rem solid #0364FF",
       bottom:"0rem",
       right:"22rem"
 
