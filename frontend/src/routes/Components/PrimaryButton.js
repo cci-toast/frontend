@@ -4,9 +4,8 @@ class PrimaryButton extends Component {
     const primary = {
       background: "linear-gradient(45deg, #721ebe, #3260b3)",
       borderRadius: "0.625rem",
-      bottom:"0rem",
-      right:"15rem",
-      float:"right"
+      float:"right",
+      minWidth: "8rem",
     };
     return (
       <button className="btn" type="submit" style={primary}>{this.props.label}</button>

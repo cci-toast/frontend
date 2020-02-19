@@ -10,9 +10,9 @@ import Logo from "./logo.png";
 import PrimaryButton from "./Components/PrimaryButton";
 
 
-class Login extends Component {
+class Signin extends Component {
   render() {
-    const leftContent = {
+    const centerContent = {
       justifyContent: "center",
       alignItems: "center"
     };
@@ -32,7 +32,7 @@ class Login extends Component {
     };
 
 
-    const paddingTop = {
+    const signinSpacer = {
       paddingTop: "5rem"
     }
 
@@ -41,7 +41,7 @@ class Login extends Component {
       <div>
         <Row>
           <Col md="6" style={bluePurpleGradient}>
-            <div style={leftContent}>
+            <div style={centerContent}>
               <Center>
                 <img src={Logo} rel="icon" alt="" style={logo} />
               </Center>
@@ -55,7 +55,7 @@ class Login extends Component {
             </div>
           </Col>
 
-          <Col md="6" style={paddingTop}>
+          <Col md="6" style={signinSpacer}>
             <form onSubmit={this.submitHandler}>
               <Col className="mb-3">
                 <h4>
@@ -110,4 +110,4 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+export default Signin;

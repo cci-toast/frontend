@@ -228,7 +228,7 @@ function ClientInformation(props) {
           </div>
         </Col>
       </Row>
-      <div className="spacerPrimary" ></div>
+      <div className="spacer-tertiary" ></div>
     </div>
 
   
@@ -269,7 +269,7 @@ function Finances(props) {
         <TertiaryButton label="+ Additional Income" />
       </Center>
 
-      <div className="spacerSecondary"></div>
+      <div className="spacer-quaternary"></div>
     </div>
   );
 }
@@ -514,7 +514,7 @@ function Goals(props) {
         <Center>
           <TertiaryButton label="+ Long Term Goal" />
         </Center>
-        <div className="spacerPrimary" ></div>
+        <div className="spacer-secondary" ></div>
       </div>
     </React.Fragment>
   );

@@ -8,7 +8,7 @@ import {
 import Logo from "./logo.png"
 import "./index.css";
 
-import Login from './routes/Login';
+import Signin from './routes/Signin';
 
 //Client Portal Screens
 import ClientForm from './routes/ClientScreens/ClientForm';
@@ -31,25 +31,73 @@ const logo = {
   paddingBottom: '0.3125rem'
 }
 
-const paddingBottom={
+const signoutSpacer={
   paddingBottom: '50vh' 
 }
 
+const clientAdvisorHeader={
+  backgroundColor: '#CCCCCC',
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}
 
-const LoginContainer = () => (
-  <div className="App-header loginBackground">
-    <div className="App-intro">
+const signinHeader={
+  backgroundColor: 'white',
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}
+
+const profileNavText={
+fontSize: '0.625rem', 
+position: 'absolute', 
+top: '0.9375rem', 
+left: '1.0625rem'
+}
+
+const planNavText={
+  fontSize: '0.625rem', 
+  position: 'absolute', 
+  top: '0.9375rem', 
+  left: '1.375rem'
+}
+
+
+const actionItemsNavText={
+  fontSize: '0.625rem', 
+  position: 'absolute', 
+  top: '0.9375rem', 
+  left: '0.25rem'
+}
+
+const advisorContactNavText={
+  fontSize: '0.625rem', 
+  position: 'absolute', 
+  top: '0.9375rem', 
+  left: '0.25rem'
+}
+
+const signoutNavText={
+  fontSize: '0.625rem', 
+  position: 'absolute', 
+  top: '0.9375rem', 
+  left: '0.9rem'
+}
+
+const SigninContainer = () => (
+  <div style={signinHeader}>
       <div>
-        <Route path="/" component={Login} />
+        <Route path="/" component={Signin} />
       </div>
-    </div>
   </div>
 )
 
 
 const ClientContainer = () => (
-  <div className="App-header clientadvisorBackground">
-    <div className="App-intro">
+  <div style={clientAdvisorHeader}>
       <div>
         <Router>
           <Route render={({ location, history }) => (
@@ -69,7 +117,7 @@ const ClientContainer = () => (
                   <NavItem eventKey="clientform" active={location.pathname === '/clientform'} >
                     <NavIcon>
                       <FontAwesomeIcon icon={faUser} />
-                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '1.0625rem' }}>Profile</span>
+                      <span style={profileNavText}>Profile</span>
                     </NavIcon>
 
                   </NavItem>
@@ -77,7 +125,7 @@ const ClientContainer = () => (
                   <NavItem eventKey="clientplan" active={location.pathname === '/clientplan'}>
                     <NavIcon>
                       <FontAwesomeIcon icon={faChartBar} />
-                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '1.375rem' }}>Plan</span>
+                      <span style={planNavText}>Plan</span>
                     </NavIcon>
                   </NavItem>
 
@@ -85,24 +133,24 @@ const ClientContainer = () => (
                   <NavItem eventKey="clientactionitems" active={location.pathname === '/clientactionitems'} >
                     <NavIcon>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '0.25rem' }}>Action Items</span>
+                      <span style={actionItemsNavText}>Action Items</span>
                     </NavIcon>
                   </NavItem>
 
                   <NavItem eventKey="clientadvisorcontact" active={location.pathname === '/clientadvisorcontact'}>
                     <NavIcon>
                       <FontAwesomeIcon icon={faAddressCard} />
-                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '0.25rem' }}>Advisor Contact</span>
+                      <span style={advisorContactNavText}>Advisor Contact</span>
                     </NavIcon>
                   </NavItem>
 
-                  <div style={paddingBottom}></div>
+                  <div style={signoutSpacer}></div>
 
   
                   <NavItem eventKey="/" onClick={() => window.location.reload(history.push("/"))} >
                     <NavIcon>
                       <FontAwesomeIcon icon={faPowerOff} />
-                      <span style={{ fontSize: '0.625rem', position: 'absolute', top: '0.9375rem', left: '1.0625rem' }}>Logout</span>
+                      <span style={signoutNavText}>Sign Out</span>
                       </NavIcon>
                       </NavItem>
                 </SideNav.Nav>
@@ -121,7 +169,6 @@ const ClientContainer = () => (
           />
         </Router>
       </div>
-    </div>
   </div>
 )
 
@@ -132,7 +179,7 @@ class App extends Component {
     return (
       <div>
       <Switch>
-        <Route exact path="/" component={LoginContainer} />
+        <Route exact path="/" component={SigninContainer} />
         <Route exact path="/clientform" component={ClientContainer} />
         <Route exact path="/clientplan" component={ClientContainer} />
         <Route exact path="/clientadvisorcontact" component={ClientContainer} />
