@@ -13,8 +13,11 @@ import {
 
 import Center from "react-center";
 
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SecondaryButton from "../Components/SecondaryButton";
+import QuaternaryButton from "../Components/QuaternaryButton";
+
+var incomeval = 87000;
+var age = 40;
 
 class ClientPlan extends Component {
   constructor(props) {
@@ -46,14 +49,7 @@ class ClientPlan extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
-        <button
-          className="btn blue-purple-gradient float-left white-text"
-          type="button"
-          onClick={this.prev}
-        >
-          {" "}
-          <FontAwesomeIcon icon={faArrowLeft} /> Previous{" "}
-        </button>
+        <QuaternaryButton handleClick={this.prev} type="button" label="Previous" />
       );
     }
     return null;
@@ -63,13 +59,8 @@ class ClientPlan extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep < 5) {
       return (
-        <button
-          className="btn blue-purple-gradient float-right white-text"
-          type="button"
-          onClick={this.next}
-        >
-          Next <FontAwesomeIcon icon={faArrowRight} />{" "}
-        </button>
+        <SecondaryButton handleClick={this.next} type="button" label="Next" />
+
       );
     }
     return null;
@@ -78,9 +69,8 @@ class ClientPlan extends Component {
   render() {
     const { useCanvas } = this.state;
     const BarSeries = useCanvas ? VerticalBarSeriesCanvas : VerticalBarSeries;
-    function Step1(props) {
-      var incomeval = 87000;
 
+    function EmergencySavings(props) {
       var lowerboundemergencysavings = (incomeval / 12) * 3;
       var upperboundemergencysavings = (incomeval / 12) * 6;
 
@@ -90,9 +80,7 @@ class ClientPlan extends Component {
       return (
         <div>
           <Center>
-            <h6 className="black-text" style={{ fontWeight: "bold" }}>
-              Emergency Savings{" "}
-            </h6>
+            <h6 className="title">Emergency Savings</h6>
           </Center>
           <Center>
             <p>Shoot for 3-6 months of income set aside for the unexpected.</p>
@@ -105,8 +93,7 @@ class ClientPlan extends Component {
               stackBy="y"
               margin={{ top: 30 }}
               width={600}
-              height={300}
-            >
+              height={300} >
               <VerticalGridLines />
               <HorizontalGridLines />
               <XAxis />
@@ -131,8 +118,7 @@ class ClientPlan extends Component {
                     yOffset: -60,
                     xOffset: 45
                   }
-                ]}
-              />
+                ]} />
               <BarSeries
                 color="#444db6"
                 data={[
@@ -141,8 +127,7 @@ class ClientPlan extends Component {
                     x: "Recommended Emergency Savings",
                     y: upperboundemergencysavings
                   }
-                ]}
-              />
+                ]} />
 
               <BarSeries
                 color="#8c92d5"
@@ -159,12 +144,11 @@ class ClientPlan extends Component {
         </div>
       );
     }
-    function Step2(props) {
+
+    function Retirement(props) {
       if (props.currentStep !== 2) {
         return null;
       }
-      var age = 40;
-      var incomeval = 87000;
       var retirementmultiplier;
 
       if (age < 39) {
@@ -183,20 +167,15 @@ class ClientPlan extends Component {
       return (
         <div>
           <Center>
-            <h6 className="black-text" style={{ fontWeight: "bold" }}>
-              Retirement{" "}
-            </h6>
+            <h6 className="title">Retirement </h6>
           </Center>
           <Center>
-            <p>
-              At this point you should have nearly {retirementmultiplier}x of
-              your income.
-            </p>
+            <p>At this point you should have nearly {retirementmultiplier}x of your income.</p>
           </Center>
 
           <Center>
             <XYPlot
-              className="clustered-stacked-bar-chart"
+              className="chartMargin"
               xType="ordinal"
               stackBy="y"
               margin={{ top: 30 }}
@@ -242,27 +221,25 @@ class ClientPlan extends Component {
         </div>
       );
     }
-    function Step3(props) {
+
+    function Debt(props) {
       if (props.currentStep !== 3) {
         return null;
       }
-      var incomeval = 87000;
       var monthlyincome = incomeval / 12;
       var debtyear = incomeval * 0.36;
       var debtmonthly = debtyear / 12;
 
       const debtrepayment = [
         { angle: debtmonthly, label: "$" + debtmonthly + " monthly" },
-        { angle: monthlyincome - debtmonthly }
+        { angle: monthlyincome - debtmonthly, label: "$"+ (monthlyincome - debtmonthly) }
       ];
-
-      //const debtrepayment = [{ label: "$"+debtmonthly, angle: debtmonthly },{ label: "$"+monthlyincome, angle: monthlyincome-debtmonthly }];
 
       return (
         <div>
           <Center>
-            <h6 className="black-text" style={{ fontWeight: "bold" }}>
-              Debt{" "}
+            <h6 className="title">
+              Debt
             </h6>
           </Center>
           <Center>
@@ -282,11 +259,11 @@ class ClientPlan extends Component {
       );
     }
 
-    function Step4(props) {
+
+    function Budget(props) {
       if (props.currentStep !== 4) {
         return null;
       }
-      var incomeval = 87000;
 
       var savings = (incomeval * 0.2) / 12;
       var fixedexpenses = (incomeval * 0.5) / 12;
@@ -303,15 +280,10 @@ class ClientPlan extends Component {
       return (
         <div>
           <Center>
-            <h6 className="black-text" style={{ fontWeight: "bold" }}>
-              Budget{" "}
-            </h6>
+            <h6 className="title">Budget </h6>
           </Center>
           <Center>
-            <p>
-              50% of your income to fixed expenses, 30% for spending, and 20% to
-              savings.{" "}
-            </p>
+            <p>50% of your income to fixed expenses, 30% for spending, and 20% tosavings.</p>
           </Center>
 
           <Center>
@@ -327,18 +299,15 @@ class ClientPlan extends Component {
       );
     }
 
-    function Step5(props) {
+    function LifeInsurance(props) {
       if (props.currentStep !== 5) {
         return null;
       }
-      var incomeval = 87000;
-      var recommendedprotection = incomeval * 10;
+      var recommendedlifeinsurance = incomeval * 10;
       return (
         <div>
           <Center>
-            <h6 className="black-text" style={{ fontWeight: "bold" }}>
-              Protection{" "}
-            </h6>
+            <h6 className="title">Life Insurance </h6>
           </Center>
           <Center>
             <p></p>
@@ -349,25 +318,22 @@ class ClientPlan extends Component {
               stackBy="y"
               margin={{ top: 30 }}
               width={600}
-              height={300}
-            >
+              height={300}>
               <VerticalGridLines />
               <HorizontalGridLines />
               <XAxis />
 
               <BarSeries
                 color="#8c92d5"
-                data={[{ x: "Your Income", y: incomeval }]}
-              />
+                data={[{ x: "Your Income", y: incomeval }]} />
               <BarSeries
                 color="#444db6"
                 data={[
                   {
                     x: "Recommended Life Insurance Policy",
-                    y: recommendedprotection
+                    y: recommendedlifeinsurance
                   }
-                ]}
-              />
+                ]} />
 
               <LabelSeries
                 data={[
@@ -380,13 +346,12 @@ class ClientPlan extends Component {
                   },
                   {
                     x: "Recommended Life Insurance Policy",
-                    y: recommendedprotection,
-                    label: "$" + recommendedprotection,
+                    y: recommendedlifeinsurance,
+                    label: "$" + recommendedlifeinsurance,
                     yOffset: -22,
                     xOffset: 26
                   }
-                ]}
-              />
+                ]} />
             </XYPlot>
           </Center>
         </div>
@@ -394,38 +359,22 @@ class ClientPlan extends Component {
     }
 
     return (
-      <main className="section">
-        <h4 className="black-text" style={{ fontWeight: "bold" }}>
-          Your Financial Plan{" "}
-        </h4>
-        <React.Fragment>
+      <div>
+        <h4 className="title">Your Financial Plan</h4>
+        <div>
           {/*Renders the form steps and passes required props in*/}
-          <form onSubmit={this.handleSubmit}>
-            <Step1
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-            />
-            <Step2
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-            />
-            <Step3
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-            />
-            <Step4
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-            />
-            <Step5
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-            />
-            {this.previousButton()}
+          <form>
+            <EmergencySavings currentStep={this.state.currentStep} />
+            <Retirement currentStep={this.state.currentStep} />
+            <Debt currentStep={this.state.currentStep} />
+            <Budget currentStep={this.state.currentStep} />
+            <LifeInsurance currentStep={this.state.currentStep} />
+            <div className="spacer-primary" ></div>
             {this.nextButton()}
+            {this.previousButton()}
           </form>
-        </React.Fragment>
-      </main>
+        </div>
+      </div>
     );
   }
 }

@@ -7,23 +7,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Logo from "./logo.png";
 
-class Login extends Component {
+import PrimaryButton from "./Components/PrimaryButton";
+
+
+class Signin extends Component {
   render() {
-    const leftContent = {
+    const centerContent = {
       justifyContent: "center",
       alignItems: "center"
     };
 
     const logo = {
       width: "30%",
-      paddingTop: "40px"
+      paddingTop: "2.5rem"
     };
+
+    const bluePurpleGradient = {
+      background: "linear-gradient(45deg, #721ebe, #3260b3)",
+      borderRadius: "0rem 5rem 0rem 0rem",
+      marginLeft: "-0.9375rem",
+      marginTop: "1.25rem",
+      height: '97vh',
+      paddingTop: "5rem"
+    };
+
+
+    const signinSpacer = {
+      paddingTop: "5rem"
+    }
+
 
     return (
       <div>
         <Row>
-          <Col className="col-md-6 blue-purple-gradient">
-            <div style={leftContent}>
+          <Col md="6" style={bluePurpleGradient}>
+            <div style={centerContent}>
               <Center>
                 <img src={Logo} rel="icon" alt="" style={logo} />
               </Center>
@@ -37,15 +55,15 @@ class Login extends Component {
             </div>
           </Col>
 
-          <Col className="col-md-6">
+          <Col md="6" style={signinSpacer}>
             <form onSubmit={this.submitHandler}>
               <Col className="mb-3">
-                <h4 className="black-text" style={{ fontWeight: "bold" }}>
-                  Sign In{" "}
+                <h4>
+                  Sign In
                 </h4>
 
                 <br />
-                <label className="black-text">Email</label>
+                <label>Email</label>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon">
@@ -62,8 +80,8 @@ class Login extends Component {
                 </div>
               </Col>
               <br />
-              <Col className="mb-3">
-                <label className="black-text"> Password</label>
+              <Col mb="3">
+                <label> Password</label>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon">
@@ -82,12 +100,7 @@ class Login extends Component {
               <br />
               <Center>
                 <Link to="/clientform">
-                  <button
-                    className="btn blue-purple-gradient white-text"
-                    type="submit"
-                  >
-                    Sign In
-                  </button>
+                  <PrimaryButton label="Sign In" />
                 </Link>
               </Center>
             </form>
@@ -97,4 +110,4 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+export default Signin;
