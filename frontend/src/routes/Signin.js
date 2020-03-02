@@ -99,7 +99,7 @@ class Signin extends Component {
               </Col>
               <br />
               <Center>
-                <Link to="/clientform">
+                <Link to="/clientprofile">
                   <PrimaryButton label="Sign In" />
                 </Link>
               </Center>
