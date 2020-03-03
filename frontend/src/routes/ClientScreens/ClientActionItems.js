@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Checkbox from "../Components/Checkbox";
 class ClientActionItems extends React.Component {
 
 
@@ -7,6 +7,10 @@ class ClientActionItems extends React.Component {
     return (
       <div>
         <h4 className="title">Your Action Items</h4>
+        <Checkbox text="action item text"/>
+        <Checkbox text="action item text"/>
+        <Checkbox text="action item text"/>
+        <Checkbox text="action item text"/>
       </div>
     );
   }
