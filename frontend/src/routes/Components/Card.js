@@ -3,7 +3,7 @@ class Card extends Component {
     render() {
       const card ={
         marginLeft: "4.375rem",
-        backgroundColor: "white",
+        backgroundColor: "var(--toast-white)",
         padding: "3rem 2rem 3.8rem",
         borderRadius: "1.25rem 1.25rem 0rem 0rem",
         width: "56.25rem",

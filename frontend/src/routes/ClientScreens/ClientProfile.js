@@ -315,7 +315,7 @@ function Expenses(props) {
    
       <Row>
         <Col xs="6">
-          <label className="black-text">Shopping Description</label>
+          <label>Shopping Description</label>
           <div className="input-group">
             <input
               type="fname"
@@ -328,7 +328,7 @@ function Expenses(props) {
           </Col>
 
           <Col xs="6">
-          <label className="black-text">Shopping Amount Spent</label>
+          <label>Shopping Amount Spent</label>
           <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon"> $</span>
@@ -423,7 +423,7 @@ function FamilyInformation(props) {
 
       <Row>
         <Col xs="6">
-          <label className="black-text">Child's First Name</label>
+          <label>Child's First Name</label>
           <div className="input-group">
             <input
               type="fname"
@@ -434,7 +434,7 @@ function FamilyInformation(props) {
               onChange={props.handleChange} />
           </div>
 
-          <label className="black-text">Child's Date of Birth</label>
+          <label>Child's Date of Birth</label>
           <div className="input-group">
             <input
               type="date"
@@ -446,7 +446,7 @@ function FamilyInformation(props) {
         </Col>
         <Col xs="6">
 
-          <label className="black-text">Child's Last Name</label>
+          <label>Child's Last Name</label>
           <div className="input-group">
             <input
               type="lname"
