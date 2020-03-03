@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Select from "react-select";
+//import Select from "react-select";
 
 import TertiaryButton from "../Components/TertiaryButton";
 import { Row, Col } from "reactstrap";
@@ -8,14 +8,17 @@ import PrimaryButton from "../Components/PrimaryButton";
 import SecondaryButton from "../Components/SecondaryButton";
 import QuaternaryButton from "../Components/QuaternaryButton";
 import "../../index.css";
+import TextInput from "../Components/TextInput";
+import DateInput from "../Components/DateInput";
+import CurrencyInput from "../Components/CurrencyInput";
 
 class ClientProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentStep: 1,
-
     };
+
   }
   handleChange = event => {
     const { name, value } = event.target;
@@ -84,42 +87,47 @@ class ClientProfile extends Component {
           Please fill out the information to generate your financial plan and
           action items.
         </p>
-          {/* <p>Step {this.state.currentStep} </p>*/}
-          {/*Renders the form steps and passes required props in*/}
-          <form onSubmit={this.handleSubmit}>
-            <ClientInformation
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              fname={this.state.fname}
-              lname={this.state.lname}
-              bday={this.state.bday}
-              income={this.state.income} />
-            <Finances
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange} />
-              <Bills
-               currentStep={this.state.currentStep}
-               handleChange={this.handleChange} />
-            <Expenses
-               currentStep={this.state.currentStep}
-               handleChange={this.handleChange} />
-            <FamilyInformation
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              spousename={this.state.spousename}
-              spousebday={this.state.spousebday}
-              numchildren={this.state.numchildren}
-              childname={this.state.childname}
-              childbday={this.state.childbday} />
-            <Goals
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange} />
-            
-            {this.nextButton()}
-            {this.saveButton()}
-            {this.previousButton()}
-           
-          </form>
+        <form onSubmit={this.handleSubmit}>
+          <ClientInformation
+            currentStep={this.state.currentStep}
+            handleChange={this.handleChange}
+            fname={this.state.fname}
+            lname={this.state.lname}
+            bday={this.state.bday}
+            city={this.state.city}
+            state={this.state.state}
+            zipcode={this.state.zipcode}/>
+          <Finances
+            currentStep={this.state.currentStep}
+            handleChange={this.handleChange} 
+            income={this.state.income}/>
+          <Bills
+            currentStep={this.state.currentStep}
+            handleChange={this.handleChange} />
+          <Expenses
+            currentStep={this.state.currentStep}
+            handleChange={this.handleChange} 
+            shoppingdescription={this.state.shoppingdescription}
+            shoppingamount={this.state.shoppingamount}/>
+          <FamilyInformation
+            currentStep={this.state.currentStep}
+            handleChange={this.handleChange}
+            spousefname={this.state.spousefname}
+            spouselname={this.state.spouselname}
+            spousebday={this.state.spousebday}
+            numchildren={this.state.numchildren}
+            childfname={this.state.childfname}
+            childlname={this.state.childlname}
+            childbday={this.state.childbday} />
+          <Goals
+            currentStep={this.state.currentStep}
+            handleChange={this.handleChange} />
+
+          {this.nextButton()}
+          {this.saveButton()}
+          {this.previousButton()}
+
+        </form>
 
       </div>
     );
@@ -135,104 +143,19 @@ function ClientInformation(props) {
 
       <Row>
         <Col xs="6">
-          <label className="control-label">First Name</label>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              name="fname"
-              placeholder="Type in your first name"
-              value={props.fname}
-              onChange={props.handleChange}
-              required
-            />
-          </div>
-          <div className="required">
-            <label className="control-label">Date of Birth</label>
-            <div className="input-group">
-              <input
-                type="date"
-                className="form-control"
-                name="bday"
-                value={props.bday}
-                onChange={props.handleChange}
-                required
-              />
-            </div>
-          </div>
+          <TextInput label="First Name" placeholder="Type in your first name" value={props.fname} name="fname" onChange={props.handleChange} />
+          <DateInput label="Date of Birth" value={props.bday} name="bday" onChange={props.handleChange} />
+          <TextInput label="State" placeholder="Type in your state" value={props.state} name="state" onChange={props.handleChange} />
+        </Col>
 
-        </Col>
         <Col xs="6">
-          <div className="required">
-            <label className="control-label">Last Name</label>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                name="lname"
-                placeholder="Type in your last name"
-                value={props.lname}
-                onChange={props.handleChange}
-                required
-              />
-            </div>
-          </div>
-          <div className="required">
-            <label className="control-label">Occupation</label>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                name="occupation"
-                placeholder="Type in your occupation"
-                value={props.occupation}
-                onChange={props.handleChange}
-                required
-              />
-            </div>
-          </div>
-        </Col>
-      </Row>
-
-        <Row>
-        <Col xs="6">
-          <div className="required">
-            <label className="control-label">State</label>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                name="state"
-                placeholder="Type in your state"
-                value={props.state}
-                onChange={props.handleChange}
-                required
-              />
-            </div>
-          </div>
-        </Col>
-        <Col xs="6">
-          <div className="required">
-            <label className="control-label">Zip Code</label>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                name="zipcode"
-                placeholder="Type in your zip-code"
-                value={props.zipcode}
-                onChange={props.handleChange}
-                required
-              />
-            </div>
-          </div>
+          <TextInput label="Last Name" placeholder="Type in your last name" value={props.lname} name="lname" onChange={props.handleChange} />
+          <TextInput label="City" placeholder="Type in your city" value={props.city} name="city" onChange={props.handleChange} />
+          <TextInput label="Zip Code" placeholder="Type in your zip-code" value={props.zipcode} name="zipcode" pattern="[0-9]*" onChange={props.handleChange} />
         </Col>
       </Row>
       <div className="spacer-tertiary" ></div>
     </div>
-
-  
-
   );
 }
 
@@ -246,22 +169,7 @@ function Finances(props) {
         <Col xs="6">
           <h5>Income</h5>
           <div className="required">
-            <label className="control-label">Annual Salary Before Taxes</label>
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon"> $</span>
-              </div>
-              <input
-                type="number"
-                className="form-control"
-                name="income"
-                placeholder="Type in your annual household income"
-                min="0"
-                value={props.income}
-                onChange={props.handleChange}
-                required
-              />
-            </div>
+          <CurrencyInput label="Annual Salary Before Taxes" placeholder="Type in your annual household income" value={props.income} name="income" onChange={props.handleChange}/>
           </div>
         </Col>
       </Row>
@@ -278,30 +186,30 @@ function Bills(props) {
   if (props.currentStep !== 3) {
     return null;
   }
-  return(
-  <div>
- <h5>Bills</h5>
-    <Center>
-      <TertiaryButton label="+ Housing" />
-    </Center>
-    <hr />
-    <Center>
-      <TertiaryButton label="+ Bill" />
-    </Center>
-    <hr />
-    <Center>
-      <TertiaryButton label="+ Utility" />
-    </Center>
-    <hr />
-    <Center>
-      <TertiaryButton label="+ Insurance" />
-    </Center>
-    <hr />
-    <Center>
-      <TertiaryButton label="+ Loan/Debt" />
-    </Center>
+  return (
+    <div>
+      <h5>Bills</h5>
+      <Center>
+        <TertiaryButton label="+ Housing" />
+      </Center>
+      <hr />
+      <Center>
+        <TertiaryButton label="+ Bill" />
+      </Center>
+      <hr />
+      <Center>
+        <TertiaryButton label="+ Utility" />
+      </Center>
+      <hr />
+      <Center>
+        <TertiaryButton label="+ Insurance" />
+      </Center>
+      <hr />
+      <Center>
+        <TertiaryButton label="+ Loan/Debt" />
+      </Center>
 
-  </div>
+    </div>
   );
 }
 
@@ -309,12 +217,19 @@ function Expenses(props) {
   if (props.currentStep !== 4) {
     return null;
   }
-  return(
-  <div>
- <h5>Expenses</h5>
-   
+  return (
+    <div>
+      <h5>Expenses</h5>
+
       <Row>
         <Col xs="6">
+      
+          <TextInput label="Shopping Description" name="shoppingdescription" placeholder="Type in your shopping description." value={props.shoppingdescription}  onChange={props.handleChange}/>
+        </Col>
+
+        <Col xs="6">
+          <CurrencyInput label="Shopping Amount" name="shoppingamount" placeholder="Type in the amount spent on shopping items." value={props.shoppingamount} onChange={props.handleChange}/>
+
           <label>Shopping Description</label>
           <div className="input-group">
             <input
@@ -344,29 +259,30 @@ function Expenses(props) {
                 required
               />
             </div>
-        </Col>
-        </Row>
-        <br/>
-    <Center>
-      <TertiaryButton label="+ Shopping" />
-    </Center>
-    <hr />
-  
-    <Center>
-      <TertiaryButton label="+ Leisure" />
-    </Center>
-    <hr />
-  
-    <Center>
-      <TertiaryButton label="+ Transportation" />
-    </Center>
-    <hr />
-  
-    <Center>
-      <TertiaryButton label="+ Subscriptions" />
-    </Center>
 
-  </div>
+        </Col>
+      </Row>
+      <br />
+      <Center>
+        <TertiaryButton label="+ Shopping" />
+      </Center>
+      <hr />
+
+      <Center>
+        <TertiaryButton label="+ Leisure" />
+      </Center>
+      <hr />
+
+      <Center>
+        <TertiaryButton label="+ Transportation" />
+      </Center>
+      <hr />
+
+      <Center>
+        <TertiaryButton label="+ Subscriptions" />
+      </Center>
+
+    </div>
   );
 }
 
@@ -379,41 +295,11 @@ function FamilyInformation(props) {
     <div>
       <Row>
         <Col xs="6">
-          <label className="control-label">Spouse's First Name</label>
-          <div className="input-group">
-            <input
-              type="fname"
-              className="form-control"
-              name="spousefname"
-              placeholder="Type in your spouse's first name"
-              value={props.spousename}
-              onChange={props.handleChange}
-              required />
-          </div>
-
-          <label className="control-label">Spouse's Date of Birth</label>
-          <div className="input-group">
-            <input
-              type="date"
-              className="form-control"
-              name="spousebday"
-              value={props.spousebday}
-              onChange={props.handleChange}
-              required />
-          </div>
+          <TextInput label="Spouse's First Name" name="spousefname" placeholder="Type in your spouse's first name" value={props.spousefname}  onChange={props.handleChange}/>
+          <DateInput label="Spouse's Date of Birth" name="spousebday" value={props.spousebday} onChange={props.handleChange} />
         </Col>
         <Col xs="6">
-          <label className="control-label">Spouse's Last Name</label>
-          <div className="input-group">
-            <input
-              type="lname"
-              className="form-control"
-              name="spouselname"
-              placeholder="Type in your spouse's last name"
-              value={props.spousename}
-              onChange={props.handleChange}
-              required />
-          </div>
+        <TextInput label="Spouse's Last Name" name="spouselname" placeholder="Type in your spouse's last name" value={props.spouselname} onChange={props.handleChange}/>
         </Col>
       </Row>
       <Center>
@@ -423,6 +309,12 @@ function FamilyInformation(props) {
 
       <Row>
         <Col xs="6">
+        <TextInput label="Child's First Name" placeholder="Type in your child's first name" value={props.childfname} name="childfname" onChange={props.handleChange}/>
+        <DateInput label="Child's Date of Birth" value={props.childbday} name="childbday" onChange={props.handleChange} />
+        </Col>
+        <Col xs="6">
+        <TextInput label="Child's Last Name" placeholder="Type in your child's last name" value={props.childlname} name="childlname" onChange={props.handleChange} />
+
           <label>Child's First Name</label>
           <div className="input-group">
             <input
@@ -475,39 +367,16 @@ function Goals(props) {
   }
   return (
     <React.Fragment>
-      <div className="form-group">
+
         <div className="required">
-          <label className="control-label">
-            Short Term Goal (Examples: taking a vacation, buying a car)
-          </label>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              name="shorttermgoal"
-              placeholder="Type in a short term goal"
-              value={props.lname}
-              onChange={props.handleChange}
-              required />
-          </div>
+        <TextInput label="Short Term Goal (Examples: taking a vacation, buying a car)" placeholder="Type in a short term goal" value={props.shorttermgoal} name="shorttermgoal" onChange={props.handleChange} />
         </div>
+       {/* TODO: Add inputs on button click */}
         <Center>
           <TertiaryButton label="+ Short Term Goal" />
         </Center>
         <div className="required">
-          <label className="control-label">
-            Long Term Goal (Examples: buying a house, preparing for retirement)
-          </label>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              name="shorttermgoal"
-              placeholder="Type in a long term goal"
-              value={props.lname}
-              onChange={props.handleChange}
-              required />
-          </div>
+        <TextInput label="Long Term Goal (Examples: buying a house, preparing for retirement)" placeholder="Type in a long term goal" value={props.longtermgoal} name="longtermgoal" onChange={props.handleChange} />
         </div>
 
         {/* TODO: Add inputs on button click */}
@@ -515,11 +384,9 @@ function Goals(props) {
           <TertiaryButton label="+ Long Term Goal" />
         </Center>
         <div className="spacer-secondary" ></div>
-      </div>
+
     </React.Fragment>
   );
 }
-
-
 
 export default ClientProfile;
