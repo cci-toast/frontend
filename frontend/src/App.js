@@ -273,7 +273,6 @@ class App extends Component {
         
 
       <Switch>
-      <Route exact path="/" component={SigninContainer} />
         <Route exact path="/configurations" component={AdvisorContainer} />
         <Route exact path="/clients" component={AdvisorContainer} />
         <Route />
