@@ -9,7 +9,7 @@ import SecondaryButton from "../Components/SecondaryButton";
 import QuaternaryButton from "../Components/QuaternaryButton";
 import "../../index.css";
 
-class ClientForm extends Component {
+class ClientProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -522,4 +522,4 @@ function Goals(props) {
 
 
 
-export default ClientForm;
+export default ClientProfile;

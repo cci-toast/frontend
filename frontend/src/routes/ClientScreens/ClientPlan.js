@@ -16,7 +16,8 @@ import Center from "react-center";
 import SecondaryButton from "../Components/SecondaryButton";
 import QuaternaryButton from "../Components/QuaternaryButton";
 
-var incomeval = 87000;
+var income = 87000;
+var incomespouse=70000;
 var age = 40;
 
 class ClientPlan extends Component {
@@ -71,8 +72,8 @@ class ClientPlan extends Component {
     const BarSeries = useCanvas ? VerticalBarSeriesCanvas : VerticalBarSeries;
 
     function EmergencySavings(props) {
-      var lowerboundemergencysavings = (incomeval / 12) * 3;
-      var upperboundemergencysavings = (incomeval / 12) * 6;
+      var lowerboundemergencysavings = (income / 12) * 3;
+      var upperboundemergencysavings = (income / 12) * 6;
 
       if (props.currentStep !== 1) {
         return null;
@@ -102,8 +103,8 @@ class ClientPlan extends Component {
                 data={[
                   {
                     x: "Your Income",
-                    y: incomeval,
-                    label: "$" + incomeval,
+                    y: income,
+                    label: "$" + income,
                     yOffset: -22,
                     xOffset: -20
                   },
@@ -132,7 +133,7 @@ class ClientPlan extends Component {
               <BarSeries
                 color="#8c92d5"
                 data={[
-                  { x: "Your Income", y: incomeval },
+                  { x: "Your Income", y: income },
                   {
                     x: "Recommended Emergency Savings",
                     y: lowerboundemergencysavings
@@ -163,14 +164,15 @@ class ClientPlan extends Component {
         retirementmultiplier = 10;
       }
 
-      var retirementsavings = incomeval * retirementmultiplier;
+      var householdincome=70000+87000
+      var retirementsavings = income * retirementmultiplier+incomespouse*retirementmultiplier;
       return (
         <div>
           <Center>
-            <h6 className="title">Retirement </h6>
+            <h6 className="title">Household Retirement Savings </h6>
           </Center>
           <Center>
-            <p>At this point you should have nearly {retirementmultiplier}x of your income.</p>
+            <p>At this point your household should have nearly {retirementmultiplier}x of income.</p>
           </Center>
 
           <Center>
@@ -189,9 +191,9 @@ class ClientPlan extends Component {
               <LabelSeries
                 data={[
                   {
-                    x: "Your Income",
-                    y: incomeval,
-                    label: "$" + incomeval,
+                    x: "Household Income",
+                    y: income+incomespouse,
+                    label: "$" + householdincome,
                     yOffset: -2,
                     xOffset: -20
                   },
@@ -207,7 +209,7 @@ class ClientPlan extends Component {
 
               <BarSeries
                 color="#8c92d5"
-                data={[{ x: "Your Income", y: incomeval }]}
+                data={[{ x: "Household Income", y: income+incomespouse }]}
               />
 
               <BarSeries
@@ -226,8 +228,8 @@ class ClientPlan extends Component {
       if (props.currentStep !== 3) {
         return null;
       }
-      var monthlyincome = incomeval / 12;
-      var debtyear = incomeval * 0.36;
+      var monthlyincome = income / 12;
+      var debtyear = income * 0.36;
       var debtmonthly = debtyear / 12;
 
       const debtrepayment = [
@@ -265,9 +267,9 @@ class ClientPlan extends Component {
         return null;
       }
 
-      var savings = (incomeval * 0.2) / 12;
-      var fixedexpenses = (incomeval * 0.5) / 12;
-      var spending = (incomeval * 0.3) / 12;
+      var savings = (income * 0.2) / 12;
+      var fixedexpenses = (income * 0.5) / 12;
+      var spending = (income * 0.3) / 12;
 
       const budgetplot = [
         {
@@ -283,7 +285,7 @@ class ClientPlan extends Component {
             <h6 className="title">Budget </h6>
           </Center>
           <Center>
-            <p>50% of your income to fixed expenses, 30% for spending, and 20% tosavings.</p>
+            <p>50% of your income to fixed expenses, 30% for spending, and 20% to savings.</p>
           </Center>
 
           <Center>
@@ -303,7 +305,23 @@ class ClientPlan extends Component {
       if (props.currentStep !== 5) {
         return null;
       }
-      var recommendedlifeinsurance = incomeval * 10;
+
+      var lifeinsurancemultiplier;
+      
+      if(age<=39){
+        lifeinsurancemultiplier=20;
+      }
+      else if(age>=40 && age<=49){
+        lifeinsurancemultiplier=12;
+      }
+      else if(age>=50 && age<=59){
+        lifeinsurancemultiplier=6;
+      }
+      else{
+        lifeinsurancemultiplier=6;
+      }
+      var recommendedlifeinsurance = income * lifeinsurancemultiplier;
+
       return (
         <div>
           <Center>
@@ -325,7 +343,7 @@ class ClientPlan extends Component {
 
               <BarSeries
                 color="#8c92d5"
-                data={[{ x: "Your Income", y: incomeval }]} />
+                data={[{ x: "Your Income", y: income }]} />
               <BarSeries
                 color="#444db6"
                 data={[
@@ -339,8 +357,8 @@ class ClientPlan extends Component {
                 data={[
                   {
                     x: "Your Income",
-                    y: incomeval,
-                    label: "$" + incomeval,
+                    y: income,
+                    label: "$" + income,
                     yOffset: -4,
                     xOffset: -20
                   },
