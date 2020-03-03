@@ -223,43 +223,11 @@ function Expenses(props) {
 
       <Row>
         <Col xs="6">
-      
           <TextInput label="Shopping Description" name="shoppingdescription" placeholder="Type in your shopping description." value={props.shoppingdescription}  onChange={props.handleChange}/>
         </Col>
 
         <Col xs="6">
           <CurrencyInput label="Shopping Amount" name="shoppingamount" placeholder="Type in the amount spent on shopping items." value={props.shoppingamount} onChange={props.handleChange}/>
-
-          <label>Shopping Description</label>
-          <div className="input-group">
-            <input
-              type="fname"
-              className="form-control"
-              name="childfname"
-              placeholder="Type in your shopping description."
-              value={props.childname}
-              onChange={props.handleChange} />
-          </div>
-          </Col>
-
-          <Col xs="6">
-          <label>Shopping Amount Spent</label>
-          <div className="input-group">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon"> $</span>
-              </div>
-              <input
-                type="number"
-                className="form-control"
-                name="income"
-                placeholder="Type in the amount spent on shopping item(s)."
-                min="0"
-                value={props.income}
-                onChange={props.handleChange}
-                required
-              />
-            </div>
-
         </Col>
       </Row>
       <br />
@@ -314,40 +282,6 @@ function FamilyInformation(props) {
         </Col>
         <Col xs="6">
         <TextInput label="Child's Last Name" placeholder="Type in your child's last name" value={props.childlname} name="childlname" onChange={props.handleChange} />
-
-          <label>Child's First Name</label>
-          <div className="input-group">
-            <input
-              type="fname"
-              className="form-control"
-              name="childfname"
-              placeholder="Type in your child's first name"
-              value={props.childname}
-              onChange={props.handleChange} />
-          </div>
-
-          <label>Child's Date of Birth</label>
-          <div className="input-group">
-            <input
-              type="date"
-              className="form-control"
-              name="childbday"
-              value={props.childbday}
-              onChange={props.handleChange} />
-          </div>
-        </Col>
-        <Col xs="6">
-
-          <label>Child's Last Name</label>
-          <div className="input-group">
-            <input
-              type="lname"
-              className="form-control"
-              name="childlname"
-              placeholder="Type in your child's last name"
-              value={props.childname}
-              onChange={props.handleChange} />
-          </div>
         </Col>
       </Row>
 
