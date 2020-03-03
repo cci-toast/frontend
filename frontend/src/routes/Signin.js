@@ -23,19 +23,27 @@ class Signin extends Component {
     };
 
     const bluePurpleGradient = {
-      background: "linear-gradient(45deg, #721ebe, #3260b3)",
+      background: "var(--toast-gradient-2)",
       borderRadius: "0rem 5rem 0rem 0rem",
       marginLeft: "-0.9375rem",
       marginTop: "1.25rem",
-      height: '97vh',
+      height: "97vh",
       paddingTop: "5rem"
     };
 
-
     const signinSpacer = {
       paddingTop: "5rem"
-    }
+    };
 
+    const toastHeader = {
+      color: "var(--toast-white)",
+      fontFamily: "Libra Baskerville"
+    };
+
+    const toastTagLine = {
+      color: "var(--toast-white)",
+      fontStyle: "italic"
+    };
 
     return (
       <div>
@@ -47,10 +55,10 @@ class Signin extends Component {
               </Center>
 
               <Center>
-                <h3 className="white-text">toast</h3>
+                <h3 style={toastHeader}>toast</h3>
               </Center>
               <Center>
-                <h6 className="white-text">Financial planning made easier</h6>
+                <h6 style={toastTagLine}>Financial planning made easier</h6>
               </Center>
             </div>
           </Col>
