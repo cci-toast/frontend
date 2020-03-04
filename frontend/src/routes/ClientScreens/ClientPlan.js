@@ -17,7 +17,7 @@ import SecondaryButton from "../Components/SecondaryButton";
 import QuaternaryButton from "../Components/QuaternaryButton";
 
 var income = 87000;
-var incomespouse=70000;
+var incomespouse = 70000;
 var age = 40;
 
 class ClientPlan extends Component {
@@ -50,7 +50,11 @@ class ClientPlan extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
-        <QuaternaryButton handleClick={this.prev} type="button" label="Previous" />
+        <QuaternaryButton
+          handleClick={this.prev}
+          type="button"
+          label="Previous"
+        />
       );
     }
     return null;
@@ -61,7 +65,6 @@ class ClientPlan extends Component {
     if (currentStep < 5) {
       return (
         <SecondaryButton handleClick={this.next} type="button" label="Next" />
-
       );
     }
     return null;
@@ -94,7 +97,8 @@ class ClientPlan extends Component {
               stackBy="y"
               margin={{ top: 30 }}
               width={600}
-              height={300} >
+              height={300}
+            >
               <VerticalGridLines />
               <HorizontalGridLines />
               <XAxis />
@@ -119,7 +123,8 @@ class ClientPlan extends Component {
                     yOffset: -60,
                     xOffset: 45
                   }
-                ]} />
+                ]}
+              />
               <BarSeries
                 color="#444db6"
                 data={[
@@ -128,7 +133,8 @@ class ClientPlan extends Component {
                     x: "Recommended Emergency Savings",
                     y: upperboundemergencysavings
                   }
-                ]} />
+                ]}
+              />
 
               <BarSeries
                 color="#8c92d5"
@@ -164,15 +170,19 @@ class ClientPlan extends Component {
         retirementmultiplier = 10;
       }
 
-      var householdincome=70000+87000
-      var retirementsavings = income * retirementmultiplier+incomespouse*retirementmultiplier;
+      var householdincome = 70000 + 87000;
+      var retirementsavings =
+        income * retirementmultiplier + incomespouse * retirementmultiplier;
       return (
         <div>
           <Center>
             <h6 className="title">Household Retirement Savings </h6>
           </Center>
           <Center>
-            <p>At this point your household should have nearly {retirementmultiplier}x of income.</p>
+            <p>
+              At this point your household should have nearly{" "}
+              {retirementmultiplier}x of income.
+            </p>
           </Center>
 
           <Center>
@@ -192,7 +202,7 @@ class ClientPlan extends Component {
                 data={[
                   {
                     x: "Household Income",
-                    y: income+incomespouse,
+                    y: income + incomespouse,
                     label: "$" + householdincome,
                     yOffset: -2,
                     xOffset: -20
@@ -209,7 +219,7 @@ class ClientPlan extends Component {
 
               <BarSeries
                 color="#8c92d5"
-                data={[{ x: "Household Income", y: income+incomespouse }]}
+                data={[{ x: "Household Income", y: income + incomespouse }]}
               />
 
               <BarSeries
@@ -234,15 +244,16 @@ class ClientPlan extends Component {
 
       const debtrepayment = [
         { angle: debtmonthly, label: "$" + debtmonthly + " monthly" },
-        { angle: monthlyincome - debtmonthly, label: "$"+ (monthlyincome - debtmonthly) }
+        {
+          angle: monthlyincome - debtmonthly,
+          label: "$" + (monthlyincome - debtmonthly)
+        }
       ];
 
       return (
         <div>
           <Center>
-            <h6 className="title">
-              Debt
-            </h6>
+            <h6 className="title">Debt</h6>
           </Center>
           <Center>
             <p>Less than 36% of your income should go toward debt repayment.</p>
@@ -260,7 +271,6 @@ class ClientPlan extends Component {
         </div>
       );
     }
-
 
     function Budget(props) {
       if (props.currentStep !== 4) {
@@ -285,7 +295,10 @@ class ClientPlan extends Component {
             <h6 className="title">Budget </h6>
           </Center>
           <Center>
-            <p>50% of your income to fixed expenses, 30% for spending, and 20% to savings.</p>
+            <p>
+              50% of your income to fixed expenses, 30% for spending, and 20% to
+              savings.
+            </p>
           </Center>
 
           <Center>
@@ -307,18 +320,15 @@ class ClientPlan extends Component {
       }
 
       var lifeinsurancemultiplier;
-      
-      if(age<=39){
-        lifeinsurancemultiplier=20;
-      }
-      else if(age>=40 && age<=49){
-        lifeinsurancemultiplier=12;
-      }
-      else if(age>=50 && age<=59){
-        lifeinsurancemultiplier=6;
-      }
-      else{
-        lifeinsurancemultiplier=6;
+
+      if (age <= 39) {
+        lifeinsurancemultiplier = 20;
+      } else if (age >= 40 && age <= 49) {
+        lifeinsurancemultiplier = 12;
+      } else if (age >= 50 && age <= 59) {
+        lifeinsurancemultiplier = 6;
+      } else {
+        lifeinsurancemultiplier = 6;
       }
       var recommendedlifeinsurance = income * lifeinsurancemultiplier;
 
@@ -336,14 +346,16 @@ class ClientPlan extends Component {
               stackBy="y"
               margin={{ top: 30 }}
               width={600}
-              height={300}>
+              height={300}
+            >
               <VerticalGridLines />
               <HorizontalGridLines />
               <XAxis />
 
               <BarSeries
                 color="#8c92d5"
-                data={[{ x: "Your Income", y: income }]} />
+                data={[{ x: "Your Income", y: income }]}
+              />
               <BarSeries
                 color="#444db6"
                 data={[
@@ -351,7 +363,8 @@ class ClientPlan extends Component {
                     x: "Recommended Life Insurance Policy",
                     y: recommendedlifeinsurance
                   }
-                ]} />
+                ]}
+              />
 
               <LabelSeries
                 data={[
@@ -369,7 +382,8 @@ class ClientPlan extends Component {
                     yOffset: -22,
                     xOffset: 26
                   }
-                ]} />
+                ]}
+              />
             </XYPlot>
           </Center>
         </div>
@@ -378,7 +392,7 @@ class ClientPlan extends Component {
 
     return (
       <div>
-        <h4 className="title">Your Financial Plan</h4>
+        <h3>Your Financial Plan</h3>
         <div>
           {/*Renders the form steps and passes required props in*/}
           <form>
@@ -387,7 +401,7 @@ class ClientPlan extends Component {
             <Debt currentStep={this.state.currentStep} />
             <Budget currentStep={this.state.currentStep} />
             <LifeInsurance currentStep={this.state.currentStep} />
-            <div className="spacer-primary" ></div>
+            <div className="spacer-primary"></div>
             {this.nextButton()}
             {this.previousButton()}
           </form>

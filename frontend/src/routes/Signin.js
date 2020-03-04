@@ -9,7 +9,6 @@ import Logo from "./logo.png";
 
 import PrimaryButton from "./Components/PrimaryButton";
 
-
 class Signin extends Component {
   render() {
     const centerContent = {
@@ -55,10 +54,10 @@ class Signin extends Component {
               </Center>
 
               <Center>
-                <h3 style={toastHeader}>toast</h3>
+                <h1 style={toastHeader}>toast</h1>
               </Center>
               <Center>
-                <h6 style={toastTagLine}>Financial planning made easier</h6>
+                <p style={toastTagLine}>Financial planning made easier</p>
               </Center>
             </div>
           </Col>
@@ -66,9 +65,7 @@ class Signin extends Component {
           <Col md="6" style={signinSpacer}>
             <form onSubmit={this.submitHandler}>
               <Col className="mb-3">
-                <h4>
-                  Sign In
-                </h4>
+                <h2>Sign In</h2>
 
                 <br />
                 <label>Email</label>
@@ -108,7 +105,7 @@ class Signin extends Component {
               <br />
               <Center>
                 <Link to="/clientprofile">
-                  <PrimaryButton label="Sign In" />
+                  <PrimaryButton round label="Sign In" />
                 </Link>
               </Center>
             </form>
