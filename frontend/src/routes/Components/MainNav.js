@@ -122,94 +122,67 @@ const SigninContainer = () => (
 const ClientContainer = () => (
   <div style={clientAdvisorHeader}>
     <div>
-      <Router>
-        <Route
-          render={({ location, history }) => (
-            <div className="container">
-              <SideNav
-                onSelect={selected => {
-                  const to = "/" + selected;
-                  if (location.pathname !== to) {
-                    history.push(to);
-                  }
-                }}
-              >
-                <Center>
-                  <img src={Logo} rel="icon" alt="" style={logo} />
-                </Center>
-                <SideNav.Nav>
-                  <NavItem
-                    eventKey="clientprofile"
-                    active={location.pathname === "/clientprofile"}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faUser} />
-                      <span style={profileNavText}>Profile</span>
-                    </NavIcon>
-                  </NavItem>
+      <div className="container">
+        <SideNav>
+          <Center>
+            <img src={Logo} rel="icon" alt="" style={logo} />
+          </Center>
+          <SideNav.Nav>
+            <NavItem
+              eventKey="clientprofile"
+              active={location.pathname === "/clientprofile"}
+            >
+              <NavIcon>
+                <FontAwesomeIcon icon={faUser} />
+                <span style={profileNavText}>Profile</span>
+              </NavIcon>
+            </NavItem>
 
-                  <NavItem
-                    eventKey="clientplan"
-                    active={location.pathname === "/clientplan"}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faChartBar} />
-                      <span style={planNavText}>Plan</span>
-                    </NavIcon>
-                  </NavItem>
+            <NavItem
+              eventKey="clientplan"
+              active={location.pathname === "/clientplan"}
+            >
+              <NavIcon>
+                <FontAwesomeIcon icon={faChartBar} />
+                <span style={planNavText}>Plan</span>
+              </NavIcon>
+            </NavItem>
 
-                  <NavItem
-                    eventKey="clientactionitems"
-                    active={location.pathname === "/clientactionitems"}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <span style={actionItemsNavText}>Action Items</span>
-                    </NavIcon>
-                  </NavItem>
+            <NavItem
+              eventKey="clientactionitems"
+              active={location.pathname === "/clientactionitems"}
+            >
+              <NavIcon>
+                <FontAwesomeIcon icon={faCheckCircle} />
+                <span style={actionItemsNavText}>Action Items</span>
+              </NavIcon>
+            </NavItem>
 
-                  <NavItem
-                    eventKey="clientadvisorcontact"
-                    active={location.pathname === "/clientadvisorcontact"}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faAddressCard} />
-                      <span style={advisorContactNavText}>Advisor Contact</span>
-                    </NavIcon>
-                  </NavItem>
+            <NavItem
+              eventKey="clientadvisorcontact"
+              active={location.pathname === "/clientadvisorcontact"}
+            >
+              <NavIcon>
+                <FontAwesomeIcon icon={faAddressCard} />
+                <span style={advisorContactNavText}>Advisor Contact</span>
+              </NavIcon>
+            </NavItem>
 
-                  <div style={signoutClientSpacer}></div>
+            <div style={signoutClientSpacer}></div>
 
-                  <NavItem
-                    eventKey="/"
-                    onClick={() => window.location.reload(history.push("/"))}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faPowerOff} />
-                      <span style={signoutNavText}>Sign Out</span>
-                    </NavIcon>
-                  </NavItem>
-                </SideNav.Nav>
-              </SideNav>
-
-              <Card>
-                <Route exact path="/clientprofile" component={ClientProfile} />
-                <Route exact path="/clientplan" component={ClientPlan} />
-                <Route
-                  exact
-                  path="/clientadvisorcontact"
-                  component={ClientAdvisorContact}
-                />
-                <Route
-                  exact
-                  path="/clientactionitems"
-                  component={ClientActionItems}
-                />
-              </Card>
-            </div>
-          )}
-        />
-      </Router>
+            <NavItem
+              eventKey="/"
+              onClick={() => window.location.reload(history.push("/"))}
+            >
+              <NavIcon>
+                <FontAwesomeIcon icon={faPowerOff} />
+                <span style={signoutNavText}>Sign Out</span>
+              </NavIcon>
+            </NavItem>
+          </SideNav.Nav>
+        </SideNav>
+      </div>
+      )} />
     </div>
   </div>
 );
