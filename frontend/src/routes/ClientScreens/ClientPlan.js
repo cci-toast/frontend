@@ -16,6 +16,9 @@ import Center from "react-center";
 import SecondaryButton from "../Components/SecondaryButton";
 import QuaternaryButton from "../Components/QuaternaryButton";
 
+import MainNav from "../Components/MainNav";
+import Card from "../Components/Card";
+
 var income = 87000;
 var incomespouse = 70000;
 var age = 40;
@@ -392,19 +395,24 @@ class ClientPlan extends Component {
 
     return (
       <div>
-        <h3>Your Financial Plan</h3>
-        <div>
-          {/*Renders the form steps and passes required props in*/}
-          <form>
-            <EmergencySavings currentStep={this.state.currentStep} />
-            <Retirement currentStep={this.state.currentStep} />
-            <Debt currentStep={this.state.currentStep} />
-            <Budget currentStep={this.state.currentStep} />
-            <LifeInsurance currentStep={this.state.currentStep} />
-            <div className="spacer-primary"></div>
-            {this.nextButton()}
-            {this.previousButton()}
-          </form>
+        {/* <h3>Your Financial Plan</h3> */}
+        {/*Renders the form steps and passes required props in*/}
+        <div className="page">
+          <div className="nav-card">
+            <MainNav client></MainNav>
+            <Card>
+              <form>
+                <EmergencySavings currentStep={this.state.currentStep} />
+                <Retirement currentStep={this.state.currentStep} />
+                <Debt currentStep={this.state.currentStep} />
+                <Budget currentStep={this.state.currentStep} />
+                <LifeInsurance currentStep={this.state.currentStep} />
+                <div className="spacer-primary"></div>
+                {this.nextButton()}
+                {this.previousButton()}
+              </form>
+            </Card>
+          </div>
         </div>
       </div>
     );

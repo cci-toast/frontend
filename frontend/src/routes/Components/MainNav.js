@@ -1,21 +1,7 @@
 import React, { Component } from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import Logo from "../logo.png";
 
-import Logo from "./logo.png";
-import "./index.css";
-
-import Signin from "./routes/Signin";
-
-//Client Portal Screens
-import ClientProfile from "./routes/ClientScreens/ClientProfile";
-import ClientPlan from "./routes/ClientScreens/ClientPlan";
-import ClientAdvisorContact from "./routes/ClientScreens/ClientAdvisorContact";
-import ClientActionItems from "./routes/ClientScreens/ClientActionItems";
-
-//Advisor Portal Screens
-import Clients from "./routes/AdvisorScreens/Clients";
-import Configurations from "./routes/AdvisorScreens/Configurations";
-
+import { Link } from "react-router-dom";
 import {
   faUser,
   faChartBar,
@@ -27,259 +13,136 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import SideNav, { NavItem, NavIcon } from "@trendmicro/react-sidenav";
-import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-import Center from "react-center";
-
-import Card from "./routes/Components/Card";
-
 const logo = {
-  width: "3.125rem",
-  paddingTop: "0.625rem",
-  paddingBottom: "0.3125rem"
+  width: "6rem",
+  marginTop: "1rem",
+  marginBottom: "2rem"
 };
 
-const signoutClientSpacer = {
-  paddingBottom: "50vh"
-};
-
-const signoutAdvisorSpacer = {
-  paddingBottom: "64.8vh"
-};
-const clientAdvisorHeader = {
-  backgroundColor: "#CCCCCC",
+const nav = {
+  background: "var(--toast-gradient-2)",
   minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "10rem",
+  borderTopRightRadius: "3rem",
+  borderBottomRightRadius: "3rem",
+  padding: "1rem 0"
+};
+
+const mainLinks = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center"
 };
 
-const signinHeader = {
-  backgroundColor: "white",
-  minHeight: "100vh",
+const icon = {
+  color: "var(--toast-white)",
+  width: "1.5rem",
+  height: "1.5rem",
+  marginBottom: "0.5rem"
+};
+
+// this only exists to switch to css class easier w 'style it'
+// (to add a hover state later)
+const iconCaption = {
   display: "flex",
-  flexDirection: "column",
-  alignItems: "center"
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column"
 };
 
-const profileNavText = {
-  fontSize: "0.625rem",
-  position: "absolute",
-  top: "0.9375rem",
-  left: "1.0625rem"
+const caption = {
+  marginBottom: "1.5rem",
+  color: "var(--toast-neutral-6)"
 };
 
-const clientsNavText = {
-  fontSize: "0.625rem",
-  position: "absolute",
-  top: "0.9375rem",
-  left: "1.0625rem"
-};
+const ClientNav = () => (
+  <div style={nav}>
+    <div style={mainLinks}>
+      <Link to="/">
+        <img src={Logo} rel="icon" alt="" style={logo} />
+      </Link>
 
-const configurationNavText = {
-  fontSize: "0.625rem",
-  position: "absolute",
-  top: "0.9375rem",
-  left: "0.2rem"
-};
+      <Link to="/clientprofile">
+        <div style={iconCaption}>
+          <FontAwesomeIcon icon={faUser} style={icon} />
+          <span style={caption}>Profile</span>
+        </div>
+      </Link>
 
-const planNavText = {
-  fontSize: "0.625rem",
-  position: "absolute",
-  top: "0.9375rem",
-  left: "1.375rem"
-};
+      <Link to="/clientplan">
+        <div style={iconCaption}>
+          <FontAwesomeIcon icon={faChartBar} style={icon} />
+          <span style={caption}>Plan</span>
+        </div>
+      </Link>
 
-const actionItemsNavText = {
-  fontSize: "0.625rem",
-  position: "absolute",
-  top: "0.9375rem",
-  left: "0.25rem"
-};
+      <Link to="/clientactionitems">
+        <div style={iconCaption}>
+          <FontAwesomeIcon icon={faCheckCircle} style={icon} />
+          <span style={caption}>Action Items</span>
+        </div>
+      </Link>
 
-const advisorContactNavText = {
-  fontSize: "0.625rem",
-  position: "absolute",
-  top: "0.9375rem",
-  left: "0.25rem"
-};
-
-const signoutNavText = {
-  fontSize: "0.625rem",
-  position: "absolute",
-  top: "0.9375rem",
-  left: "0.9rem"
-};
-
-const SigninContainer = () => (
-  <div style={signinHeader}>
-    <div>
-      <Route path="/" component={Signin} />
+      <Link to="/clientadvisorcontact">
+        <div style={iconCaption}>
+          <FontAwesomeIcon icon={faAddressCard} style={icon} />
+          <span style={caption}>Advisor</span>
+        </div>
+      </Link>
     </div>
-  </div>
-);
 
-const ClientContainer = () => (
-  <div style={clientAdvisorHeader}>
-    <div>
-      <div className="container">
-        <SideNav>
-          <Center>
-            <img src={Logo} rel="icon" alt="" style={logo} />
-          </Center>
-          <SideNav.Nav>
-            <NavItem
-              eventKey="clientprofile"
-              active={location.pathname === "/clientprofile"}
-            >
-              <NavIcon>
-                <FontAwesomeIcon icon={faUser} />
-                <span style={profileNavText}>Profile</span>
-              </NavIcon>
-            </NavItem>
-
-            <NavItem
-              eventKey="clientplan"
-              active={location.pathname === "/clientplan"}
-            >
-              <NavIcon>
-                <FontAwesomeIcon icon={faChartBar} />
-                <span style={planNavText}>Plan</span>
-              </NavIcon>
-            </NavItem>
-
-            <NavItem
-              eventKey="clientactionitems"
-              active={location.pathname === "/clientactionitems"}
-            >
-              <NavIcon>
-                <FontAwesomeIcon icon={faCheckCircle} />
-                <span style={actionItemsNavText}>Action Items</span>
-              </NavIcon>
-            </NavItem>
-
-            <NavItem
-              eventKey="clientadvisorcontact"
-              active={location.pathname === "/clientadvisorcontact"}
-            >
-              <NavIcon>
-                <FontAwesomeIcon icon={faAddressCard} />
-                <span style={advisorContactNavText}>Advisor Contact</span>
-              </NavIcon>
-            </NavItem>
-
-            <div style={signoutClientSpacer}></div>
-
-            <NavItem
-              eventKey="/"
-              onClick={() => window.location.reload(history.push("/"))}
-            >
-              <NavIcon>
-                <FontAwesomeIcon icon={faPowerOff} />
-                <span style={signoutNavText}>Sign Out</span>
-              </NavIcon>
-            </NavItem>
-          </SideNav.Nav>
-        </SideNav>
+    <Link to="/">
+      <div style={iconCaption}>
+        <FontAwesomeIcon icon={faPowerOff} style={icon} />
+        <span style={caption}>Log Out</span>
       </div>
-      )} />
-    </div>
+    </Link>
   </div>
 );
 
-const AdvisorContainer = () => (
-  <div style={clientAdvisorHeader}>
-    <div>
-      <Router>
-        <Route
-          render={({ location, history }) => (
-            <div className="container">
-              <SideNav
-                onSelect={selected => {
-                  const to = "/" + selected;
-                  if (location.pathname !== to) {
-                    history.push(to);
-                  }
-                }}
-              >
-                <Center>
-                  <img src={Logo} rel="icon" alt="" style={logo} />
-                </Center>
-                <SideNav.Nav>
-                  <NavItem
-                    eventKey="clients"
-                    active={location.pathname === "/clients"}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faUsers} />
-                      <span style={clientsNavText}>Clients</span>
-                    </NavIcon>
-                  </NavItem>
-                  <NavItem
-                    eventKey="configurations"
-                    active={location.pathname === "/configurations"}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faSlidersH} />
-                      <span style={configurationNavText}>Configurations</span>
-                    </NavIcon>
-                  </NavItem>
+const AdvisorNav = () => (
+  <div style={nav}>
+    <div style={mainLinks}>
+      <Link to="/">
+        <img src={Logo} rel="icon" alt="" style={logo} />
+      </Link>
 
-                  <div style={signoutAdvisorSpacer}></div>
+      <Link to="/clients">
+        <div style={iconCaption}>
+          <FontAwesomeIcon icon={faUsers} style={icon} />
+          <span style={caption}>Clients</span>
+        </div>
+      </Link>
 
-                  <NavItem
-                    eventKey="/"
-                    onClick={() => window.location.reload(history.push("/"))}
-                  >
-                    <NavIcon>
-                      <FontAwesomeIcon icon={faPowerOff} />
-                      <span style={signoutNavText}>Sign Out</span>
-                    </NavIcon>
-                  </NavItem>
-                </SideNav.Nav>
-              </SideNav>
-
-              <Card>
-                <Route
-                  exact
-                  path="/configurations"
-                  component={Configurations}
-                />
-                <Route exact path="/clients" component={Clients} />
-              </Card>
-            </div>
-          )}
-        />
-      </Router>
+      <Link to="/configurations">
+        <div style={iconCaption}>
+          <FontAwesomeIcon icon={faSlidersH} style={icon} />
+          <span style={caption}>Configuration</span>
+        </div>
+      </Link>
     </div>
+
+    <Link to="/">
+      <div style={iconCaption}>
+        <FontAwesomeIcon icon={faPowerOff} style={icon} />
+        <span style={caption}>Log Out</span>
+      </div>
+    </Link>
   </div>
 );
 
-class App extends Component {
+class MainNav extends Component {
   render() {
-    return (
-      <div>
-        <Switch>
-          <Route exact path="/" component={SigninContainer} />
-          <Route exact path="/clientprofile" component={ClientContainer} />
-          <Route exact path="/clientplan" component={ClientContainer} />
-          <Route
-            exact
-            path="/clientadvisorcontact"
-            component={ClientContainer}
-          />
-          <Route exact path="/clientactionitems" component={ClientContainer} />
-          <Route />
-        </Switch>
-
-        <Switch>
-          <Route exact path="/configurations" component={AdvisorContainer} />
-          <Route exact path="/clients" component={AdvisorContainer} />
-          <Route />
-        </Switch>
-      </div>
-    );
+    if (this.props.advisor) {
+      return <AdvisorNav></AdvisorNav>;
+    } else {
+      return <ClientNav></ClientNav>;
+    }
   }
 }
 
-export default App;
+export default MainNav;
