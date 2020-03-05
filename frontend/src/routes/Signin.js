@@ -9,60 +9,87 @@ import Logo from "./logo.png";
 
 import PrimaryButton from "./Components/PrimaryButton";
 
+import Style from "style-it";
+
 class Signin extends Component {
   render() {
-    const centerContent = {
-      justifyContent: "center",
-      alignItems: "center"
-    };
+    const styles = `
+    .center-content {
+      justify-content: center;
+      align-items: center;
+    }
 
-    const logo = {
-      width: "30%",
-      paddingTop: "2.5rem"
-    };
+    .logo {
+      width: 30%;
+      padding-top: 2.5rem;
+    }
 
-    const bluePurpleGradient = {
-      background: "var(--toast-gradient-2)",
-      borderRadius: "0rem 5rem 0rem 0rem",
-      marginLeft: "-0.9375rem",
-      marginTop: "1.25rem",
-      height: "calc(100vh - 1.25rem)",
-      paddingTop: "5rem"
-    };
+    .hero-bg-left {
+      background: var(--toast-gradient-2);
+      border-radius: 0rem 5rem 0rem 0rem;
+      margin-left: -0.9375rem;
+      margin-top: 1.25rem;
+      height: calc(100vh - 1.25rem);
+      padding-top: 5rem;
+    }
 
-    const signinSpacer = {
-      paddingTop: "5rem"
-    };
+    .sign-in-spacer {
+      padding-top: 5rem;
+    }
 
-    const toastHeader = {
-      color: "var(--toast-white)",
-      fontFamily: "Libra Baskerville"
-    };
+    .toast-title {
+      color: var(--toast-white);
+      font-family: Libra Baskerville;
+    }
 
-    const toastTagLine = {
-      color: "var(--toast-white)",
-      fontStyle: "italic"
-    };
+    .toast-tag-line {
+      color: var(--toast-white);
+      font-style: italic;
+    }
 
-    return (
+    .input-group {
+      display: flex;
+     }
+
+     .input-group-text {
+      background-color: var(--toast-neutral-6);
+      border-radius: 20rem;
+      color: var(--toast-neutral-1);
+      padding: 0rem 0.75rem;
+    }
+
+     .form-control {
+       border-radius: 20rem;
+       background-color: var(--toast-neutral-6);
+       font-size: 0.96rem;
+     }
+  
+     .required .control-label:after {
+       content: "*";
+       color: var(--toast-red);
+     }
+      `;
+
+    return Style.it(
+      `${styles}`,
       <div>
         <Row>
-          <Col md="6" style={bluePurpleGradient}>
-            <div style={centerContent}>
+          <Col md="6" className="hero-bg-left">
+            <div className="center-content">
               <Center>
-                <img src={Logo} rel="icon" alt="" style={logo} />
+                <img src={Logo} rel="icon" alt="" className="logo" />
               </Center>
 
               <Center>
-                <h1 style={toastHeader}>toast</h1>
+                <h1 className="toast-title">toast</h1>
               </Center>
               <Center>
-                <p style={toastTagLine}>Financial planning made easier</p>
+                <p className="toast-tag-line">Financial planning made easier</p>
               </Center>
             </div>
           </Col>
 
-          <Col md="6" style={signinSpacer}>
+          <Col md="6" className="sign-in-spacer">
             <form onSubmit={this.submitHandler}>
               <Col className="mb-3">
                 <h2>Sign In</h2>
