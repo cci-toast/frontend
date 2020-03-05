@@ -1,10 +1,18 @@
-import React from 'react';
-class Configurations extends React.Component {
+import React from "react";
 
+import MainNav from "../Components/MainNav";
+import Card from "../Components/Card";
+
+class Configurations extends React.Component {
   render() {
     return (
-      <div>
-        <h4 className="title">Configure Factors</h4>
+      <div className="page">
+        <div className="nav-card">
+          <MainNav advisor></MainNav>
+          <Card>
+            <h4 className="title">Configure Factors</h4>
+          </Card>
+        </div>
       </div>
     );
   }

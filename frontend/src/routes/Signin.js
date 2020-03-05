@@ -26,7 +26,7 @@ class Signin extends Component {
       borderRadius: "0rem 5rem 0rem 0rem",
       marginLeft: "-0.9375rem",
       marginTop: "1.25rem",
-      height: "97vh",
+      height: "calc(100vh - 1.25rem)",
       paddingTop: "5rem"
     };
 
