@@ -9,7 +9,7 @@ class Clients extends React.Component {
     return (
       <div className="page">
         <div className="nav-card">
-          <MainNav client></MainNav>
+          <MainNav advisor></MainNav>
           <Card>
             <h4 className="title">Your Clients</h4>
             <Clientbox clientName="John Smith" />

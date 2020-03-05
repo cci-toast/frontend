@@ -8,7 +8,7 @@ class Configurations extends React.Component {
     return (
       <div className="page">
         <div className="nav-card">
-          <MainNav client></MainNav>
+          <MainNav advisor></MainNav>
           <Card>
             <h4 className="title">Configure Factors</h4>
           </Card>

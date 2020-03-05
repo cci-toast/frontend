@@ -26,7 +26,7 @@ const nav = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "space-between",
-  width: "10rem",
+  width: "8rem",
   borderTopRightRadius: "3rem",
   borderBottomRightRadius: "3rem",
   padding: "1rem 0"

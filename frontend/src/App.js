@@ -37,8 +37,8 @@ class App extends Component {
         </Switch>
 
         <Switch>
-          <Route exact path="/configurations" component={Clients} />
-          <Route exact path="/clients" component={Configurations} />
+          <Route exact path="/configurations" component={Configurations} />
+          <Route exact path="/clients" component={Clients} />
           <Route />
         </Switch>
       </div>
