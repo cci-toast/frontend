@@ -7,9 +7,9 @@ import Center from "react-center";
 import PrimaryButton from "../Components/PrimaryButton";
 import SecondaryButton from "../Components/SecondaryButton";
 import QuaternaryButton from "../Components/QuaternaryButton";
-import TextInput from "../Components/TextInput";
-import DateInput from "../Components/DateInput";
-import CurrencyInput from "../Components/CurrencyInput";
+import InputComponent from "../Components/InputComponent";
+
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -132,23 +132,25 @@ function ClientInformation(props) {
     return null;
   }
   return (
-    <div className="form-group required">
+    <div>
       <Row>
         <Col xs="6">
-          <TextInput
+          <InputComponent type="text"
             label="First Name"
             placeholder="Type in your first name"
             value={props.fname}
             name="fname"
-            onChange={props.handleChange}
+            onChange={props.handleChange} required
           />
-          <DateInput
-            label="Date of Birth"
-            value={props.bday}
-            name="bday"
-            onChange={props.handleChange}
+          <InputComponent type="date" 
+          label="Date of Birth" 
+          value={props.bday} 
+          name="bday" 
+          onChange={props.handleChange} required
           />
-          <TextInput
+
+          <InputComponent
+            type="text"
             label="State"
             placeholder="Type in your state"
             value={props.state}
@@ -158,21 +160,24 @@ function ClientInformation(props) {
         </Col>
 
         <Col xs="6">
-          <TextInput
+          <InputComponent
+            type="text"
             label="Last Name"
             placeholder="Type in your last name"
             value={props.lname}
             name="lname"
-            onChange={props.handleChange}
+            onChange={props.handleChange} required
           />
-          <TextInput
+          <InputComponent
+            type="text"
             label="City"
             placeholder="Type in your city"
             value={props.city}
             name="city"
             onChange={props.handleChange}
           />
-          <TextInput
+          <InputComponent
+            type="text"
             label="Zip Code"
             placeholder="Type in your zip-code"
             value={props.zipcode}
@@ -196,15 +201,15 @@ function Finances(props) {
       <Row>
         <Col xs="6">
           <h5>Income</h5>
-          <div className="required">
-            <CurrencyInput
-              label="Annual Salary Before Taxes"
-              placeholder="Type in your annual household income"
-              value={props.income}
-              name="income"
-              onChange={props.handleChange}
-            />
-          </div>
+            <InputComponent 
+            type="number" 
+            min="0" 
+            label="Annual Salary Before Taxes" 
+            placeholder="Type in your annual salary before taxes" 
+            value={props.income} 
+            name="income" 
+            icon={faDollarSign} 
+            onChange={props.handleChange} required/>
         </Col>
       </Row>
       <Center>
@@ -256,7 +261,8 @@ function Expenses(props) {
 
       <Row>
         <Col xs="6">
-          <TextInput
+          <InputComponent
+            type="text"
             label="Shopping Description"
             name="shoppingdescription"
             placeholder="Type in your shopping description."
@@ -266,10 +272,11 @@ function Expenses(props) {
         </Col>
 
         <Col xs="6">
-          <CurrencyInput
-            label="Shopping Amount"
-            name="shoppingamount"
+          <InputComponent type="number"
+            label="Shopping Amount" name="shoppingamount"
             placeholder="Type in the amount spent on shopping items."
+            min="0"
+            icon={faDollarSign}
             value={props.shoppingamount}
             onChange={props.handleChange}
           />
@@ -306,22 +313,19 @@ function FamilyInformation(props) {
     <div>
       <Row>
         <Col xs="6">
-          <TextInput
+          <InputComponent
+            type="text"
             label="Spouse's First Name"
             name="spousefname"
             placeholder="Type in your spouse's first name"
             value={props.spousefname}
             onChange={props.handleChange}
           />
-          <DateInput
-            label="Spouse's Date of Birth"
-            name="spousebday"
-            value={props.spousebday}
-            onChange={props.handleChange}
-          />
+          <InputComponent type="date" label="Spouse's Date of Birth" name="spousebday" value={props.spousebday} onChange={props.handleChange} />
         </Col>
         <Col xs="6">
-          <TextInput
+          <InputComponent
+            type="text"
             label="Spouse's Last Name"
             name="spouselname"
             placeholder="Type in your spouse's last name"
@@ -337,22 +341,19 @@ function FamilyInformation(props) {
 
       <Row>
         <Col xs="6">
-          <TextInput
+          <InputComponent
+            type="text"
             label="Child's First Name"
             placeholder="Type in your child's first name"
             value={props.childfname}
             name="childfname"
             onChange={props.handleChange}
           />
-          <DateInput
-            label="Child's Date of Birth"
-            value={props.childbday}
-            name="childbday"
-            onChange={props.handleChange}
-          />
+          <InputComponent type="date" label="Child's Date of Birth" value={props.childbday} name="childbday" onChange={props.handleChange} />
         </Col>
         <Col xs="6">
-          <TextInput
+          <InputComponent
+            type="text"
             label="Child's Last Name"
             placeholder="Type in your child's last name"
             value={props.childlname}
@@ -375,28 +376,29 @@ function Goals(props) {
   }
   return (
     <React.Fragment>
-      <div className="required">
-        <TextInput
+      <div>
+        <InputComponent
+          type="text"
           label="Short Term Goal (Examples: taking a vacation, buying a car)"
           placeholder="Type in a short term goal"
           value={props.shorttermgoal}
           name="shorttermgoal"
-          onChange={props.handleChange}
-        />
+          onChange={props.handleChange} required
+          />
       </div>
       {/* TODO: Add inputs on button click */}
       <Center>
         <TertiaryButton label="+ Short Term Goal" />
       </Center>
-      <div className="required">
-        <TextInput
+     
+        <InputComponent
+          type="text"
           label="Long Term Goal (Examples: buying a house, preparing for retirement)"
           placeholder="Type in a long term goal"
           value={props.longtermgoal}
           name="longtermgoal"
-          onChange={props.handleChange}
+          onChange={props.handleChange} required
         />
-      </div>
 
       {/* TODO: Add inputs on button click */}
       <Center>
