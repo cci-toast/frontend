@@ -3,15 +3,34 @@ import { Row, Col } from "reactstrap";
 import Center from "react-center";
 import { Link } from "react-router-dom";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Logo from "./logo.png";
 
 import PrimaryButton from "./Components/PrimaryButton";
+import InputComponent from "./Components/InputComponent";
 
 import Style from "style-it";
 
 class Signin extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { email: '', password: '' };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+  submitHandler(event) {
+    alert('Email, Password: ' + this.state.email+" "+ this.state.password);
+    event.preventDefault();
+  }
+
   render() {
     const styles = `
     .center-content {
@@ -46,28 +65,6 @@ class Signin extends Component {
       color: var(--toast-white);
       font-style: italic;
     }
-
-    .input-group {
-      display: flex;
-     }
-
-     .input-group-text {
-      background-color: var(--toast-neutral-6);
-      border-radius: 20rem;
-      color: var(--toast-neutral-1);
-      padding: 0rem 0.75rem;
-    }
-
-     .form-control {
-       border-radius: 20rem;
-       background-color: var(--toast-neutral-6);
-       font-size: 0.96rem;
-     }
-  
-     .required .control-label:after {
-       content: "*";
-       color: var(--toast-red);
-     }
       `;
 
     return Style.it(
@@ -93,41 +90,26 @@ class Signin extends Component {
             <form onSubmit={this.submitHandler}>
               <Col className="mb-3">
                 <h2>Sign In</h2>
-
                 <br />
-                <label>Email</label>
-                <div className="input-group">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon">
-                      <FontAwesomeIcon icon={faUser} />
-                    </span>
-                  </div>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    placeholder="Type in your email"
-                    required
-                  />
-                </div>
+                <InputComponent 
+                placeholder="Type in your email" 
+                type="email" icon={faUser} 
+                label="Email" 
+                onChange={this.handleChange} 
+                name="email" 
+                value={this.state.email} required
+                />
               </Col>
               <br />
               <Col mb="3">
-                <label> Password</label>
-                <div className="input-group">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon">
-                      <FontAwesomeIcon icon={faLock} />
-                    </span>
-                  </div>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    placeholder="Type in your password"
-                    required
-                  />
-                </div>
+                <InputComponent 
+                placeholder="Type in your password" 
+                type="password" icon={faLock} 
+                label="Password" 
+                onChange={this.handleChange} 
+                name="password" 
+                value={this.state.password} required
+                />
               </Col>
               <br />
               <Center>
