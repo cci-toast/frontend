@@ -1,9 +1,35 @@
 import React, { Component } from "react";
+import Style from "style-it";
+
 class TextInput extends Component {
   render() {
+    const styles = `
+    .input-group {
+      display: flex;
+     }
 
-    return (
-        <div>
+     .input-group-text {
+       background-color: var(--toast-neutral-6);
+       border-radius: 20rem;
+       color: var(--toast-neutral-1);
+       padding: 0rem 0.75rem;
+     }
+  
+     .form-control {
+       border-radius: 20rem;
+       background-color: var(--toast-neutral-6);
+       font-size: 0.96rem;
+     }
+  
+     .required .control-label:after {
+       content: "*";
+       color: var(--toast-red);
+     }
+  `;
+
+    return Style.it(
+      `${styles}`,
+      <div>
         <label className="control-label">{this.props.label}</label>
         <div className="input-group">
           <input
@@ -17,11 +43,9 @@ class TextInput extends Component {
             required
           />
         </div>
-        </div>
+      </div>
     );
   }
 }
 
 export default TextInput;
-
-

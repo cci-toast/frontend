@@ -1,16 +1,24 @@
 import React, { Component } from "react";
+import Style from "style-it";
+
 class QuaternaryButton extends Component {
   render() {
-    const quaternary = {
-      color: "var(--toast-black)",
-      float: "right"
-    };
+    const styles = `
+    .quaternary {
+      color: var(--toast-black);
+      float: right;
+    }
+
+    .round {
+      border-radius: 2rem;
+    }
+    `;
 
     if (this.props.round) {
-      return (
+      return Style.it(
+        `${styles}`,
         <button
-          className="btn round"
-          style={quaternary}
+          className="quaternary round"
           type={this.props.type}
           onClick={this.props.handleClick}
         >
@@ -18,10 +26,10 @@ class QuaternaryButton extends Component {
         </button>
       );
     } else {
-      return (
+      return Style.it(
+        `${styles}`,
         <button
-          className="btn"
-          style={quaternary}
+          className="quaternary"
           type={this.props.type}
           onClick={this.props.handleClick}
         >

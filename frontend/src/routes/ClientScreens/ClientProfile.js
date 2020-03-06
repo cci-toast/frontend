@@ -43,7 +43,7 @@ class ClientProfile extends Component {
     });
   };
 
-  //Button functions
+  // Button functions
 
   previousButton() {
     let currentStep = this.state.currentStep;

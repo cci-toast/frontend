@@ -1,20 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 :root {
-    --toast-black: #1A1A1A;
-    --toast-white: #FFFFFF;
-    --toast-blue-1: #0364FF;
-    --toast-blue-2: #3062B2;
-    --toast-purple: #761ABE;
-    --toast-red: #BF0000;
-    --toast-gradient-1: linear-gradient(90deg, #721ebe, #3260b3);
-    --toast-gradient-2: linear-gradient(0deg, #721ebe, #3260b3);
-    --toast-neutral-6: #F5F5F5;
-    --toast-neutral-5: #E9E9E9;
-    --toast-neutral-4: #CDCDCD;
-    --toast-neutral-3: #ACACAC;
-    --toast-neutral-2: #949494;
-    --toast-neutral-1: #757575;
+    --toast-black: rgb(26, 26, 26);
+    --toast-white: rgb(255, 255, 255);
+    --toast-blue-1: rgb(3, 100, 255);
+    --toast-blue-2: rgb(48, 98, 178);
+    --toast-purple: rgb(118, 26, 190);
+    --toast-purple-transparent: rgba(118, 26, 190, 0.2);
+    --toast-red: rgb(191, 0, 0);
+    --toast-gradient-1: linear-gradient( 90deg, rgb(114, 30, 190), rgb(50, 95, 179));
+    --toast-gradient-2: linear-gradient( 0deg, rgb(114, 30, 190), rgb(50, 95, 179));
+    --toast-neutral-6: rgb(245, 245, 245);
+    --toast-neutral-5: rgb(233, 233, 233);
+    --toast-neutral-4: rgb(205, 205, 205);
+    --toast-neutral-3: rgb(172, 172, 172);
+    --toast-neutral-2: rgb(148, 148, 148);
+    --toast-neutral-1: rgb(117, 117, 117);
 }
 
 ::-webkit-input-placeholder {
@@ -73,52 +74,20 @@ p {
     margin-right: 20rem;
 }
 
-
-/* Form input styles */
-
-.input-group-text {
-    background-color: var(--toast-neutral-6);
-    border-radius: 20rem;
-    color: var(--toast-neutral-1);
-    padding: 0rem .75rem;
+a,
+a:hover {
+    text-decoration: none;
+    color: var(--toast-black);
 }
 
-.form-control {
-    border-radius: 20rem;
-    background-color: var(--toast-neutral-6);
-    font-size: 0.96rem;
-}
-
-.required .control-label:after {
-    content: "*";
-    color: var(--toast-red);
-}
-
-input[type=checkbox],
-input[type=radio] {
+input[type="checkbox"],
+input[type="radio"] {
     width: 1.2rem;
     height: 1.2rem;
     margin-top: 0.3rem;
 }
 
-.client-box {
-    padding: 1rem;
-    border-radius: 0.625rem;
-    margin: 0.3rem;
-}
-
-.client-box:nth-child(odd) {
-    background-color: var(--toast-neutral-6);
-}
-
-.client-box:nth-child(even) {
-    background-color: var(--toast-neutral-5);
-}
-
-
-/* Common Button Styles */
-
-.btn {
+button {
     margin: 0.375rem;
     color: var(--toast-white);
     text-transform: uppercase;
@@ -133,42 +102,8 @@ input[type=radio] {
     min-width: 8rem;
 }
 
-.btn:hover {
+button:hover {
     color: var(--toast-white);
     /* box-shadow: 0rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12); */
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.btn.round {
-    border-radius: 2rem;
-}
-
-
-/* Spacing to push buttons to the bottom of the page. */
-
-.spacer-primary {
-    height: 6.5rem;
-}
-
-.spacer-secondary {
-    height: 10.5rem;
-}
-
-.spacer-tertiary {
-    height: 13.5rem;
-}
-
-.spacer-quaternary {
-    height: 17.5rem;
-}
-
-
-/* Overrides sidenav default colors */
-
-.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv {
-    background: var(--toast-gradient-2);
-    border-radius: 0rem 2rem 2rem 0rem;
-    min-width: 4.875rem;
-    position: fixed;
-    overflow-y: hidden;
 }
