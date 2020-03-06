@@ -35,25 +35,14 @@ class InputComponent extends Component {
       }
     }
 
-
-    function isRequired(props){
-      if(props.required){
-        return(
-        <div className="required">
-          {inputGroup(props)}
-          </div>
-        );
-      }
-      else{
-        return(
-        inputGroup(props)
-        );
-      }
-    }
-
     function inputGroup(props){
+      let classes=[];
+
+      if(props.required){
+        classes.push("required");
+      }
       return(
-      <div>
+      <div className={classes.join(" ")}>
       <label className="control-label">{props.label}</label>
       
       <div className="input-group">
@@ -74,7 +63,7 @@ class InputComponent extends Component {
     }
     return Style.it(
       `${styles}`,
-      isRequired(this.props)
+      inputGroup(this.props)
     );
   }
 }
