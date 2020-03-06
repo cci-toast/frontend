@@ -6,15 +6,15 @@ import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 
 import Logo from "./logo.png";
 
-import PrimaryButton from "./Components/PrimaryButton";
 import InputComponent from "./Components/InputComponent";
+import ToastButton from "./Components/ToastButton";
 
 import Style from "style-it";
 
 class Signin extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { email: "", password: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -27,7 +27,7 @@ class Signin extends Component {
     });
   };
   submitHandler(event) {
-    alert('Email, Password: ' + this.state.email+" "+ this.state.password);
+    alert("Email, Password: " + this.state.email + " " + this.state.password);
     event.preventDefault();
   }
 
@@ -91,30 +91,34 @@ class Signin extends Component {
               <Col className="mb-3">
                 <h2>Sign In</h2>
                 <br />
-                <InputComponent 
-                placeholder="Type in your email" 
-                type="email" icon={faUser} 
-                label="Email" 
-                onChange={this.handleChange} 
-                name="email" 
-                value={this.state.email} required
+                <InputComponent
+                  placeholder="Type in your email"
+                  type="email"
+                  icon={faUser}
+                  label="Email"
+                  onChange={this.handleChange}
+                  name="email"
+                  value={this.state.email}
+                  required
                 />
               </Col>
               <br />
               <Col mb="3">
-                <InputComponent 
-                placeholder="Type in your password" 
-                type="password" icon={faLock} 
-                label="Password" 
-                onChange={this.handleChange} 
-                name="password" 
-                value={this.state.password} required
+                <InputComponent
+                  placeholder="Type in your password"
+                  type="password"
+                  icon={faLock}
+                  label="Password"
+                  onChange={this.handleChange}
+                  name="password"
+                  value={this.state.password}
+                  required
                 />
               </Col>
               <br />
               <Center>
                 <Link to="/clientprofile">
-                  <PrimaryButton round label="Sign In" />
+                  <ToastButton primary round label="Sign In" />
                 </Link>
               </Center>
             </form>
