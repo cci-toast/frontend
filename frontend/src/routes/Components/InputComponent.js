@@ -40,18 +40,18 @@ class InputComponent extends Component {
       if(props.required){
         return(
         <div className="required">
-          {notRequired(props)}
+          {inputGroup(props)}
           </div>
         );
       }
       else{
         return(
-        notRequired(props)
+        inputGroup(props)
         );
       }
     }
 
-    function notRequired(props){
+    function inputGroup(props){
       return(
       <div>
       <label className="control-label">{props.label}</label>
