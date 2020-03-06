@@ -13,8 +13,7 @@ import {
 
 import Center from "react-center";
 
-import SecondaryButton from "../Components/SecondaryButton";
-import QuaternaryButton from "../Components/QuaternaryButton";
+import ToastButton from "../Components/ToastButton";
 
 var income = 87000;
 var incomespouse = 70000;
@@ -50,7 +49,8 @@ class ClientPlanContent extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
-        <QuaternaryButton
+        <ToastButton
+          quaternary
           handleClick={this.prev}
           type="button"
           label="Previous"
@@ -64,7 +64,12 @@ class ClientPlanContent extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep < 5) {
       return (
-        <SecondaryButton handleClick={this.next} type="button" label="Next" />
+        <ToastButton
+          secondary
+          handleClick={this.next}
+          type="button"
+          label="Next"
+        />
       );
     }
     return null;
