@@ -5,15 +5,13 @@ import "./index.css";
 
 import Signin from "./routes/Signin";
 
-// Client Portal Screens
-import ClientProfile from "./routes/ClientScreens/ClientProfile";
-import ClientPlan from "./routes/ClientScreens/ClientPlan";
-import ClientAdvisorContact from "./routes/ClientScreens/ClientAdvisorContact";
-import ClientActionItems from "./routes/ClientScreens/ClientActionItems";
+import ClientProfileScreen from "./routes/ClientScreens/ClientProfileScreen";
+import ClientPlanScreen from "./routes/ClientScreens/ClientPlanScreen";
+import ClientAdvisorContactScreen from "./routes/ClientScreens/ClientAdvisorContactScreen";
+import ClientActionItemsScreen from "./routes/ClientScreens/ClientActionItemsScreen";
 
-// Advisor Portal Screens
-import Clients from "./routes/AdvisorScreens/Clients";
-import Configurations from "./routes/AdvisorScreens/Configurations";
+import AdvisorClientsScreen from "./routes/AdvisorScreens/AdvisorClientsScreen";
+import AdvisorConfigsScreen from "./routes/AdvisorScreens/AdvisorConfigsScreen";
 
 class App extends Component {
   render() {
@@ -21,24 +19,28 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={Signin} />
-          <Route exact path="/clientprofile" component={ClientProfile} />
-          <Route exact path="/clientplan" component={ClientPlan} />
+          <Route exact path="/clientprofile" component={ClientProfileScreen} />
+          <Route exact path="/clientplan" component={ClientPlanScreen} />
           <Route
             exact
             path="/clientadvisorcontact"
-            component={ClientAdvisorContact}
+            component={ClientAdvisorContactScreen}
           />
           <Route
             exact
             path="/clientactionitems"
-            component={ClientActionItems}
+            component={ClientActionItemsScreen}
           />
           <Route />
         </Switch>
 
         <Switch>
-          <Route exact path="/configurations" component={Configurations} />
-          <Route exact path="/clients" component={Clients} />
+          <Route
+            exact
+            path="/configurations"
+            component={AdvisorConfigsScreen}
+          />
+          <Route exact path="/clients" component={AdvisorClientsScreen} />
           <Route />
         </Switch>
       </div>

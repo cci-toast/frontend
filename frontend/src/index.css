@@ -63,17 +63,6 @@ p {
     font-weight: bold;
 }
 
-.page {
-    height: 100vh;
-    background-color: var(--toast-neutral-5);
-}
-
-.nav-card {
-    display: flex;
-    justify-content: space-between;
-    margin-right: 20rem;
-}
-
 a,
 a:hover {
     text-decoration: none;

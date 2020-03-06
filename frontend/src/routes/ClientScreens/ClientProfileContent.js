@@ -10,10 +10,8 @@ import QuaternaryButton from "../Components/QuaternaryButton";
 import TextInput from "../Components/TextInput";
 import DateInput from "../Components/DateInput";
 import CurrencyInput from "../Components/CurrencyInput";
-import MainNav from "../Components/MainNav";
-import Card from "../Components/Card";
 
-class ClientProfile extends Component {
+class ClientProfileContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,59 +77,52 @@ class ClientProfile extends Component {
 
   render() {
     return (
-      <div className="page">
-        <div className="nav-card">
-          <MainNav client></MainNav>
-          <Card>
-            <form onSubmit={this.handleSubmit}>
-              <ClientInformation
-                currentStep={this.state.currentStep}
-                handleChange={this.handleChange}
-                fname={this.state.fname}
-                lname={this.state.lname}
-                bday={this.state.bday}
-                city={this.state.city}
-                state={this.state.state}
-                zipcode={this.state.zipcode}
-              />
-              <Finances
-                currentStep={this.state.currentStep}
-                handleChange={this.handleChange}
-                income={this.state.income}
-              />
-              <Bills
-                currentStep={this.state.currentStep}
-                handleChange={this.handleChange}
-              />
-              <Expenses
-                currentStep={this.state.currentStep}
-                handleChange={this.handleChange}
-                shoppingdescription={this.state.shoppingdescription}
-                shoppingamount={this.state.shoppingamount}
-              />
-              <FamilyInformation
-                currentStep={this.state.currentStep}
-                handleChange={this.handleChange}
-                spousefname={this.state.spousefname}
-                spouselname={this.state.spouselname}
-                spousebday={this.state.spousebday}
-                numchildren={this.state.numchildren}
-                childfname={this.state.childfname}
-                childlname={this.state.childlname}
-                childbday={this.state.childbday}
-              />
-              <Goals
-                currentStep={this.state.currentStep}
-                handleChange={this.handleChange}
-              />
+      <form onSubmit={this.handleSubmit}>
+        <ClientInformation
+          currentStep={this.state.currentStep}
+          handleChange={this.handleChange}
+          fname={this.state.fname}
+          lname={this.state.lname}
+          bday={this.state.bday}
+          city={this.state.city}
+          state={this.state.state}
+          zipcode={this.state.zipcode}
+        />
+        <Finances
+          currentStep={this.state.currentStep}
+          handleChange={this.handleChange}
+          income={this.state.income}
+        />
+        <Bills
+          currentStep={this.state.currentStep}
+          handleChange={this.handleChange}
+        />
+        <Expenses
+          currentStep={this.state.currentStep}
+          handleChange={this.handleChange}
+          shoppingdescription={this.state.shoppingdescription}
+          shoppingamount={this.state.shoppingamount}
+        />
+        <FamilyInformation
+          currentStep={this.state.currentStep}
+          handleChange={this.handleChange}
+          spousefname={this.state.spousefname}
+          spouselname={this.state.spouselname}
+          spousebday={this.state.spousebday}
+          numchildren={this.state.numchildren}
+          childfname={this.state.childfname}
+          childlname={this.state.childlname}
+          childbday={this.state.childbday}
+        />
+        <Goals
+          currentStep={this.state.currentStep}
+          handleChange={this.handleChange}
+        />
 
-              {this.nextButton()}
-              {this.saveButton()}
-              {this.previousButton()}
-            </form>
-          </Card>
-        </div>
-      </div>
+        {this.nextButton()}
+        {this.saveButton()}
+        {this.previousButton()}
+      </form>
     );
   }
 }
@@ -416,4 +407,4 @@ function Goals(props) {
   );
 }
 
-export default ClientProfile;
+export default ClientProfileContent;
