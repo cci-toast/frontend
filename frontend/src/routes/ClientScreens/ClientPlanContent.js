@@ -13,17 +13,13 @@ import {
 
 import Center from "react-center";
 
-import SecondaryButton from "../Components/SecondaryButton";
-import QuaternaryButton from "../Components/QuaternaryButton";
-
-import MainNav from "../Components/MainNav";
-import Card from "../Components/Card";
+import ToastButton from "../Components/ToastButton";
 
 var income = 87000;
 var incomespouse = 70000;
 var age = 40;
 
-class ClientPlan extends Component {
+class ClientPlanContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +49,8 @@ class ClientPlan extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
-        <QuaternaryButton
+        <ToastButton
+          quaternary
           handleClick={this.prev}
           type="button"
           label="Previous"
@@ -67,7 +64,12 @@ class ClientPlan extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep < 5) {
       return (
-        <SecondaryButton handleClick={this.next} type="button" label="Next" />
+        <ToastButton
+          secondary
+          handleClick={this.next}
+          type="button"
+          label="Next"
+        />
       );
     }
     return null;
@@ -85,7 +87,7 @@ class ClientPlan extends Component {
         return null;
       }
       return (
-        <div>
+        <React.Fragment>
           <Center>
             <h6 className="title">Emergency Savings</h6>
           </Center>
@@ -151,7 +153,7 @@ class ClientPlan extends Component {
               />
             </XYPlot>
           </Center>
-        </div>
+        </React.Fragment>
       );
     }
 
@@ -397,26 +399,19 @@ class ClientPlan extends Component {
       <div>
         {/* <h3>Your Financial Plan</h3> */}
         {/*Renders the form steps and passes required props in*/}
-        <div className="page">
-          <div className="nav-card">
-            <MainNav client></MainNav>
-            <Card>
-              <form>
-                <EmergencySavings currentStep={this.state.currentStep} />
-                <Retirement currentStep={this.state.currentStep} />
-                <Debt currentStep={this.state.currentStep} />
-                <Budget currentStep={this.state.currentStep} />
-                <LifeInsurance currentStep={this.state.currentStep} />
-                <div className="spacer-primary"></div>
-                {this.nextButton()}
-                {this.previousButton()}
-              </form>
-            </Card>
-          </div>
-        </div>
+        <form>
+          <EmergencySavings currentStep={this.state.currentStep} />
+          <Retirement currentStep={this.state.currentStep} />
+          <Debt currentStep={this.state.currentStep} />
+          <Budget currentStep={this.state.currentStep} />
+          <LifeInsurance currentStep={this.state.currentStep} />
+          <div className="spacer-primary"></div>
+          {this.nextButton()}
+          {this.previousButton()}
+        </form>
       </div>
     );
   }
 }
 
-export default ClientPlan;
+export default ClientPlanContent;
