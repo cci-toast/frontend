@@ -41,7 +41,6 @@ class MainNav extends Component {
       width: 6rem;
       margin-top: 1rem;
       margin-bottom: 2rem;
-      padding: 1rem 0;
     }
 
     .icon {
@@ -61,11 +60,11 @@ class MainNav extends Component {
       justify-content: center;
       flex-direction: column;
       width: 100%;
-      padding: 1rem 0 1rem 0;
+      padding: 0.4rem 0 0.4rem 0;
     }
 
     .icon-caption:last-child {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
     
     .icon-caption:hover {
