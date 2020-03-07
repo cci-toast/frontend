@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Style from "style-it";
 
-class Clientbox extends Component {
+class ClientboxComponent extends Component {
   render() {
     const styles = `
     .client-box {
@@ -27,4 +27,4 @@ class Clientbox extends Component {
     );
   }
 }
-export default Clientbox;
+export default ClientboxComponent;

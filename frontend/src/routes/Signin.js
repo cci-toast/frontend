@@ -7,7 +7,7 @@ import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import Logo from "./logo.png";
 
 import InputComponent from "./Components/InputComponent";
-import ToastButton from "./Components/ToastButton";
+import ToastButtonComponent from "./Components/ToastButtonComponent";
 
 import Style from "style-it";
 
@@ -118,7 +118,7 @@ class Signin extends Component {
               <br />
               <Center>
                 <Link to="/clientprofile">
-                  <ToastButton primary round label="Sign In" />
+                  <ToastButtonComponent primary round label="Sign In" />
                 </Link>
               </Center>
             </form>

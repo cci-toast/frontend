@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Style from "style-it";
 
-class Card extends Component {
+class CardComponent extends Component {
   render() {
     const styles = `
     .card {
@@ -22,4 +22,4 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export default CardComponent;

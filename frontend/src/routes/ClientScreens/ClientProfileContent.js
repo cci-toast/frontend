@@ -6,7 +6,7 @@ import Center from "react-center";
 import InputComponent from "../Components/InputComponent";
 
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import ToastButton from "../Components/ToastButton";
+import ToastButtonComponent from "../Components/ToastButtonComponent";
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class ClientProfileContent extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
-        <ToastButton
+        <ToastButtonComponent
           quaternary
           handleClick={this.prev}
           type="button"
@@ -59,7 +59,7 @@ class ClientProfileContent extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep < 6) {
       return (
-        <ToastButton
+        <ToastButtonComponent
           secondary
           handleClick={this.next}
           type="button"
@@ -73,7 +73,7 @@ class ClientProfileContent extends Component {
   saveButton() {
     let currentStep = this.state.currentStep;
     if (currentStep === 6) {
-      return <ToastButton primary type="button" label="Save" />;
+      return <ToastButtonComponent primary type="button" label="Save" />;
     }
     return null;
   }
@@ -223,7 +223,7 @@ function Finances(props) {
         </Col>
       </Row>
       <Center>
-        <ToastButton tertiary label="+ Additional Income" />
+        <ToastButtonComponent tertiary label="+ Additional Income" />
       </Center>
 
       <div className="spacer-quaternary"></div>
@@ -239,23 +239,23 @@ function Bills(props) {
     <div>
       <h5>Bills</h5>
       <Center>
-        <ToastButton tertiary label="+ Housing" />
+        <ToastButtonComponent tertiary label="+ Housing" />
       </Center>
       <hr />
       <Center>
-        <ToastButton tertiary label="+ Bill" />
+        <ToastButtonComponent tertiary label="+ Bill" />
       </Center>
       <hr />
       <Center>
-        <ToastButton tertiary label="+ Utility" />
+        <ToastButtonComponent tertiary label="+ Utility" />
       </Center>
       <hr />
       <Center>
-        <ToastButton tertiary Button label="+ Insurance" />
+        <ToastButtonComponent tertiary Button label="+ Insurance" />
       </Center>
       <hr />
       <Center>
-        <ToastButton tertiary label="+ Loan/Debt" />
+        <ToastButtonComponent tertiary label="+ Loan/Debt" />
       </Center>
     </div>
   );
@@ -296,22 +296,22 @@ function Expenses(props) {
       </Row>
       <br />
       <Center>
-        <ToastButton tertiary label="+ Shopping" />
+        <ToastButtonComponent tertiary label="+ Shopping" />
       </Center>
       <hr />
 
       <Center>
-        <ToastButton tertiary label="+ Leisure" />
+        <ToastButtonComponent tertiary label="+ Leisure" />
       </Center>
       <hr />
 
       <Center>
-        <ToastButton tertiary label="+ Transportation" />
+        <ToastButtonComponent tertiary label="+ Transportation" />
       </Center>
       <hr />
 
       <Center>
-        <ToastButton tertiary label="+ Subscriptions" />
+        <ToastButtonComponent tertiary label="+ Subscriptions" />
       </Center>
     </div>
   );
@@ -353,7 +353,7 @@ function FamilyInformation(props) {
         </Col>
       </Row>
       <Center>
-        <ToastButton tertiary label="+ Partner" />
+        <ToastButtonComponent tertiary label="+ Partner" />
       </Center>
       <hr />
 
@@ -388,7 +388,7 @@ function FamilyInformation(props) {
       </Row>
 
       <Center>
-        <ToastButton tertiary label="+ Child" />
+        <ToastButtonComponent tertiary label="+ Child" />
       </Center>
     </div>
   );
@@ -413,7 +413,7 @@ function Goals(props) {
       </div>
       {/* TODO: Add inputs on button click */}
       <Center>
-        <ToastButton tertiary label="+ Short Term Goal" />
+        <ToastButtonComponent tertiary label="+ Short Term Goal" />
       </Center>
 
       <InputComponent
@@ -428,7 +428,7 @@ function Goals(props) {
 
       {/* TODO: Add inputs on button click */}
       <Center>
-        <ToastButton tertiary label="+ Long Term Goal" />
+        <ToastButtonComponent tertiary label="+ Long Term Goal" />
       </Center>
       <div className="spacer-secondary"></div>
     </React.Fragment>

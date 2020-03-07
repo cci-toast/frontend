@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Style from "style-it";
 
-class Checkbox extends Component {
+class CheckboxComponent extends Component {
   render() {
     const styles = `
     .input-group {
@@ -18,4 +18,4 @@ class Checkbox extends Component {
     );
   }
 }
-export default Checkbox;
+export default CheckboxComponent;
