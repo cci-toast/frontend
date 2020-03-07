@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Style from "style-it";
 
-import MainNav from "../Components/MainNav";
-import Card from "../Components/Card";
+import MainNavComponent from "../Components/MainNavComponent";
+import CardComponent from "../Components/CardComponent";
 
 import ClientProfileContent from "../ClientScreens/ClientProfileContent";
 import ClientPlanContent from "../ClientScreens/ClientPlanContent";
@@ -12,11 +12,10 @@ import ClientAdvisorContactContent from "../ClientScreens/ClientAdvisorContactCo
 import AdvisorClientsContent from "../AdvisorScreens/AdvisorClientsContent";
 import AdvisorConfigsContent from "../AdvisorScreens/AdvisorConfigsContent";
 
-class ScreenTemplate extends Component {
+class ScreenTemplateComponent extends Component {
   render() {
     const styles = `
     .page {
-        height: 100vh;
         background-color: var(--toast-neutral-5);
     }
     
@@ -47,9 +46,9 @@ class ScreenTemplate extends Component {
 
     function getMainNav(props) {
       if (props.advisor) {
-        return <MainNav advisor></MainNav>;
+        return <MainNavComponent advisor></MainNavComponent>;
       } else {
-        return <MainNav client></MainNav>;
+        return <MainNavComponent client></MainNavComponent>;
       }
     }
 
@@ -58,11 +57,11 @@ class ScreenTemplate extends Component {
       <div className="page">
         <div className="nav-card">
           {getMainNav(this.props)}
-          <Card>{getScreenContent(this.props)}</Card>
+          <CardComponent>{getScreenContent(this.props)}</CardComponent>
         </div>
       </div>
     );
   }
 }
 
-export default ScreenTemplate;
+export default ScreenTemplateComponent;

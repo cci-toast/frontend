@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-class MainNav extends Component {
+class MainNavComponent extends Component {
   render() {
     const styles = `
     .nav {
@@ -144,4 +144,4 @@ class MainNav extends Component {
   }
 }
 
-export default MainNav;
+export default MainNavComponent;

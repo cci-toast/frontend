@@ -1,16 +1,16 @@
 import React from "react";
 
-import Checkbox from "../Components/Checkbox";
+import CheckboxComponent from "../Components/CheckboxComponent";
 
 class ClientActionItemsContent extends React.Component {
   render() {
     return (
       <React.Fragment>
         {/* <h3>Your Action Items</h3> */}
-        <Checkbox text="action item text" />
-        <Checkbox text="action item text" />
-        <Checkbox text="action item text" />
-        <Checkbox text="action item text" />
+        <CheckboxComponent text="action item text" />
+        <CheckboxComponent text="action item text" />
+        <CheckboxComponent text="action item text" />
+        <CheckboxComponent text="action item text" />
       </React.Fragment>
     );
   }
