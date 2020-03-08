@@ -1,7 +1,5 @@
-# frontend
-Repo for hosting the React app
-
-#### Starting the application
+# Toast Frontend
+## Prerequisites
 * Ensure the following packages are installed with the following commands prior to running the server:
 ```
 npm install --save bootstrap
@@ -15,6 +13,8 @@ npm i --save @fortawesome/fontawesome-svg-core
 npm i --save @fortawesome/free-solid-svg-icons
 npm i --save @fortawesome/react-fontawesome
 npm install react-vis --save
-
+npm install style-it --save
 ```
+
+## How to Run
 * Run the server with `npm start`
