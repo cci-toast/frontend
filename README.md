@@ -2,6 +2,7 @@
 ## Prerequisites
 * Ensure the following packages are installed with the following commands prior to running the server:
 ```
+npm i react-scripts
 npm install --save bootstrap
 npm install --save reactstrap react react-dom
 npm install react-router-dom
