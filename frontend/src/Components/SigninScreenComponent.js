@@ -3,10 +3,10 @@ import Center from "react-center";
 import { Link } from "react-router-dom";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 
-import Logo from "./logo.png";
+import Logo from "../logo.png";
 
-import InputComponent from "./Components/InputComponent";
-import ToastButtonComponent from "./Components/ToastButtonComponent";
+import InputComponent from "./InputComponent";
+import ToastButtonComponent from "./ToastButtonComponent";
 
 import Style from "style-it";
 
@@ -106,8 +106,8 @@ class SigninScreenComponent extends Component {
                   value={this.state.email}
                   required
                 />
-        
-              <br />
+
+                <br />
                 <InputComponent
                   placeholder="Type in your password"
                   type="password"
@@ -126,7 +126,6 @@ class SigninScreenComponent extends Component {
                 </Link>
               </Center>
             </form>
-      
           </div>
         </div>
       </div>

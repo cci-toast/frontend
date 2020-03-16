@@ -12,18 +12,22 @@ import AdvisorClientsContent from "./AdvisorClientsContent";
 import AdvisorConfigsContent from "./AdvisorConfigsContent";
 
 import CardComponent from "./CardComponent";
+import LeftNavComponent from "./LeftNavComponent";
 
 class ScreenTemplateComponent extends Component {
   render() {
     const styles = `
-    .page {
+    .nav-content-container {
+        display: flex;
+        justify-content: space-between;
         background-color: var(--toast-neutral-5);
     }
     
-    .nav-card {
+    .leftnav-card {
         display: flex;
-        justify-content: space-between;
-        margin-right: 20rem;
+        justify-content: space-evenly;
+        margin-top: 3rem;
+        width: calc(100vw - 10rem);
     }
       `;
 
@@ -53,11 +57,22 @@ class ScreenTemplateComponent extends Component {
       }
     }
 
+    function getLeftNav(props) {
+      if (props.profile) {
+        return <LeftNavComponent profile></LeftNavComponent>;
+      } else if (props.clients || props.advisorcontact) {
+        return <LeftNavComponent hidden></LeftNavComponent>;
+      } else {
+        return <LeftNavComponent></LeftNavComponent>;
+      }
+    }
+
     return Style.it(
       `${styles}`,
-      <div className="page">
-        <div className="nav-card">
-          {getMainNav(this.props)}
+      <div className="nav-content-container">
+        {getMainNav(this.props)}
+        <div className="leftnav-card">
+          {getLeftNav(this.props)}
           <CardComponent>{getScreenContent(this.props)}</CardComponent>
         </div>
       </div>
