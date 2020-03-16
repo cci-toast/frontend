@@ -1,5 +1,5 @@
 import React from "react";
-import ClientboxComponent from "../Components/ClientboxComponent";
+import ClientboxComponent from "./ClientboxComponent";
 
 class AdvisorClientsContent extends React.Component {
   render() {

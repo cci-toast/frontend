@@ -1,6 +1,6 @@
 import React from "react";
 
-import CheckboxComponent from "../Components/CheckboxComponent";
+import CheckboxComponent from "./CheckboxComponent";
 
 class ClientActionItemsContent extends React.Component {
   render() {

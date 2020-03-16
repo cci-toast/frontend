@@ -97,3 +97,15 @@ button:hover {
     /* box-shadow: 0rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12); */
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width:50%;
+    padding-right:2rem;
+ }
+
+ .row{
+     display: flex;
+     flex-direction: row;
+ }

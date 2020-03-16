@@ -13,7 +13,7 @@ import {
 
 import Center from "react-center";
 
-import ToastButtonComponent from "../Components/ToastButtonComponent";
+import ToastButtonComponent from "./ToastButtonComponent";
 
 var income = 87000;
 var incomespouse = 70000;

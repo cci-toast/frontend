@@ -4,7 +4,6 @@
 ```
 npm i react-scripts
 npm install --save bootstrap
-npm install --save reactstrap react react-dom
 npm install react-router-dom
 npm install --save react-center
 npm install --save react @trendmicro/react-sidenav
