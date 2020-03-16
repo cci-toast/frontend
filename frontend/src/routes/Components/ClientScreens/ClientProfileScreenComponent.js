@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Style from "style-it";
 
-import ScreenTemplateComponent from "../Components/ScreenTemplateComponent";
+import ScreenTemplateComponent from "../ScreenTemplateComponent";
 
-class ClientProfileScreen extends Component {
+class ClientProfileScreenComponent extends Component {
   render() {
     const styles = ``;
 
@@ -16,4 +16,4 @@ class ClientProfileScreen extends Component {
   }
 }
 
-export default ClientProfileScreen;
+export default ClientProfileScreenComponent;

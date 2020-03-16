@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 //import Select from "react-select";
 
-import { Row, Col } from "reactstrap";
 import Center from "react-center";
-import InputComponent from "../Components/InputComponent";
+import InputComponent from "./InputComponent";
 
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import ToastButtonComponent from "../Components/ToastButtonComponent";
+import ToastButtonComponent from "./ToastButtonComponent";
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -136,8 +135,8 @@ function ClientInformation(props) {
   }
   return (
     <div>
-      <Row>
-        <Col xs="6">
+      <div className="row">
+        <div className="column">
           <InputComponent
             type="text"
             label="First Name"
@@ -148,26 +147,6 @@ function ClientInformation(props) {
             required
           />
           <InputComponent
-            type="date"
-            label="Date of Birth"
-            value={props.bday}
-            name="bday"
-            onChange={props.handleChange}
-            required
-          />
-
-          <InputComponent
-            type="text"
-            label="State"
-            placeholder="Type in your state"
-            value={props.state}
-            name="state"
-            onChange={props.handleChange}
-          />
-        </Col>
-
-        <Col xs="6">
-          <InputComponent
             type="text"
             label="Last Name"
             placeholder="Type in your last name"
@@ -176,6 +155,32 @@ function ClientInformation(props) {
             onChange={props.handleChange}
             required
           />
+        </div>
+
+        <div className="column">
+          <InputComponent
+            type="text"
+            label="Middle Name"
+            placeholder="Type in your middle name"
+            value={props.mname}
+            name="mname"
+            onChange={props.handleChange}
+          />
+
+          <InputComponent
+            type="date"
+            label="Date of Birth"
+            value={props.bday}
+            name="bday"
+            onChange={props.handleChange}
+            required
+          />
+        </div>
+      </div>
+
+      <hr />
+      <div className="row">
+        <div className="column">
           <InputComponent
             type="text"
             label="City"
@@ -184,17 +189,20 @@ function ClientInformation(props) {
             name="city"
             onChange={props.handleChange}
           />
+        </div>
+        <div className="column">
           <InputComponent
             type="text"
-            label="Zip Code"
-            placeholder="Type in your zip-code"
-            value={props.zipcode}
-            name="zipcode"
-            pattern="[0-9]*"
+            label="State"
+            placeholder="Type in your state"
+            value={props.state}
+            name="state"
             onChange={props.handleChange}
           />
-        </Col>
-      </Row>
+        </div>
+
+      </div>
+
       <div className="spacer-tertiary"></div>
     </div>
   );
@@ -206,9 +214,11 @@ function Finances(props) {
   }
   return (
     <div>
-      <Row>
-        <Col xs="6">
-          <h5>Income</h5>
+      <h5>Income</h5>
+      <div className="row">
+
+        <div className="column">
+
           <InputComponent
             type="number"
             min="0"
@@ -220,8 +230,20 @@ function Finances(props) {
             onChange={props.handleChange}
             required
           />
-        </Col>
-      </Row>
+        </div>
+        <div className="column">
+          <InputComponent
+            type="number"
+            min="0"
+            label="Annual Salary After Taxes"
+            placeholder="Type in your annual salary after taxes"
+            value={props.income}
+            name="income"
+            icon={faDollarSign}
+            onChange={props.handleChange}
+          />
+        </div>
+      </div>
       <Center>
         <ToastButtonComponent tertiary label="+ Additional Income" />
       </Center>
@@ -269,8 +291,8 @@ function Expenses(props) {
     <div>
       <h5>Expenses</h5>
 
-      <Row>
-        <Col xs="6">
+      <div className="row">
+        <div className="column">
           <InputComponent
             type="text"
             label="Shopping Description"
@@ -279,9 +301,9 @@ function Expenses(props) {
             value={props.shoppingdescription}
             onChange={props.handleChange}
           />
-        </Col>
+        </div>
 
-        <Col xs="6">
+        <div className="column">
           <InputComponent
             type="number"
             label="Shopping Amount"
@@ -292,8 +314,8 @@ function Expenses(props) {
             value={props.shoppingamount}
             onChange={props.handleChange}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
       <br />
       <Center>
         <ToastButtonComponent tertiary label="+ Shopping" />
@@ -323,8 +345,8 @@ function FamilyInformation(props) {
   }
   return (
     <div>
-      <Row>
-        <Col xs="6">
+      <div className="row">
+        <div className="column">
           <InputComponent
             type="text"
             label="Spouse's First Name"
@@ -340,8 +362,8 @@ function FamilyInformation(props) {
             value={props.spousebday}
             onChange={props.handleChange}
           />
-        </Col>
-        <Col xs="6">
+        </div>
+        <div className="column">
           <InputComponent
             type="text"
             label="Spouse's Last Name"
@@ -350,15 +372,15 @@ function FamilyInformation(props) {
             value={props.spouselname}
             onChange={props.handleChange}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
       <Center>
         <ToastButtonComponent tertiary label="+ Partner" />
       </Center>
       <hr />
 
-      <Row>
-        <Col xs="6">
+      <div className="row">
+        <div className="column">
           <InputComponent
             type="text"
             label="Child's First Name"
@@ -374,8 +396,8 @@ function FamilyInformation(props) {
             name="childbday"
             onChange={props.handleChange}
           />
-        </Col>
-        <Col xs="6">
+        </div>
+        <div className="column">
           <InputComponent
             type="text"
             label="Child's Last Name"
@@ -384,8 +406,8 @@ function FamilyInformation(props) {
             name="childlname"
             onChange={props.handleChange}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
 
       <Center>
         <ToastButtonComponent tertiary label="+ Child" />

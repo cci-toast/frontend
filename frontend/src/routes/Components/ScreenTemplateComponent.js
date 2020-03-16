@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import Style from "style-it";
 
-import MainNavComponent from "../Components/MainNavComponent";
-import CardComponent from "../Components/CardComponent";
+import MainNavComponent from "./MainNavComponent";
 
-import ClientProfileContent from "../ClientScreens/ClientProfileContent";
-import ClientPlanContent from "../ClientScreens/ClientPlanContent";
-import ClientActionItemsContent from "../ClientScreens/ClientActionItemsContent";
-import ClientAdvisorContactContent from "../ClientScreens/ClientAdvisorContactContent";
+import ClientProfileContent from "./ClientProfileContent";
+import ClientPlanContent from "./ClientPlanContent";
+import ClientActionItemsContent from "./ClientActionItemsContent";
+import ClientAdvisorContactContent from "./ClientAdvisorContactContent";
 
-import AdvisorClientsContent from "../AdvisorScreens/AdvisorClientsContent";
-import AdvisorConfigsContent from "../AdvisorScreens/AdvisorConfigsContent";
+import AdvisorClientsContent from "./AdvisorClientsContent";
+import AdvisorConfigsContent from "./AdvisorConfigsContent";
+
+import CardComponent from "./CardComponent";
 
 class ScreenTemplateComponent extends Component {
   render() {

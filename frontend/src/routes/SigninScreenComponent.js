@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
 import Center from "react-center";
 import { Link } from "react-router-dom";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +10,7 @@ import ToastButtonComponent from "./Components/ToastButtonComponent";
 
 import Style from "style-it";
 
-class Signin extends Component {
+class SigninScreenComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { email: "", password: "" };
@@ -54,6 +53,7 @@ class Signin extends Component {
 
     .sign-in-spacer {
       padding-top: 5rem;
+      padding-left: 5rem;
     }
 
     .toast-title {
@@ -65,13 +65,18 @@ class Signin extends Component {
       color: var(--toast-white);
       font-style: italic;
     }
+
+    .column-full {
+      display: flex;
+      flex-direction: column;
+    }
       `;
 
     return Style.it(
       `${styles}`,
       <div>
-        <Row>
-          <Col md="6" className="hero-bg-left">
+        <div className="row">
+          <div className="column hero-bg-left">
             <div className="center-content">
               <Center>
                 <img src={Logo} rel="icon" alt="" className="logo" />
@@ -84,11 +89,11 @@ class Signin extends Component {
                 <p className="toast-tag-line">Financial planning made easier</p>
               </Center>
             </div>
-          </Col>
+          </div>
 
-          <Col md="6" className="sign-in-spacer">
+          <div className="column sign-in-spacer">
             <form onSubmit={this.submitHandler}>
-              <Col className="mb-3">
+              <div className="column-full">
                 <h2>Sign In</h2>
                 <br />
                 <InputComponent
@@ -101,9 +106,8 @@ class Signin extends Component {
                   value={this.state.email}
                   required
                 />
-              </Col>
+        
               <br />
-              <Col mb="3">
                 <InputComponent
                   placeholder="Type in your password"
                   type="password"
@@ -114,7 +118,7 @@ class Signin extends Component {
                   value={this.state.password}
                   required
                 />
-              </Col>
+              </div>
               <br />
               <Center>
                 <Link to="/clientprofile">
@@ -122,10 +126,11 @@ class Signin extends Component {
                 </Link>
               </Center>
             </form>
-          </Col>
-        </Row>
+      
+          </div>
+        </div>
       </div>
     );
   }
 }
-export default Signin;
+export default SigninScreenComponent;

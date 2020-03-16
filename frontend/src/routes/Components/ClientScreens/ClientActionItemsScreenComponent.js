@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Style from "style-it";
 
-import ScreenTemplateComponent from "../Components/ScreenTemplateComponent";
+import ScreenTemplateComponent from "../ScreenTemplateComponent";
 
-class ClientActionItemsScreen extends Component {
+class ClientActionItemsScreenComponent extends Component {
   render() {
     const styles = ``;
 
@@ -16,4 +16,4 @@ class ClientActionItemsScreen extends Component {
   }
 }
 
-export default ClientActionItemsScreen;
+export default ClientActionItemsScreenComponent;
