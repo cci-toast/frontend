@@ -116,7 +116,7 @@ class LeftNavComponent extends Component {
         background: var(--toast-gradient-1);
         border-radius: 1rem;
         margin-right: 1rem;
-        margin-top: 0.25rem;
+        margin-top: 0.75rem;
         transition: height 0.5s;
     }
 

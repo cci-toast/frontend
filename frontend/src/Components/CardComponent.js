@@ -6,7 +6,7 @@ class CardComponent extends Component {
     const styles = `
     .card {
     background-color: var(--toast-white);
-    padding: 3rem 2rem 3.8rem;
+    padding: 2.5rem 2rem 3.8rem;
     border-radius: 3rem 3rem 0rem 0rem;
     width: 60rem;
     box-shadow: 0px 10px 20px 5px var(--toast-neutral-3-transparent);

@@ -52,8 +52,7 @@ class SigninScreenComponent extends Component {
     }
 
     .sign-in-spacer {
-      padding-top: 5rem;
-      padding-left: 5rem;
+      padding: 5rem 3rem;
     }
 
     .toast-title {
