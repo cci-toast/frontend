@@ -15,6 +15,14 @@ npm i --save @fortawesome/react-fontawesome
 npm install react-vis --save
 npm install style-it --save
 ```
+## Viewing the Application
+https://toast-25543.firebaseapp.com/
+
+## Deploying the Application
+```
+npm run build
+firebase deploy 
+```
 
 ## How to Run
 * Run the server with `npm start`
