@@ -52,6 +52,7 @@ class MainNavComponent extends Component {
     
     .caption {
       color: var(--toast-neutral-6);
+      letter-spacing: 0.25px;
     }
     
     .icon-caption {
@@ -60,7 +61,7 @@ class MainNavComponent extends Component {
       justify-content: center;
       flex-direction: column;
       width: 100%;
-      padding: 0.4rem 0 0.4rem 0;
+      padding: .75rem 0 1rem 0;
     }
 
     .icon-caption:last-child {

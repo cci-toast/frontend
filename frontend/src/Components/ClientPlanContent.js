@@ -89,13 +89,6 @@ class ClientPlanContent extends Component {
       return (
         <React.Fragment>
           <Center>
-            <h6 className="title">Emergency Savings</h6>
-          </Center>
-          <Center>
-            <p>Shoot for 3-6 months of income set aside for the unexpected.</p>
-          </Center>
-
-          <Center>
             <XYPlot
               className="clustered-stacked-bar-chart"
               xType="ordinal"
@@ -153,6 +146,8 @@ class ClientPlanContent extends Component {
               />
             </XYPlot>
           </Center>
+
+          <p>Shoot for 3-6 months of income set aside for the unexpected.</p>
         </React.Fragment>
       );
     }
@@ -179,17 +174,7 @@ class ClientPlanContent extends Component {
       var retirementsavings =
         income * retirementmultiplier + incomespouse * retirementmultiplier;
       return (
-        <div>
-          <Center>
-            <h6 className="title">Household Retirement Savings </h6>
-          </Center>
-          <Center>
-            <p>
-              At this point your household should have nearly{" "}
-              {retirementmultiplier}x of income.
-            </p>
-          </Center>
-
+        <React.Fragment>
           <Center>
             <XYPlot
               className="chartMargin"
@@ -235,7 +220,11 @@ class ClientPlanContent extends Component {
               />
             </XYPlot>
           </Center>
-        </div>
+          <p>
+            At this point your household should have nearly{" "}
+            {retirementmultiplier}x of income.
+          </p>
+        </React.Fragment>
       );
     }
 
@@ -256,14 +245,7 @@ class ClientPlanContent extends Component {
       ];
 
       return (
-        <div>
-          <Center>
-            <h6 className="title">Debt</h6>
-          </Center>
-          <Center>
-            <p>Less than 36% of your income should go toward debt repayment.</p>
-          </Center>
-
+        <React.Fragment>
           <Center>
             <RadialChart
               colorRange={["#8c92d5", "#444db6"]}
@@ -273,7 +255,8 @@ class ClientPlanContent extends Component {
               showLabels={true}
             />
           </Center>
-        </div>
+          <p>Less than 36% of your income should go toward debt repayment.</p>
+        </React.Fragment>
       );
     }
 
@@ -295,17 +278,7 @@ class ClientPlanContent extends Component {
         { angle: savings, label: "$" + savings + " savings monthly" }
       ];
       return (
-        <div>
-          <Center>
-            <h6 className="title">Budget </h6>
-          </Center>
-          <Center>
-            <p>
-              50% of your income to fixed expenses, 30% for spending, and 20% to
-              savings.
-            </p>
-          </Center>
-
+        <React.Fragment>
           <Center>
             <RadialChart
               colorRange={["#c6c9ea", "#444db6", "#8c92d5"]}
@@ -315,7 +288,11 @@ class ClientPlanContent extends Component {
               showLabels={true}
             />
           </Center>
-        </div>
+          <p>
+            50% of your income to fixed expenses, 30% for spending, and 20% to
+            savings.
+          </p>
+        </React.Fragment>
       );
     }
 
@@ -338,13 +315,7 @@ class ClientPlanContent extends Component {
       var recommendedlifeinsurance = income * lifeinsurancemultiplier;
 
       return (
-        <div>
-          <Center>
-            <h6 className="title">Life Insurance </h6>
-          </Center>
-          <Center>
-            <p></p>
-          </Center>
+        <React.Fragment>
           <Center>
             <XYPlot
               xType="ordinal"
@@ -391,7 +362,7 @@ class ClientPlanContent extends Component {
               />
             </XYPlot>
           </Center>
-        </div>
+        </React.Fragment>
       );
     }
 

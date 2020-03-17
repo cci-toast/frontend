@@ -134,7 +134,7 @@ function ClientInformation(props) {
     return null;
   }
   return (
-    <div>
+    <React.Fragment>
       <div className="row">
         <div className="column">
           <InputComponent
@@ -200,11 +200,10 @@ function ClientInformation(props) {
             onChange={props.handleChange}
           />
         </div>
-
       </div>
 
       <div className="spacer-tertiary"></div>
-    </div>
+    </React.Fragment>
   );
 }
 
@@ -214,11 +213,9 @@ function Finances(props) {
   }
   return (
     <div>
-      <h5>Income</h5>
+      <h4>Income</h4>
       <div className="row">
-
         <div className="column">
-
           <InputComponent
             type="number"
             min="0"
@@ -259,7 +256,7 @@ function Bills(props) {
   }
   return (
     <div>
-      <h5>Bills</h5>
+      <h4>Bills</h4>
       <Center>
         <ToastButtonComponent tertiary label="+ Housing" />
       </Center>
@@ -277,7 +274,7 @@ function Bills(props) {
       </Center>
       <hr />
       <Center>
-        <ToastButtonComponent tertiary label="+ Loan/Debt" />
+        <ToastButtonComponent tertiary label="+ Loan / Debt" />
       </Center>
     </div>
   );
@@ -289,7 +286,7 @@ function Expenses(props) {
   }
   return (
     <div>
-      <h5>Expenses</h5>
+      <h4>Expenses</h4>
 
       <div className="row">
         <div className="column">
@@ -297,7 +294,7 @@ function Expenses(props) {
             type="text"
             label="Shopping Description"
             name="shoppingdescription"
-            placeholder="Type in your shopping description."
+            placeholder="Type in your shopping description"
             value={props.shoppingdescription}
             onChange={props.handleChange}
           />
@@ -308,7 +305,7 @@ function Expenses(props) {
             type="number"
             label="Shopping Amount"
             name="shoppingamount"
-            placeholder="Type in the amount spent on shopping items."
+            placeholder="Type in your amount spent on shopping items"
             min="0"
             icon={faDollarSign}
             value={props.shoppingamount}
@@ -316,7 +313,6 @@ function Expenses(props) {
           />
         </div>
       </div>
-      <br />
       <Center>
         <ToastButtonComponent tertiary label="+ Shopping" />
       </Center>
@@ -344,7 +340,7 @@ function FamilyInformation(props) {
     return null;
   }
   return (
-    <div>
+    <React.Fragment>
       <div className="row">
         <div className="column">
           <InputComponent
@@ -412,7 +408,7 @@ function FamilyInformation(props) {
       <Center>
         <ToastButtonComponent tertiary label="+ Child" />
       </Center>
-    </div>
+    </React.Fragment>
   );
 }
 
@@ -426,7 +422,7 @@ function Goals(props) {
         <InputComponent
           type="text"
           label="Short Term Goal (Examples: taking a vacation, buying a car)"
-          placeholder="Type in a short term goal"
+          placeholder="Type in your short term goal"
           value={props.shorttermgoal}
           name="shorttermgoal"
           onChange={props.handleChange}
@@ -438,10 +434,12 @@ function Goals(props) {
         <ToastButtonComponent tertiary label="+ Short Term Goal" />
       </Center>
 
+      <hr />
+
       <InputComponent
         type="text"
         label="Long Term Goal (Examples: buying a house, preparing for retirement)"
-        placeholder="Type in a long term goal"
+        placeholder="Type in your long term goal"
         value={props.longtermgoal}
         name="longtermgoal"
         onChange={props.handleChange}

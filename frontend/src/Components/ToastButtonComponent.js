@@ -19,6 +19,7 @@ class ToastButton extends Component {
       background-color: var(--toast-blue-1);
       float: right;
       text-transform: uppercase;
+      padding: 0.75rem 0;
     }
 
     .secondary:hover {
@@ -30,7 +31,7 @@ class ToastButton extends Component {
       border: 1px var(--toast-neutral-4) solid;
       color: var(--toast-neutral-2);
       min-width: 12rem;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1rem;
     }
 
     .tertiary:hover {
@@ -40,6 +41,7 @@ class ToastButton extends Component {
     .quaternary {
       color: var(--toast-black);
       float: right;
+      padding: 0.75rem 0;
       text-transform: uppercase;
     }
 
