@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Style from "style-it";
+import React, { Component } from 'react';
+import Style from 'style-it';
 
 class ToastButton extends Component {
   render() {
@@ -52,29 +52,37 @@ class ToastButton extends Component {
     .round {
       border-radius: 2rem;
     }
+
+    .hidden {
+      display: none;
+  }
     `;
 
     function getButton(props) {
       let classes = [];
 
       if (props.primary) {
-        classes.push("primary");
+        classes.push('primary');
       } else if (props.secondary) {
-        classes.push("secondary");
+        classes.push('secondary');
       } else if (props.tertiary) {
-        classes.push("tertiary");
+        classes.push('tertiary');
       } else if (props.quaternary) {
-        classes.push("quaternary");
+        classes.push('quaternary');
       }
 
       if (props.round) {
-        classes.push("round");
+        classes.push('round');
+      }
+
+      if (props.hidden) {
+        classes.push('hidden');
       }
 
       return Style.it(
         `${styles}`,
         <button
-          className={classes.join(" ")}
+          className={classes.join(' ')}
           type="Button"
           onClick={props.handleClick}
         >

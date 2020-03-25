@@ -1,19 +1,18 @@
-import React, { Component } from "react";
-
+import React, { Component } from 'react';
+import Center from 'react-center';
 import {
-  XYPlot,
-  XAxis,
-  VerticalGridLines,
   HorizontalGridLines,
+  LabelSeries,
+  RadialChart,
   VerticalBarSeries,
   VerticalBarSeriesCanvas,
-  RadialChart,
-  LabelSeries
-} from "react-vis";
+  VerticalGridLines,
+  XAxis,
+  XYPlot,
+} from 'react-vis';
+import Style from 'style-it';
 
-import Center from "react-center";
-
-import ToastButtonComponent from "./ToastButtonComponent";
+import SaveCancelComponent from './SaveCancelComponent';
 
 var income = 87000;
 var incomespouse = 70000;
@@ -43,37 +42,13 @@ class ClientPlanContent extends Component {
     });
   };
 
-  //Button functions
+  hidePrevButton = () => {
+    return this.state.currentStep === 1;
+  };
 
-  previousButton() {
-    let currentStep = this.state.currentStep;
-    if (currentStep !== 1) {
-      return (
-        <ToastButtonComponent
-          quaternary
-          handleClick={this.prev}
-          type="button"
-          label="Previous"
-        />
-      );
-    }
-    return null;
-  }
-
-  nextButton() {
-    let currentStep = this.state.currentStep;
-    if (currentStep < 5) {
-      return (
-        <ToastButtonComponent
-          secondary
-          handleClick={this.next}
-          type="button"
-          label="Next"
-        />
-      );
-    }
-    return null;
-  }
+  hideNextButton = () => {
+    return this.state.currentStep === 5;
+  };
 
   render() {
     const { useCanvas } = this.state;
@@ -90,9 +65,9 @@ class ClientPlanContent extends Component {
         <React.Fragment>
           <Center>
             <XYPlot
-              className="clustered-stacked-bar-chart"
-              xType="ordinal"
-              stackBy="y"
+              className='clustered-stacked-bar-chart'
+              xType='ordinal'
+              stackBy='y'
               margin={{ top: 30 }}
               width={600}
               height={300}
@@ -104,19 +79,19 @@ class ClientPlanContent extends Component {
               <LabelSeries
                 data={[
                   {
-                    x: "Your Income",
+                    x: 'Your Income',
                     y: income,
-                    label: "$" + income,
+                    label: '$' + income,
                     yOffset: -22,
                     xOffset: -20
                   },
                   {
-                    x: "Recommended Emergency Savings",
+                    x: 'Recommended Emergency Savings',
                     y: upperboundemergencysavings,
                     label:
-                      "$" +
+                      '$' +
                       lowerboundemergencysavings +
-                      "-$" +
+                      '-$' +
                       upperboundemergencysavings,
                     yOffset: -60,
                     xOffset: 45
@@ -124,22 +99,22 @@ class ClientPlanContent extends Component {
                 ]}
               />
               <BarSeries
-                color="#444db6"
+                color='#444db6'
                 data={[
-                  { x: "Your Income", y: 0 },
+                  { x: 'Your Income', y: 0 },
                   {
-                    x: "Recommended Emergency Savings",
+                    x: 'Recommended Emergency Savings',
                     y: upperboundemergencysavings
                   }
                 ]}
               />
 
               <BarSeries
-                color="#8c92d5"
+                color='#8c92d5'
                 data={[
-                  { x: "Your Income", y: income },
+                  { x: 'Your Income', y: income },
                   {
-                    x: "Recommended Emergency Savings",
+                    x: 'Recommended Emergency Savings',
                     y: lowerboundemergencysavings
                   }
                 ]}
@@ -177,9 +152,9 @@ class ClientPlanContent extends Component {
         <React.Fragment>
           <Center>
             <XYPlot
-              className="chartMargin"
-              xType="ordinal"
-              stackBy="y"
+              className='chartMargin'
+              xType='ordinal'
+              stackBy='y'
               margin={{ top: 30 }}
               width={600}
               height={300}
@@ -191,16 +166,16 @@ class ClientPlanContent extends Component {
               <LabelSeries
                 data={[
                   {
-                    x: "Household Income",
+                    x: 'Household Income',
                     y: income + incomespouse,
-                    label: "$" + householdincome,
+                    label: '$' + householdincome,
                     yOffset: -2,
                     xOffset: -20
                   },
                   {
-                    x: "Recommended Retirement Savings",
+                    x: 'Recommended Retirement Savings',
                     y: retirementsavings,
-                    label: "$" + retirementsavings,
+                    label: '$' + retirementsavings,
                     yOffset: -22,
                     xOffset: 26
                   }
@@ -208,20 +183,20 @@ class ClientPlanContent extends Component {
               />
 
               <BarSeries
-                color="#8c92d5"
-                data={[{ x: "Household Income", y: income + incomespouse }]}
+                color='#8c92d5'
+                data={[{ x: 'Household Income', y: income + incomespouse }]}
               />
 
               <BarSeries
-                color="#444db6"
+                color='#444db6'
                 data={[
-                  { x: "Recommended Retirement Savings", y: retirementsavings }
+                  { x: 'Recommended Retirement Savings', y: retirementsavings }
                 ]}
               />
             </XYPlot>
           </Center>
           <p>
-            At this point your household should have nearly{" "}
+            At this point your household should have nearly{' '}
             {retirementmultiplier}x of income.
           </p>
         </React.Fragment>
@@ -237,10 +212,10 @@ class ClientPlanContent extends Component {
       var debtmonthly = debtyear / 12;
 
       const debtrepayment = [
-        { angle: debtmonthly, label: "$" + debtmonthly + " monthly" },
+        { angle: debtmonthly, label: '$' + debtmonthly + ' monthly' },
         {
           angle: monthlyincome - debtmonthly,
-          label: "$" + (monthlyincome - debtmonthly)
+          label: '$' + (monthlyincome - debtmonthly)
         }
       ];
 
@@ -248,7 +223,7 @@ class ClientPlanContent extends Component {
         <React.Fragment>
           <Center>
             <RadialChart
-              colorRange={["#8c92d5", "#444db6"]}
+              colorRange={['#8c92d5', '#444db6']}
               data={debtrepayment}
               width={300}
               height={300}
@@ -272,16 +247,16 @@ class ClientPlanContent extends Component {
       const budgetplot = [
         {
           angle: fixedexpenses,
-          label: "$" + fixedexpenses + " fixed expenses monthly"
+          label: '$' + fixedexpenses + ' fixed expenses monthly'
         },
-        { angle: spending, label: "$" + spending + " spending monthly" },
-        { angle: savings, label: "$" + savings + " savings monthly" }
+        { angle: spending, label: '$' + spending + ' spending monthly' },
+        { angle: savings, label: '$' + savings + ' savings monthly' }
       ];
       return (
         <React.Fragment>
           <Center>
             <RadialChart
-              colorRange={["#c6c9ea", "#444db6", "#8c92d5"]}
+              colorRange={['#c6c9ea', '#444db6', '#8c92d5']}
               data={budgetplot}
               width={300}
               height={300}
@@ -318,8 +293,8 @@ class ClientPlanContent extends Component {
         <React.Fragment>
           <Center>
             <XYPlot
-              xType="ordinal"
-              stackBy="y"
+              xType='ordinal'
+              stackBy='y'
               margin={{ top: 30 }}
               width={600}
               height={300}
@@ -329,14 +304,14 @@ class ClientPlanContent extends Component {
               <XAxis />
 
               <BarSeries
-                color="#8c92d5"
-                data={[{ x: "Your Income", y: income }]}
+                color='#8c92d5'
+                data={[{ x: 'Your Income', y: income }]}
               />
               <BarSeries
-                color="#444db6"
+                color='#444db6'
                 data={[
                   {
-                    x: "Recommended Life Insurance Policy",
+                    x: 'Recommended Life Insurance Policy',
                     y: recommendedlifeinsurance
                   }
                 ]}
@@ -345,16 +320,16 @@ class ClientPlanContent extends Component {
               <LabelSeries
                 data={[
                   {
-                    x: "Your Income",
+                    x: 'Your Income',
                     y: income,
-                    label: "$" + income,
+                    label: '$' + income,
                     yOffset: -4,
                     xOffset: -20
                   },
                   {
-                    x: "Recommended Life Insurance Policy",
+                    x: 'Recommended Life Insurance Policy',
                     y: recommendedlifeinsurance,
-                    label: "$" + recommendedlifeinsurance,
+                    label: '$' + recommendedlifeinsurance,
                     yOffset: -22,
                     xOffset: 26
                   }
@@ -366,20 +341,41 @@ class ClientPlanContent extends Component {
       );
     }
 
-    return (
-      <div>
-        {/* <h3>Your Financial Plan</h3> */}
-        {/*Renders the form steps and passes required props in*/}
+    const styles = `
+    .save-cancel {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .container {
+      height: calc(100vh - 10rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    `;
+
+    return Style.it(
+      `${styles}`,
+      <div className='container'>
         <form>
           <EmergencySavings currentStep={this.state.currentStep} />
           <Retirement currentStep={this.state.currentStep} />
           <Debt currentStep={this.state.currentStep} />
           <Budget currentStep={this.state.currentStep} />
           <LifeInsurance currentStep={this.state.currentStep} />
-          <div className="spacer-primary"></div>
-          {this.nextButton()}
-          {this.previousButton()}
+          <div className='spacer-primary'></div>
         </form>
+        <div className='save-cancel'>
+          <SaveCancelComponent
+            saveClicked={this.next}
+            cancelClicked={this.prev}
+            saveLabel='next'
+            cancelLabel='previous'
+            hideSave={this.hideNextButton()}
+            hideCancel={this.hidePrevButton()}
+          ></SaveCancelComponent>
+        </div>
       </div>
     );
   }
