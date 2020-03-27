@@ -7,7 +7,7 @@ import InputComponent from './InputComponent';
 import SaveCancelComponent from './SaveCancelComponent';
 import ToastButtonComponent from './ToastButtonComponent';
 
-//import Select from "react-select";
+//import Select from 'react-select';
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -261,15 +261,15 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label="Spouse's First Name"
+                label='Spouse's First Name'
                 name='spousefname'
-                placeholder="Type in your spouse's first name"
+                placeholder='Type in your spouse's first name'
                 value={props.spousefname}
                 onChange={props.handleChange}
               />
               <InputComponent
                 type='date'
-                label="Spouse's Date of Birth"
+                label='Spouse's Date of Birth'
                 name='spousebday'
                 value={props.spousebday}
                 onChange={props.handleChange}
@@ -278,9 +278,9 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label="Spouse's Last Name"
+                label='Spouse's Last Name'
                 name='spouselname'
-                placeholder="Type in your spouse's last name"
+                placeholder='Type in your spouse's last name'
                 value={props.spouselname}
                 onChange={props.handleChange}
               />
@@ -295,15 +295,15 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label="Child's First Name"
-                placeholder="Type in your child's first name"
+                label='Child's First Name'
+                placeholder='Type in your child's first name'
                 value={props.childfname}
                 name='childfname'
                 onChange={props.handleChange}
               />
               <InputComponent
                 type='date'
-                label="Child's Date of Birth"
+                label='Child's Date of Birth'
                 value={props.childbday}
                 name='childbday'
                 onChange={props.handleChange}
@@ -312,8 +312,8 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label="Child's Last Name"
-                placeholder="Type in your child's last name"
+                label='Child's Last Name'
+                placeholder='Type in your child's last name'
                 value={props.childlname}
                 name='childlname'
                 onChange={props.handleChange}
@@ -335,36 +335,36 @@ class ClientProfileContent extends Component {
       return (
         <React.Fragment>
 
-          <InputComponent type="text" name="goal" label="Goal 1" list="goals" placeholder="Type in a goal..." value={props.goal} onChange={props.handleChange} />
-          <datalist id="goals">
-            <option data-value="0" value="I want to save money to pay off my credit card" />
-            <option data-value="1" value="I want to save money to pay off student debt" />
-            <option data-value="2" value="I want to save money for a vacation" />
-            <option data-value="3" value="I want to save money to buy/rent a property" />
-            <option data-value="4" value="I want to create an emergency savings fund" />
-            <option data-value="5" value="I want to save money to prepare for retirement" />
-            <option data-value="6" value="Other (Type in)" />
+          <InputComponent type='text' name='goal' label='Goal 1' list='goals' placeholder='Type in a goal...' value={props.goal} onChange={props.handleChange} />
+          <datalist id='goals'>
+            <option data-value='0' value='I want to save money to pay off my credit card' />
+            <option data-value='1' value='I want to save money to pay off student debt' />
+            <option data-value='2' value='I want to save money for a vacation' />
+            <option data-value='3' value='I want to save money to buy/rent a property' />
+            <option data-value='4' value='I want to create an emergency savings fund' />
+            <option data-value='5' value='I want to save money to prepare for retirement' />
+            <option data-value='6' value='Other (Type in)' />
           </datalist>
 
-          <div className="row">
-            <div className="column">
+          <div className='row'>
+            <div className='column'>
               <InputComponent
-                type="number"
-                label="Dollar Amount"
-                name="dollarAmount"
-                placeholder="1,000"
-                min="0"
+                type='number'
+                label='Dollar Amount'
+                name='dollarAmount'
+                placeholder='1,000'
+                min='0'
                 icon={faDollarSign}
                 value={props.dollarAmount}
                 onChange={props.handleChange}
               />
             </div>
-            <div className="column">
+            <div className='column'>
               <InputComponent
-                type="date"
-                label="Goal End Date"
+                type='date'
+                label='Goal End Date'
                 value={props.goalEndDate}
-                name="goalEndDate"
+                name='goalEndDate'
                 onChange={props.handleChange}
               />
             </div>
