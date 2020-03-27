@@ -1,6 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
 import Style from 'style-it';
+
+import SvgIconComponent from './SvgIconComponent';
 
 class InputComponent extends Component {
   render() {
@@ -37,11 +38,13 @@ class InputComponent extends Component {
       height: 1rem;
       width: 2rem;
       display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: var(--toast-neutral-6);
       border-top-left-radius: 20rem;
       border-bottom-left-radius: 20rem;
       color: var(--toast-neutral-1);
-      padding: 1rem 1rem;
+      padding: 1rem 1.5rem 1rem 1rem;
       margin: 0.75rem -1.5rem 1.75rem 0;
     }
 
@@ -53,10 +56,17 @@ class InputComponent extends Component {
     `;
 
     function getIcon(props) {
-      if (props.icon) {
+      if (props.iconName) {
         return (
           <div className='input-group-prepend'>
-            <FontAwesomeIcon icon={props.icon} />
+            <SvgIconComponent
+              name={props.iconName}
+              width={props.iconWidth}
+              height={props.iconHeight}
+              stroke={props.stroke}
+              strokeWidth={props.iconStrokeWidth}
+              fill={props.iconFill}
+            ></SvgIconComponent>
           </div>
         );
       }
