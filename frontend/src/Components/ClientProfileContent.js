@@ -261,15 +261,15 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label='Spouse's First Name'
+                label="Spouse's First Name"
                 name='spousefname'
-                placeholder='Type in your spouse's first name'
+                placeholder="Type in your spouse's first name"
                 value={props.spousefname}
                 onChange={props.handleChange}
               />
               <InputComponent
                 type='date'
-                label='Spouse's Date of Birth'
+                label="Spouse's Date of Birth"
                 name='spousebday'
                 value={props.spousebday}
                 onChange={props.handleChange}
@@ -278,9 +278,9 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label='Spouse's Last Name'
+                label="Spouse's Last Name"
                 name='spouselname'
-                placeholder='Type in your spouse's last name'
+                placeholder="Type in your spouse's last name"
                 value={props.spouselname}
                 onChange={props.handleChange}
               />
@@ -295,15 +295,15 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label='Child's First Name'
-                placeholder='Type in your child's first name'
+                label="Child's First Name"
+                placeholder="Type in your child's first name"
                 value={props.childfname}
                 name='childfname'
                 onChange={props.handleChange}
               />
               <InputComponent
                 type='date'
-                label='Child's Date of Birth'
+                label="Child's Date of Birth"
                 value={props.childbday}
                 name='childbday'
                 onChange={props.handleChange}
@@ -312,8 +312,8 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label='Child's Last Name'
-                placeholder='Type in your child's last name'
+                label="Child's Last Name"
+                placeholder="Type in your child's last name"
                 value={props.childlname}
                 name='childlname'
                 onChange={props.handleChange}
