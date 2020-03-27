@@ -8,6 +8,15 @@ import SaveCancelComponent from './SaveCancelComponent';
 import ToastButtonComponent from './ToastButtonComponent';
 
 //import Select from 'react-select';
+const goalOptions = [
+  { id: 0, value: 'I want to save money to pay off my credit card' },
+  { id: 1, value: 'I want to save money to pay off student debt'},
+  { id: 2, value: 'I want to save money for a vacation' },
+  { id: 3, value: 'I want to save money to buy/rent a property'}, 
+  { id: 4, value: 'I want to create an emergency savings fund'}, 
+  { id: 5, value: 'I want to save money to prepare for retirement'}
+ ];
+
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -16,6 +25,8 @@ class ClientProfileContent extends Component {
       currentStep: 1
     };
   }
+
+ 
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -337,13 +348,7 @@ class ClientProfileContent extends Component {
 
           <InputComponent type='text' name='goal' label='Goal 1' list='goals' placeholder='Type in a goal...' value={props.goal} onChange={props.handleChange} />
           <datalist id='goals'>
-            <option data-value='0' value='I want to save money to pay off my credit card' />
-            <option data-value='1' value='I want to save money to pay off student debt' />
-            <option data-value='2' value='I want to save money for a vacation' />
-            <option data-value='3' value='I want to save money to buy/rent a property' />
-            <option data-value='4' value='I want to create an emergency savings fund' />
-            <option data-value='5' value='I want to save money to prepare for retirement' />
-            <option data-value='6' value='Other (Type in)' />
+          {goalOptions.map(goalSelect => <option data-value={goalSelect.id} value={goalSelect.value}/>)}
           </datalist>
 
           <div className='row'>
