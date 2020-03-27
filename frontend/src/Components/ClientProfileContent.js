@@ -121,8 +121,6 @@ class ClientProfileContent extends Component {
               />
             </div>
           </div>
-
-          <div className='spacer-tertiary'></div>
         </React.Fragment>
       );
     }
@@ -164,8 +162,6 @@ class ClientProfileContent extends Component {
           <Center>
             <ToastButtonComponent tertiary label='+ Additional Income' />
           </Center>
-
-          <div className='spacer-quaternary'></div>
         </div>
       );
     }
@@ -338,39 +334,47 @@ class ClientProfileContent extends Component {
       }
       return (
         <React.Fragment>
-          <div>
-            <InputComponent
-              type='text'
-              label='Short Term Goal (Examples: taking a vacation, buying a car)'
-              placeholder='Type in your short term goal'
-              value={props.shorttermgoal}
-              name='shorttermgoal'
-              onChange={props.handleChange}
-              required
-            />
+
+          <InputComponent type="text" name="goal" label="Goal 1" list="goals" placeholder="Type in a goal..." value={props.goal} onChange={props.handleChange} />
+          <datalist id="goals">
+            <option data-value="0" value="I want to save money to pay off my credit card" />
+            <option data-value="1" value="I want to save money to pay off student debt" />
+            <option data-value="2" value="I want to save money for a vacation" />
+            <option data-value="3" value="I want to save money to buy/rent a property" />
+            <option data-value="4" value="I want to create an emergency savings fund" />
+            <option data-value="5" value="I want to save money to prepare for retirement" />
+            <option data-value="6" value="Other (Type in)" />
+          </datalist>
+
+          <div className="row">
+            <div className="column">
+              <InputComponent
+                type="number"
+                label="Dollar Amount"
+                name="dollarAmount"
+                placeholder="1,000"
+                min="0"
+                icon={faDollarSign}
+                value={props.dollarAmount}
+                onChange={props.handleChange}
+              />
+            </div>
+            <div className="column">
+              <InputComponent
+                type="date"
+                label="Goal End Date"
+                value={props.goalEndDate}
+                name="goalEndDate"
+                onChange={props.handleChange}
+              />
+            </div>
           </div>
-          {/* TODO: Add inputs on button click */}
-          <Center>
-            <ToastButtonComponent tertiary label='+ Short Term Goal' />
-          </Center>
 
-          <hr />
-
-          <InputComponent
-            type='text'
-            label='Long Term Goal (Examples: buying a house, preparing for retirement)'
-            placeholder='Type in your long term goal'
-            value={props.longtermgoal}
-            name='longtermgoal'
-            onChange={props.handleChange}
-            required
-          />
 
           {/* TODO: Add inputs on button click */}
           <Center>
-            <ToastButtonComponent tertiary label='+ Long Term Goal' />
+            <ToastButtonComponent tertiary label='Add Goal' />
           </Center>
-          <div className='spacer-secondary'></div>
         </React.Fragment>
       );
     }
@@ -397,6 +401,7 @@ class ClientProfileContent extends Component {
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
             fname={this.state.fname}
+            mname={this.state.mname}
             lname={this.state.lname}
             bday={this.state.bday}
             city={this.state.city}
@@ -432,6 +437,9 @@ class ClientProfileContent extends Component {
           <Goals
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
+            goal={this.state.goal}
+            dollarAmount={this.state.dollarAmount}
+            goalEndDate={this.state.goalEndDate}
           />
         </form>
         <div className='save-cancel'>
