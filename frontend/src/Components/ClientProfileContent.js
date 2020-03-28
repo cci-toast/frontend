@@ -6,7 +6,7 @@ import Style from 'style-it';
 import InputComponent from './InputComponent';
 import SaveCancelComponent from './SaveCancelComponent';
 import ToastButtonComponent from './ToastButtonComponent';
-import DropdownComponent from './DropdownComponent';
+import ToastSelectComponent from './ToastSelectComponent';
 
 const goalOptions = [
   { id: 0, value: 'I want to save money to pay off my credit card' },
@@ -69,7 +69,7 @@ const stateOptions=[
 { id: 47, value: 'West Virginia'},
 { id: 48, value: 'Wisconsin'},
 { id: 49, value: 'Wyoming'}
-]
+];
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -176,7 +176,7 @@ class ClientProfileContent extends Component {
               />
             </div>
             <div className='column'>
-            <DropdownComponent
+            <ToastSelectComponent
             options={stateOptions}
             name='state' 
             label='State'
@@ -427,7 +427,7 @@ class ClientProfileContent extends Component {
       }
       return (
         <React.Fragment>
-          <DropdownComponent
+          <ToastSelectComponent
             options={goalOptions}
             name='goal' 
             label='Goal 1'
@@ -445,7 +445,8 @@ class ClientProfileContent extends Component {
                 label='Dollar Amount'
                 name='dollarAmount'
                 placeholder='1,000'
-                min={0}
+                min={0.00}
+                step={0.01}
                 icon={faDollarSign}
                 value={props.dollarAmount}
                 onChange={props.handleChange}
