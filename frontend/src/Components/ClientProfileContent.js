@@ -150,11 +150,14 @@ class ClientProfileContent extends Component {
               />
 
               <InputComponent
-                type='date'
-                label='Date of Birth'
+                type='number'
+                label='Birth Year'
                 value={props.bday}
+                placeholder='Type in your birth year'
                 name='bday'
                 onChange={props.handleChange}
+                min={1}
+                max={9999}
                 required
               />
             </div>
@@ -194,39 +197,42 @@ class ClientProfileContent extends Component {
         return null;
       }
       return (
-        <div>
+        <React.Fragment>
           <h4>Income</h4>
           <div className='row'>
             <div className='column'>
               <InputComponent
                 type='number'
-                min='0'
+                min={0.0}
                 label='Annual Salary Before Taxes'
-                placeholder='Type in your annual salary before taxes'
-                value={props.income}
-                name='income'
+                placeholder='50,000'
+                value={props.salarynotax}
+                name='salarynotax'
                 icon={faDollarSign}
                 onChange={props.handleChange}
+                step={0.01}
                 required
               />
             </div>
             <div className='column'>
               <InputComponent
                 type='number'
-                min='0'
+                min={0.0}
                 label='Annual Salary After Taxes'
-                placeholder='Type in your annual salary after taxes'
-                value={props.income}
-                name='income'
+                placeholder='50,000'
+                value={props.salarytax}
+                name='salarytax'
                 icon={faDollarSign}
                 onChange={props.handleChange}
+                step={0.01}
+                required
               />
             </div>
           </div>
           <Center>
-            <ToastButtonComponent tertiary label='+ Additional Income' />
+            <ToastButtonComponent tertiary label='Add Additional Income' />
           </Center>
-        </div>
+        </React.Fragment>
       );
     }
 
@@ -235,28 +241,28 @@ class ClientProfileContent extends Component {
         return null;
       }
       return (
-        <div>
+        <React.Fragment>
           <h4>Bills</h4>
           <Center>
-            <ToastButtonComponent tertiary label='+ Housing' />
+            <ToastButtonComponent tertiary label='Add Housing' />
           </Center>
           <hr />
           <Center>
-            <ToastButtonComponent tertiary label='+ Bill' />
+            <ToastButtonComponent tertiary label='Add Bill' />
           </Center>
           <hr />
           <Center>
-            <ToastButtonComponent tertiary label='+ Utility' />
+            <ToastButtonComponent tertiary label='Add Utility' />
           </Center>
           <hr />
           <Center>
-            <ToastButtonComponent tertiary Button label='+ Insurance' />
+            <ToastButtonComponent tertiary Button label='Add Insurance' />
           </Center>
           <hr />
           <Center>
-            <ToastButtonComponent tertiary label='+ Loan / Debt' />
+            <ToastButtonComponent tertiary label='Add Loan / Debt' />
           </Center>
-        </div>
+        </React.Fragment>
       );
     }
 
@@ -265,7 +271,7 @@ class ClientProfileContent extends Component {
         return null;
       }
       return (
-        <div>
+        <React.Fragment>
           <h4>Expenses</h4>
 
           <div className='row'>
@@ -286,7 +292,8 @@ class ClientProfileContent extends Component {
                 label='Shopping Amount'
                 name='shoppingamount'
                 placeholder='Type in your amount spent on shopping items'
-                min='0'
+                min={0.0}
+                step={0.01}
                 icon={faDollarSign}
                 value={props.shoppingamount}
                 onChange={props.handleChange}
@@ -294,24 +301,29 @@ class ClientProfileContent extends Component {
             </div>
           </div>
           <Center>
-            <ToastButtonComponent tertiary label='+ Shopping' />
+            <ToastButtonComponent tertiary label='Add Shopping' />
           </Center>
           <hr />
 
           <Center>
-            <ToastButtonComponent tertiary label='+ Leisure' />
+            <ToastButtonComponent tertiary label='Add Leisure' />
           </Center>
           <hr />
 
           <Center>
-            <ToastButtonComponent tertiary label='+ Transportation' />
+            <ToastButtonComponent tertiary label='Add Transportation' />
           </Center>
           <hr />
 
           <Center>
-            <ToastButtonComponent tertiary label='+ Subscriptions' />
+            <ToastButtonComponent tertiary label='Add Subscriptions' />
           </Center>
-        </div>
+
+          <hr />
+          <Center>
+            <ToastButtonComponent tertiary label='Add Miscellaneous' />
+          </Center>
+        </React.Fragment>
       );
     }
 
@@ -325,33 +337,47 @@ class ClientProfileContent extends Component {
             <div className='column'>
               <InputComponent
                 type='text'
-                label="Spouse's First Name"
+                label="Partner's First Name"
                 name='spousefname'
-                placeholder="Type in your spouse's first name"
+                placeholder="Type in your partner's first name"
                 value={props.spousefname}
                 onChange={props.handleChange}
               />
               <InputComponent
-                type='date'
-                label="Spouse's Date of Birth"
+                type='number'
+                label="Partner's Birth Year"
                 name='spousebday'
+                placeholder="Type in your partner's birth year"
                 value={props.spousebday}
                 onChange={props.handleChange}
+                min={1}
+                max={9999}
               />
             </div>
             <div className='column'>
               <InputComponent
                 type='text'
-                label="Spouse's Last Name"
+                label="Partner's Last Name"
                 name='spouselname'
-                placeholder="Type in your spouse's last name"
+                placeholder="Type in your partner's last name"
                 value={props.spouselname}
                 onChange={props.handleChange}
+              />
+              <InputComponent
+                type='number'
+                min={0.0}
+                label="Partner's Annual Salary After Taxes"
+                placeholder='50,000'
+                value={props.spousesalary}
+                name='spousesalary'
+                icon={faDollarSign}
+                onChange={props.handleChange}
+                step={0.01}
               />
             </div>
           </div>
           <Center>
-            <ToastButtonComponent tertiary label='+ Partner' />
+            <ToastButtonComponent tertiary label='Add Partner' />
           </Center>
           <hr />
 
@@ -366,27 +392,30 @@ class ClientProfileContent extends Component {
                 onChange={props.handleChange}
               />
               <InputComponent
-                type='date'
-                label="Child's Date of Birth"
-                value={props.childbday}
-                name='childbday'
+                type='text'
+                label="Child's Education"
+                placeholder="Type in your child's education"
+                value={props.childfname}
+                name='childfname'
                 onChange={props.handleChange}
               />
             </div>
             <div className='column'>
               <InputComponent
-                type='text'
-                label="Child's Last Name"
-                placeholder="Type in your child's last name"
-                value={props.childlname}
-                name='childlname'
+                type='number'
+                label="Child's Birth Year"
+                name='spousebday'
+                placeholder="Type in your child's birth year"
+                value={props.childbday}
                 onChange={props.handleChange}
+                min={1}
+                max={9999}
               />
             </div>
           </div>
 
           <Center>
-            <ToastButtonComponent tertiary label='+ Child' />
+            <ToastButtonComponent tertiary label='Add Child' />
           </Center>
         </React.Fragment>
       );
@@ -474,7 +503,8 @@ class ClientProfileContent extends Component {
           <Finances
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            income={this.state.income}
+            salarynotax={this.state.salarynotax}
+            salarytax={this.state.salarytax}
           />
           <Bills
             currentStep={this.state.currentStep}
@@ -492,9 +522,9 @@ class ClientProfileContent extends Component {
             spousefname={this.state.spousefname}
             spouselname={this.state.spouselname}
             spousebday={this.state.spousebday}
+            spousesalary={this.state.spousesalary}
             numchildren={this.state.numchildren}
             childfname={this.state.childfname}
-            childlname={this.state.childlname}
             childbday={this.state.childbday}
           />
           <Goals

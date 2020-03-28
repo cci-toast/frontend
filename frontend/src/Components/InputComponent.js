@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Style from "style-it";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from 'react';
+import Style from 'style-it';
 
 class InputComponent extends Component {
   render() {
@@ -55,7 +55,7 @@ class InputComponent extends Component {
     function getIcon(props) {
       if (props.icon) {
         return (
-          <div className="input-group-prepend">
+          <div className='input-group-prepend'>
             <FontAwesomeIcon icon={props.icon} />
           </div>
         );
@@ -66,23 +66,25 @@ class InputComponent extends Component {
       let classes = [];
 
       if (props.required) {
-        classes.push("required");
+        classes.push('required');
       }
       return (
-        <div className={classes.join(" ")}>
-          <label className="input-label">{props.label}</label>
+        <div className={classes.join(' ')}>
+          <label className='input-label'>{props.label}</label>
 
-          <div className="input-group">
+          <div className='input-group'>
             {getIcon(props)}
             <input
               type={props.type}
               name={props.name}
               placeholder={props.placeholder}
-              value={props.value || ""}
+              value={props.value || ''}
               min={props.min}
               list={props.list}
+              max={props.max}
               onChange={props.onChange}
               required={props.required}
+              step={props.step}
             />
           </div>
         </div>
