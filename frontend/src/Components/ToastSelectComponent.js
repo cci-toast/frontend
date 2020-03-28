@@ -3,13 +3,13 @@ import Style from "style-it";
 import InputComponent from "./InputComponent"
 
 
-class DropdownComponent extends Component {
+class ToastSelectComponent extends Component {
   render() {
     const styles = `
     `;
     var dropdownOptions = this.props.options.map(function (select) {
       return (
-        <option data-value={select.id} value={select.value} />
+        <option key={select.id} value={select.value} />
       );
     });
 
@@ -24,4 +24,4 @@ class DropdownComponent extends Component {
   }
 }
 
-export default DropdownComponent;
+export default ToastSelectComponent;
