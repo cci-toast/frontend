@@ -80,6 +80,7 @@ class InputComponent extends Component {
               placeholder={props.placeholder}
               value={props.value || ''}
               min={props.min}
+              list={props.list}
               max={props.max}
               onChange={props.onChange}
               required={props.required}

@@ -6,8 +6,70 @@ import Style from 'style-it';
 import InputComponent from './InputComponent';
 import SaveCancelComponent from './SaveCancelComponent';
 import ToastButtonComponent from './ToastButtonComponent';
+import ToastSelectComponent from './ToastSelectComponent';
 
-//import Select from "react-select";
+const goalOptions = [
+  { id: 0, value: 'I want to save money to pay off my credit card' },
+  { id: 1, value: 'I want to save money to pay off student debt' },
+  { id: 2, value: 'I want to save money for a vacation' },
+  { id: 3, value: 'I want to save money to buy/rent a property' },
+  { id: 4, value: 'I want to create an emergency savings fund' },
+  { id: 5, value: 'I want to save money to prepare for retirement' },
+  { id: 6, value: 'Other (Type in)'}
+];
+
+const stateOptions=[
+{ id: 0, value: 'Alabama'},
+{ id: 1, value: 'Alaska'},
+{ id: 2, value: 'Arizona'},
+{ id: 3, value: 'Arkansas'},
+{ id: 4, value: 'California'},
+{ id: 5, value: 'Colorado'},
+{ id: 6, value: 'Connecticut'},
+{ id: 7, value: 'Delaware'},
+{ id: 8, value: 'Florida'}, 
+{ id: 9, value: 'Georgia'},
+{ id: 10, value: 'Hawaii'},
+{ id: 11, value: 'Idaho'},
+{ id: 12, value: 'Illinois'},
+{ id: 13, value: 'Indiana'},
+{ id: 14, value: 'Iowa'},
+{ id: 15, value: 'Kansas'},
+{ id: 16, value: 'Kentucky'},
+{ id: 17, value: 'Louisiana'},
+{ id: 18, value: 'Maine'}, 
+{ id: 19, value: 'Maryland'},
+{ id: 20, value: 'Massachusetts'},
+{ id: 21, value: 'Michigan'},
+{ id: 22, value: 'Minnesota'},
+{ id: 23, value: 'Mississippi'},
+{ id: 24, value: 'Missouri'},
+{ id: 25, value: 'Montana'},
+{ id: 26, value: 'Nebraska'},
+{ id: 27, value: 'Nevada'},
+{ id: 28, value: 'New Hampshire'},
+{ id: 29, value: 'New Jersey'},
+{ id: 30, value: 'New Mexico'},
+{ id: 31, value: 'New York'},
+{ id: 32, value: 'North Carolina'},
+{ id: 33, value: 'North Dakota'},
+{ id: 34, value: 'Ohio'},
+{ id: 35, value: 'Oklahoma'},
+{ id: 36, value: 'Oregon'}, 
+{ id: 37, value: 'Pennsylvania'},
+{ id: 38, value: 'Rhode Island'},
+{ id: 39, value: 'South Carolina'},
+{ id: 40, value: 'South Dakota'},
+{ id: 41, value: 'Tennessee'},
+{ id: 42, value: 'Texas'},
+{ id: 43, value: 'Utah'},
+{ id: 44, value: 'Vermont'},
+{ id: 45, value: 'Virginia'},
+{ id: 46, value: 'Washington'},
+{ id: 47, value: 'West Virginia'},
+{ id: 48, value: 'Wisconsin'},
+{ id: 49, value: 'Wyoming'}
+];
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -114,18 +176,18 @@ class ClientProfileContent extends Component {
               />
             </div>
             <div className='column'>
-              <InputComponent
-                type='text'
-                label='State'
-                placeholder='Type in your state'
-                value={props.state}
-                name='state'
-                onChange={props.handleChange}
-              />
+            <ToastSelectComponent
+            options={stateOptions}
+            name='state' 
+            label='State'
+            list='state'
+            placeholder='Type in your state'
+            value={props.state}
+            id="state"
+            onChange={props.handleChange}
+          />
             </div>
           </div>
-
-          <div className='spacer-tertiary'></div>
         </React.Fragment>
       );
     }
@@ -170,8 +232,6 @@ class ClientProfileContent extends Component {
           <Center>
             <ToastButtonComponent tertiary label='Add Additional Income' />
           </Center>
-
-          <div className='spacer-quaternary'></div>
         </React.Fragment>
       );
     }
@@ -367,39 +427,47 @@ class ClientProfileContent extends Component {
       }
       return (
         <React.Fragment>
-          <div>
-            <InputComponent
-              type='text'
-              label='Short Term Goal (Examples: taking a vacation, buying a car)'
-              placeholder='Type in your short term goal'
-              value={props.shorttermgoal}
-              name='shorttermgoal'
-              onChange={props.handleChange}
-              required
-            />
-          </div>
-          {/* TODO: Add inputs on button click */}
-          <Center>
-            <ToastButtonComponent tertiary label='Add Short Term Goal' />
-          </Center>
-
-          <hr />
-
-          <InputComponent
-            type='text'
-            label='Long Term Goal (Examples: buying a house, preparing for retirement)'
-            placeholder='Type in your long term goal'
-            value={props.longtermgoal}
-            name='longtermgoal'
+          <ToastSelectComponent
+            options={goalOptions}
+            name='goal' 
+            label='Goal 1'
+            list='goals'
+            placeholder='Type in your goal'
+            value={props.goal}
+            id="goals"
             onChange={props.handleChange}
-            required
           />
 
+          <div className='row'>
+            <div className='column'>
+              <InputComponent
+                type='number'
+                label='Dollar Amount'
+                name='dollarAmount'
+                placeholder='1,000'
+                min={0.00}
+                step={0.01}
+                icon={faDollarSign}
+                value={props.dollarAmount}
+                onChange={props.handleChange}
+              />
+            </div>
+            <div className='column'>
+              <InputComponent
+                type='date'
+                label='Goal End Date'
+                value={props.goalEndDate}
+                name='goalEndDate'
+                onChange={props.handleChange}
+              />
+            </div>
+          </div>
+
+
           {/* TODO: Add inputs on button click */}
           <Center>
-            <ToastButtonComponent tertiary label='Add Long Term Goal' />
+            <ToastButtonComponent tertiary label='Add Goal' />
           </Center>
-          <div className='spacer-secondary'></div>
         </React.Fragment>
       );
     }
@@ -426,6 +494,7 @@ class ClientProfileContent extends Component {
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
             fname={this.state.fname}
+            mname={this.state.mname}
             lname={this.state.lname}
             bday={this.state.bday}
             city={this.state.city}
@@ -462,6 +531,9 @@ class ClientProfileContent extends Component {
           <Goals
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
+            goal={this.state.goal}
+            dollarAmount={this.state.dollarAmount}
+            goalEndDate={this.state.goalEndDate}
           />
         </form>
         <div className='save-cancel'>

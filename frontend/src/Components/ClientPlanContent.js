@@ -364,7 +364,6 @@ class ClientPlanContent extends Component {
           <Debt currentStep={this.state.currentStep} />
           <Budget currentStep={this.state.currentStep} />
           <LifeInsurance currentStep={this.state.currentStep} />
-          <div className='spacer-primary'></div>
         </form>
         <div className='save-cancel'>
           <SaveCancelComponent
