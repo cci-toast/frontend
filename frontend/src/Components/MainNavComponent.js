@@ -1,19 +1,10 @@
-import React, { Component } from "react";
-import Logo from "../logo.png";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Style from 'style-it';
 
-import Style from "style-it";
+import Logo from '../logo.png';
 
-import { Link } from "react-router-dom";
-import {
-  faUser,
-  faChartBar,
-  faCheckCircle,
-  faAddressCard,
-  faPowerOff,
-  faUsers,
-  faSlidersH
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SvgIconComponent from './SvgIconComponent';
 
 class MainNavComponent extends Component {
   render() {
@@ -42,13 +33,6 @@ class MainNavComponent extends Component {
       margin-top: 1rem;
       margin-bottom: 2rem;
     }
-
-    .icon {
-      color: var(--toast-white);
-      width: 1.5rem;
-      height: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
     
     .caption {
       color: var(--toast-neutral-6);
@@ -74,64 +58,76 @@ class MainNavComponent extends Component {
     }
 `;
 
+    function getIcon(name) {
+      return (
+        <SvgIconComponent
+          name={name}
+          width={35}
+          height={45}
+          stroke='var(--toast-white)'
+          strokeWidth={1}
+        ></SvgIconComponent>
+      );
+    }
+
     function getMainNav(props) {
       if (props.advisor) {
         return (
           <React.Fragment>
-            <div className="main-links">
-              <Link to="/">
-                <img src={Logo} rel="icon" alt="" className="logo" />
+            <div className='main-links'>
+              <Link to='/'>
+                <img src={Logo} rel='icon' alt='' className='logo' />
               </Link>
 
-              <Link to="/clients" className="icon-caption">
-                <FontAwesomeIcon icon={faUsers} className="icon" />
-                <span className="caption">Clients</span>
+              <Link to='/clients' className='icon-caption'>
+                {getIcon('users')}
+                <span className='caption'>Clients</span>
               </Link>
 
-              <Link to="/configurations" className="icon-caption">
-                <FontAwesomeIcon icon={faSlidersH} className="icon" />
-                <span className="caption">Configuration</span>
+              <Link to='/configurations' className='icon-caption'>
+                {getIcon('sliders')}
+                <span className='caption'>Configuration</span>
               </Link>
             </div>
 
-            <Link to="/" className="icon-caption">
-              <FontAwesomeIcon icon={faPowerOff} className="icon" />
-              <span className="caption">Log Out</span>
+            <Link to='/' className='icon-caption'>
+              {getIcon('power')}
+              <span className='caption'>Log Out</span>
             </Link>
           </React.Fragment>
         );
       } else {
         return (
           <React.Fragment>
-            <div className="main-links">
-              <Link to="/">
-                <img src={Logo} rel="icon" alt="" className="logo" />
+            <div className='main-links'>
+              <Link to='/'>
+                <img src={Logo} rel='icon' alt='' className='logo' />
               </Link>
 
-              <Link to="/clientprofile" className="icon-caption">
-                <FontAwesomeIcon icon={faUser} className="icon" />
-                <span className="caption">Profile</span>
+              <Link to='/clientprofile' className='icon-caption'>
+                {getIcon('user')}
+                <span className='caption'>Profile</span>
               </Link>
 
-              <Link to="/clientplan" className="icon-caption">
-                <FontAwesomeIcon icon={faChartBar} className="icon" />
-                <span className="caption">Plan</span>
+              <Link to='/clientplan' className='icon-caption'>
+                {getIcon('barchart')}
+                <span className='caption'>Plan</span>
               </Link>
 
-              <Link to="/clientactionitems" className="icon-caption">
-                <FontAwesomeIcon icon={faCheckCircle} className="icon" />
-                <span className="caption">Action Items</span>
+              <Link to='/clientactionitems' className='icon-caption'>
+                {getIcon('checkcircle')}
+                <span className='caption'>Action Items</span>
               </Link>
 
-              <Link to="/clientadvisorcontact" className="icon-caption">
-                <FontAwesomeIcon icon={faAddressCard} className="icon" />
-                <span className="caption">Advisor</span>
+              <Link to='/clientadvisorcontact' className='icon-caption'>
+                {getIcon('addresscard')}
+                <span className='caption'>Advisor</span>
               </Link>
             </div>
 
-            <Link to="/" className="icon-caption">
-              <FontAwesomeIcon icon={faPowerOff} className="icon" />
-              <span className="caption">Log Out</span>
+            <Link to='/' className='icon-caption'>
+              {getIcon('power')}
+              <span className='caption'>Log Out</span>
             </Link>
           </React.Fragment>
         );
@@ -140,7 +136,7 @@ class MainNavComponent extends Component {
 
     return Style.it(
       `${styles}`,
-      <div className="nav">{getMainNav(this.props)}</div>
+      <div className='nav'>{getMainNav(this.props)}</div>
     );
   }
 }
