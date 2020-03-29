@@ -1,42 +1,40 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import './index.css';
 
-import "./index.css";
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import SigninScreenComponent from "./Components/SigninScreenComponent";
-
-import ClientProfileScreenComponent from "./Components/ClientScreens/ClientProfileScreenComponent";
-import ClientPlanScreenComponent from "./Components/ClientScreens/ClientPlanScreenComponent";
-import ClientAdvisorContactScreenComponent from "./Components/ClientScreens/ClientAdvisorContactScreenComponent";
-import ClientActionItemsScreenComponent from "./Components/ClientScreens/ClientActionItemsScreenComponent";
-
-import AdvisorClientsScreenComponent from "./Components/AdvisorScreens/AdvisorClientsScreenComponent";
-import AdvisorConfigsScreenComponent from "./Components/AdvisorScreens/AdvisorConfigsScreenComponent";
+import AdvisorClientsScreenComponent from './Components/AdvisorScreens/AdvisorClientsScreenComponent';
+import AdvisorConfigsScreenComponent from './Components/AdvisorScreens/AdvisorConfigsScreenComponent';
+import ClientActionItemsScreenComponent from './Components/ClientScreens/ClientActionItemsScreenComponent';
+import ClientAdvisorContactScreenComponent from './Components/ClientScreens/ClientAdvisorContactScreenComponent';
+import ClientPlanScreenComponent from './Components/ClientScreens/ClientPlanScreenComponent';
+import ClientProfileScreenComponent from './Components/ClientScreens/ClientProfileScreenComponent';
+import SigninScreenComponent from './Components/SigninScreenComponent';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={SigninScreenComponent} />
+          <Route exact path='/' component={SigninScreenComponent} />
           <Route
             exact
-            path="/clientprofile"
+            path='/clientprofile'
             component={ClientProfileScreenComponent}
           />
           <Route
             exact
-            path="/clientplan"
+            path='/clientplan'
             component={ClientPlanScreenComponent}
           />
           <Route
             exact
-            path="/clientadvisorcontact"
+            path='/clientadvisorcontact'
             component={ClientAdvisorContactScreenComponent}
           />
           <Route
             exact
-            path="/clientactionitems"
+            path='/clientactionitems'
             component={ClientActionItemsScreenComponent}
           />
           <Route />
@@ -45,12 +43,12 @@ class App extends Component {
         <Switch>
           <Route
             exact
-            path="/configurations"
+            path='/configurations'
             component={AdvisorConfigsScreenComponent}
           />
           <Route
             exact
-            path="/clients"
+            path='/clients'
             component={AdvisorClientsScreenComponent}
           />
           <Route />
