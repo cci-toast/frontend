@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import Style from 'style-it';
 
+import SvgIconComponent from './SvgIconComponent';
+
 class ToastButton extends Component {
   render() {
     const styles = `
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .primary {
       background: var(--toast-gradient-1);
       float: right;
@@ -56,10 +64,31 @@ class ToastButton extends Component {
     .hidden {
       display: none;
   }
+
+  .icon {
+    margin-right: 0.5rem;
+  }
     `;
 
+    function getIcon(props) {
+      if (props.iconName) {
+        return (
+          <div className='icon'>
+            <SvgIconComponent
+              name={props.iconName}
+              width={props.iconWidth}
+              height={props.iconHeight}
+              stroke={props.iconStroke}
+              strokeWidth={props.iconStrokeWidth}
+              fill={props.iconFill}
+            ></SvgIconComponent>
+          </div>
+        );
+      }
+    }
+
     function getButton(props) {
-      let classes = [];
+      let classes = ['button'];
 
       if (props.primary) {
         classes.push('primary');
@@ -83,9 +112,10 @@ class ToastButton extends Component {
         `${styles}`,
         <button
           className={classes.join(' ')}
-          type="Button"
+          type='Button'
           onClick={props.handleClick}
         >
+          {getIcon(props)}
           {props.label}
         </button>
       );
