@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Style from "style-it";
+import React, { Component } from 'react';
+import Style from 'style-it';
 
-import ScreenTemplateComponent from "../ScreenTemplateComponent";
+import ScreenTemplateComponent from '../ScreenTemplateComponent';
 
 class ClientAdvisorContactScreenComponent extends Component {
   render() {
@@ -10,7 +10,10 @@ class ClientAdvisorContactScreenComponent extends Component {
     return Style.it(
       `${styles}`,
       <React.Fragment>
-        <ScreenTemplateComponent client advisorcontact></ScreenTemplateComponent>
+        <ScreenTemplateComponent
+          user='client'
+          page='advisorcontact'
+        ></ScreenTemplateComponent>
       </React.Fragment>
     );
   }

@@ -50,15 +50,9 @@ class SvgIconComponent extends Component {
       case 'ellipsis':
         return (
           <React.Fragment>
-            <circle cx='12' cy='12' r='1' {...props}>
-              >
-            </circle>
-            <circle cx='19' cy='12' r='1' {...props}>
-              >
-            </circle>
-            <circle cx='5' cy='12' r='1' {...props}>
-              >
-            </circle>
+            <circle cx='12' cy='12' r='1' {...props}></circle>
+            <circle cx='19' cy='12' r='1' {...props}></circle>
+            <circle cx='5' cy='12' r='1' {...props}></circle>
           </React.Fragment>
         );
       case 'helpcircle':
