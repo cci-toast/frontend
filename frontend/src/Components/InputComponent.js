@@ -63,7 +63,7 @@ class InputComponent extends Component {
               name={props.iconName}
               width={props.iconWidth}
               height={props.iconHeight}
-              stroke={props.stroke}
+              stroke={props.iconStroke}
               strokeWidth={props.iconStrokeWidth}
               fill={props.iconFill}
             ></SvgIconComponent>
