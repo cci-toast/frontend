@@ -12,7 +12,7 @@ import {
 } from 'react-vis';
 import Style from 'style-it';
 
-import SaveCancelComponent from './SaveCancelComponent';
+import SaveCancelComponent from '../SaveCancelComponent';
 
 var income = 87000;
 var incomespouse = 70000;
@@ -348,7 +348,7 @@ class ClientPlanContent extends Component {
     }
 
     .container {
-      height: calc(100vh - 10rem);
+      height: calc(90vh - 5rem);
       display: flex;
       flex-direction: column;
       justify-content: space-between;

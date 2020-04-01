@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Style from "style-it";
+import React, { Component } from 'react';
+import Style from 'style-it';
 
 class CardComponent extends Component {
   render() {
@@ -15,7 +15,7 @@ class CardComponent extends Component {
 
     return Style.it(
       `${styles}`,
-      <main className="card">{this.props.children}</main>
+      <div className='card'>{this.props.children}</div>
     );
   }
 }

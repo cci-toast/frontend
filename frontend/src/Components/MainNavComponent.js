@@ -11,7 +11,7 @@ class MainNavComponent extends Component {
     const styles = `
     .nav {
       background: var(--toast-gradient-2);
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;

@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Inter&display=swap");
 :root {
     --toast-black: rgb(26, 26, 26);
     --toast-white: rgb(255, 255, 255);
@@ -29,7 +29,7 @@ body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     background-color: var(--toast-white);
-    font-family: Roboto;
+    font-family: Inter, sans-serif;
     color: var(--toast-black);
 }
 
@@ -47,7 +47,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 h3 {
