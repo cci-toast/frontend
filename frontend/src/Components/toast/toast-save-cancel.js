@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Style from 'style-it';
+import React from "react";
+import Style from "style-it";
 
-import ToastButtonComponent from './ToastButtonComponent';
+import ToastButton from "./toast-button";
 
-class SaveCancelComponent extends Component {
+class ToastSaveCancel extends React.Component {
   render() {
     const styles = `
     .wrapper {
@@ -13,19 +13,19 @@ class SaveCancelComponent extends Component {
 
     return Style.it(
       `${styles}`,
-      <div className='wrapper'>
-        <ToastButtonComponent
+      <div className="wrapper">
+        <ToastButton
           quaternary
           handleClick={this.props.cancelClicked}
-          type='button'
+          type="button"
           label={this.props.cancelLabel}
           hidden={this.props.hideCancel}
         />
 
-        <ToastButtonComponent
+        <ToastButton
           secondary
           handleClick={this.props.saveClicked}
-          type='button'
+          type="button"
           label={this.props.saveLabel}
           hidden={this.props.hideSave}
         />
@@ -33,4 +33,4 @@ class SaveCancelComponent extends Component {
     );
   }
 }
-export default SaveCancelComponent;
+export default ToastSaveCancel;

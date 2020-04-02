@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-class ClientAdvisorContactContent extends Component {
+class AdvisorContactContent extends React.Component {
   render() {
     return (
       <React.Fragment>
@@ -24,4 +24,4 @@ class ClientAdvisorContactContent extends Component {
   }
 }
 
-export default ClientAdvisorContactContent;
+export default AdvisorContactContent;

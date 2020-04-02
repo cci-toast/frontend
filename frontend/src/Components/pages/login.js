@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import Center from 'react-center';
-import { Link } from 'react-router-dom';
-import Style from 'style-it';
+import React from "react";
+import Center from "react-center";
+import { Link } from "react-router-dom";
+import Style from "style-it";
 
-import Logo from '../logo.png';
-import InputComponent from './InputComponent';
-import ToastButtonComponent from './ToastButtonComponent';
+import ToastLogo from "../../toast-logo.png";
+import ToastButton from "../toast/toast-button";
+import ToastInput from "../toast/toast-input";
 
-class SigninScreenComponent extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { email: "", password: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
   submitHandler(event) {
-    alert('Email, Password: ' + this.state.email + ' ' + this.state.password);
+    alert("Email, Password: " + this.state.email + " " + this.state.password);
     event.preventDefault();
   }
 
@@ -71,58 +71,58 @@ class SigninScreenComponent extends Component {
     return Style.it(
       `${styles}`,
       <div>
-        <div className='row'>
-          <div className='column hero-bg-left'>
-            <div className='center-content'>
+        <div className="row">
+          <div className="column hero-bg-left">
+            <div className="center-content">
               <Center>
-                <img src={Logo} rel='icon' alt='' className='logo' />
+                <img src={ToastLogo} rel="icon" alt="" className="logo" />
               </Center>
 
               <Center>
-                <h1 className='toast-title'>toast</h1>
+                <h1 className="toast-title">toast</h1>
               </Center>
               <Center>
-                <p className='toast-tag-line'>Financial planning made easier</p>
+                <p className="toast-tag-line">Financial planning made easier</p>
               </Center>
             </div>
           </div>
 
-          <div className='column sign-in-spacer'>
+          <div className="column sign-in-spacer">
             <form onSubmit={this.submitHandler}>
-              <div className='column-full'>
+              <div className="column-full">
                 <h2>Sign In</h2>
                 <br />
-                <InputComponent
-                  placeholder='Type in your email'
-                  type='email'
-                  iconName='user'
+                <ToastInput
+                  placeholder="Type in your email"
+                  type="email"
+                  iconName="user"
                   iconWidth={24}
                   iconHeight={24}
-                  label='Email'
+                  label="Email"
                   onChange={this.handleChange}
-                  name='email'
+                  name="email"
                   value={this.state.email}
                   required
                 />
 
                 <br />
-                <InputComponent
-                  placeholder='Type in your password'
-                  type='password'
-                  iconName='lock'
+                <ToastInput
+                  placeholder="Type in your password"
+                  type="password"
+                  iconName="lock"
                   iconWidth={24}
                   iconHeight={24}
-                  label='Password'
+                  label="Password"
                   onChange={this.handleChange}
-                  name='password'
+                  name="password"
                   value={this.state.password}
                   required
                 />
               </div>
               <br />
               <Center>
-                <Link to='/clientprofile'>
-                  <ToastButtonComponent primary round label='Sign In' />
+                <Link to="/profile">
+                  <ToastButton primary round label="Sign In" />
                 </Link>
               </Center>
             </form>
@@ -132,4 +132,4 @@ class SigninScreenComponent extends Component {
     );
   }
 }
-export default SigninScreenComponent;
+export default Login;

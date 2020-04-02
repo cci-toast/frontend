@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Style from "style-it";
 
-class LeftNavComponent extends Component {
+class ToastPageNav extends React.Component {
   constructor(props) {
     super(props);
 
@@ -11,34 +11,34 @@ class LeftNavComponent extends Component {
       "Protection",
       "Debt",
       "Retirement",
-      "Budgeting"
+      "Budgeting",
     ];
 
     if (props.profile) {
       this.state = {
-        active: "Profile"
+        active: "Profile",
       };
       this.titlesList = this.profileTitlesList;
     } else {
       this.state = {
-        active: "Emergency Savings"
+        active: "Emergency Savings",
       };
       this.titlesList = this.factorsTitlesList;
     }
   }
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({
-      active: event.target.innerHTML
+      active: event.target.innerHTML,
     });
   };
 
-  isActive = link => {
+  isActive = (link) => {
     return this.state.active === link ? "active" : "";
   };
 
   getTitles = () => {
-    let titlesHTML = this.titlesList.map(title => {
+    let titlesHTML = this.titlesList.map((title) => {
       return (
         <h3
           className={this.isActive(`${title}`)}
@@ -62,7 +62,7 @@ class LeftNavComponent extends Component {
     const pxToRem = 16;
 
     const height = {
-      height: "1rem"
+      height: "1rem",
     };
 
     if (this.state.active !== this.titlesList[0]) {
@@ -149,4 +149,4 @@ class LeftNavComponent extends Component {
   }
 }
 
-export default LeftNavComponent;
+export default ToastPageNav;

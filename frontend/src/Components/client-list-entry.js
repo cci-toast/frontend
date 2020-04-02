@@ -1,30 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import Style from "style-it";
 
-class ClientboxComponent extends Component {
+class ClientListEntry extends React.Component {
   render() {
     const styles = `
-    .client-box {
+    .entry {
         padding: 1rem;
         border-radius: 0.625rem;
         margin: 0.3rem;
     }
     
-    .client-box:nth-child(odd) {
+    .entry:nth-child(odd) {
         background-color: var(--toast-neutral-6);
     }
     
-    .client-box:nth-child(even) {
+    .entry:nth-child(even) {
         background-color: var(--toast-neutral-5);
     }
     `;
 
     return Style.it(
       `${styles}`,
-      <div className="client-box">
-        <a href="/clientprofile">{this.props.clientName}</a>
+      <div className="entry">
+        <a href="/profile">{this.props.clientName}</a>
       </div>
     );
   }
 }
-export default ClientboxComponent;
+export default ClientListEntry;

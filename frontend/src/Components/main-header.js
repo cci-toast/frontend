@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Style from 'style-it';
+import React from "react";
+import Style from "style-it";
 
-import ClientNavComponent from './ClientNavComponent';
+import ClientNav from "./client-nav";
 
-class MainHeaderComponent extends Component {
+class MainHeader extends React.Component {
   render() {
     const styles = `
     .wrapper {
@@ -16,7 +16,7 @@ class MainHeaderComponent extends Component {
 
     function getLeftSide(props) {
       switch (props.leftside) {
-        case 'header':
+        case "header":
           return <h2>{props.header}</h2>;
         default:
           return <React.Fragment></React.Fragment>;
@@ -25,8 +25,8 @@ class MainHeaderComponent extends Component {
 
     function getRightSide(props) {
       switch (props.rightside) {
-        case 'nav':
-          return <ClientNavComponent></ClientNavComponent>;
+        case "nav":
+          return <ClientNav></ClientNav>;
         default:
           return <React.Fragment></React.Fragment>;
       }
@@ -34,11 +34,11 @@ class MainHeaderComponent extends Component {
 
     return Style.it(
       `${styles}`,
-      <div className='wrapper'>
+      <div className="wrapper">
         {getLeftSide(this.props)}
         {getRightSide(this.props)}
       </div>
     );
   }
 }
-export default MainHeaderComponent;
+export default MainHeader;

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Style from 'style-it';
+import React from "react";
+import Style from "style-it";
 
-class CheckboxComponent extends Component {
+class ToastCheckbox extends React.Component {
   render() {
     const styles = `
     .input-group {
@@ -41,22 +41,22 @@ class CheckboxComponent extends Component {
     `;
 
     function getLabelClasses(props) {
-      let classes = ['label'];
+      let classes = ["label"];
 
       if (props.hideLabel) {
-        classes.push('hidden');
+        classes.push("hidden");
       }
 
-      return classes.join(' ');
+      return classes.join(" ");
     }
 
     return Style.it(
       `${styles}`,
-      <div className='input-group'>
-        <input type='checkbox' />
+      <div className="input-group">
+        <input type="checkbox" />
         <label className={getLabelClasses(this.props)}>{this.props.text}</label>
       </div>
     );
   }
 }
-export default CheckboxComponent;
+export default ToastCheckbox;
