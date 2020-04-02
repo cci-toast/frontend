@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Center from 'react-center';
 import Style from 'style-it';
 
-import InputComponent from './InputComponent';
-import SaveCancelComponent from './SaveCancelComponent';
-import ToastButtonComponent from './ToastButtonComponent';
-import ToastSelectComponent from './ToastSelectComponent';
+import InputComponent from '../InputComponent';
+import SaveCancelComponent from '../SaveCancelComponent';
+import ToastButtonComponent from '../ToastButtonComponent';
+import ToastSelectComponent from '../ToastSelectComponent';
 
 const goalOptions = [
   { id: 0, value: 'I want to save money to pay off my credit card' },
@@ -483,7 +483,7 @@ class ClientProfileContent extends Component {
     }
 
     .container {
-      height: calc(100vh - 10rem);
+      height: calc(90vh - 5rem);
       display: flex;
       flex-direction: column;
       justify-content: space-between;

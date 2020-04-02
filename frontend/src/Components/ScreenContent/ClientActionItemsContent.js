@@ -1,8 +1,8 @@
 import React from 'react';
 import Style from 'style-it';
 
-import CheckboxComponent from './CheckboxComponent';
-import SaveCancelComponent from './SaveCancelComponent';
+import CheckboxComponent from '../CheckboxComponent';
+import SaveCancelComponent from '../SaveCancelComponent';
 
 class ClientActionItemsContent extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class ClientActionItemsContent extends React.Component {
     }
 
     .container {
-      height: calc(100vh - 10rem);
+      height: calc(90vh - 5rem);
       display: flex;
       flex-direction: column;
       justify-content: space-between;

@@ -38,8 +38,8 @@ class ToastButton extends Component {
       background-color: var(--toast-white);
       border: 1px var(--toast-neutral-4) solid;
       color: var(--toast-neutral-2);
-      min-width: 12rem;
       padding: 0.75rem 1rem;
+      min-width: 12rem;
     }
 
     .tertiary:hover {
@@ -63,11 +63,17 @@ class ToastButton extends Component {
 
     .hidden {
       display: none;
-  }
-
-  .icon {
-    margin-right: 0.5rem;
-  }
+    }
+    
+    .icon {
+      margin-right: 0.5rem;
+    }
+    
+    .icon-button {
+      text-transform: uppercase;
+      white-space: nowrap;
+      min-width: 5rem;
+    }
     `;
 
     function getIcon(props) {
@@ -106,6 +112,10 @@ class ToastButton extends Component {
 
       if (props.hidden) {
         classes.push('hidden');
+      }
+
+      if (props.iconName) {
+        classes.push('icon-button');
       }
 
       return Style.it(

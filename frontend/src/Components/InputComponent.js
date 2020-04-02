@@ -20,7 +20,7 @@ class InputComponent extends Component {
     }
 
     input[type="date"] {
-      font-family: Roboto;
+      font-family: Inter;
       font-style: italic;
       font-size: 1rem;
       color: var(--toast-neutral-3);
