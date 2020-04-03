@@ -1,14 +1,14 @@
-import React from 'react';
-import Style from 'style-it';
+import React from "react";
+import Style from "style-it";
 
-import CheckboxComponent from '../CheckboxComponent';
-import SaveCancelComponent from '../SaveCancelComponent';
+import ToastCheckbox from "../toast/toast-checkbox";
+import ToastSaveCancel from "../toast/toast-save-cancel";
 
-class ClientActionItemsContent extends React.Component {
+class ActionItemsContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentStep: 1
+      currentStep: 1,
     };
   }
 
@@ -16,7 +16,7 @@ class ClientActionItemsContent extends React.Component {
     let currentStep = this.state.currentStep;
     currentStep = currentStep >= 4 ? 5 : currentStep + 1;
     this.setState({
-      currentStep: currentStep
+      currentStep: currentStep,
     });
   };
 
@@ -24,7 +24,7 @@ class ClientActionItemsContent extends React.Component {
     let currentStep = this.state.currentStep;
     currentStep = currentStep <= 1 ? 1 : currentStep - 1;
     this.setState({
-      currentStep: currentStep
+      currentStep: currentStep,
     });
   };
 
@@ -53,26 +53,26 @@ class ClientActionItemsContent extends React.Component {
 
     return Style.it(
       `${styles}`,
-      <div className='container'>
+      <div className="container">
         <div>
-          <CheckboxComponent text='action item text' />
-          <CheckboxComponent text='action item text' />
-          <CheckboxComponent text='action item text' />
-          <CheckboxComponent text='action item text' />
+          <ToastCheckbox text="action item text" />
+          <ToastCheckbox text="action item text" />
+          <ToastCheckbox text="action item text" />
+          <ToastCheckbox text="action item text" />
         </div>
-        <div className='save-cancel'>
-          <SaveCancelComponent
+        <div className="save-cancel">
+          <ToastSaveCancel
             saveClicked={this.next}
             cancelClicked={this.prev}
-            saveLabel='next'
-            cancelLabel='previous'
+            saveLabel="next"
+            cancelLabel="previous"
             hideSave={this.hideNextButton()}
             hideCancel={this.hidePrevButton()}
-          ></SaveCancelComponent>
+          ></ToastSaveCancel>
         </div>
       </div>
     );
   }
 }
 
-export default ClientActionItemsContent;
+export default ActionItemsContent;

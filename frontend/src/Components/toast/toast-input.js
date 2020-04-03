@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Style from 'style-it';
+import React from "react";
+import Style from "style-it";
 
-import SvgIconComponent from './SvgIconComponent';
+import ToastIcon from "./toast-icon";
 
-class InputComponent extends Component {
+class ToastInput extends React.Component {
   render() {
     const styles = `
     input {
@@ -58,15 +58,15 @@ class InputComponent extends Component {
     function getIcon(props) {
       if (props.iconName) {
         return (
-          <div className='input-group-prepend'>
-            <SvgIconComponent
+          <div className="input-group-prepend">
+            <ToastIcon
               name={props.iconName}
               width={props.iconWidth}
               height={props.iconHeight}
               stroke={props.iconStroke}
               strokeWidth={props.iconStrokeWidth}
               fill={props.iconFill}
-            ></SvgIconComponent>
+            ></ToastIcon>
           </div>
         );
       }
@@ -76,19 +76,19 @@ class InputComponent extends Component {
       let classes = [];
 
       if (props.required) {
-        classes.push('required');
+        classes.push("required");
       }
       return (
-        <div className={classes.join(' ')}>
-          <label className='input-label'>{props.label}</label>
+        <div className={classes.join(" ")}>
+          <label className="input-label">{props.label}</label>
 
-          <div className='input-group'>
+          <div className="input-group">
             {getIcon(props)}
             <input
               type={props.type}
               name={props.name}
               placeholder={props.placeholder}
-              value={props.value || ''}
+              value={props.value || ""}
               min={props.min}
               list={props.list}
               max={props.max}
@@ -104,4 +104,4 @@ class InputComponent extends Component {
   }
 }
 
-export default InputComponent;
+export default ToastInput;

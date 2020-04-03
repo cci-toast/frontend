@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Style from 'style-it';
+import React from "react";
+import Style from "style-it";
 
-import SvgIconComponent from './SvgIconComponent';
+import ToastIcon from "./toast-icon";
 
-class ToastButton extends Component {
+class ToastButton extends React.Component {
   render() {
     const styles = `
     .button {
@@ -79,50 +79,50 @@ class ToastButton extends Component {
     function getIcon(props) {
       if (props.iconName) {
         return (
-          <div className='icon'>
-            <SvgIconComponent
+          <div className="icon">
+            <ToastIcon
               name={props.iconName}
               width={props.iconWidth}
               height={props.iconHeight}
               stroke={props.iconStroke}
               strokeWidth={props.iconStrokeWidth}
               fill={props.iconFill}
-            ></SvgIconComponent>
+            ></ToastIcon>
           </div>
         );
       }
     }
 
     function getButton(props) {
-      let classes = ['button'];
+      let classes = ["button"];
 
       if (props.primary) {
-        classes.push('primary');
+        classes.push("primary");
       } else if (props.secondary) {
-        classes.push('secondary');
+        classes.push("secondary");
       } else if (props.tertiary) {
-        classes.push('tertiary');
+        classes.push("tertiary");
       } else if (props.quaternary) {
-        classes.push('quaternary');
+        classes.push("quaternary");
       }
 
       if (props.round) {
-        classes.push('round');
+        classes.push("round");
       }
 
       if (props.hidden) {
-        classes.push('hidden');
+        classes.push("hidden");
       }
 
       if (props.iconName) {
-        classes.push('icon-button');
+        classes.push("icon-button");
       }
 
       return Style.it(
         `${styles}`,
         <button
-          className={classes.join(' ')}
-          type='Button'
+          className={classes.join(" ")}
+          type="Button"
           onClick={props.handleClick}
         >
           {getIcon(props)}
