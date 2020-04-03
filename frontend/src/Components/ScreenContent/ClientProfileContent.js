@@ -1,74 +1,22 @@
 import React, { Component } from 'react';
-import Center from 'react-center';
 import Style from 'style-it';
-
 import InputComponent from '../InputComponent';
-import SaveCancelComponent from '../SaveCancelComponent';
-import ToastButtonComponent from '../ToastButtonComponent';
-import ToastSelectComponent from '../ToastSelectComponent';
-
-const goalOptions = [
-  { id: 0, value: 'I want to save money to pay off my credit card' },
-  { id: 1, value: 'I want to save money to pay off student debt' },
-  { id: 2, value: 'I want to save money for a vacation' },
-  { id: 3, value: 'I want to save money to buy/rent a property' },
-  { id: 4, value: 'I want to create an emergency savings fund' },
-  { id: 5, value: 'I want to save money to prepare for retirement' },
-  { id: 6, value: 'Other (Type in)' }
-];
-
-const stateOptions = [
-  { id: 0, value: 'Alabama' },
-  { id: 1, value: 'Alaska' },
-  { id: 2, value: 'Arizona' },
-  { id: 3, value: 'Arkansas' },
-  { id: 4, value: 'California' },
-  { id: 5, value: 'Colorado' },
-  { id: 6, value: 'Connecticut' },
-  { id: 7, value: 'Delaware' },
-  { id: 8, value: 'Florida' },
-  { id: 9, value: 'Georgia' },
-  { id: 10, value: 'Hawaii' },
-  { id: 11, value: 'Idaho' },
-  { id: 12, value: 'Illinois' },
-  { id: 13, value: 'Indiana' },
-  { id: 14, value: 'Iowa' },
-  { id: 15, value: 'Kansas' },
-  { id: 16, value: 'Kentucky' },
-  { id: 17, value: 'Louisiana' },
-  { id: 18, value: 'Maine' },
-  { id: 19, value: 'Maryland' },
-  { id: 20, value: 'Massachusetts' },
-  { id: 21, value: 'Michigan' },
-  { id: 22, value: 'Minnesota' },
-  { id: 23, value: 'Mississippi' },
-  { id: 24, value: 'Missouri' },
-  { id: 25, value: 'Montana' },
-  { id: 26, value: 'Nebraska' },
-  { id: 27, value: 'Nevada' },
-  { id: 28, value: 'New Hampshire' },
-  { id: 29, value: 'New Jersey' },
-  { id: 30, value: 'New Mexico' },
-  { id: 31, value: 'New York' },
-  { id: 32, value: 'North Carolina' },
-  { id: 33, value: 'North Dakota' },
-  { id: 34, value: 'Ohio' },
-  { id: 35, value: 'Oklahoma' },
-  { id: 36, value: 'Oregon' },
-  { id: 37, value: 'Pennsylvania' },
-  { id: 38, value: 'Rhode Island' },
-  { id: 39, value: 'South Carolina' },
-  { id: 40, value: 'South Dakota' },
-  { id: 41, value: 'Tennessee' },
-  { id: 42, value: 'Texas' },
-  { id: 43, value: 'Utah' },
-  { id: 44, value: 'Vermont' },
-  { id: 45, value: 'Virginia' },
-  { id: 46, value: 'Washington' },
-  { id: 47, value: 'West Virginia' },
-  { id: 48, value: 'Wisconsin' },
-  { id: 49, value: 'Wyoming' }
-];
+import IncomeGroup from './ProfileScreenComponents/IncomeGroup';
+import BillGroup from './ProfileScreenComponents/BillGroup';
+import HousingGroup from './ProfileScreenComponents/HousingGroup';
+import InsuranceGroup from './ProfileScreenComponents/InsuranceGroup';
+import UtilityGroup from './ProfileScreenComponents/UtilityGroup';
+import LoanDebtGroup from './ProfileScreenComponents/LoanDebtGroup';
+import ShoppingGroup from './ProfileScreenComponents/ShoppingGroup';
+import LeisureGroup from './ProfileScreenComponents/LeisureGroup';
+import TransportationGroup from './ProfileScreenComponents/TransportationGroup';
+import ToastSelectComponent from '../ToastSelectComponent'
+import SaveCancelComponent from '../SaveCancelComponent'
+import SubscriptionGroup from './ProfileScreenComponents/SubscriptionGroup';
+import MiscGroup from './ProfileScreenComponents/MiscGroup';
+import ChildGroup from './ProfileScreenComponents/ChildGroup';
+import PartnerGroup from './ProfileScreenComponents/PartnerGroup';
+import GoalGroup from './ProfileScreenComponents/GoalGroup';
 
 class ClientProfileContent extends Component {
   constructor(props) {
@@ -79,10 +27,8 @@ class ClientProfileContent extends Component {
   }
 
   handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    const {name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   next = () => {
@@ -109,7 +55,9 @@ class ClientProfileContent extends Component {
     return this.state.currentStep === 6;
   };
 
+
   render() {
+    //var parent = this;
     function ClientInformation(props) {
       if (props.currentStep !== 1) {
         return null;
@@ -148,16 +96,15 @@ class ClientProfileContent extends Component {
                 onChange={props.handleChange}
               />
 
-              <InputComponent
-                type='number'
+              <ToastSelectComponent
+                options="birthyearOptions"
+                name='birthyear'
                 label='Birth Year'
-                value={props.bday}
+                list='birthyear'
                 placeholder='Type in your birth year'
-                name='bday'
+                value={props.birthyear}
+                id='birthyear'
                 onChange={props.handleChange}
-                min={1}
-                max={9999}
-                required
               />
             </div>
           </div>
@@ -175,8 +122,9 @@ class ClientProfileContent extends Component {
               />
             </div>
             <div className='column'>
+
               <ToastSelectComponent
-                options={stateOptions}
+                options="stateOptions"
                 name='state'
                 label='State'
                 list='state'
@@ -232,9 +180,8 @@ class ClientProfileContent extends Component {
               />
             </div>
           </div>
-          <Center>
-            <ToastButtonComponent tertiary label='Add Additional Income' />
-          </Center>
+          <IncomeGroup label='Add Additional Income' />
+
         </React.Fragment>
       );
     }
@@ -246,25 +193,11 @@ class ClientProfileContent extends Component {
       return (
         <React.Fragment>
           <h4>Bills</h4>
-          <Center>
-            <ToastButtonComponent tertiary label='Add Housing' />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButtonComponent tertiary label='Add Bill' />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButtonComponent tertiary label='Add Utility' />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButtonComponent tertiary Button label='Add Insurance' />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButtonComponent tertiary label='Add Loan / Debt' />
-          </Center>
+          <HousingGroup label='Add Housing' />
+          <BillGroup label='Add Bill' />
+          <UtilityGroup label='Add Utility' />
+          <InsuranceGroup label='Add Insurance' />
+          <LoanDebtGroup label='Add Loan/Debt' />
         </React.Fragment>
       );
     }
@@ -276,58 +209,11 @@ class ClientProfileContent extends Component {
       return (
         <React.Fragment>
           <h4>Expenses</h4>
-
-          <div className='row'>
-            <div className='column'>
-              <InputComponent
-                type='text'
-                label='Shopping Description'
-                name='shoppingdescription'
-                placeholder='Type in your shopping description'
-                value={props.shoppingdescription}
-                onChange={props.handleChange}
-              />
-            </div>
-
-            <div className='column'>
-              <InputComponent
-                type='number'
-                label='Shopping Amount'
-                name='shoppingamount'
-                placeholder='Type in your amount spent on shopping items'
-                min={0.0}
-                step={0.01}
-                iconName='dollarsign'
-                iconWidth={20}
-                iconHeight={20}
-                value={props.shoppingamount}
-                onChange={props.handleChange}
-              />
-            </div>
-          </div>
-          <Center>
-            <ToastButtonComponent tertiary label='Add Shopping' />
-          </Center>
-          <hr />
-
-          <Center>
-            <ToastButtonComponent tertiary label='Add Leisure' />
-          </Center>
-          <hr />
-
-          <Center>
-            <ToastButtonComponent tertiary label='Add Transportation' />
-          </Center>
-          <hr />
-
-          <Center>
-            <ToastButtonComponent tertiary label='Add Subscriptions' />
-          </Center>
-
-          <hr />
-          <Center>
-            <ToastButtonComponent tertiary label='Add Miscellaneous' />
-          </Center>
+          <ShoppingGroup label='Add Shopping' />
+          <LeisureGroup label='Add Leisure' />
+          <TransportationGroup label='Add Transportation' />
+          <SubscriptionGroup label='Add Subscription' />
+          <MiscGroup label='Add Miscellaneous' />
         </React.Fragment>
       );
     }
@@ -338,90 +224,8 @@ class ClientProfileContent extends Component {
       }
       return (
         <React.Fragment>
-          <div className='row'>
-            <div className='column'>
-              <InputComponent
-                type='text'
-                label="Partner's First Name"
-                name='spousefname'
-                placeholder="Type in your partner's first name"
-                value={props.spousefname}
-                onChange={props.handleChange}
-              />
-              <InputComponent
-                type='number'
-                label="Partner's Birth Year"
-                name='spousebday'
-                placeholder="Type in your partner's birth year"
-                value={props.spousebday}
-                onChange={props.handleChange}
-                min={1}
-                max={9999}
-              />
-            </div>
-            <div className='column'>
-              <InputComponent
-                type='text'
-                label="Partner's Last Name"
-                name='spouselname'
-                placeholder="Type in your partner's last name"
-                value={props.spouselname}
-                onChange={props.handleChange}
-              />
-              <InputComponent
-                type='number'
-                min={0.0}
-                label="Partner's Annual Salary After Taxes"
-                placeholder='50,000'
-                value={props.spousesalary}
-                name='spousesalary'
-                iconName='dollarsign'
-                onChange={props.handleChange}
-                step={0.01}
-              />
-            </div>
-          </div>
-          <Center>
-            <ToastButtonComponent tertiary label='Add Partner' />
-          </Center>
-          <hr />
-
-          <div className='row'>
-            <div className='column'>
-              <InputComponent
-                type='text'
-                label="Child's First Name"
-                placeholder="Type in your child's first name"
-                value={props.childfname}
-                name='childfname'
-                onChange={props.handleChange}
-              />
-              <InputComponent
-                type='text'
-                label="Child's Education"
-                placeholder="Type in your child's education"
-                value={props.childfname}
-                name='childfname'
-                onChange={props.handleChange}
-              />
-            </div>
-            <div className='column'>
-              <InputComponent
-                type='number'
-                label="Child's Birth Year"
-                name='spousebday'
-                placeholder="Type in your child's birth year"
-                value={props.childbday}
-                onChange={props.handleChange}
-                min={1}
-                max={9999}
-              />
-            </div>
-          </div>
-
-          <Center>
-            <ToastButtonComponent tertiary label='Add Child' />
-          </Center>
+          <PartnerGroup label='Add Partner' />
+          <ChildGroup label='Add Child' />
         </React.Fragment>
       );
     }
@@ -431,48 +235,8 @@ class ClientProfileContent extends Component {
         return null;
       }
       return (
-        <React.Fragment>
-          <ToastSelectComponent
-            options={goalOptions}
-            name='goal'
-            label='Goal 1'
-            list='goals'
-            placeholder='Type in your goal'
-            value={props.goal}
-            id='goals'
-            onChange={props.handleChange}
-          />
 
-          <div className='row'>
-            <div className='column'>
-              <InputComponent
-                type='number'
-                label='Dollar Amount'
-                name='dollarAmount'
-                placeholder='1,000'
-                min={0.0}
-                step={0.01}
-                iconName='dollarsign'
-                value={props.dollarAmount}
-                onChange={props.handleChange}
-              />
-            </div>
-            <div className='column'>
-              <InputComponent
-                type='date'
-                label='Goal End Date'
-                value={props.goalEndDate}
-                name='goalEndDate'
-                onChange={props.handleChange}
-              />
-            </div>
-          </div>
-
-          {/* TODO: Add inputs on button click */}
-          <Center>
-            <ToastButtonComponent tertiary label='Add Goal' />
-          </Center>
-        </React.Fragment>
+        <GoalGroup label='Add Goal' />
       );
     }
 
@@ -488,6 +252,10 @@ class ClientProfileContent extends Component {
       flex-direction: column;
       justify-content: space-between;
     }
+
+    .hideDiv {
+      display: None;
+    }
     `;
 
     return Style.it(
@@ -500,7 +268,7 @@ class ClientProfileContent extends Component {
             fname={this.state.fname}
             mname={this.state.mname}
             lname={this.state.lname}
-            bday={this.state.bday}
+            birthyear={this.state.birthyear}
             city={this.state.city}
             state={this.state.state}
             zipcode={this.state.zipcode}
@@ -518,26 +286,14 @@ class ClientProfileContent extends Component {
           <Expenses
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            shoppingdescription={this.state.shoppingdescription}
-            shoppingamount={this.state.shoppingamount}
           />
           <FamilyInformation
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            spousefname={this.state.spousefname}
-            spouselname={this.state.spouselname}
-            spousebday={this.state.spousebday}
-            spousesalary={this.state.spousesalary}
-            numchildren={this.state.numchildren}
-            childfname={this.state.childfname}
-            childbday={this.state.childbday}
           />
           <Goals
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            goal={this.state.goal}
-            dollarAmount={this.state.dollarAmount}
-            goalEndDate={this.state.goalEndDate}
           />
         </form>
         <div className='save-cancel'>

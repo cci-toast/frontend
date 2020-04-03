@@ -53,6 +53,10 @@ class InputComponent extends Component {
         color: var(--toast-red);
         margin-left: 0.125rem;
       }
+      input::-webkit-calendar-picker-indicator {
+        opacity: 100;
+        color: var(--toast-neutral-3);
+     }
     `;
 
     function getIcon(props) {
