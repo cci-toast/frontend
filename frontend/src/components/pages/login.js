@@ -7,23 +7,33 @@ import ToastLogo from "../../toast-logo.png";
 import ToastButton from "../toast/toast-button";
 import ToastInput from "../toast/toast-input";
 
+import { connect } from "react-redux";
+
+import { getEmail } from "../../redux/selectors";
+import { getPassword } from "../../redux/selectors";
+
+import { setEmail } from "../../redux/actions";
+import { setPassword } from "../../redux/actions";
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.setEmail = this.setEmail.bind(this);
+    this.setPassword = this.setPassword.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
 
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
-  };
+  setEmail(event) {
+    this.props.setEmail(event.target.value);
+  }
+
+  setPassword(event) {
+    this.props.setPassword(event.target.value);
+  }
+
   submitHandler(event) {
-    alert("Email, Password: " + this.state.email + " " + this.state.password);
+    alert("Email, Password: " + this.props.email + " " + this.props.password);
     event.preventDefault();
   }
 
@@ -99,9 +109,9 @@ class Login extends React.Component {
                   iconWidth={24}
                   iconHeight={24}
                   label="Email"
-                  onChange={this.handleChange}
+                  onChange={this.setEmail}
                   name="email"
-                  value={this.state.email}
+                  defaultValue={this.props.email}
                   required
                 />
 
@@ -113,9 +123,9 @@ class Login extends React.Component {
                   iconWidth={24}
                   iconHeight={24}
                   label="Password"
-                  onChange={this.handleChange}
+                  onChange={this.setPassword}
                   name="password"
-                  value={this.state.password}
+                  defaultValue={this.props.password}
                   required
                 />
               </div>
@@ -132,4 +142,10 @@ class Login extends React.Component {
     );
   }
 }
-export default Login;
+
+const mapStateToProps = (state) => ({
+  email: getEmail(state),
+  password: getPassword(state),
+});
+
+export default connect(mapStateToProps, { setEmail, setPassword })(Login);

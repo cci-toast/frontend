@@ -1,11 +1,16 @@
 import React from "react";
-import Center from "react-center";
 import Style from "style-it";
 
-import ToastButton from "../toast/toast-button";
-import ToastInput from "../toast/toast-input";
 import ToastSaveCancel from "../toast/toast-save-cancel";
-import ToastSelect from "../toast/toast-select";
+
+import Profile from "./profile/profile";
+import Finances from "./profile/finances";
+import Family from "./profile/family";
+import Goals from "./profile/goals.js";
+
+import { connect } from "react-redux";
+import { getCurrentStep } from "../../redux/selectors";
+import { incrementStep, decrementStep, resetStep } from "../../redux/actions";
 
 const goalOptions = [
   { id: 0, value: "I want to save money to pay off my credit card" },
@@ -73,409 +78,33 @@ const stateOptions = [
 class ProfileContent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentStep: 1,
-    };
+    this.props.resetStep();
+
+    this.next = this.next.bind(this);
+    this.prev = this.prev.bind(this);
   }
 
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
-  };
+  next() {
+    this.props.incrementStep();
+  }
 
-  next = () => {
-    let currentStep = this.state.currentStep;
-    currentStep = currentStep >= 5 ? 6 : currentStep + 1;
-    this.setState({
-      currentStep: currentStep,
-    });
-  };
+  prev() {
+    this.props.decrementStep();
+  }
 
-  prev = () => {
-    let currentStep = this.state.currentStep;
-    currentStep = currentStep <= 1 ? 1 : currentStep - 1;
-    this.setState({
-      currentStep: currentStep,
-    });
-  };
+  hidePrevButton() {
+    return this.props.currentStep === 1;
+  }
 
-  hidePrevButton = () => {
-    return this.state.currentStep === 1;
-  };
+  hideNextButton() {
+    return this.props.currentStep === 4;
+  }
 
-  hideNextButton = () => {
-    return this.state.currentStep === 6;
-  };
+  onSubmit() {
+    // submit form
+  }
 
   render() {
-    function ClientInformation(props) {
-      if (props.currentStep !== 1) {
-        return null;
-      }
-      return (
-        <React.Fragment>
-          <div className="row">
-            <div className="column">
-              <ToastInput
-                type="text"
-                label="First Name"
-                placeholder="Type in your first name"
-                value={props.fname}
-                name="fname"
-                onChange={props.handleChange}
-                required
-              />
-              <ToastInput
-                type="text"
-                label="Last Name"
-                placeholder="Type in your last name"
-                value={props.lname}
-                name="lname"
-                onChange={props.handleChange}
-                required
-              />
-            </div>
-
-            <div className="column">
-              <ToastInput
-                type="text"
-                label="Middle Name"
-                placeholder="Type in your middle name"
-                value={props.mname}
-                name="mname"
-                onChange={props.handleChange}
-              />
-
-              <ToastInput
-                type="number"
-                label="Birth Year"
-                value={props.bday}
-                placeholder="Type in your birth year"
-                name="bday"
-                onChange={props.handleChange}
-                min={1}
-                max={9999}
-                required
-              />
-            </div>
-          </div>
-
-          <hr />
-          <div className="row">
-            <div className="column">
-              <ToastInput
-                type="text"
-                label="City"
-                placeholder="Type in your city"
-                value={props.city}
-                name="city"
-                onChange={props.handleChange}
-              />
-            </div>
-            <div className="column">
-              <ToastSelect
-                options={stateOptions}
-                name="state"
-                label="State"
-                list="state"
-                placeholder="Type in your state"
-                value={props.state}
-                id="state"
-                onChange={props.handleChange}
-              />
-            </div>
-          </div>
-        </React.Fragment>
-      );
-    }
-
-    function Finances(props) {
-      if (props.currentStep !== 2) {
-        return null;
-      }
-      return (
-        <React.Fragment>
-          <h4>Income</h4>
-          <div className="row">
-            <div className="column">
-              <ToastInput
-                type="number"
-                min={0.0}
-                label="Annual Salary Before Taxes"
-                placeholder="50,000"
-                value={props.salarynotax}
-                name="salarynotax"
-                iconName="dollarsign"
-                iconWidth={20}
-                iconHeight={20}
-                onChange={props.handleChange}
-                step={0.01}
-                required
-              />
-            </div>
-            <div className="column">
-              <ToastInput
-                type="number"
-                min={0.0}
-                label="Annual Salary After Taxes"
-                placeholder="50,000"
-                value={props.salarytax}
-                name="salarytax"
-                iconName="dollarsign"
-                iconWidth={20}
-                iconHeight={20}
-                onChange={props.handleChange}
-                step={0.01}
-                required
-              />
-            </div>
-          </div>
-          <Center>
-            <ToastButton tertiary label="Add Additional Income" />
-          </Center>
-        </React.Fragment>
-      );
-    }
-
-    function Bills(props) {
-      if (props.currentStep !== 3) {
-        return null;
-      }
-      return (
-        <React.Fragment>
-          <h4>Bills</h4>
-          <Center>
-            <ToastButton tertiary label="Add Housing" />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButton tertiary label="Add Bill" />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButton tertiary label="Add Utility" />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButton tertiary Button label="Add Insurance" />
-          </Center>
-          <hr />
-          <Center>
-            <ToastButton tertiary label="Add Loan / Debt" />
-          </Center>
-        </React.Fragment>
-      );
-    }
-
-    function Expenses(props) {
-      if (props.currentStep !== 4) {
-        return null;
-      }
-      return (
-        <React.Fragment>
-          <h4>Expenses</h4>
-
-          <div className="row">
-            <div className="column">
-              <ToastInput
-                type="text"
-                label="Shopping Description"
-                name="shoppingdescription"
-                placeholder="Type in your shopping description"
-                value={props.shoppingdescription}
-                onChange={props.handleChange}
-              />
-            </div>
-
-            <div className="column">
-              <ToastInput
-                type="number"
-                label="Shopping Amount"
-                name="shoppingamount"
-                placeholder="Type in your amount spent on shopping items"
-                min={0.0}
-                step={0.01}
-                iconName="dollarsign"
-                iconWidth={20}
-                iconHeight={20}
-                value={props.shoppingamount}
-                onChange={props.handleChange}
-              />
-            </div>
-          </div>
-          <Center>
-            <ToastButton tertiary label="Add Shopping" />
-          </Center>
-          <hr />
-
-          <Center>
-            <ToastButton tertiary label="Add Leisure" />
-          </Center>
-          <hr />
-
-          <Center>
-            <ToastButton tertiary label="Add Transportation" />
-          </Center>
-          <hr />
-
-          <Center>
-            <ToastButton tertiary label="Add Subscriptions" />
-          </Center>
-
-          <hr />
-          <Center>
-            <ToastButton tertiary label="Add Miscellaneous" />
-          </Center>
-        </React.Fragment>
-      );
-    }
-
-    function FamilyInformation(props) {
-      if (props.currentStep !== 5) {
-        return null;
-      }
-      return (
-        <React.Fragment>
-          <div className="row">
-            <div className="column">
-              <ToastInput
-                type="text"
-                label="Partner's First Name"
-                name="spousefname"
-                placeholder="Type in your partner's first name"
-                value={props.spousefname}
-                onChange={props.handleChange}
-              />
-              <ToastInput
-                type="number"
-                label="Partner's Birth Year"
-                name="spousebday"
-                placeholder="Type in your partner's birth year"
-                value={props.spousebday}
-                onChange={props.handleChange}
-                min={1}
-                max={9999}
-              />
-            </div>
-            <div className="column">
-              <ToastInput
-                type="text"
-                label="Partner's Last Name"
-                name="spouselname"
-                placeholder="Type in your partner's last name"
-                value={props.spouselname}
-                onChange={props.handleChange}
-              />
-              <ToastInput
-                type="number"
-                min={0.0}
-                label="Partner's Annual Salary After Taxes"
-                placeholder="50,000"
-                value={props.spousesalary}
-                name="spousesalary"
-                iconName="dollarsign"
-                onChange={props.handleChange}
-                step={0.01}
-              />
-            </div>
-          </div>
-          <Center>
-            <ToastButton tertiary label="Add Partner" />
-          </Center>
-          <hr />
-
-          <div className="row">
-            <div className="column">
-              <ToastInput
-                type="text"
-                label="Child's First Name"
-                placeholder="Type in your child's first name"
-                value={props.childfname}
-                name="childfname"
-                onChange={props.handleChange}
-              />
-              <ToastInput
-                type="text"
-                label="Child's Education"
-                placeholder="Type in your child's education"
-                value={props.childfname}
-                name="childfname"
-                onChange={props.handleChange}
-              />
-            </div>
-            <div className="column">
-              <ToastInput
-                type="number"
-                label="Child's Birth Year"
-                name="spousebday"
-                placeholder="Type in your child's birth year"
-                value={props.childbday}
-                onChange={props.handleChange}
-                min={1}
-                max={9999}
-              />
-            </div>
-          </div>
-
-          <Center>
-            <ToastButton tertiary label="Add Child" />
-          </Center>
-        </React.Fragment>
-      );
-    }
-
-    function Goals(props) {
-      if (props.currentStep !== 6) {
-        return null;
-      }
-      return (
-        <React.Fragment>
-          <ToastSelect
-            options={goalOptions}
-            name="goal"
-            label="Goal 1"
-            list="goals"
-            placeholder="Type in your goal"
-            value={props.goal}
-            id="goals"
-            onChange={props.handleChange}
-          />
-
-          <div className="row">
-            <div className="column">
-              <ToastInput
-                type="number"
-                label="Dollar Amount"
-                name="dollarAmount"
-                placeholder="1,000"
-                min={0.0}
-                step={0.01}
-                iconName="dollarsign"
-                value={props.dollarAmount}
-                onChange={props.handleChange}
-              />
-            </div>
-            <div className="column">
-              <ToastInput
-                type="date"
-                label="Goal End Date"
-                value={props.goalEndDate}
-                name="goalEndDate"
-                onChange={props.handleChange}
-              />
-            </div>
-          </div>
-
-          {/* TODO: Add inputs on button click */}
-          <Center>
-            <ToastButton tertiary label="Add Goal" />
-          </Center>
-        </React.Fragment>
-      );
-    }
-
     const styles = `
     .save-cancel {
       display: flex;
@@ -493,51 +122,16 @@ class ProfileContent extends React.Component {
     return Style.it(
       `${styles}`,
       <div className="container">
-        <form onSubmit={this.handleSubmit}>
-          <ClientInformation
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            fname={this.state.fname}
-            mname={this.state.mname}
-            lname={this.state.lname}
-            bday={this.state.bday}
-            city={this.state.city}
-            state={this.state.state}
-            zipcode={this.state.zipcode}
+        <form onSubmit={this.onSubmit}>
+          <Profile
+            currentStep={this.props.currentStep}
+            stateOptions={stateOptions}
           />
-          <Finances
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            salarynotax={this.state.salarynotax}
-            salarytax={this.state.salarytax}
-          />
-          <Bills
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-          />
-          <Expenses
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            shoppingdescription={this.state.shoppingdescription}
-            shoppingamount={this.state.shoppingamount}
-          />
-          <FamilyInformation
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            spousefname={this.state.spousefname}
-            spouselname={this.state.spouselname}
-            spousebday={this.state.spousebday}
-            spousesalary={this.state.spousesalary}
-            numchildren={this.state.numchildren}
-            childfname={this.state.childfname}
-            childbday={this.state.childbday}
-          />
+          <Finances currentStep={this.props.currentStep} />
+          <Family currentStep={this.props.currentStep} />
           <Goals
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            goal={this.state.goal}
-            dollarAmount={this.state.dollarAmount}
-            goalEndDate={this.state.goalEndDate}
+            currentStep={this.props.currentStep}
+            goalOptions={goalOptions}
           />
         </form>
         <div className="save-cancel">
@@ -555,4 +149,12 @@ class ProfileContent extends React.Component {
   }
 }
 
-export default ProfileContent;
+const mapStateToProps = (state) => ({
+  currentStep: getCurrentStep(state),
+});
+
+export default connect(mapStateToProps, {
+  incrementStep,
+  decrementStep,
+  resetStep,
+})(ProfileContent);
