@@ -4,36 +4,34 @@ import Style from "style-it";
 import ToastCheckbox from "../toast/toast-checkbox";
 import ToastSaveCancel from "../toast/toast-save-cancel";
 
+import { connect } from "react-redux";
+
+import { getCurrentStep } from "../../redux/selectors";
+
+import { incrementStep } from "../../redux/actions";
+import { decrementStep } from "../../redux/actions";
+import { resetStep } from "../../redux/actions";
+
 class ActionItemsContent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentStep: 1,
-    };
+    this.props.resetStep();
   }
 
   next = () => {
-    let currentStep = this.state.currentStep;
-    currentStep = currentStep >= 4 ? 5 : currentStep + 1;
-    this.setState({
-      currentStep: currentStep,
-    });
+    this.props.incrementStep();
   };
 
   prev = () => {
-    let currentStep = this.state.currentStep;
-    currentStep = currentStep <= 1 ? 1 : currentStep - 1;
-    this.setState({
-      currentStep: currentStep,
-    });
+    this.props.decrementStep();
   };
 
   hidePrevButton = () => {
-    return this.state.currentStep === 1;
+    return this.props.currentStep === 1;
   };
 
   hideNextButton = () => {
-    return this.state.currentStep === 5;
+    return this.props.currentStep === 5;
   };
 
   render() {
@@ -75,4 +73,12 @@ class ActionItemsContent extends React.Component {
   }
 }
 
-export default ActionItemsContent;
+const mapStateToProps = (state) => ({
+  currentStep: getCurrentStep(state),
+});
+
+export default connect(mapStateToProps, {
+  incrementStep,
+  decrementStep,
+  resetStep,
+})(ActionItemsContent);

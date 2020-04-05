@@ -8,7 +8,7 @@ class ToastSelect extends React.Component {
     const styles = ``;
 
     var dropdownOptions = this.props.options.map((select) => (
-      <option data-value={select.id} value={select.value} />
+      <option key={select.id} value={select.value} />
     ));
 
     return Style.it(

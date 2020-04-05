@@ -88,7 +88,7 @@ class ToastInput extends React.Component {
               type={props.type}
               name={props.name}
               placeholder={props.placeholder}
-              value={props.value || ""}
+              defaultValue={props.defaultValue || ""}
               min={props.min}
               list={props.list}
               max={props.max}
