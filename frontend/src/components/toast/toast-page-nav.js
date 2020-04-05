@@ -1,43 +1,38 @@
 import React from "react";
 import Style from "style-it";
 
+import { connect } from "react-redux";
+
+import { setActiveTitle } from "../../redux/actions";
+
+import { getProfileTitlesList } from "../../redux/selectors";
+import { getFactorsTitlesList } from "../../redux/selectors";
+import { getActiveTitle } from "../../redux/selectors";
+
 class ToastPageNav extends React.Component {
   constructor(props) {
     super(props);
 
-    this.profileTitlesList = ["Profile", "Finances", "Family", "Goals"];
-    this.factorsTitlesList = [
-      "Emergency Savings",
-      "Protection",
-      "Debt",
-      "Retirement",
-      "Budgeting",
-    ];
-
-    if (props.profile) {
-      this.state = {
-        active: "Profile",
-      };
-      this.titlesList = this.profileTitlesList;
+    if (this.props.profile) {
+      this.titlesList = this.props.profileTitlesList;
     } else {
-      this.state = {
-        active: "Emergency Savings",
-      };
-      this.titlesList = this.factorsTitlesList;
+      this.titlesList = this.props.factorsTitlesList;
     }
+
+    this.props.setActiveTitle(this.titlesList[0]);
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick = (event) => {
-    this.setState({
-      active: event.target.innerHTML,
-    });
-  };
+  handleClick(event) {
+    this.props.setActiveTitle(event.target.innerHTML);
+  }
 
-  isActive = (link) => {
-    return this.state.active === link ? "active" : "";
-  };
+  isActive(link) {
+    return this.props.activeTitle === link ? "active" : "";
+  }
 
-  getTitles = () => {
+  getTitles() {
     let titlesHTML = this.titlesList.map((title) => {
       return (
         <h3
@@ -52,10 +47,10 @@ class ToastPageNav extends React.Component {
     });
 
     return <div className="titles">{titlesHTML}</div>;
-  };
+  }
 
   // height matches middle of active h3
-  getBar = () => {
+  getBar() {
     let classes = ["bar"];
     let heights = [];
     let heightSum = 0;
@@ -65,9 +60,9 @@ class ToastPageNav extends React.Component {
       height: "1rem",
     };
 
-    if (this.state.active !== this.titlesList[0]) {
+    if (this.props.activeTitle !== this.titlesList[0]) {
       for (let i = 0; i < this.titlesList.length; i++) {
-        if (this.state.active === this.titlesList[i]) {
+        if (this.props.activeTitle === this.titlesList[i]) {
           if (document.getElementById(`${this.titlesList[i]}`) !== null) {
             let currentHeight =
               document.getElementById(`${this.titlesList[i]}`).offsetHeight /
@@ -92,7 +87,7 @@ class ToastPageNav extends React.Component {
     }
 
     return <div className={classes.join(" ")} style={height}></div>;
-  };
+  }
 
   render() {
     const styles = `
@@ -149,4 +144,10 @@ class ToastPageNav extends React.Component {
   }
 }
 
-export default ToastPageNav;
+const mapStateToProps = (state) => ({
+  activeTitle: getActiveTitle(state),
+  profileTitlesList: getProfileTitlesList(state),
+  factorsTitlesList: getFactorsTitlesList(state),
+});
+
+export default connect(mapStateToProps, { setActiveTitle })(ToastPageNav);

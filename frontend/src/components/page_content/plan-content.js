@@ -14,6 +14,14 @@ import Style from "style-it";
 
 import ToastSaveCancel from "../toast/toast-save-cancel";
 
+import { connect } from "react-redux";
+
+import { getCurrentStep } from "../../redux/selectors";
+
+import { incrementStep } from "../../redux/actions";
+import { decrementStep } from "../../redux/actions";
+import { resetStep } from "../../redux/actions";
+
 var income = 87000;
 var incomespouse = 70000;
 var age = 40;
@@ -21,37 +29,27 @@ var age = 40;
 class PlanContent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentStep: 1,
-    };
+    this.props.resetStep();
   }
 
   next = () => {
-    let currentStep = this.state.currentStep;
-    currentStep = currentStep >= 4 ? 5 : currentStep + 1;
-    this.setState({
-      currentStep: currentStep,
-    });
+    this.props.incrementStep();
   };
 
   prev = () => {
-    let currentStep = this.state.currentStep;
-    currentStep = currentStep <= 1 ? 1 : currentStep - 1;
-    this.setState({
-      currentStep: currentStep,
-    });
+    this.props.decrementStep();
   };
 
   hidePrevButton = () => {
-    return this.state.currentStep === 1;
+    return this.props.currentStep === 1;
   };
 
   hideNextButton = () => {
-    return this.state.currentStep === 5;
+    return this.props.currentStep === 5;
   };
 
   render() {
-    const { useCanvas } = this.state;
+    const { useCanvas } = this.props.currentStep;
     const BarSeries = useCanvas ? VerticalBarSeriesCanvas : VerticalBarSeries;
 
     function EmergencySavings(props) {
@@ -359,11 +357,11 @@ class PlanContent extends React.Component {
       `${styles}`,
       <div className="container">
         <form>
-          <EmergencySavings currentStep={this.state.currentStep} />
-          <Retirement currentStep={this.state.currentStep} />
-          <Debt currentStep={this.state.currentStep} />
-          <Budget currentStep={this.state.currentStep} />
-          <LifeInsurance currentStep={this.state.currentStep} />
+          <EmergencySavings currentStep={this.props.currentStep} />
+          <Retirement currentStep={this.props.currentStep} />
+          <Debt currentStep={this.props.currentStep} />
+          <Budget currentStep={this.props.currentStep} />
+          <LifeInsurance currentStep={this.props.currentStep} />
         </form>
         <div className="save-cancel">
           <ToastSaveCancel
@@ -380,4 +378,12 @@ class PlanContent extends React.Component {
   }
 }
 
-export default PlanContent;
+const mapStateToProps = (state) => ({
+  currentStep: getCurrentStep(state),
+});
+
+export default connect(mapStateToProps, {
+  incrementStep,
+  decrementStep,
+  resetStep,
+})(PlanContent);
