@@ -4,6 +4,24 @@ import Style from "style-it";
 import ClientNav from "./client-nav";
 
 class MainHeader extends React.Component {
+  getLeftSide() {
+    switch (this.props.leftside) {
+      case "header":
+        return <h2>{this.props.header}</h2>;
+      default:
+        return <React.Fragment></React.Fragment>;
+    }
+  }
+
+  getRightSide() {
+    switch (this.props.rightside) {
+      case "nav":
+        return <ClientNav></ClientNav>;
+      default:
+        return <React.Fragment></React.Fragment>;
+    }
+  }
+
   render() {
     const styles = `
     .wrapper {
@@ -14,29 +32,11 @@ class MainHeader extends React.Component {
     }
     `;
 
-    function getLeftSide(props) {
-      switch (props.leftside) {
-        case "header":
-          return <h2>{props.header}</h2>;
-        default:
-          return <React.Fragment></React.Fragment>;
-      }
-    }
-
-    function getRightSide(props) {
-      switch (props.rightside) {
-        case "nav":
-          return <ClientNav></ClientNav>;
-        default:
-          return <React.Fragment></React.Fragment>;
-      }
-    }
-
     return Style.it(
       `${styles}`,
       <div className="wrapper">
-        {getLeftSide(this.props)}
-        {getRightSide(this.props)}
+        {this.getLeftSide()}
+        {this.getRightSide()}
       </div>
     );
   }

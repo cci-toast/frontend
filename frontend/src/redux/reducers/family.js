@@ -4,15 +4,15 @@ const initialState = {
       id: 0,
       firstName: "",
       lastName: "",
-      birthYear: "",
-      salary: 0.0,
+      birthYear: 0,
+      salary: 70000,
     },
   ],
   children: [
     {
       id: 0,
       firstName: "",
-      birthYear: "",
+      birthYear: 0,
       education: "",
     },
   ],

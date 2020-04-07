@@ -4,6 +4,51 @@ import Style from "style-it";
 import ToastIcon from "./toast-icon";
 
 class ToastButton extends React.Component {
+  getIcon() {
+    if (this.props.iconName) {
+      return (
+        <div className="icon">
+          <ToastIcon
+            name={this.props.iconName}
+            width={this.props.iconWidth}
+            height={this.props.iconHeight}
+            stroke={this.props.iconStroke}
+            strokeWidth={this.props.iconStrokeWidth}
+            fill={this.props.iconFill}
+          ></ToastIcon>
+        </div>
+      );
+    }
+  }
+
+  getClasses() {
+    let classes = ["button"];
+
+    if (this.props.primary) {
+      classes.push("primary");
+    } else if (this.props.secondary) {
+      classes.push("secondary");
+    } else if (this.props.tertiary) {
+      classes.push("tertiary");
+    } else if (this.props.quaternary) {
+      classes.push("quaternary");
+    }
+
+    if (this.props.round) {
+      classes.push("round");
+    }
+
+    if (this.props.hidden) {
+      classes.push("hidden");
+    }
+
+    if (this.props.iconName) {
+      classes.push("icon-button");
+    }
+
+    return classes.join(" ");
+  }
+
   render() {
     const styles = `
     .button {
@@ -76,62 +121,17 @@ class ToastButton extends React.Component {
     }
     `;
 
-    function getIcon(props) {
-      if (props.iconName) {
-        return (
-          <div className="icon">
-            <ToastIcon
-              name={props.iconName}
-              width={props.iconWidth}
-              height={props.iconHeight}
-              stroke={props.iconStroke}
-              strokeWidth={props.iconStrokeWidth}
-              fill={props.iconFill}
-            ></ToastIcon>
-          </div>
-        );
-      }
-    }
-
-    function getButton(props) {
-      let classes = ["button"];
-
-      if (props.primary) {
-        classes.push("primary");
-      } else if (props.secondary) {
-        classes.push("secondary");
-      } else if (props.tertiary) {
-        classes.push("tertiary");
-      } else if (props.quaternary) {
-        classes.push("quaternary");
-      }
-
-      if (props.round) {
-        classes.push("round");
-      }
-
-      if (props.hidden) {
-        classes.push("hidden");
-      }
-
-      if (props.iconName) {
-        classes.push("icon-button");
-      }
-
-      return Style.it(
-        `${styles}`,
-        <button
-          className={classes.join(" ")}
-          type="Button"
-          onClick={props.handleClick}
-        >
-          {getIcon(props)}
-          {props.label}
-        </button>
-      );
-    }
-
-    return getButton(this.props);
+    return Style.it(
+      `${styles}`,
+      <button
+        className={this.getClasses()}
+        type="Button"
+        onClick={this.props.handleClick}
+      >
+        {this.getIcon()}
+        {this.props.label}
+      </button>
+    );
   }
 }
 

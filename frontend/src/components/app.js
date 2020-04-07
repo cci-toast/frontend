@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActionItems from "./pages/action-items";
 import AdvisorContact from "./pages/advisor-contact";
 import Clients from "./pages/clients";
-import Configurations from "./pages/configurations";
+import Configuration from "./pages/configuration";
 import Login from "./pages/login";
 import Plan from "./pages/plan";
 import Profile from "./pages/profile";
@@ -25,7 +25,7 @@ class App extends React.Component {
         </Switch>
 
         <Switch>
-          <Route exact path="/configurations" component={Configurations} />
+          <Route exact path="/configuration" component={Configuration} />
           <Route exact path="/clients" component={Clients} />
           <Route />
         </Switch>

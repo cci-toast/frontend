@@ -2,7 +2,7 @@ const initialState = {
   firstName: "",
   middleName: "",
   lastName: "",
-  birthYear: "",
+  birthYear: 1980,
   city: "",
   state: "",
 };

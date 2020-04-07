@@ -89,6 +89,16 @@ class ToastPageNav extends React.Component {
     return <div className={classes.join(" ")} style={height}></div>;
   }
 
+  getClasses() {
+    let classes = ["wrapper"];
+
+    if (this.props.hidden) {
+      classes.push("hidden");
+    }
+
+    return classes.join(" ");
+  }
+
   render() {
     const styles = `
     h3 {
@@ -124,19 +134,9 @@ class ToastPageNav extends React.Component {
     }
     `;
 
-    function getClasses(props) {
-      let classes = ["wrapper"];
-
-      if (props.hidden) {
-        classes.push("hidden");
-      }
-
-      return classes.join(" ");
-    }
-
     return Style.it(
       `${styles}`,
-      <div className={getClasses(this.props)}>
+      <div className={this.getClasses()}>
         {this.getBar()}
         {this.getTitles()}
       </div>

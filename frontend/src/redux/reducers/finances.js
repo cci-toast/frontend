@@ -1,6 +1,6 @@
 const initialState = {
-  salaryNoTax: 0.0,
-  salaryTax: 0.0,
+  salaryBeforeTax: 0.0,
+  salaryAfterTax: 87000,
   shopping: [
     {
       id: 0,
