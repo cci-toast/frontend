@@ -16,23 +16,26 @@ class ActionItemsContent extends React.Component {
   constructor(props) {
     super(props);
     this.props.resetStep();
+
+    this.next = this.next.bind(this);
+    this.prev = this.prev.bind(this);
   }
 
-  next = () => {
+  next() {
     this.props.incrementStep();
-  };
+  }
 
-  prev = () => {
+  prev() {
     this.props.decrementStep();
-  };
+  }
 
-  hidePrevButton = () => {
+  hidePrevButton() {
     return this.props.currentStep === 1;
-  };
+  }
 
-  hideNextButton = () => {
+  hideNextButton() {
     return this.props.currentStep === 5;
-  };
+  }
 
   render() {
     const styles = `
@@ -66,7 +69,7 @@ class ActionItemsContent extends React.Component {
             cancelLabel="previous"
             hideSave={this.hideNextButton()}
             hideCancel={this.hidePrevButton()}
-          ></ToastSaveCancel>
+          />
         </div>
       </div>
     );

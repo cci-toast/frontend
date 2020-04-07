@@ -2,6 +2,16 @@ import React from "react";
 import Style from "style-it";
 
 class ToastCheckbox extends React.Component {
+  getLabelClasses() {
+    let classes = ["label"];
+
+    if (this.props.hideLabel) {
+      classes.push("hidden");
+    }
+
+    return classes.join(" ");
+  }
+
   render() {
     const styles = `
     .input-group {
@@ -40,21 +50,11 @@ class ToastCheckbox extends React.Component {
     }
     `;
 
-    function getLabelClasses(props) {
-      let classes = ["label"];
-
-      if (props.hideLabel) {
-        classes.push("hidden");
-      }
-
-      return classes.join(" ");
-    }
-
     return Style.it(
       `${styles}`,
       <div className="input-group">
         <input type="checkbox" />
-        <label className={getLabelClasses(this.props)}>{this.props.text}</label>
+        <label className={this.getLabelClasses()}>{this.props.text}</label>
       </div>
     );
   }

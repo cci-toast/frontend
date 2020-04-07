@@ -4,6 +4,32 @@ import Style from "style-it";
 import ToastIcon from "./toast-icon";
 
 class ToastInput extends React.Component {
+  getIcon() {
+    if (this.props.iconName) {
+      return (
+        <div className="input-group-prepend">
+          <ToastIcon
+            name={this.props.iconName}
+            width={this.props.iconWidth}
+            height={this.props.iconHeight}
+            stroke={this.props.iconStroke}
+            strokeWidth={this.props.iconStrokeWidth}
+            fill={this.props.iconFill}
+          />
+        </div>
+      );
+    }
+  }
+
+  getClasses() {
+    let classes = [];
+
+    if (this.props.required) {
+      classes.push("required");
+    }
+    return classes.join(" ");
+  }
+
   render() {
     const styles = `
     input {
@@ -55,52 +81,28 @@ class ToastInput extends React.Component {
       }
     `;
 
-    function getIcon(props) {
-      if (props.iconName) {
-        return (
-          <div className="input-group-prepend">
-            <ToastIcon
-              name={props.iconName}
-              width={props.iconWidth}
-              height={props.iconHeight}
-              stroke={props.iconStroke}
-              strokeWidth={props.iconStrokeWidth}
-              fill={props.iconFill}
-            ></ToastIcon>
-          </div>
-        );
-      }
-    }
+    return Style.it(
+      `${styles}`,
+      <div className={this.getClasses()}>
+        <label className="input-label">{this.props.label}</label>
 
-    function getInputGroup(props) {
-      let classes = [];
-
-      if (props.required) {
-        classes.push("required");
-      }
-      return (
-        <div className={classes.join(" ")}>
-          <label className="input-label">{props.label}</label>
-
-          <div className="input-group">
-            {getIcon(props)}
-            <input
-              type={props.type}
-              name={props.name}
-              placeholder={props.placeholder}
-              defaultValue={props.defaultValue || ""}
-              min={props.min}
-              list={props.list}
-              max={props.max}
-              onChange={props.onChange}
-              required={props.required}
-              step={props.step}
-            />
-          </div>
+        <div className="input-group">
+          {this.getIcon()}
+          <input
+            type={this.props.type}
+            name={this.props.name}
+            placeholder={this.props.placeholder}
+            defaultValue={this.props.defaultValue || ""}
+            min={this.props.min}
+            list={this.props.list}
+            max={this.props.max}
+            onChange={this.props.onChange}
+            required={this.props.required}
+            step={this.props.step}
+          />
         </div>
-      );
-    }
-    return Style.it(`${styles}`, getInputGroup(this.props));
+      </div>
+    );
   }
 }
 

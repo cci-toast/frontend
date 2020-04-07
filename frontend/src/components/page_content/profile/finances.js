@@ -8,8 +8,8 @@ import ToastButton from "../../toast/toast-button";
 import { connect } from "react-redux";
 
 import {
-  getSalaryNoTax,
-  getSalaryTax,
+  getSalaryAfterTax,
+  getSalaryBeforeTax,
   getShopping,
 } from "../../../redux/selectors";
 
@@ -65,7 +65,7 @@ class Finances extends React.Component {
                 min={0.0}
                 label="Annual Salary Before Taxes"
                 placeholder="50,000"
-                defaultValue={this.props.salaryNoTax}
+                defaultValue={this.props.salaryBeforeTax}
                 name="salaryNoTax"
                 iconName="dollarsign"
                 iconWidth={20}
@@ -81,7 +81,7 @@ class Finances extends React.Component {
                 min={0.0}
                 label="Annual Salary After Taxes"
                 placeholder="50,000"
-                defaultValue={this.props.salaryTax}
+                defaultValue={this.props.salaryAfterTax}
                 name="salaryTax"
                 iconName="dollarsign"
                 iconWidth={20}
@@ -180,8 +180,8 @@ class Finances extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  salaryNoTax: getSalaryNoTax(state),
-  salaryTax: getSalaryTax(state),
+  salaryBeforeTax: getSalaryBeforeTax(state),
+  salaryAfterTax: getSalaryAfterTax(state),
   shopping: getShopping(state),
 });
 

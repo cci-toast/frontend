@@ -142,7 +142,7 @@ class ProfileContent extends React.Component {
             cancelLabel="previous"
             hideSave={this.hideNextButton()}
             hideCancel={this.hidePrevButton()}
-          ></ToastSaveCancel>
+          />
         </div>
       </div>
     );

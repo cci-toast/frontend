@@ -13,6 +13,59 @@ import ToastCard from "./toast/toast-card";
 import ToastPageNav from "./toast/toast-page-nav";
 
 class PageTemplate extends React.Component {
+  getScreenContent() {
+    switch (this.props.page) {
+      case "profile":
+        return <ProfileContent />;
+      case "plan":
+        return <PlanContent />;
+      case "actionitems":
+        return <ActionItemsContent />;
+      case "advisorcontact":
+        return <AdvisorContactContent />;
+      case "clients":
+        return <ClientsContent />;
+      case "configs":
+        return <ConfigurationContent />;
+      default:
+        return <React.Fragment />;
+    }
+  }
+
+  getLeftNav() {
+    switch (this.props.page) {
+      case "profile":
+        return <ToastPageNav profile />;
+      case "clients":
+        return <ToastPageNav hidden />;
+      case "advisorcontact":
+        return <ToastPageNav hidden />;
+      default:
+        return <ToastPageNav />;
+    }
+  }
+
+  getMainHeader() {
+    switch (this.props.page) {
+      case "profile":
+        return (
+          <MainHeader header="Your Profile" leftside="header" rightside="nav" />
+        );
+      case "plan":
+        return <MainHeader header="Your Plan" leftside="header" />;
+      case "actionitems":
+        return <MainHeader header="Your Action Items" leftside="header" />;
+      case "advisorcontact":
+        return <MainHeader header="Your Advisor" leftside="header" />;
+      case "clients":
+        return <MainHeader header="Your Clients" leftside="header" />;
+      case "configs":
+        return <MainHeader header="Configure Factors" leftside="header" />;
+      default:
+        return <MainHeader />;
+    }
+  }
+
   render() {
     const styles = `
     .nav-content-container {
@@ -33,98 +86,16 @@ class PageTemplate extends React.Component {
     }
       `;
 
-    function getScreenContent(props) {
-      switch (props.page) {
-        case "profile":
-          return <ProfileContent></ProfileContent>;
-        case "plan":
-          return <PlanContent></PlanContent>;
-        case "actionitems":
-          return <ActionItemsContent></ActionItemsContent>;
-        case "advisorcontact":
-          return <AdvisorContactContent></AdvisorContactContent>;
-        case "clients":
-          return <ClientsContent></ClientsContent>;
-        case "configs":
-          return <ConfigurationContent></ConfigurationContent>;
-        default:
-          return <React.Fragment></React.Fragment>;
-      }
-    }
-
-    function getMainNav(props) {
-      switch (props.user) {
-        case "advisor":
-          return <MainNav advisor></MainNav>;
-        case "client":
-          return <MainNav client></MainNav>;
-        default:
-          return <React.Fragment></React.Fragment>;
-      }
-    }
-
-    function getLeftNav(props) {
-      switch (props.page) {
-        case "profile":
-          return <ToastPageNav profile></ToastPageNav>;
-        case "clients":
-          return <ToastPageNav hidden></ToastPageNav>;
-        case "advisorcontact":
-          return <ToastPageNav hidden></ToastPageNav>;
-        default:
-          return <ToastPageNav></ToastPageNav>;
-      }
-    }
-
-    function getMainHeader(props) {
-      switch (props.page) {
-        case "profile":
-          return (
-            <MainHeader
-              header="Your Profile"
-              leftside="header"
-              rightside="nav"
-            ></MainHeader>
-          );
-        case "plan":
-          return <MainHeader header="Your Plan" leftside="header"></MainHeader>;
-        case "actionitems":
-          return (
-            <MainHeader
-              header="Your Action Items"
-              leftside="header"
-            ></MainHeader>
-          );
-        case "advisorcontact":
-          return (
-            <MainHeader header="Your Advisor" leftside="header"></MainHeader>
-          );
-        case "clients":
-          return (
-            <MainHeader header="Your Clients" leftside="header"></MainHeader>
-          );
-        case "configs":
-          return (
-            <MainHeader
-              header="Configure Factors"
-              leftside="header"
-            ></MainHeader>
-          );
-        default:
-          return <MainHeader></MainHeader>;
-      }
-    }
-
     return Style.it(
       `${styles}`,
       <div>
         <div className="nav-content-container">
-          {getMainNav(this.props)}
+          <MainNav user={this.props.user} />
           <div className="right-content">
-            {getMainHeader(this.props)}
+            {this.getMainHeader()}
             <div className="leftnav-card">
-              {getLeftNav(this.props)}
-              <ToastCard>{getScreenContent(this.props)}</ToastCard>
+              {this.getLeftNav()}
+              <ToastCard>{this.getScreenContent()}</ToastCard>
             </div>
           </div>
         </div>

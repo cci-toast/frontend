@@ -6,6 +6,44 @@ import ToastLogo from "../toast-logo.png";
 import ToastIcon from "./toast/toast-icon";
 
 class MainNav extends React.Component {
+  getLink(link, linkName, iconName) {
+    return (
+      <Link to={`/${link}`} className="icon-caption">
+        <ToastIcon
+          name={iconName}
+          width={35}
+          height={45}
+          stroke="var(--toast-white)"
+          strokeWidth={1}
+        />
+        <span className="caption">{linkName}</span>
+      </Link>
+    );
+  }
+
+  getLinks() {
+    switch (this.props.user) {
+      case "advisor":
+        return (
+          <React.Fragment>
+            {this.getLink("clients", "Clients", "users")}
+            {this.getLink("configuration", "Configuration", "sliders")}
+          </React.Fragment>
+        );
+      case "client":
+        return (
+          <React.Fragment>
+            {this.getLink("profile", "Profile", "user")}
+            {this.getLink("plan", "Plan", "barchart")}
+            {this.getLink("actionitems", "Action Items", "checkcircle")}
+            {this.getLink("advisorcontact", "Advisor", "addresscard")}
+          </React.Fragment>
+        );
+      default:
+        return <React.Fragment />;
+    }
+  }
+
   render() {
     const styles = `
     .nav {
@@ -57,85 +95,19 @@ class MainNav extends React.Component {
     }
 `;
 
-    function getIcon(name) {
-      return (
-        <ToastIcon
-          name={name}
-          width={35}
-          height={45}
-          stroke="var(--toast-white)"
-          strokeWidth={1}
-        ></ToastIcon>
-      );
-    }
-
-    function getMainNav(props) {
-      if (props.advisor) {
-        return (
-          <React.Fragment>
-            <div className="main-links">
-              <Link to="/">
-                <img src={ToastLogo} rel="icon" alt="" className="logo" />
-              </Link>
-
-              <Link to="/clients" className="icon-caption">
-                {getIcon("users")}
-                <span className="caption">Clients</span>
-              </Link>
-
-              <Link to="/configurations" className="icon-caption">
-                {getIcon("sliders")}
-                <span className="caption">Configuration</span>
-              </Link>
-            </div>
-
-            <Link to="/" className="icon-caption">
-              {getIcon("power")}
-              <span className="caption">Log Out</span>
-            </Link>
-          </React.Fragment>
-        );
-      } else {
-        return (
-          <React.Fragment>
-            <div className="main-links">
-              <Link to="/">
-                <img src={ToastLogo} rel="icon" alt="" className="logo" />
-              </Link>
-
-              <Link to="/profile" className="icon-caption">
-                {getIcon("user")}
-                <span className="caption">Profile</span>
-              </Link>
-
-              <Link to="/plan" className="icon-caption">
-                {getIcon("barchart")}
-                <span className="caption">Plan</span>
-              </Link>
-
-              <Link to="/actionitems" className="icon-caption">
-                {getIcon("checkcircle")}
-                <span className="caption">Action Items</span>
-              </Link>
-
-              <Link to="/advisorcontact" className="icon-caption">
-                {getIcon("addresscard")}
-                <span className="caption">Advisor</span>
-              </Link>
-            </div>
-
-            <Link to="/" className="icon-caption">
-              {getIcon("power")}
-              <span className="caption">Log Out</span>
-            </Link>
-          </React.Fragment>
-        );
-      }
-    }
-
     return Style.it(
       `${styles}`,
-      <div className="nav">{getMainNav(this.props)}</div>
+      <div className="nav">
+        <div className="main-links">
+          <Link to="/">
+            <img src={ToastLogo} rel="icon" alt="" className="logo" />
+          </Link>
+
+          {this.getLinks()}
+        </div>
+
+        {this.getLink("", "Log Out", "power")}
+      </div>
     );
   }
 }
