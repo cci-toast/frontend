@@ -1,16 +1,12 @@
 import React from "react";
 import Style from "style-it";
 
-import ToastSaveCancel from "../toast/toast-save-cancel";
-
 import Profile from "./profile/profile";
 import Finances from "./profile/finances";
 import Family from "./profile/family";
 import Goals from "./profile/goals.js";
 
 import { connect } from "react-redux";
-import { getCurrentStep } from "../../redux/selectors";
-import { incrementStep, decrementStep, resetStep } from "../../redux/actions";
 
 const goalOptions = [
   { id: 0, value: "I want to save money to pay off my credit card" },
@@ -76,85 +72,26 @@ const stateOptions = [
 ];
 
 class ProfileContent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props.resetStep();
-
-    this.next = this.next.bind(this);
-    this.prev = this.prev.bind(this);
-  }
-
-  next() {
-    this.props.incrementStep();
-  }
-
-  prev() {
-    this.props.decrementStep();
-  }
-
-  hidePrevButton() {
-    return this.props.currentStep === 0;
-  }
-
-  hideNextButton() {
-    return this.props.currentStep === 3;
-  }
-
   onSubmit() {
     // submit form
   }
 
   render() {
-    const styles = `
-    .save-cancel {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .container {
-      height: calc(90vh - 5rem);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    `;
+    const styles = ``;
 
     return Style.it(
       `${styles}`,
-      <div className="container">
-        <form onSubmit={this.onSubmit}>
-          <Profile
-            currentStep={this.props.currentStep}
-            stateOptions={stateOptions}
-          />
-          <Finances currentStep={this.props.currentStep} />
-          <Family currentStep={this.props.currentStep} />
-          <Goals
-            currentStep={this.props.currentStep}
-            goalOptions={goalOptions}
-          />
-        </form>
-        <div className="save-cancel">
-          <ToastSaveCancel
-            saveClicked={this.next}
-            cancelClicked={this.prev}
-            saveLabel="next"
-            cancelLabel="previous"
-            hideSave={this.hideNextButton()}
-            hideCancel={this.hidePrevButton()}
-          />
-        </div>
-      </div>
+      <form onSubmit={this.onSubmit}>
+        <Profile
+          currentStep={this.props.currentStep}
+          stateOptions={stateOptions}
+        />
+        <Finances currentStep={this.props.currentStep} />
+        <Family currentStep={this.props.currentStep} />
+        <Goals currentStep={this.props.currentStep} goalOptions={goalOptions} />
+      </form>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentStep: getCurrentStep(state),
-});
-
-export default connect(mapStateToProps, {
-  incrementStep,
-  decrementStep,
-  resetStep,
-})(ProfileContent);
+export default connect(null)(ProfileContent);
