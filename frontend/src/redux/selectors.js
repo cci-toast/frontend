@@ -26,6 +26,8 @@ export const getPassword = (state) => state.loginReducer.password;
 
 // page content
 export const getCurrentStep = (state) => state.pageContentReducer.currentStep;
+export const getHideSave = (state) => state.pageContentReducer.hideSave;
+export const getHideCancel = (state) => state.pageContentReducer.hideCancel;
 
 // PROFILE
 

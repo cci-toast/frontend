@@ -1,5 +1,7 @@
 const initialState = {
   currentStep: 0,
+  hideSave: false,
+  hideCancel: true,
 };
 
 export default function (state = initialState, action) {
@@ -27,6 +29,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentStep: step,
+      };
+    }
+    case "setHideSaveCancel": {
+      const { save, cancel } = action.payload;
+      return {
+        ...state,
+        hideSave: save,
+        hideCancel: cancel,
       };
     }
     default:

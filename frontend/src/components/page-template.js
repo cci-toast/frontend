@@ -3,32 +3,21 @@ import Style from "style-it";
 
 import MainHeader from "./main-header";
 import MainNav from "./main-nav";
-import ActionItemsContent from "./page_content/action-items-content";
 import AdvisorContactContent from "./page_content/advisor-contact-content";
 import ClientsContent from "./page_content/clients-content";
-import ConfigurationContent from "./page_content/configuration-content";
-import PlanContent from "./page_content/plan-content";
-import ProfileContent from "./page_content/profile-content";
 import ToastCard from "./toast/toast-card";
 import ToastPageNav from "./toast/toast-page-nav";
+import PageContentTemplate from "./page_content/page-content-template";
 
 class PageTemplate extends React.Component {
   getScreenContent() {
     switch (this.props.page) {
-      case "profile":
-        return <ProfileContent />;
-      case "plan":
-        return <PlanContent />;
-      case "actionitems":
-        return <ActionItemsContent />;
       case "advisorcontact":
-        return <AdvisorContactContent />;
+        return <AdvisorContactContent {...this.props} />;
       case "clients":
-        return <ClientsContent />;
-      case "configs":
-        return <ConfigurationContent />;
+        return <ClientsContent {...this.props} />;
       default:
-        return <React.Fragment />;
+        return <PageContentTemplate {...this.props} />;
     }
   }
 
