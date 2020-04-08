@@ -1,9 +1,3 @@
-// toast page nav
-export const setActiveTitle = (title) => ({
-  type: "setActiveTitle",
-  payload: { title },
-});
-
 // login
 export const setEmail = (email) => ({
   type: "setEmail",
@@ -26,6 +20,11 @@ export const decrementStep = () => ({
 
 export const resetStep = () => ({
   type: "resetStep",
+});
+
+export const setStep = (step) => ({
+  type: "setStep",
+  payload: { step },
 });
 
 // profile

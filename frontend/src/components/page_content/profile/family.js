@@ -31,7 +31,7 @@ class Family extends React.Component {
   getClasses() {
     let classes = [""];
 
-    if (this.props.currentStep !== 3) {
+    if (this.props.currentStep !== 2) {
       classes.push("hidden");
     }
 

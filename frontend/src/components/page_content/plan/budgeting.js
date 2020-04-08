@@ -35,7 +35,7 @@ class Budgeting extends React.Component {
   getClasses() {
     let classes = [""];
 
-    if (this.props.currentStep !== 5) {
+    if (this.props.currentStep !== 4) {
       classes.push("hidden");
     }
 
