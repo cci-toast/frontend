@@ -93,11 +93,11 @@ class ProfileContent extends React.Component {
   }
 
   hidePrevButton() {
-    return this.props.currentStep === 1;
+    return this.props.currentStep === 0;
   }
 
   hideNextButton() {
-    return this.props.currentStep === 4;
+    return this.props.currentStep === 3;
   }
 
   onSubmit() {

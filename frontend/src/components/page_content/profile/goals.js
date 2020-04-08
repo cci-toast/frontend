@@ -26,7 +26,7 @@ class Goals extends React.Component {
   getClasses() {
     let classes = [""];
 
-    if (this.props.currentStep !== 4) {
+    if (this.props.currentStep !== 3) {
       classes.push("hidden");
     }
 

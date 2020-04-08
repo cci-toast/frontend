@@ -25,7 +25,7 @@ class Finances extends React.Component {
   getClasses() {
     let classes = [""];
 
-    if (this.props.currentStep !== 2) {
+    if (this.props.currentStep !== 1) {
       classes.push("hidden");
     }
 

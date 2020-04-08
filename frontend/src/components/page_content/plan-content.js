@@ -12,9 +12,7 @@ import { connect } from "react-redux";
 
 import { getCurrentStep } from "../../redux/selectors";
 
-import { incrementStep } from "../../redux/actions";
-import { decrementStep } from "../../redux/actions";
-import { resetStep } from "../../redux/actions";
+import { incrementStep, decrementStep, resetStep } from "../../redux/actions";
 
 import {
   getSalaryAfterTax,
@@ -40,11 +38,11 @@ class PlanContent extends React.Component {
   }
 
   hidePrevButton() {
-    return this.props.currentStep === 1;
+    return this.props.currentStep === 0;
   }
 
   hideNextButton() {
-    return this.props.currentStep === 5;
+    return this.props.currentStep === 4;
   }
 
   render() {

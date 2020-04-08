@@ -31,7 +31,7 @@ class Profile extends React.Component {
   getClasses() {
     let classes = [""];
 
-    if (this.props.currentStep !== 1) {
+    if (this.props.currentStep !== 0) {
       classes.push("hidden");
     }
 
