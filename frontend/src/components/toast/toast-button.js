@@ -57,6 +57,10 @@ class ToastButton extends React.Component {
       justify-content: center;
     }
 
+    .button:focus{
+      outline:none;
+      box-shadow: 0rem 0rem 1rem 0.3rem var(--toast-blue-2);
+    }
     .primary {
       background: var(--toast-gradient-1);
       float: right;

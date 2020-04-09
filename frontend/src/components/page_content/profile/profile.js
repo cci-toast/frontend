@@ -15,6 +15,8 @@ import {
   getState,
 } from "../../../redux/selectors";
 
+import { stateOptions, birthYearOptions } from "../../../utils/select-utils";
+
 import { setProfileValue } from "../../../redux/actions";
 
 class Profile extends React.Component {
@@ -83,17 +85,15 @@ class Profile extends React.Component {
               name="middleName"
               onChange={this.handleChange}
             />
-
-            <ToastInput
-              type="number"
-              label="Birth Year"
-              defaultValue={this.props.birthYear}
-              placeholder="Type in your birth year"
+            <ToastSelect
+              options={birthYearOptions}
               name="birthYear"
+              label="Birth Year"
+              list="birthYear"
+              placeholder="Type in your birth year"
+              defaultValue={this.props.birthYearOptions}
+              id="birthYear"
               onChange={this.handleChange}
-              min={1}
-              max={9999}
-              required
             />
           </div>
         </div>
@@ -112,7 +112,7 @@ class Profile extends React.Component {
           </div>
           <div className="column">
             <ToastSelect
-              options={this.props.stateOptions}
+              options={stateOptions}
               name="state"
               label="State"
               list="state"

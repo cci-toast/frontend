@@ -45,12 +45,22 @@ class ToastInput extends React.Component {
       color: var(--toast-neutral-1);
     }
 
+    input:focus{
+      outline: none;
+      box-shadow: 0rem 0rem 1rem 0.3rem var(--toast-blue-2);
+    }
+
     input[type="date"] {
       font-family: Inter;
       font-style: italic;
       font-size: 1rem;
       color: var(--toast-neutral-3);
     }
+
+    input::-webkit-calendar-picker-indicator {
+      opacity: 100;
+      color: var(--toast-neutral-3);
+   }
 
     .input-label {
       margin-bottom: 0.5rem;

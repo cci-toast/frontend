@@ -43,8 +43,6 @@ export const getAge = (state) =>
   new Date().getFullYear() - state.profileReducer.birthYear;
 
 // finances
-export const getSalaryBeforeTax = (state) =>
-  state.financesReducer.salaryBeforeTax;
 export const getSalaryAfterTax = (state) =>
   state.financesReducer.salaryAfterTax;
 export const getMonthlySalaryAfterTax = (state) =>
