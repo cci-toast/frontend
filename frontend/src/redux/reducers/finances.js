@@ -1,6 +1,6 @@
 const initialState = {
   salaryAfterTax: 87000,
-  shoppingAmount: 0.0,
+  shopping: 0.0,
 };
 
 export default function (state = initialState, action) {
@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
         [valueName]: value,
       };
     }
-    case "setShoppingValue": {
+    case "setShopping": {
       const { value } = action.payload;
       return {
         ...state,
