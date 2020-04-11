@@ -15,7 +15,8 @@
     --toast-neutral-5: rgb(233, 233, 233);
     --toast-neutral-4: rgb(205, 205, 205);
     --toast-neutral-3: rgb(172, 172, 172);
-    --toast-neutral-3-transparent: rgb(172, 172, 172, 0.2);
+    --toast-neutral-3-transparent: rgba(172, 172, 172, 0.2);
+    --toast-neutral-3-transparent-2: rgba(172, 172, 172, 0.6);
     --toast-neutral-2: rgb(148, 148, 148);
     --toast-neutral-1: rgb(117, 117, 117);
 }
