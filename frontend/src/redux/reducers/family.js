@@ -2,18 +2,18 @@ const initialState = {
   partners: [
     {
       id: 0,
-      firstName: "",
-      lastName: "",
-      birthYear: 0,
+      partnerFirstName: "",
+      partnerLastName: "",
+      partnerBirthYear: 0,
       salary: 70000,
     },
   ],
   children: [
     {
       id: 0,
-      firstName: "",
-      birthYear: 0,
-      education: "",
+      childFirstName: "",
+      childBirthYear: "2020",
+      childEducation: "",
     },
   ],
 };

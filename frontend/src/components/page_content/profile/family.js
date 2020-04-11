@@ -63,14 +63,14 @@ class Family extends React.Component {
             <ToastInput
               type="text"
               label="Partner's First Name"
-              name="firstName"
+              name="partnerFirstName"
               placeholder="Type in your partner's first name"
-              defaultValue={this.props.partners[0].firstName}
+              defaultValue={this.props.partners[0].partnerFirstName}
               onChange={this.setPartner}
             />
             <ToastSelect
               options={birthYearOptions}
-              name="partnerbirthYear"
+              name="partnerBirthYear"
               label="Partner's Birth Year"
               list="partnerbirthYear"
               placeholder="Type in your partner's birth year"
@@ -83,9 +83,9 @@ class Family extends React.Component {
             <ToastInput
               type="text"
               label="Partner's Last Name"
-              name="lastName"
+              name="partnerLastName"
               placeholder="Type in your partner's last name"
-              defaultValue={this.props.partners[0].lastName}
+              defaultValue={this.props.partners[0].partnerLastName}
               onChange={this.setPartner}
             />
             <ToastInput
@@ -112,8 +112,8 @@ class Family extends React.Component {
               type="text"
               label="Child's First Name"
               placeholder="Type in your child's first name"
-              value={this.props.children[0].firstName}
-              name="firstName"
+              value={this.props.children[0].childFirstName}
+              name="childFirstName"
               onChange={this.setChildListValue}
             />
 
@@ -123,7 +123,7 @@ class Family extends React.Component {
               label="Child's Education"
               list="childEducation"
               placeholder="Type in your child's education"
-              value={this.props.children[0].education}
+              value={this.props.children[0].childEducation}
               id="childEducation"
               onChange={this.setChildListValue}
             />
@@ -131,12 +131,12 @@ class Family extends React.Component {
           <div className="column">
             <ToastSelect
               options={birthYearOptions}
-              name="childbirthYear"
+              name="childBirthYear"
               label="Child's Birth Year"
-              list="childbirthYear"
+              list="childBirthYear"
               placeholder="Type in your child's birth year"
-              value={this.props.children[0].birthYear}
-              id="childbirthYear"
+              value={this.props.children[0].childBirthYear}
+              id="childBirthYear"
               onChange={this.setChildListValue}
             />
           </div>
