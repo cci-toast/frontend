@@ -13,8 +13,9 @@ import { getPartners, getChildren } from "../../../redux/selectors";
 import { setPartnerListValue, setChildListValue } from "../../../redux/actions";
 
 import {
-  birthYearOptions,
   childEducationOptions,
+  getBirthYearOptions,
+  defaultMaxOffsetYear,
 } from "../../../utils/select-utils";
 
 class Family extends React.Component {
@@ -69,13 +70,13 @@ class Family extends React.Component {
               onChange={this.setPartner}
             />
             <ToastSelect
-              options={birthYearOptions}
+              options={getBirthYearOptions(defaultMaxOffsetYear)}
               name="partnerBirthYear"
               label="Partner's Birth Year"
-              list="partnerbirthYear"
+              list="partnerBirthYear"
               placeholder="Type in your partner's birth year"
-              value={this.props.partners[0].birthYear}
-              id="partnerbirthYear"
+              value={this.props.partners[0].partnerBirthYear}
+              id="partnerBirthYear"
               onChange={this.setPartner}
             />
           </div>
@@ -130,7 +131,7 @@ class Family extends React.Component {
           </div>
           <div className="column">
             <ToastSelect
-              options={birthYearOptions}
+              options={getBirthYearOptions(defaultMaxOffsetYear)}
               name="childBirthYear"
               label="Child's Birth Year"
               list="childBirthYear"
