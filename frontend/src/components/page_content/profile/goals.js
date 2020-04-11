@@ -12,6 +12,8 @@ import { getGoals } from "../../../redux/selectors";
 
 import { setGoalListValue } from "../../../redux/actions";
 
+import { goalOptions } from "../../../utils/select-utils";
+
 class Goals extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +50,7 @@ class Goals extends React.Component {
       `${styles}`,
       <div className={this.getClasses()}>
         <ToastSelect
-          options={this.props.goalOptions}
+          options={goalOptions}
           name="description"
           label="Goal 1"
           list="goals"

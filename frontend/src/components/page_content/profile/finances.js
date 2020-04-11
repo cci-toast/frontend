@@ -7,19 +7,15 @@ import ToastButton from "../../toast/toast-button";
 
 import { connect } from "react-redux";
 
-import {
-  getSalaryAfterTax,
-  getSalaryBeforeTax,
-  getShopping,
-} from "../../../redux/selectors";
+import { getSalaryAfterTax, getShopping } from "../../../redux/selectors";
 
-import { setFinancesValue, setShoppingListValue } from "../../../redux/actions";
+import { setFinancesValue, setShopping } from "../../../redux/actions";
 
 class Finances extends React.Component {
   constructor(props) {
     super(props);
     this.setFinancesValue = this.setFinancesValue.bind(this);
-    this.setShoppingListValue = this.setShoppingListValue.bind(this);
+    this.setShopping = this.setShopping.bind(this);
   }
 
   getClasses() {
@@ -37,9 +33,9 @@ class Finances extends React.Component {
     this.props.setFinancesValue(name, value);
   }
 
-  setShoppingListValue(event) {
+  setShopping(event) {
     const { name, value } = event.target;
-    this.props.setShoppingListValue(0, name, value);
+    this.props.setShopping(name, value);
   }
 
   render() {
@@ -63,23 +59,7 @@ class Finances extends React.Component {
               <ToastInput
                 type="number"
                 min={0.0}
-                label="Annual Salary Before Taxes"
-                placeholder="50,000"
-                defaultValue={this.props.salaryBeforeTax}
-                name="salaryNoTax"
-                iconName="dollarsign"
-                iconWidth={20}
-                iconHeight={20}
-                onChange={this.setFinancesValue}
-                step={0.01}
-                required
-              />
-            </div>
-            <div className="column">
-              <ToastInput
-                type="number"
-                min={0.0}
-                label="Annual Salary After Taxes"
+                label="Personal Annual Net Income (Take Home Pay After Taxes)"
                 placeholder="50,000"
                 defaultValue={this.props.salaryAfterTax}
                 name="salaryTax"
@@ -103,19 +83,19 @@ class Finances extends React.Component {
           </Center>
           <hr />
           <Center>
-            <ToastButton tertiary label="Add Bill" />
+            <ToastButton tertiary label="Add Bills" />
           </Center>
           <hr />
           <Center>
-            <ToastButton tertiary label="Add Utility" />
+            <ToastButton tertiary label="Add Utilities" />
           </Center>
           <hr />
           <Center>
-            <ToastButton tertiary Button label="Add Insurance" />
+            <ToastButton tertiary Button label="Add Insurances" />
           </Center>
           <hr />
           <Center>
-            <ToastButton tertiary label="Add Loan / Debt" />
+            <ToastButton tertiary label="Add Loans / Debts" />
           </Center>
         </div>
 
@@ -125,28 +105,17 @@ class Finances extends React.Component {
           <div className="row">
             <div className="column">
               <ToastInput
-                type="text"
-                label="Shopping Description"
-                name="description"
-                placeholder="Type in your shopping description"
-                defaultValue={this.props.shopping[0].description}
-                onChange={this.setShoppingListValue}
-              />
-            </div>
-
-            <div className="column">
-              <ToastInput
                 type="number"
                 label="Shopping Amount"
-                name="amount"
+                name="shopping"
                 placeholder="Type in your amount spent on shopping items"
                 min={0.0}
                 step={0.01}
                 iconName="dollarsign"
                 iconWidth={20}
                 iconHeight={20}
-                defaultValue={this.props.shopping[0].amount}
-                onChange={this.setShoppingListValue}
+                defaultValue={this.props.shopping}
+                onChange={this.setShopping}
               />
             </div>
           </div>
@@ -171,7 +140,7 @@ class Finances extends React.Component {
 
           <hr />
           <Center>
-            <ToastButton tertiary label="Add Miscellaneous" />
+            <ToastButton tertiary label="Add Other" />
           </Center>
         </div>
       </div>
@@ -180,12 +149,11 @@ class Finances extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  salaryBeforeTax: getSalaryBeforeTax(state),
   salaryAfterTax: getSalaryAfterTax(state),
   shopping: getShopping(state),
 });
 
 export default connect(mapStateToProps, {
   setFinancesValue,
-  setShoppingListValue,
+  setShopping,
 })(Finances);

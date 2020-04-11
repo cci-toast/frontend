@@ -4,7 +4,7 @@ const initialState = {
       id: 0,
       firstName: "",
       lastName: "",
-      birthYear: 0,
+      birthYear: 2020,
       salary: 70000,
     },
   ],
@@ -12,7 +12,7 @@ const initialState = {
     {
       id: 0,
       firstName: "",
-      birthYear: 0,
+      birthYear: 2020,
       education: "",
     },
   ],

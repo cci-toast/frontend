@@ -52,6 +52,11 @@ class ToastInput extends React.Component {
       color: var(--toast-neutral-3);
     }
 
+    input::-webkit-calendar-picker-indicator {
+      opacity: 100;
+      color: var(--toast-neutral-3);
+   }
+
     .input-label {
       margin-bottom: 0.5rem;
     }
