@@ -45,11 +45,6 @@ class ToastInput extends React.Component {
       color: var(--toast-neutral-1);
     }
 
-    input:focus { 
-      outline: none;
-      box-shadow: 0rem 0rem 1rem 0.3rem var(--toast-blue-2);
-    }
-
     input[type="date"] {
       font-family: Inter;
       font-style: italic;

@@ -15,7 +15,6 @@ import { setPartnerListValue, setChildListValue } from "../../../redux/actions";
 import {
   childEducationOptions,
   getBirthYearOptions,
-  defaultMaxOffsetYear,
 } from "../../../utils/select-utils";
 
 class Family extends React.Component {
@@ -64,19 +63,19 @@ class Family extends React.Component {
             <ToastInput
               type="text"
               label="Partner's First Name"
-              name="partnerFirstName"
+              name="firstName"
               placeholder="Type in your partner's first name"
-              defaultValue={this.props.partners[0].partnerFirstName}
+              defaultValue={this.props.partners[0].firstName}
               onChange={this.setPartner}
             />
             <ToastSelect
-              options={getBirthYearOptions(defaultMaxOffsetYear)}
-              name="partnerBirthYear"
+              options={getBirthYearOptions()}
+              name="birthYear"
               label="Partner's Birth Year"
-              list="partnerBirthYear"
+              list="birthYear"
               placeholder="Type in your partner's birth year"
-              value={this.props.partners[0].partnerBirthYear}
-              id="partnerBirthYear"
+              value={this.props.partners[0].birthYear}
+              id="birthYear"
               onChange={this.setPartner}
             />
           </div>
@@ -84,9 +83,9 @@ class Family extends React.Component {
             <ToastInput
               type="text"
               label="Partner's Last Name"
-              name="partnerLastName"
+              name="lastName"
               placeholder="Type in your partner's last name"
-              defaultValue={this.props.partners[0].partnerLastName}
+              defaultValue={this.props.partners[0].lastName}
               onChange={this.setPartner}
             />
             <ToastInput
@@ -113,30 +112,30 @@ class Family extends React.Component {
               type="text"
               label="Child's First Name"
               placeholder="Type in your child's first name"
-              value={this.props.children[0].childFirstName}
-              name="childFirstName"
+              value={this.props.children[0].firstName}
+              name="firstName"
               onChange={this.setChildListValue}
             />
 
             <ToastSelect
               options={childEducationOptions}
-              name="childEducation"
+              name="education"
               label="Child's Education"
               list="childEducation"
               placeholder="Type in your child's education"
-              value={this.props.children[0].childEducation}
+              value={this.props.children[0].education}
               id="childEducation"
               onChange={this.setChildListValue}
             />
           </div>
           <div className="column">
             <ToastSelect
-              options={getBirthYearOptions(defaultMaxOffsetYear)}
-              name="childBirthYear"
+              options={getBirthYearOptions()}
+              name="birthYear"
               label="Child's Birth Year"
               list="childBirthYear"
               placeholder="Type in your child's birth year"
-              value={this.props.children[0].childBirthYear}
+              value={this.props.children[0].birthYear}
               id="childBirthYear"
               onChange={this.setChildListValue}
             />

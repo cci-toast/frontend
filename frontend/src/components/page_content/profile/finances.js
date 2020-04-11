@@ -9,13 +9,13 @@ import { connect } from "react-redux";
 
 import { getSalaryAfterTax, getShopping } from "../../../redux/selectors";
 
-import { setFinancesValue, setShoppingListValue } from "../../../redux/actions";
+import { setFinancesValue, setShoppingValue } from "../../../redux/actions";
 
 class Finances extends React.Component {
   constructor(props) {
     super(props);
     this.setFinancesValue = this.setFinancesValue.bind(this);
-    this.setShoppingListValue = this.setShoppingListValue.bind(this);
+    this.setShoppingValue = this.setShoppingValue.bind(this);
   }
 
   getClasses() {
@@ -33,9 +33,9 @@ class Finances extends React.Component {
     this.props.setFinancesValue(name, value);
   }
 
-  setShoppingListValue(event) {
+  setShoppingValue(event) {
     const { name, value } = event.target;
-    this.props.setShoppingListValue(0, name, value);
+    this.props.setShoppingValue(name, value);
   }
 
   render() {
@@ -114,8 +114,8 @@ class Finances extends React.Component {
                 iconName="dollarsign"
                 iconWidth={20}
                 iconHeight={20}
-                defaultValue={this.props.shopping[0].amount}
-                onChange={this.setShoppingListValue}
+                defaultValue={this.props.shopping}
+                onChange={this.setShoppingValue}
               />
             </div>
           </div>
@@ -155,5 +155,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   setFinancesValue,
-  setShoppingListValue,
+  setShoppingValue,
 })(Finances);

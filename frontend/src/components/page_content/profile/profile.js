@@ -15,11 +15,7 @@ import {
   getState,
 } from "../../../redux/selectors";
 
-import {
-  stateOptions,
-  getBirthYearOptions,
-  defaultMaxOffsetYear,
-} from "../../../utils/select-utils";
+import { stateOptions, getBirthYearOptions } from "../../../utils/select-utils";
 
 import { setProfileValue } from "../../../redux/actions";
 
@@ -90,7 +86,7 @@ class Profile extends React.Component {
               onChange={this.handleChange}
             />
             <ToastSelect
-              options={getBirthYearOptions(defaultMaxOffsetYear)}
+              options={getBirthYearOptions()}
               name="birthYear"
               label="Birth Year"
               list="birthYear"

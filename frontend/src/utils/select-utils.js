@@ -148,8 +148,10 @@ export const childEducationOptions = [
   { id: 2, value: "Other" },
 ];
 
-export const defaultMaxOffsetYear = 120;
 export const getBirthYearOptions = (maxOffset) => {
+  if (maxOffset == null) {
+    maxOffset = 120;
+  }
   let thisYear = new Date().getFullYear();
   let birthYearOptions = [];
   for (let x = 0; x <= maxOffset; x++) {

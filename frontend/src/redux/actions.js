@@ -54,9 +54,9 @@ export const setFinancesValue = (valueName, value) => ({
   payload: { valueName, value },
 });
 
-export const setShoppingListValue = (valueName, value) => ({
-  type: "setShoppingListValue",
-  payload: { valueName, value },
+export const setShoppingValue = (value) => ({
+  type: "setShoppingValue",
+  payload: { value },
 });
 
 // family
