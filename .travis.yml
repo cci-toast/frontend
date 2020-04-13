@@ -1,10 +1,11 @@
 language: node_js
-node_js: 
+node_js:
   - "stable"
-cache: 
+cache:
   directories:
-  - node_modules
-script: 
+    - node_modules
+script:
   - cd frontend
+  - npm install
   - npm test
   - npm run build
