@@ -65,8 +65,8 @@ class ToastSelect extends React.Component {
     }
     `;
 
-    var dropdownOptions = this.props.options.map((select) => (
-      <option key={select.id}>{select.value}</option>
+    var dropdownOptions = this.props.options.map((option) => (
+      <option key={this.props.options.indexOf(option)}>{option}</option>
     ));
 
     return Style.it(
@@ -78,8 +78,6 @@ class ToastSelect extends React.Component {
           <select
             type="text"
             name={this.props.name}
-            label={this.props.label}
-            list={this.props.list}
             placeholder={this.props.placeholder}
             value={this.props.value}
             onChange={this.props.onChange}
