@@ -96,3 +96,11 @@ export const getSavings = (state) => calcSavings(getSalaryAfterTax(state));
 export const getFixedExpenses = (state) =>
   calcFixedExpenses(getSalaryAfterTax(state));
 export const getSpending = (state) => calcSpending(getSalaryAfterTax(state));
+
+// advisor
+export const getAdvisorFirstName = (state) => state.advisorReducer.firstName;
+export const getAdvisorLastName = (state) => state.advisorReducer.lastName;
+export const getAdvisorEmail = (state) => state.advisorReducer.email;
+export const getAdvisorPhoneNumber = (state) =>
+  state.advisorReducer.phoneNumber;
+export const getAdvisorAddress = (state) => state.advisorReducer.address;

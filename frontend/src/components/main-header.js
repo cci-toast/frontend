@@ -29,6 +29,7 @@ class MainHeader extends React.Component {
        justify-content: space-between;
        align-items: center;
        height: 10vh;
+       width: calc(100vw - 13rem - 8rem);
     }
     `;
 

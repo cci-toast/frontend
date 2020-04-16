@@ -1,27 +1,72 @@
 import React from "react";
+import Style from "style-it";
+
+import { connect } from "react-redux";
+
+import { setAdvisorValue } from "../../redux/actions";
+
+import {
+  getAdvisorFirstName,
+  getAdvisorLastName,
+  getAdvisorEmail,
+  getAdvisorPhoneNumber,
+  getAdvisorAddress,
+} from "../../redux/selectors";
 
 class AdvisorContactContent extends React.Component {
   render() {
-    return (
-      <React.Fragment>
-        <label>Name</label>
-        <p>Advisor Name Placeholder</p>
-        <label>Email</label>
-        <a href="mailto:" target="blank_">
-          <p>Advisor Email Placeholder</p>
-        </a>
-        <label>Phone Number</label>
-        <a href="tel:XXXXXXXXXX">
-          <p>XXXXXXXXXX</p>
-        </a>
-        <label>Address</label>
-        <p>
-          XXX Address <br />
-          City, State Zip
-        </p>
-      </React.Fragment>
+    const styles = `
+    .entry {
+       margin-bottom: 1.5rem;
+    }
+
+    a {
+      color: var(--toast-neutral-2);
+      text-decoration: underline;
+    }
+    `;
+
+    return Style.it(
+      `${styles}`,
+      <div>
+        <div className="entry">
+          <label>Name</label>
+          <p>
+            {this.props.firstName} {this.props.lastName}
+          </p>
+        </div>
+
+        <div className="entry">
+          <label>Email</label>
+          <a href={`mailto:${this.props.email}`} target="blank_">
+            <p>{this.props.email}</p>
+          </a>
+        </div>
+
+        <div className="entry">
+          <label>Phone Number</label>
+          <a href={`tel:${this.props.phoneNumber}`}>
+            <p>{this.props.phoneNumber}</p>
+          </a>
+        </div>
+
+        <div className="entry">
+          <label>Address</label>
+          <p>{this.props.address}</p>
+        </div>
+      </div>
     );
   }
 }
 
-export default AdvisorContactContent;
+const mapStateToProps = (state) => ({
+  firstName: getAdvisorFirstName(state),
+  lastName: getAdvisorLastName(state),
+  email: getAdvisorEmail(state),
+  phoneNumber: getAdvisorPhoneNumber(state),
+  address: getAdvisorAddress(state),
+});
+
+export default connect(mapStateToProps, {
+  setAdvisorValue,
+})(AdvisorContactContent);

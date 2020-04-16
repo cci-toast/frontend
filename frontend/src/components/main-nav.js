@@ -53,7 +53,7 @@ class MainNav extends React.Component {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      width: 10rem;
+      min-width: 8rem;
       border-top-right-radius: 3rem;
       border-bottom-right-radius: 3rem;
     }
