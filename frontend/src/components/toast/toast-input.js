@@ -4,6 +4,21 @@ import Style from "style-it";
 import ToastIcon from "./toast-icon";
 
 class ToastInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+  }
+
+  onFocus(e) {
+    e.currentTarget.parentNode.classList.add("focused");
+  }
+
+  onBlur(e) {
+    e.currentTarget.parentNode.classList.remove("focused");
+  }
+
   getIcon() {
     if (this.props.iconName) {
       return (
@@ -41,7 +56,6 @@ class ToastInput extends React.Component {
       min-width: 15rem;
       width: 100%;
       padding: 0.75rem 1rem;
-      margin: 0.75rem 0 1.75rem 0;
       color: var(--toast-neutral-1);
     }
 
@@ -55,16 +69,19 @@ class ToastInput extends React.Component {
     input::-webkit-calendar-picker-indicator {
       opacity: 100;
       color: var(--toast-neutral-3);
-   }
-
-    .input-label {
-      margin-bottom: 0.5rem;
     }
-
+    
+    input {
+      box-shadow: none;
+    }
+    
     .input-group {
       display: flex;
-     }
-
+      border-radius: 2rem;
+      background-color: var(--toast-neutral-6);
+      margin: 0.5rem 0 1.5rem 0;
+    }
+    
     .input-group-prepend {
       height: 1rem;
       width: 2rem;
@@ -75,15 +92,18 @@ class ToastInput extends React.Component {
       border-top-left-radius: 20rem;
       border-bottom-left-radius: 20rem;
       color: var(--toast-neutral-1);
-      padding: 1rem 1.5rem 1rem 1rem;
-      margin: 0.75rem -1.5rem 1.75rem 0;
+      padding: 1rem 0 1rem 1rem;
     }
-
+    
     .required .input-label:after {
-        content: "*";
-        color: var(--toast-red);
-        margin-left: 0.125rem;
-      }
+      content: "*";
+      color: var(--toast-red);
+      margin-left: 0.125rem;
+    }
+    
+    .focused {
+      box-shadow: 0 0 5px var(--toast-blue-1);
+    }
     `;
 
     return Style.it(
@@ -94,6 +114,7 @@ class ToastInput extends React.Component {
         <div className="input-group">
           {this.getIcon()}
           <input
+            className="input"
             type={this.props.type}
             name={this.props.name}
             placeholder={this.props.placeholder}
@@ -104,6 +125,8 @@ class ToastInput extends React.Component {
             onChange={this.props.onChange}
             required={this.props.required}
             step={this.props.step}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
           />
         </div>
       </div>
