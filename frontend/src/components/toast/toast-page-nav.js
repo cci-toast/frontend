@@ -128,7 +128,7 @@ class ToastPageNav extends React.Component {
     }
 
     .titles {
-        width: 14rem;
+        min-width: 14rem;
     }
 
     .hidden {

@@ -69,3 +69,9 @@ export const setChildListValue = (index, valueName, value) => ({
   type: "setChildListValue",
   payload: { index, valueName, value },
 });
+
+// advisor
+export const setAdvisorValue = (valueName, value) => ({
+  type: "setAdvisorValue",
+  payload: { valueName, value },
+});

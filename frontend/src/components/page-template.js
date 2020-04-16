@@ -67,12 +67,14 @@ class PageTemplate extends React.Component {
         display: flex;
         justify-content: space-between;
         height: calc(90vh - 1rem);
+        width: calc(100vw - 13rem - 8rem);
     }
 
     .right-content {
-      width: calc(100% - 10rem);
+      width: calc(100vw - 8rem);
       margin: 1rem 6.5rem 0 6.5rem;
     }
+
       `;
 
     return Style.it(

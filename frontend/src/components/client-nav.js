@@ -24,8 +24,7 @@ class ClientNav extends React.Component {
   render() {
     const styles = `
     .wrapper {
-       display: flex;
-       justify-self: flex-end;
+       width: 30rem;
     }
     `;
 
