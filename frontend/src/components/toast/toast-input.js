@@ -13,10 +13,12 @@ class ToastInput extends React.Component {
 
   onFocus(e) {
     e.currentTarget.parentNode.classList.add("focused");
+    if (this.props.onFocus) this.props.onFocus(e);
   }
 
   onBlur(e) {
     e.currentTarget.parentNode.classList.remove("focused");
+    if (this.props.onBlur) this.props.onBlur(e);
   }
 
   getIcon() {
@@ -117,6 +119,7 @@ class ToastInput extends React.Component {
             className="input"
             type={this.props.type}
             name={this.props.name}
+            value={this.props.value}
             placeholder={this.props.placeholder}
             defaultValue={this.props.defaultValue || ""}
             min={this.props.min}
