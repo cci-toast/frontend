@@ -1,152 +1,128 @@
 export const goalOptions = [
-  { id: 0, value: "I want to save money to pay off my credit card" },
-  { id: 1, value: "I want to save money to pay off student debt" },
-  { id: 2, value: "I want to save money for a vacation" },
-  { id: 3, value: "I want to save money to buy/rent a property" },
-  { id: 4, value: "I want to create an emergency savings fund" },
-  { id: 5, value: "I want to save money to prepare for retirement" },
-  { id: 6, value: "Other (Type in)" },
+  "I want to save money to pay off my credit card",
+  "I want to save money to pay off student debt",
+  "I want to save money for a vacation",
+  "I want to save money to buy/rent a property",
+  "I want to create an emergency savings fund",
+  "I want to save money to prepare for retirement",
+  "Other (Type in)",
 ];
 
 export const stateOptions = [
-  { id: 0, value: "Alabama" },
-  { id: 1, value: "Alaska" },
-  { id: 2, value: "Arizona" },
-  { id: 3, value: "Arkansas" },
-  { id: 4, value: "California" },
-  { id: 5, value: "Colorado" },
-  { id: 6, value: "Connecticut" },
-  { id: 7, value: "Delaware" },
-  { id: 8, value: "Florida" },
-  { id: 9, value: "Georgia" },
-  { id: 10, value: "Hawaii" },
-  { id: 11, value: "Idaho" },
-  { id: 12, value: "Illinois" },
-  { id: 13, value: "Indiana" },
-  { id: 14, value: "Iowa" },
-  { id: 15, value: "Kansas" },
-  { id: 16, value: "Kentucky" },
-  { id: 17, value: "Louisiana" },
-  { id: 18, value: "Maine" },
-  { id: 19, value: "Maryland" },
-  { id: 20, value: "Massachusetts" },
-  { id: 21, value: "Michigan" },
-  { id: 22, value: "Minnesota" },
-  { id: 23, value: "Mississippi" },
-  { id: 24, value: "Missouri" },
-  { id: 25, value: "Montana" },
-  { id: 26, value: "Nebraska" },
-  { id: 27, value: "Nevada" },
-  { id: 28, value: "New Hampshire" },
-  { id: 29, value: "New Jersey" },
-  { id: 30, value: "New Mexico" },
-  { id: 31, value: "New York" },
-  { id: 32, value: "North Carolina" },
-  { id: 33, value: "North Dakota" },
-  { id: 34, value: "Ohio" },
-  { id: 35, value: "Oklahoma" },
-  { id: 36, value: "Oregon" },
-  { id: 37, value: "Pennsylvania" },
-  { id: 38, value: "Rhode Island" },
-  { id: 39, value: "South Carolina" },
-  { id: 40, value: "South Dakota" },
-  { id: 41, value: "Tennessee" },
-  { id: 42, value: "Texas" },
-  { id: 43, value: "Utah" },
-  { id: 44, value: "Vermont" },
-  { id: 45, value: "Virginia" },
-  { id: 46, value: "Washington" },
-  { id: 47, value: "West Virginia" },
-  { id: 48, value: "Wisconsin" },
-  { id: 49, value: "Wyoming" },
+  { code: "AL", name: "Alabama" },
+  { code: "AK", name: "Alaska" },
+  { code: "AZ", name: "Arizona" },
+  { code: "AR", name: "Arkansas" },
+  { code: "CA", name: "California" },
+  { code: "CO", name: "Colorado" },
+  { code: "CT", name: "Connecticut" },
+  { code: "DE", name: "Delaware" },
+  { code: "FL", name: "Florida" },
+  { code: "GA", name: "Georgia" },
+  { code: "HI", name: "Hawaii" },
+  { code: "ID", name: "Idaho" },
+  { code: "IL", name: "Illinois" },
+  { code: "IN", name: "Indiana" },
+  { code: "IA", name: "Iowa" },
+  { code: "KS", name: "Kansas" },
+  { code: "KY", name: "Kentucky" },
+  { code: "LA", name: "Louisiana" },
+  { code: "ME", name: "Maine" },
+  { code: "MD", name: "Maryland" },
+  { code: "MA", name: "Massachusetts" },
+  { code: "MI", name: "Michigan" },
+  { code: "MN", name: "Minnesota" },
+  { code: "MS", name: "Mississippi" },
+  { code: "MO", name: "Missouri" },
+  { code: "MT", name: "Montana" },
+  { code: "NE", name: "Nebraska" },
+  { code: "NV", name: "Nevada" },
+  { code: "NH", name: "New Hampshire" },
+  { code: "NJ", name: "New Jersey" },
+  { code: "NM", name: "New Mexico" },
+  { code: "NY", name: "New York" },
+  { code: "NC", name: "North Carolina" },
+  { code: "ND", name: "North Dakota" },
+  { code: "OH", name: "Ohio" },
+  { code: "OK", name: "Oklahoma" },
+  { code: "OR", name: "Oregon" },
+  { code: "PA", name: "Pennsylvania" },
+  { code: "RI", name: "Rhode Island" },
+  { code: "SC", name: "South Carolina" },
+  { code: "SD", name: "South Dakota" },
+  { code: "TN", name: "Tennessee" },
+  { code: "TX", name: "Texas" },
+  { code: "UT", name: "Utah" },
+  { code: "VT", name: "Vermont" },
+  { code: "VA", name: "Virginia" },
+  { code: "WA", name: "Washington" },
+  { code: "WV", name: "West Virginia" },
+  { code: "WI", name: "Wisconsin" },
+  { code: "WY", name: "Wyoming" },
 ];
 
+export const getStateCode = (name) => {
+  let results = stateOptions.filter((state) => state.name === name);
+  if (!!results.length) {
+    return stateOptions.filter((state) => state.name === name)[0].code;
+  }
+  return null;
+};
+
 export const utilityOptions = [
-  { id: 0, value: "Water" },
-  { id: 1, value: "Electricity" },
-  { id: 2, value: "Gas" },
-  { id: 3, value: "Sewer" },
-  { id: 4, value: "Internet" },
-  { id: 5, value: "Telephone" },
-  { id: 6, value: "TV" },
-  { id: 7, value: "Other (Type in)" },
+  "Water",
+  "Electricity",
+  "Gas",
+  "Sewer",
+  "Internet",
+  "Telephone",
+  "TV",
 ];
 
 export const insuranceOptions = [
-  { id: 0, value: "Health Insurance" },
-  { id: 1, value: "Life Insurance" },
-  { id: 2, value: "Dental Insurance" },
-  { id: 3, value: "Car Insurance" },
-  { id: 4, value: "Homeowners/Renters Insurance" },
-  { id: 5, value: "Life Insurance" },
-  { id: 6, value: "Flood Insurance" },
-  { id: 7, value: "Pet Insurance" },
-  { id: 8, value: "Disability Insurance" },
-  { id: 9, value: "Umbrella Insurance" },
-  { id: 10, value: "Other (Type in)" },
+  "Health Insurance",
+  "Life Insurance",
+  "Dental Insurance",
+  "Car Insurance",
+  "Homeowners/RentInsurance",
+  "Life Insurance",
+  "Flood Insurance",
+  "Pet Insurance",
+  "Disability Insurance",
+  "Umbrella Insurance",
 ];
 
-export const housingOptions = [
-  { id: 0, value: "Rent" },
-  { id: 1, value: "Mortgage" },
-  { id: 2, value: "Other (Type in)" },
-];
+export const housingOptions = ["Rent", "Mortgage"];
 
 export const billOptions = [
-  { id: 0, value: "Rent" },
-  { id: 1, value: "Mortgage" },
-  { id: 2, value: "Lawn Service" },
-  { id: 3, value: "Water" },
-  { id: 4, value: "Electricity" },
-  { id: 5, value: "Gas" },
-  { id: 6, value: "Sewer" },
-  { id: 7, value: "Internet" },
-  { id: 8, value: "Telephone" },
-  { id: 9, value: "TV" },
-  { id: 10, value: "Other (Type in)" },
+  "Rent",
+  "Mortgage",
+  "Lawn Service",
+  "Water",
+  "Electricity",
+  "Gas",
+  "Sewer",
+  "Internet",
+  "Telephone",
+  "TV",
 ];
 
-export const shoppingOptions = [
-  { id: 0, value: "Groceries" },
-  { id: 1, value: "Clothing/Shoes" },
-  { id: 2, value: "Other (Type in)" },
-];
+export const shoppingOptions = ["Groceries", "Clothing/Shoes"];
 
-export const leisureOptions = [
-  { id: 0, value: "Concert" },
-  { id: 1, value: "Dining" },
-  { id: 2, value: "Vacation" },
-  { id: 3, value: "Sports" },
-  { id: 4, value: "Other (Type in)" },
-];
+export const leisureOptions = ["Concert", "Dining", "Vacation", "Sports"];
 
-export const transportationOptions = [
-  { id: 0, value: "Car" },
-  { id: 1, value: "Bus" },
-  { id: 2, value: "Train" },
-  { id: 3, value: "Flight" },
-];
+export const transportationOptions = ["Car", "Bus", "Train", "Flight"];
 
 export const subscriptionOptions = [
-  { id: 0, value: "Music Subscription (Spotify, Apple Music)" },
-  { id: 1, value: "TV/Movie Subscription (Netflix, Hulu, Disney+)" },
-  { id: 2, value: "Gym Membership" },
-  { id: 3, value: "Magazine Subscription" },
-  { id: 4, value: "Other (Type in)" },
+  "Music Subscription (Spotify, Apple Music)",
+  "TV/Movie Subscription (Netflix, Hulu, Disney+)",
+  "Gym Membership",
+  "Magazine Subscription",
 ];
 
-export const loandebtOptions = [
-  { id: 0, value: "Credit Card" },
-  { id: 1, value: "School/Student" },
-  { id: 2, value: "Medical" },
-  { id: 4, value: "Other (Type in)" },
-];
+export const loandebtOptions = ["Credit Card", "School/Student", "Medical"];
 
-export const childEducationOptions = [
-  { id: 0, value: "College" },
-  { id: 1, value: "Going to College" },
-  { id: 2, value: "Other" },
-];
+export const childEducationOptions = ["College", "Going to College"];
 
 export const getBirthYearOptions = (maxOffset) => {
   if (maxOffset == null) {
@@ -155,7 +131,7 @@ export const getBirthYearOptions = (maxOffset) => {
   let thisYear = new Date().getFullYear();
   let birthYearOptions = [];
   for (let x = 0; x <= maxOffset; x++) {
-    birthYearOptions.push({ id: x, value: thisYear - x });
+    birthYearOptions.push(thisYear - x);
   }
   return birthYearOptions;
 };

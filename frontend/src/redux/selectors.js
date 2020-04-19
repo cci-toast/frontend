@@ -38,6 +38,7 @@ export const getLastName = (state) => state.profileReducer.lastName;
 export const getBirthYear = (state) => state.profileReducer.birthYear;
 export const getCity = (state) => state.profileReducer.city;
 export const getState = (state) => state.profileReducer.state;
+export const getCities = (state) => state.profileReducer.cities;
 
 export const getAge = (state) =>
   new Date().getFullYear() - state.profileReducer.birthYear;

@@ -38,6 +38,16 @@ export const setProfileValue = (valueName, value) => ({
   payload: { valueName, value },
 });
 
+export const setCities = (cities) => ({
+  type: "setCities",
+  payload: { cities },
+});
+
+export const fetchCities = (state) => ({
+  type: "fetchCities",
+  payload: { state },
+});
+
 // goals
 export const setGoalListValue = (index, valueName, value) => ({
   type: "setGoalListValue",
