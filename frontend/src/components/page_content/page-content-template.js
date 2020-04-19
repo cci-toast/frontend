@@ -49,7 +49,6 @@ class PageContentTemplate extends React.Component {
   }
 
   setFactorsSaveCancel() {
-    this.saveClick = this.next;
     this.setHideSaveCancel(
       this.props.currentStep === 4,
       this.props.currentStep === 0
@@ -60,8 +59,6 @@ class PageContentTemplate extends React.Component {
     if (this.props.currentStep === 3) {
       this.saveLabel = "View Plan";
       this.saveClick = this.save;
-    } else {
-      this.saveClick = this.next;
     }
     this.setHideSaveCancel(null, this.props.currentStep === 0);
   }
@@ -110,7 +107,7 @@ class PageContentTemplate extends React.Component {
         {this.getContent()}
         <div className="save-cancel">
           <ToastSaveCancel
-            saveClicked={this.saveClick}
+            saveClicked={this.saveClick || this.next}
             cancelClicked={this.prev}
             saveLabel={this.saveLabel || "next"}
             cancelLabel="previous"
