@@ -80,11 +80,7 @@ export const getHouseholdIncome = (state) =>
 export const getRetirementMultiplier = (state) =>
   calcRetirementMultiplier(getAge(state));
 export const getRetirement = (state) =>
-  calcRetirement(
-    getSalaryAfterTax(state),
-    getPartnerSalariesSum(state),
-    getRetirementMultiplier(state)
-  );
+  calcRetirement(getSalaryAfterTax(state), getRetirementMultiplier(state));
 
 // debt
 export const getDebtMonthly = (state) =>
