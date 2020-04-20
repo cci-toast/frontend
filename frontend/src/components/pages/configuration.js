@@ -10,7 +10,7 @@ class Configurations extends React.Component {
     return Style.it(
       `${styles}`,
       <React.Fragment>
-        <PageTemplate user="advisor" page="configs"></PageTemplate>
+        <PageTemplate user="advisor" page="configuration"></PageTemplate>
       </React.Fragment>
     );
   }
