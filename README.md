@@ -13,6 +13,12 @@ npm i --save @fortawesome/free-solid-svg-icons
 npm i --save @fortawesome/react-fontawesome
 npm install react-vis --save
 npm install style-it --save
+npm i jest
+npm i babel
+npm i babel-jest
+npm i @babel/preset-env
+npm i @babel/preset-react 
+npm i react-test-renderer
 ```
 ## Viewing the Application
 https://drexeltoast.web.app/
@@ -22,6 +28,9 @@ https://drexeltoast.web.app/
 npm run build
 firebase deploy 
 ```
+
+## Testing the Application
+`npm test`
 
 ## How to Run
 * Run the server with `npm start`
