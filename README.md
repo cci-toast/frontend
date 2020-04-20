@@ -13,6 +13,8 @@ npm i --save @fortawesome/free-solid-svg-icons
 npm i --save @fortawesome/react-fontawesome
 npm install react-vis --save
 npm install style-it --save
+npm i redux react-redux
+npm i redux-saga
 npm i jest
 npm i babel
 npm i babel-jest
@@ -33,4 +35,4 @@ firebase deploy
 `npm test`
 
 ## How to Run
-* Run the server with `npm start`
+`npm start`
