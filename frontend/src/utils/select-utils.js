@@ -133,5 +133,6 @@ export const getBirthYearOptions = (maxOffset) => {
   for (let x = 0; x <= maxOffset; x++) {
     birthYearOptions.push(thisYear - x);
   }
+
   return birthYearOptions;
 };

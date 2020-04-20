@@ -24,11 +24,11 @@ export const calcRetirementMultiplier = (age) => {
   let multiplier;
   if (age < 39) {
     multiplier = 1;
-  } else if (age >= 40 && age < 49) {
+  } else if (age >= 40 && age <= 49) {
     multiplier = 3;
-  } else if (age >= 50) {
+  } else if (age >= 50 && age <= 59) {
     multiplier = 6;
-  } else if (age >= 60) {
+  } else if (age >= 60 && age <= 66) {
     multiplier = 8;
   } else if (age >= 67) {
     multiplier = 10;
@@ -36,8 +36,7 @@ export const calcRetirementMultiplier = (age) => {
   return multiplier;
 };
 
-export const calcRetirement = (salary, partnerSalaries, multiplier) =>
-  salary * multiplier + partnerSalaries * multiplier;
+export const calcRetirement = (salary, multiplier) => salary * multiplier;
 
 export const calcDebtMonthly = (salary) => calcMonthlyValue(salary * 0.36);
 
