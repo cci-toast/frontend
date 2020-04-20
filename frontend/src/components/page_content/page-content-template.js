@@ -73,7 +73,7 @@ class PageContentTemplate extends React.Component {
         return <AdvisorContactContent {...this.props} />;
       case "clients":
         return <ClientsContent {...this.props} />;
-      case "configs":
+      case "configuration":
         this.setFactorsSaveCancel();
         return <ConfigurationContent {...this.props} />;
       default:
