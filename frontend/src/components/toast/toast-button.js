@@ -62,6 +62,7 @@ class ToastButton extends React.Component {
       float: right;
       padding: 1rem 2.5rem;
       text-transform: uppercase;
+      font-size: 1.25rem;
     }
 
     .primary:hover {

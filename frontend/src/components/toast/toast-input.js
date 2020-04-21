@@ -42,6 +42,17 @@ class ToastInput extends React.Component {
     if (this.props.required) {
       classes.push("required");
     }
+
+    return classes.join(" ");
+  }
+
+  getInputClasses() {
+    let classes = ["input-group"];
+
+    if (this.props.short) {
+      classes.push("short");
+    }
+
     return classes.join(" ");
   }
 
@@ -104,6 +115,10 @@ class ToastInput extends React.Component {
     .focused {
       box-shadow: 0 0 5px var(--toast-blue-1);
     }
+
+    .short {
+      width: 70%;
+    }
     `;
 
     return Style.it(
@@ -111,10 +126,9 @@ class ToastInput extends React.Component {
       <div className={this.getClasses()}>
         <label className="input-label">{this.props.label}</label>
 
-        <div className="input-group">
+        <div className={this.getInputClasses()}>
           {this.getIcon()}
           <input
-            className="input"
             type={this.props.type}
             name={this.props.name}
             placeholder={this.props.placeholder}

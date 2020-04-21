@@ -5,7 +5,48 @@ import Style from "style-it";
 import ToastLogo from "../toast-logo.png";
 import ToastIcon from "./toast/toast-icon";
 
+import { connect } from "react-redux";
+
+import { isLoggedInAdvisor, isLoggedInClient } from "../redux/selectors";
+import { logoutClient, logoutAdvisor, resetLogin } from "../redux/actions";
+
 class MainNav extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.logOut = this.logOut.bind(this);
+    this.goHome = this.goHome.bind(this);
+  }
+
+  goHome() {
+    if (this.props.isLoggedInClient) {
+      document.location.href = "/profile";
+    } else if (this.props.isLoggedInAdvisor) {
+      document.location.href = "/clients";
+    }
+  }
+
+  logOut() {
+    this.props.logoutClient();
+    this.props.logoutAdvisor();
+    this.props.resetLogin();
+  }
+
+  getLogOut() {
+    return (
+      <Link to="/" className="icon-caption" onClick={this.logOut}>
+        <ToastIcon
+          name="power"
+          width={35}
+          height={45}
+          stroke="var(--toast-white)"
+          strokeWidth={1}
+        />
+        <span className="caption">Log Out</span>
+      </Link>
+    );
+  }
+
   getLink(link, linkName, iconName) {
     return (
       <Link to={`/${link}`} className="icon-caption">
@@ -69,6 +110,7 @@ class MainNav extends React.Component {
       width: 6rem;
       margin-top: 1rem;
       margin-bottom: 2rem;
+      cursor: pointer;
     }
     
     .caption {
@@ -99,17 +141,30 @@ class MainNav extends React.Component {
       `${styles}`,
       <div className="nav">
         <div className="main-links">
-          <Link to="/">
-            <img src={ToastLogo} rel="icon" alt="" className="logo" />
-          </Link>
+          <img
+            src={ToastLogo}
+            rel="icon"
+            alt=""
+            className="logo"
+            onClick={this.goHome}
+          />
 
           {this.getLinks()}
         </div>
 
-        {this.getLink("", "Log Out", "power")}
+        {this.getLogOut()}
       </div>
     );
   }
 }
 
-export default MainNav;
+const mapStateToProps = (state) => ({
+  isLoggedInAdvisor: isLoggedInAdvisor(state),
+  isLoggedInClient: isLoggedInClient(state),
+});
+
+export default connect(mapStateToProps, {
+  logoutClient,
+  logoutAdvisor,
+  resetLogin,
+})(MainNav);

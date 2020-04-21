@@ -9,6 +9,26 @@ export const setPassword = (password) => ({
   payload: { password },
 });
 
+export const loginAdvisor = () => ({
+  type: "loginAdvisor",
+});
+
+export const loginClient = () => ({
+  type: "loginClient",
+});
+
+export const logoutAdvisor = () => ({
+  type: "logoutAdvisor",
+});
+
+export const logoutClient = () => ({
+  type: "logoutClient",
+});
+
+export const resetLogin = () => ({
+  type: "resetLogin",
+});
+
 // page content
 export const incrementStep = () => ({
   type: "incrementStep",

@@ -148,6 +148,13 @@ class ToastIcon extends React.Component {
             <path d="M16 3.13a4 4 0 0 1 0 7.75" {...this.props}></path>
           </React.Fragment>
         );
+      case "x":
+        return (
+          <React.Fragment>
+            <line x1="18" y1="6" x2="6" y2="18" {...this.props}></line>
+            <line x1="6" y1="6" x2="18" y2="18" {...this.props}></line>
+          </React.Fragment>
+        );
       default:
         return <path />;
     }
