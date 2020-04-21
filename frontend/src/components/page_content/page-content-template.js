@@ -30,10 +30,16 @@ class PageContentTemplate extends React.Component {
 
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
+
+    this.saveLabel = "Next";
   }
 
   next() {
-    this.props.incrementStep();
+    if (this.saveLabel === "View Plan") {
+      document.location.href = "/plan";
+    } else {
+      this.props.incrementStep();
+    }
   }
 
   prev() {
@@ -52,10 +58,10 @@ class PageContentTemplate extends React.Component {
   }
 
   setProfileSaveCancel() {
-    this.setHideSaveCancel(
-      this.props.currentStep === 3,
-      this.props.currentStep === 0
-    );
+    if (this.props.currentStep === 3) {
+      this.saveLabel = "View Plan";
+    }
+    this.setHideSaveCancel(null, this.props.currentStep === 0);
   }
 
   getContent() {
@@ -104,7 +110,7 @@ class PageContentTemplate extends React.Component {
           <ToastSaveCancel
             saveClicked={this.next}
             cancelClicked={this.prev}
-            saveLabel="next"
+            saveLabel={this.saveLabel}
             cancelLabel="previous"
             hideCancel={this.props.hideCancel}
             hideSave={this.props.hideSave}
