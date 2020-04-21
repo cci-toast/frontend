@@ -60,6 +60,8 @@ class PageContentTemplate extends React.Component {
   setProfileSaveCancel() {
     if (this.props.currentStep === 3) {
       this.saveLabel = "View Plan";
+    } else {
+      this.saveLabel = "Next";
     }
     this.setHideSaveCancel(null, this.props.currentStep === 0);
   }
