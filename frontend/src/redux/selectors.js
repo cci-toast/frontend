@@ -38,6 +38,7 @@ export const getLastName = (state) => state.profileReducer.lastName;
 export const getBirthYear = (state) => state.profileReducer.birthYear;
 export const getCity = (state) => state.profileReducer.city;
 export const getState = (state) => state.profileReducer.state;
+export const getCities = (state) => state.profileReducer.cities;
 
 export const getAge = (state) =>
   new Date().getFullYear() - state.profileReducer.birthYear;
@@ -79,11 +80,7 @@ export const getHouseholdIncome = (state) =>
 export const getRetirementMultiplier = (state) =>
   calcRetirementMultiplier(getAge(state));
 export const getRetirement = (state) =>
-  calcRetirement(
-    getSalaryAfterTax(state),
-    getPartnerSalariesSum(state),
-    getRetirementMultiplier(state)
-  );
+  calcRetirement(getSalaryAfterTax(state), getRetirementMultiplier(state));
 
 // debt
 export const getDebtMonthly = (state) =>

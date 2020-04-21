@@ -5,6 +5,7 @@ const initialState = {
   birthYear: 1980,
   city: "",
   state: "",
+  cities: [],
 };
 
 export default function (state = initialState, action) {
@@ -14,6 +15,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         [valueName]: value,
+      };
+    }
+    case "setCities": {
+      const { cities } = action.payload;
+      return {
+        ...state,
+        cities: cities,
       };
     }
     default:

@@ -13,21 +13,31 @@ import {
   getBirthYear,
   getCity,
   getState,
+  getCities,
 } from "../../../redux/selectors";
 
 import { stateOptions, getBirthYearOptions } from "../../../utils/select-utils";
 
-import { setProfileValue } from "../../../redux/actions";
+import { setProfileValue, fetchCities } from "../../../redux/actions";
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handleStateChange = this.handleStateChange.bind(this);
+
+    this.props.fetchCities("Alabama");
   }
 
   handleChange(event) {
     const { name, value } = event.target;
     this.props.setProfileValue(name, value);
+  }
+
+  handleStateChange(event) {
+    const { value } = event.target;
+    this.props.setProfileValue("state", value);
+    this.props.fetchCities(value);
   }
 
   getClasses() {
@@ -101,25 +111,25 @@ class Profile extends React.Component {
         <hr />
         <div className="row">
           <div className="column">
-            <ToastInput
-              type="text"
-              label="City"
-              placeholder="Type in your city"
-              defaultValue={this.props.city}
+            <ToastSelect
+              options={this.props.cities}
               name="city"
+              label="City"
+              placeholder="Select your city"
+              value={this.props.city || this.props.cities[0]}
+              id="city"
               onChange={this.handleChange}
             />
           </div>
           <div className="column">
             <ToastSelect
-              options={stateOptions}
+              options={stateOptions.map((state) => state.name)}
               name="state"
               label="State"
-              list="state"
-              placeholder="Type in your state"
-              defaultValue={this.props.state}
+              placeholder="Select your state"
+              value={this.props.state || stateOptions[0].state}
               id="state"
-              onChange={this.handleChange}
+              onChange={this.handleStateChange}
             />
           </div>
         </div>
@@ -135,8 +145,10 @@ const mapStateToProps = (state) => ({
   birthYear: getBirthYear(state),
   city: getCity(state),
   state: getState(state),
+  cities: getCities(state),
 });
 
 export default connect(mapStateToProps, {
   setProfileValue,
+  fetchCities,
 })(Profile);

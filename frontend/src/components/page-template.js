@@ -7,6 +7,7 @@ import AdvisorContactContent from "./page_content/advisor-contact-content";
 import ClientsContent from "./page_content/clients-content";
 import ToastCard from "./toast/toast-card";
 import ToastPageNav from "./toast/toast-page-nav";
+import ToastHelp from "./toast/toast-help";
 import PageContentTemplate from "./page_content/page-content-template";
 
 class PageTemplate extends React.Component {
@@ -48,7 +49,7 @@ class PageTemplate extends React.Component {
         return <MainHeader header="Your Advisor" leftside="header" />;
       case "clients":
         return <MainHeader header="Your Clients" leftside="header" />;
-      case "configs":
+      case "configuration":
         return <MainHeader header="Configure Factors" leftside="header" />;
       default:
         return <MainHeader />;
@@ -74,12 +75,12 @@ class PageTemplate extends React.Component {
       width: calc(100vw - 8rem);
       margin: 1rem 6.5rem 0 6.5rem;
     }
-
-      `;
+    `;
 
     return Style.it(
       `${styles}`,
       <div>
+        <ToastHelp {...this.props} />
         <div className="nav-content-container">
           <MainNav user={this.props.user} />
           <div className="right-content">

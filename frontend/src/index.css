@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Inter&display=swap");
 :root {
     --toast-black: rgb(26, 26, 26);
+    --toast-black-transparent: rgba(26, 26, 26, 0.5);
     --toast-white: rgb(255, 255, 255);
     --toast-blue-1: rgb(3, 100, 255);
     --toast-blue-2: rgb(48, 98, 178);
@@ -11,14 +12,14 @@
     --toast-red: rgb(191, 0, 0);
     --toast-gradient-1: linear-gradient( 90deg, rgb(114, 30, 190), rgb(50, 95, 179));
     --toast-gradient-2: linear-gradient( 0deg, rgb(114, 30, 190), rgb(50, 95, 179));
-    --toast-neutral-6: rgb(245, 245, 245);
-    --toast-neutral-5: rgb(233, 233, 233);
-    --toast-neutral-4: rgb(205, 205, 205);
+    --toast-neutral-1: rgb(117, 117, 117);
+    --toast-neutral-2: rgb(148, 148, 148);
     --toast-neutral-3: rgb(172, 172, 172);
     --toast-neutral-3-transparent: rgba(172, 172, 172, 0.2);
     --toast-neutral-3-transparent-2: rgba(172, 172, 172, 0.6);
-    --toast-neutral-2: rgb(148, 148, 148);
-    --toast-neutral-1: rgb(117, 117, 117);
+    --toast-neutral-4: rgb(205, 205, 205);
+    --toast-neutral-5: rgb(233, 233, 233);
+    --toast-neutral-6: rgb(245, 245, 245);
 }
 
 ::-webkit-input-placeholder {
