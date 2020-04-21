@@ -30,18 +30,17 @@ class PageContentTemplate extends React.Component {
 
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
-    this.save = this.save.bind(this);
-  }
 
-  save() {
-    //Save form and move to view plan
-    if (this.saveLabel === "View Plan") {
-      document.location.href = "/plan";
-    }
+    this.saveLabel = "Next";
+    this.saveClick = this.next;
   }
 
   next() {
-    this.props.incrementStep();
+    if (this.saveLabel === "View Plan") {
+      document.location.href = "/plan";
+    } else {
+      this.props.incrementStep();
+    }
   }
 
   prev() {
@@ -53,8 +52,6 @@ class PageContentTemplate extends React.Component {
   }
 
   setFactorsSaveCancel() {
-    this.saveLabel = "Next";
-    this.saveClick = this.next;
     this.setHideSaveCancel(
       this.props.currentStep === 4,
       this.props.currentStep === 0
@@ -64,10 +61,6 @@ class PageContentTemplate extends React.Component {
   setProfileSaveCancel() {
     if (this.props.currentStep === 3) {
       this.saveLabel = "View Plan";
-      this.saveClick = this.save;
-    } else {
-      this.saveLabel = "Next";
-      this.saveClick = this.next;
     }
     this.setHideSaveCancel(null, this.props.currentStep === 0);
   }
@@ -116,7 +109,7 @@ class PageContentTemplate extends React.Component {
         {this.getContent()}
         <div className="save-cancel">
           <ToastSaveCancel
-            saveClicked={this.saveClick}
+            saveClicked={this.next}
             cancelClicked={this.prev}
             saveLabel={this.saveLabel}
             cancelLabel="previous"
