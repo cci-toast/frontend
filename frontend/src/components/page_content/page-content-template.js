@@ -116,7 +116,7 @@ class PageContentTemplate extends React.Component {
         {this.getContent()}
         <div className="save-cancel">
           <ToastSaveCancel
-            saveClicked={this.save}
+            saveClicked={this.saveClick}
             cancelClicked={this.prev}
             saveLabel={this.saveLabel}
             cancelLabel="previous"
