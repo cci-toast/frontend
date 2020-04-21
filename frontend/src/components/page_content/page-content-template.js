@@ -32,7 +32,6 @@ class PageContentTemplate extends React.Component {
     this.prev = this.prev.bind(this);
 
     this.saveLabel = "Next";
-    this.saveClick = this.next;
   }
 
   next() {
