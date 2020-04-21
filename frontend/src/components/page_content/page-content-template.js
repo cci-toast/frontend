@@ -30,10 +30,14 @@ class PageContentTemplate extends React.Component {
 
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
+    this.save = this.save.bind(this);
   }
 
   save() {
     //Save form and move to view plan
+    if (this.saveLabel === "View Plan") {
+      document.location.href = "/plan";
+    }
   }
 
   next() {
@@ -112,7 +116,7 @@ class PageContentTemplate extends React.Component {
         {this.getContent()}
         <div className="save-cancel">
           <ToastSaveCancel
-            saveClicked={this.saveClick}
+            saveClicked={this.save}
             cancelClicked={this.prev}
             saveLabel={this.saveLabel}
             cancelLabel="previous"
