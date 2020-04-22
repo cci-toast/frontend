@@ -1,30 +1,48 @@
 import React from "react";
-import Center from "react-center";
 import Style from "style-it";
 
 import { connect } from "react-redux";
 
-import {
-  VerticalBarSeries,
-  HorizontalGridLines,
-  LabelSeries,
-  VerticalGridLines,
-  XAxis,
-  XYPlot,
-} from "react-vis";
+import { numWithCommas } from "../../../utils/plan-utils";
 
 import {
-  getHouseholdIncome,
   getRetirement,
-  getRetirementMultiplier,
+  getRetirementSavings,
+  getRetirementYears,
+  getRetirementMonthly,
 } from "../../../redux/selectors";
 
+import ToastBarChart from "../../toast/toast-bar-chart";
+
 class Retirement extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.data = [
+      {
+        name: "Your Total Savings",
+        value: this.props.retirementSavings,
+        fill: "var(--toast-purple)",
+      },
+      {
+        name: "Total Target Savings",
+        value: this.props.retirement,
+        fill: "url(#gradient)",
+      },
+    ];
+  }
+
+  getCaption() {
+    return `Given your age and personal annual net income is $${this.props.salaryAfterTax}, we recommend you set aside $261,000 for
+    your retirement savings. We recommend that you set aside $${this.props.retirementMonthly} monthly
+    for ${this.props.retirementYears} years to reach your recommended total savings.`;
+  }
+
   getClasses() {
     let classes = [""];
 
     if (this.props.currentStep !== 3) {
-      classes.push("hidden");
+      classes.push("hide");
     }
 
     return classes.join(" ");
@@ -32,84 +50,31 @@ class Retirement extends React.Component {
 
   render() {
     const styles = `
-    .wrapper {
-        display: flex;
-    }
-    
-    .hidden {
-        display: none;
+    .hide {
+      display: none;
     }
     `;
 
     return Style.it(
       `${styles}`,
       <div className={this.getClasses()}>
-        <Center>
-          <XYPlot
-            className="chartMargin"
-            xType="ordinal"
-            stackBy="y"
-            margin={{ top: 30 }}
-            width={600}
-            height={300}
-          >
-            <VerticalGridLines />
-            <HorizontalGridLines />
-            <XAxis />
-
-            <LabelSeries
-              data={[
-                {
-                  x: "Household Income",
-                  y: this.props.householdIncome,
-                  label: "$" + this.props.householdIncome,
-                  yOffset: -2,
-                  xOffset: -20,
-                },
-                {
-                  x: "Recommended Retirement Savings",
-                  y: this.props.retirement,
-                  label: "$" + this.props.retirement,
-                  yOffset: -22,
-                  xOffset: 26,
-                },
-              ]}
-            />
-
-            <VerticalBarSeries
-              color="#8c92d5"
-              data={[
-                {
-                  x: "Household Income",
-                  y: this.props.householdIncome,
-                },
-              ]}
-            />
-
-            <VerticalBarSeries
-              color="#444db6"
-              data={[
-                {
-                  x: "Recommended Retirement Savings",
-                  y: this.props.retirement,
-                },
-              ]}
-            />
-          </XYPlot>
-        </Center>
-        <p>
-          At this point your household should have nearly{" "}
-          {this.props.multiplier}x of income.
-        </p>
+        <ToastBarChart
+          salaryAfterTax={this.props.salaryAfterTax}
+          header={`$${numWithCommas(this.props.retirement)}`}
+          data={this.data}
+          subheader={this.props.retirementSavings}
+          caption={this.getCaption()}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  householdIncome: getHouseholdIncome(state),
   retirement: getRetirement(state),
-  multiplier: getRetirementMultiplier(state),
+  retirementSavings: getRetirementSavings(state),
+  retirementYears: getRetirementYears(state),
+  retirementMonthly: getRetirementMonthly(state),
 });
 
 export default connect(mapStateToProps)(Retirement);

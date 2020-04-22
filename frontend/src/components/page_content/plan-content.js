@@ -43,7 +43,6 @@ class PlanContent extends React.Component {
           currentStep={this.props.currentStep}
           salaryAfterTax={this.props.salaryAfterTax}
           age={this.props.age}
-          partnerIncomes={this.props.partnerIncomes}
         />
         <Budgeting
           currentStep={this.props.currentStep}

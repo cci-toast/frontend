@@ -1,5 +1,6 @@
 const initialState = {
   salaryAfterTax: 87000,
+  retirementSavings: 100000,
   shopping: 0.0,
 };
 

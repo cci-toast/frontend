@@ -11,6 +11,8 @@ import {
   calcSavings,
   calcFixedExpenses,
   calcSpending,
+  calcRetirementYears,
+  calcRetirementMonthly,
 } from "../utils/plan-utils";
 
 // toast-page-nav
@@ -81,6 +83,14 @@ export const getRetirementMultiplier = (state) =>
   calcRetirementMultiplier(getAge(state));
 export const getRetirement = (state) =>
   calcRetirement(getSalaryAfterTax(state), getRetirementMultiplier(state));
+export const getRetirementSavings = (state) =>
+  state.financesReducer.retirementSavings;
+export const getRetirementYears = (state) => calcRetirementYears(getAge(state));
+export const getRetirementMonthly = (state) =>
+  calcRetirementMonthly(
+    getMonthlySalaryAfterTax(state),
+    getRetirementYears(state)
+  );
 
 // debt
 export const getDebtMonthly = (state) =>
