@@ -12,6 +12,8 @@ import {
   getSpending,
 } from "../../../redux/selectors";
 
+import ToastToggle from "../../toast/toast-toggle";
+
 class Budgeting extends React.Component {
   constructor(props) {
     super(props);
@@ -56,6 +58,8 @@ class Budgeting extends React.Component {
     return Style.it(
       `${styles}`,
       <div className={this.getClasses()}>
+        <ToastToggle active="Target" inactive="Current" />
+
         <Center>
           <RadialChart
             colorRange={["#c6c9ea", "#444db6", "#8c92d5"]}
