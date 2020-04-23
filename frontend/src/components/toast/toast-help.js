@@ -86,6 +86,7 @@ class ToastSaveCancel extends React.Component {
         height: 30rem;
         padding: 1rem 0;
         outline: none;
+        z-index: 2;
     }
 
     .modal {
@@ -96,6 +97,7 @@ class ToastSaveCancel extends React.Component {
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 1;
     }
 
     .hidden {

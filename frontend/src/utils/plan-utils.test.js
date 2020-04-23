@@ -11,6 +11,8 @@ import {
   calcSavings,
   calcFixedExpenses,
   calcSpending,
+  calcRetirementMonthly,
+  numWithCommas,
 } from "./plan-utils";
 
 // calcMonthlyValue
@@ -159,4 +161,32 @@ test("calcFixedExpenses - multiply salary by 0.5 & divide by 12", () => {
 
 test("calcSpending - multiply salary by 0.3 & divide by 12", () => {
   expect(calcSpending(5000)).toBe(125);
+});
+
+// calcRetirementMonthly
+
+test("calcRetirementMonthly - divide monthly salary by years", () => {
+  expect(calcRetirementMonthly(5000, 2)).toBe(2500);
+});
+
+// numWithCommas
+
+test("numWithCommas - add commas to number hundred", () => {
+  expect(numWithCommas(100)).toBe("100");
+});
+
+test("numWithCommas - add commas to number thousand", () => {
+  expect(numWithCommas(1000)).toBe("1,000");
+});
+
+test("numWithCommas - add commas to number ten thousand", () => {
+  expect(numWithCommas(10000)).toBe("10,000");
+});
+
+test("numWithCommas - add commas to number hundred thousand", () => {
+  expect(numWithCommas(100000)).toBe("100,000");
+});
+
+test("numWithCommas - add commas to number million", () => {
+  expect(numWithCommas(1000000)).toBe("1,000,000");
 });
