@@ -85,3 +85,9 @@ export const setAdvisorValue = (valueName, value) => ({
   type: "setAdvisorValue",
   payload: { valueName, value },
 });
+
+// plan
+export const setPlanValue = (valueName, value) => ({
+  type: "setPlanValue",
+  payload: { valueName, value },
+});

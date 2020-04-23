@@ -6,6 +6,7 @@ import financesReducer from "./finances";
 import goalsReducer from "./goals";
 import loginReducer from "./login";
 import pageContentReducer from "./page-content";
+import planReducer from "./plan";
 import profileReducer from "./profile";
 import toastPageNavReducer from "./toast-page-nav";
 
@@ -16,6 +17,7 @@ export default combineReducers({
   goalsReducer,
   loginReducer,
   pageContentReducer,
+  planReducer,
   profileReducer,
   toastPageNavReducer,
 });
