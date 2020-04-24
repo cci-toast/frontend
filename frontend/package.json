@@ -27,7 +27,7 @@
         "build-webpack": "webpack --mode production",
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "jest",
+        "test": "jest --coverage",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
