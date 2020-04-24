@@ -63,7 +63,7 @@ class PageContentTemplate extends React.Component {
     } else {
       this.saveLabel = "Next";
     }
-    this.setHideSaveCancel(null, this.props.currentStep === 0);
+    this.setHideSaveCancel(false, this.props.currentStep === 0);
   }
 
   getContent() {

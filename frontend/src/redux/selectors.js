@@ -51,6 +51,10 @@ export const getSalaryAfterTax = (state) =>
 export const getMonthlySalaryAfterTax = (state) =>
   calcMonthlyValue(getSalaryAfterTax(state));
 export const getShopping = (state) => state.financesReducer.shopping;
+export const getProtectionMonthly = (state) =>
+  state.financesReducer.protectionMonthly;
+export const getProtectionPolicy = (state) =>
+  state.financesReducer.protectionPolicy;
 
 // family
 export const getPartners = (state) => state.familyReducer.partners;
@@ -68,8 +72,11 @@ export const getGoals = (state) => state.goalsReducer.goals;
 // protection
 export const getProtectionMultiplier = (state) =>
   calcProtectionMultiplier(getAge(state));
-export const getProtection = (state) =>
+export const getProtectionPolicyPlan = (state) =>
   calcProtection(getSalaryAfterTax(state), getProtectionMultiplier(state));
+export const getProtectionMonthlyPlan = (state) =>
+  state.planReducer.protectionMonthly;
+
 // emergency savings
 export const getSavingsLowerBound = (state) =>
   calcSavingsLowerBound(getMonthlySalaryAfterTax(state));

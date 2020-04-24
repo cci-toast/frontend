@@ -2,6 +2,8 @@ const initialState = {
   salaryAfterTax: 87000,
   retirementSavings: 100000,
   shopping: 0.0,
+  protectionMonthly: 20,
+  protectionPolicy: 250000,
 };
 
 export default function (state = initialState, action) {
