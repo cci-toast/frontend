@@ -14,6 +14,7 @@ import {
   calcRetirementYears,
   calcRetirementMonthly,
 } from "../utils/plan-utils";
+import { lookupUser } from "../utils/login-utils";
 
 // toast-page-nav
 export const getProfileTitlesList = (state) =>
@@ -25,6 +26,11 @@ export const getActiveTitle = (state) => state.toastPageNavReducer.activeTitle;
 // login
 export const getEmail = (state) => state.loginReducer.email;
 export const getPassword = (state) => state.loginReducer.password;
+export const getUser = (state) =>
+  lookupUser(getEmail(state), getPassword(state));
+export const isLoggedInAdvisor = (state) =>
+  state.loginReducer.isLoggedInAdvisor;
+export const isLoggedInClient = (state) => state.loginReducer.isLoggedInClient;
 
 // page content
 export const getCurrentStep = (state) => state.pageContentReducer.currentStep;

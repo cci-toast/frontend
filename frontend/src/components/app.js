@@ -3,13 +3,10 @@ import "../index.css";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import ActionItems from "./pages/action-items";
-import AdvisorContact from "./pages/advisor-contact";
-import Clients from "./pages/clients";
-import Configuration from "./pages/configuration";
-import Login from "./pages/login";
-import Plan from "./pages/plan";
-import Profile from "./pages/profile";
+import Login from "./login";
+import PageTemplate from "./page-template";
+
+import PrivateRoute from "./private-route";
 
 class App extends React.Component {
   render() {
@@ -17,17 +14,48 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/plan" component={Plan} />
-          <Route exact path="/advisorcontact" component={AdvisorContact} />
-          <Route exact path="/actionitems" component={ActionItems} />
-          <Route />
-        </Switch>
-
-        <Switch>
-          <Route exact path="/configuration" component={Configuration} />
-          <Route exact path="/clients" component={Clients} />
-          <Route />
+          <PrivateRoute
+            exact
+            path="/profile"
+            component={PageTemplate}
+            user="client"
+            page="profile"
+          />
+          <PrivateRoute
+            exact
+            path="/plan"
+            component={PageTemplate}
+            user="client"
+            page="plan"
+          />
+          <PrivateRoute
+            exact
+            path="/advisorcontact"
+            component={PageTemplate}
+            user="client"
+            page="advisorcontact"
+          />
+          <PrivateRoute
+            exact
+            path="/actionitems"
+            component={PageTemplate}
+            user="client"
+            page="actionitems"
+          />
+          <PrivateRoute
+            exact
+            path="/configuration"
+            component={PageTemplate}
+            user="advisor"
+            page="configuration"
+          />
+          <PrivateRoute
+            exact
+            path="/clients"
+            component={PageTemplate}
+            user="advisor"
+            page="clients"
+          />
         </Switch>
       </BrowserRouter>
     );

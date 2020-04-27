@@ -4,7 +4,7 @@ import { setCities, setProfileValue } from "../actions";
 
 import { getStateCode } from "../../utils/select-utils";
 
-function* fetchCities(action) {
+function* fetchCities() {
   yield takeLatest("fetchCities", function* (action) {
     const response = yield fetch(
       `https://parseapi.back4app.com/classes/Usabystate_${getStateCode(
