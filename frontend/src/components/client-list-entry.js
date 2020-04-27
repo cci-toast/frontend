@@ -82,16 +82,12 @@ class ClientListEntry extends React.Component {
     return Style.it(
       `${styles}`,
       <div className="entry">
-<<<<<<< HEAD
-        <a
+        <Link
           href="/profile"
           className="link"
           onClick={this.setClient}
           title="Click to view the client's profile"
         >
-=======
-        <Link to="/profile" className="link" onClick={this.setClient}>
->>>>>>> [#161] - write to client profile api
           {this.props.firstName} {this.props.middleName} {this.props.lastName}
         </Link>
 

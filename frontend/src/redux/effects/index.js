@@ -5,7 +5,7 @@ import * as Selectors from "../selectors";
 
 import { getStateCode } from "../../utils/select-utils";
 
-const clientBaseURL = "http://0.0.0.0:8000/api";
+const clientBaseURL = "https://toastbackend.herokuapp.com/api";
 
 function* fetchCities() {
   yield takeLatest("fetchCities", function* (action) {
@@ -62,6 +62,52 @@ function* fetchClients() {
 
     yield put(Actions.setAdvisorValue("clients", clients));
     // yield put fetchClientProfile()
+    // yield put(Actions.setProfileValue("city", cities[0]));
+  });
+}
+
+function* writeClient() {
+  yield takeLatest(["incrementStep", "decrementStep", "setStep"], function* (
+    action
+  ) {
+    const firstName = yield select(Selectors.getFirstName);
+    const lastName = yield select(Selectors.getLastName);
+    const middleName = yield select(Selectors.getMiddleName);
+    const birthYear = yield select(Selectors.getBirthYear);
+    const email = yield select(Selectors.getEmail);
+    const city = yield select(Selectors.getCity);
+    const state = yield select(Selectors.getState);
+    const salaryAfterTax = yield select(Selectors.getSalaryAfterTax);
+    yield fetch("http://0.0.0.0:8000/api/clients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        middle_name: middleName,
+        birth_year: birthYear,
+        email: email,
+        city: city,
+        state: state,
+        personal_annual_net_income: salaryAfterTax,
+        additional_income: null,
+        advisor: null,
+      }),
+    })
+      .then((res) => {
+        res.json().then((json) => {
+          if (res.status >= 200 && res.status < 300) {
+            return json;
+          } else {
+            throw res;
+          }
+        });
+      })
+      .catch((error) => {
+        throw error;
+      });
   });
 }
 
@@ -133,5 +179,6 @@ export default function* rootEffect() {
     fetchClientProfile(),
     fetchClients(),
     createClient(),
+    writeClient(),
   ]);
 }

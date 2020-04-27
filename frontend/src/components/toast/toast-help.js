@@ -42,17 +42,7 @@ class ToastSaveCancel extends React.Component {
         case "plan":
           return clientPlan.map((p) => <p key={p}>{p}</p>);
         case "actionitems":
-<<<<<<< HEAD
           return clientActionItems.map((p) => <p key={p}>{p}</p>);
-=======
-          return clientActionItems.map((p) => (
-            <p>
-              {" "}
-              key={p}
-              {p}
-            </p>
-          ));
->>>>>>> [#161] - write to client profile api
         case "advisorcontact":
           return clientAdvisorContact.map((p) => <p key={p}>{p}</p>);
         default:
