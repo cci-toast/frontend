@@ -5,10 +5,16 @@ import { Link } from "react-router-dom";
 
 import ToastButton from "./toast/toast-button";
 
+import { Link } from "react-router-dom";
+
 class ClientNav extends React.Component {
   getButton(label, iconName, href) {
     return (
+<<<<<<< HEAD
       <Link to={`/${href}`} className="link">
+=======
+      <Link to={`/${href}`}>
+>>>>>>> [#161] - write to client profile api
         <ToastButton
           tertiary
           type="button"

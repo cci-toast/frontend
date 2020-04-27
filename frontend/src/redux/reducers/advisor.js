@@ -4,6 +4,7 @@ const initialState = {
   email: "jblack92@gmail.com",
   phoneNumber: "(123)-456-7890",
   address: "29 Circuit Lane, Philadelphia, PA 19104",
+<<<<<<< HEAD
   searchTerm: "",
   clients: [
     {
@@ -31,6 +32,9 @@ const initialState = {
       lastName: "Doe",
     },
   ],
+=======
+  clients: [],
+>>>>>>> [#161] - write to client profile api
 };
 
 export default function (state = initialState, action) {

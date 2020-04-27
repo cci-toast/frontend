@@ -133,6 +133,10 @@ class ToastSelect extends React.Component {
           <select
             type="text"
             name={this.props.name}
+<<<<<<< HEAD
+=======
+            value={this.props.value}
+>>>>>>> [#161] - write to client profile api
             onChange={this.props.onChange}
             defaultValue={this.props.defaultValue}
             onFocus={this.onFocus}

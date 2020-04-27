@@ -1,11 +1,11 @@
 export const users = [
   {
-    email: "client",
+    email: "client@client.com",
     password: "client",
     user: "client",
   },
   {
-    email: "advisor",
+    email: "advisor@advisor.com",
     password: "advisor",
     user: "advisor",
   },

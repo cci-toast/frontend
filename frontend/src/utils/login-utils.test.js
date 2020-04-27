@@ -3,9 +3,9 @@ import { lookupUser } from "./login-utils";
 // lookupUser
 
 test("lookupUser - client", () => {
-  expect(lookupUser("client", "client")).toBe("client");
+  expect(lookupUser("client@client.com", "client")).toBe("client");
 });
 
 test("lookupUser - advisor", () => {
-  expect(lookupUser("advisor", "advisor")).toBe("advisor");
+  expect(lookupUser("advisor@advisor.com", "advisor")).toBe("advisor");
 });

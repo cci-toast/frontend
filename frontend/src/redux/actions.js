@@ -136,3 +136,13 @@ export const setPlanValue = (valueName, value) => ({
   type: "setPlanValue",
   payload: { valueName, value },
 });
+
+// api
+
+export const fetchClientProfile = () => ({
+  type: "fetchClientProfile",
+});
+
+export const fetchClients = () => ({
+  type: "fetchClients",
+});

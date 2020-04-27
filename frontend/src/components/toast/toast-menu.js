@@ -3,8 +3,10 @@ import Style from "style-it";
 
 import ToastIcon from "./toast-icon";
 
+import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
-import { setProfileValue } from "../../redux/actions";
+import { setProfileValue, fetchClientProfile } from "../../redux/actions";
 
 class ToastMenu extends React.Component {
   constructor(props) {
@@ -39,6 +41,8 @@ class ToastMenu extends React.Component {
     this.props.setProfileValue("firstName", this.props.firstName);
     this.props.setProfileValue("middleName", this.props.middleName);
     this.props.setProfileValue("lastName", this.props.lastName);
+
+    this.props.fetchClientProfile();
   }
 
   createMenu() {
@@ -46,8 +50,8 @@ class ToastMenu extends React.Component {
     return (
       <div className="card" tabIndex="-1" onBlur={this.onBlur}>
         {numbers.map((num) => (
-          <a
-            href={`/${this.props.links[num]}`}
+          <Link
+            to={`/${this.props.links[num]}`}
             key={`${this.props.links[num]}`}
             onMouseDown={this.setClose}
             onClick={this.setClient}
@@ -65,7 +69,7 @@ class ToastMenu extends React.Component {
                 <label>{this.props.labels[num]}</label>
               </div>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     );
@@ -141,4 +145,5 @@ class ToastMenu extends React.Component {
 
 export default connect(null, {
   setProfileValue,
+  fetchClientProfile,
 })(ToastMenu);

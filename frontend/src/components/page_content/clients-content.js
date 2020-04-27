@@ -4,6 +4,7 @@ import Style from "style-it";
 import ClientListEntry from "../client-list-entry";
 
 import { connect } from "react-redux";
+<<<<<<< HEAD
 import { setSearchTerm } from "../../redux/actions";
 import { getFilteredClients, getSearchTerm } from "../../redux/selectors";
 
@@ -11,6 +12,17 @@ class ClientsContent extends React.Component {
   componenDidMount() {
     this.props.setSearchTerm("");
     this.props.searchTerm = "";
+=======
+
+import { fetchClients } from "../../redux/actions";
+import { getClients } from "../../redux/selectors";
+
+class ClientsContent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.props.fetchClients();
+>>>>>>> [#161] - write to client profile api
   }
 
   getClients() {
@@ -43,8 +55,17 @@ class ClientsContent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+<<<<<<< HEAD
   clients: getFilteredClients(state),
   searchTerm: getSearchTerm(state),
 });
 
 export default connect(mapStateToProps, { setSearchTerm })(ClientsContent);
+=======
+  clients: getClients(state),
+});
+
+export default connect(mapStateToProps, {
+  fetchClients,
+})(ClientsContent);
+>>>>>>> [#161] - write to client profile api
