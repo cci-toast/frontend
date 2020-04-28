@@ -37,12 +37,14 @@ class ToastPieChart extends React.Component {
     
         .chart {
             display: flex;
-            align-items: center;
-            flex-direction: column;
-            background-color: var(--toast-neutral-5);
-            padding: 2rem 5rem 5rem 5rem;
-            margin: 0 3rem 3rem 3rem;
-            border-radius: 0.5rem;
+      align-items: center;
+      flex-direction: column;
+      background-color: var(--toast-neutral-5);
+      padding: 2rem 5rem 5rem 5rem;
+      margin: 1.25rem 3rem 3rem 3rem;
+      border-radius: 0.5rem;
+      height: 47vh;
+      width: 44rem;
         }
     
         .top-right {
@@ -67,6 +69,7 @@ class ToastPieChart extends React.Component {
         }
         .recharts-legend-wrapper{
             padding-left:20rem;
+            
         }
         `;
     return Style.it(
@@ -99,7 +102,7 @@ class ToastPieChart extends React.Component {
 
           <PieChart
             width={document.documentElement.clientWidth * 0.35}
-            height={document.documentElement.clientHeight * 0.45}
+            height={document.documentElement.clientHeight * 0.4}
           >
             <Pie
               dataKey="value"
