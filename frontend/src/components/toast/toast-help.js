@@ -38,28 +38,28 @@ class ToastSaveCancel extends React.Component {
     if (this.props.user === "client") {
       switch (this.props.page) {
         case "profile":
-          return clientProfile.map((p) => <p>{p}</p>);
+          return clientProfile.map((p) => <p key={p}>{p}</p>);
         case "plan":
-          return clientPlan.map((p) => <p>{p}</p>);
+          return clientPlan.map((p) => <p key={p}>{p}</p>);
         case "actionitems":
-          return clientActionItems.map((p) => <p>{p}</p>);
+          return clientActionItems.map((p) => <p key={p}>{p}</p>);
         case "advisorcontact":
-          return clientAdvisorContact.map((p) => <p>{p}</p>);
+          return clientAdvisorContact.map((p) => <p key={p}>{p}</p>);
         default:
           return <p></p>;
       }
     } else if (this.props.user === "advisor") {
       switch (this.props.page) {
         case "profile":
-          return advisorClientProfile.map((p) => <p>{p}</p>);
+          return advisorClientProfile.map((p) => <p key={p}>{p}</p>);
         case "plan":
-          return advisorClientPlan.map((p) => <p>{p}</p>);
+          return advisorClientPlan.map((p) => <p key={p}>{p}</p>);
         case "actionitems":
-          return advisorClientActionItems.map((p) => <p>{p}</p>);
+          return advisorClientActionItems.map((p) => <p key={p}>{p}</p>);
         case "configuration":
-          return advisorConfiguration.map((p) => <p>{p}</p>);
+          return advisorConfiguration.map((p) => <p key={p}>{p}</p>);
         case "clients":
-          return advisorClients.map((p) => <p>{p}</p>);
+          return advisorClients.map((p) => <p key={p}>{p}</p>);
         default:
           return <p></p>;
       }

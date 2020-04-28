@@ -4,13 +4,29 @@ import Style from "style-it";
 import ToastIcon from "./toast/toast-icon";
 import ToastMenu from "./toast/toast-menu";
 
+import { connect } from "react-redux";
+import { setProfileValue } from "../redux/actions";
+
 class ClientListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.menuLabels = ["Profile", "Plan", "Action Items"];
     this.menuIconNames = ["user", "barchart", "checkcircle"];
     this.menuLinks = ["profile", "plan", "actionitems"];
+
+    this.setClient = this.setClient.bind(this);
   }
+
+  setClient(event) {
+    let name = event.target.innerHTML.split(" ");
+    let firstName = name[0];
+    let middleName = name[1];
+    let lastName = name[2];
+    this.props.setProfileValue("firstName", firstName);
+    this.props.setProfileValue("middleName", middleName);
+    this.props.setProfileValue("lastName", lastName);
+  }
+
   render() {
     const styles = `
     .entry {
@@ -60,7 +76,7 @@ class ClientListEntry extends React.Component {
     return Style.it(
       `${styles}`,
       <div className="entry">
-        <a href="/profile" className="link">
+        <a href="/profile" className="link" onClick={this.setClient}>
           {this.props.firstName} {this.props.middleName} {this.props.lastName}
         </a>
 
@@ -68,6 +84,9 @@ class ClientListEntry extends React.Component {
           labels={this.menuLabels}
           iconNames={this.menuIconNames}
           links={this.menuLinks}
+          firstName={this.props.firstName}
+          middleName={this.props.middleName}
+          lastName={this.props.lastName}
         >
           <div className="ellipsis">
             <ToastIcon
@@ -82,4 +101,7 @@ class ClientListEntry extends React.Component {
     );
   }
 }
-export default ClientListEntry;
+
+export default connect(null, {
+  setProfileValue,
+})(ClientListEntry);

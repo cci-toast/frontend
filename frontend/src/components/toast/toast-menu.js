@@ -3,6 +3,9 @@ import Style from "style-it";
 
 import ToastIcon from "./toast-icon";
 
+import { connect } from "react-redux";
+import { setProfileValue } from "../../redux/actions";
+
 class ToastMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +13,9 @@ class ToastMenu extends React.Component {
     this.closeMenu = this.closeMenu.bind(this);
     this.onBlur = this.onBlur.bind(this);
 
+    this.setClient = this.setClient.bind(this);
     this.setClose = this.setClose.bind(this);
+
     this.close = true;
   }
 
@@ -30,6 +35,12 @@ class ToastMenu extends React.Component {
     this.close = false;
   }
 
+  setClient() {
+    this.props.setProfileValue("firstName", this.props.firstName);
+    this.props.setProfileValue("middleName", this.props.middleName);
+    this.props.setProfileValue("lastName", this.props.lastName);
+  }
+
   createMenu() {
     var numbers = [...Array(this.props.labels.length).keys()];
     return (
@@ -39,6 +50,7 @@ class ToastMenu extends React.Component {
             href={`/${this.props.links[num]}`}
             key={`${this.props.links[num]}`}
             onMouseDown={this.setClose}
+            onClick={this.setClient}
           >
             <div className="list-item">
               <div className="icon-text">
@@ -126,4 +138,6 @@ class ToastMenu extends React.Component {
   }
 }
 
-export default ToastMenu;
+export default connect(null, {
+  setProfileValue,
+})(ToastMenu);
