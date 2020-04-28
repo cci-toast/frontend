@@ -1,6 +1,5 @@
 import React from "react";
 import Style from "style-it";
-import ToastToggle from "../../toast/toast-toggle";
 import { numWithCommas, calcMonthlyValue } from "../../../utils/plan-utils";
 
 import { connect } from "react-redux";
@@ -74,8 +73,6 @@ class Budgeting extends React.Component {
       `${styles}`,
 
       <div className={this.getClasses()}>
-        <ToastToggle active="Target" inactive="Current" />
-
         <ToastPieChart
           label={this.data}
           salaryAfterTax={this.props.salaryAfterTax}

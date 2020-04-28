@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { getDebtMonthly, getSalaryAfterDebt } from "../../../redux/selectors";
 
 import { numWithCommas, calcMonthlyValue } from "../../../utils/plan-utils";
-import ToastToggle from "../../toast/toast-toggle";
 
 import ToastPieChart from "../../toast/toast-pie-chart";
 
@@ -66,8 +65,6 @@ class Debt extends React.Component {
       `${styles}`,
 
       <div className={this.getClasses()}>
-        <ToastToggle active="Target" inactive="Current" />
-
         <ToastPieChart
           label={this.data}
           salaryAfterTax={this.props.salaryAfterTax}

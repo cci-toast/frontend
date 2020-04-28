@@ -4,6 +4,7 @@ import Style from "style-it";
 import { PieChart, Pie, Legend } from "recharts";
 
 import { numWithCommas } from "../../utils/plan-utils";
+import ToastToggle from "./toast-toggle";
 
 class ToastPieChart extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class ToastPieChart extends React.Component {
             padding-bottom: 4rem;
             display: flex;
             align-items: flex-end;
+            padding-left:20rem;
         }
     
 
@@ -62,6 +64,9 @@ class ToastPieChart extends React.Component {
 
         .recharts-pie-label-line{
             d:none;
+        }
+        .recharts-legend-wrapper{
+            padding-left:20rem;
         }
         `;
     return Style.it(
@@ -84,6 +89,8 @@ class ToastPieChart extends React.Component {
 
         <div className="chart">
           <div className="row">
+            <ToastToggle active="Target" inactive="Current" />
+
             <div className="top-right">
               <h3>{this.props.header}</h3>
               <p className="subheader">{subheader}</p>
@@ -92,7 +99,7 @@ class ToastPieChart extends React.Component {
 
           <PieChart
             width={document.documentElement.clientWidth * 0.35}
-            height={document.documentElement.clientHeight * 0.35}
+            height={document.documentElement.clientHeight * 0.45}
           >
             <Pie
               dataKey="value"
@@ -102,7 +109,7 @@ class ToastPieChart extends React.Component {
               outerRadius={150}
               label={this.getLabel}
             />
-            <Legend layout="horizontal" verticalAlign="bottom" align="right" />
+            <Legend layout="vertical" verticalAlign="bottom" align="right" />
           </PieChart>
         </div>
 
