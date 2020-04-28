@@ -26,12 +26,12 @@ class Budgeting extends React.Component {
       {
         name: "Fixed Expenses",
         value: this.props.fixedExpenses,
-        fill: "var(--toast-purple-3)",
+        fill: "var(--toast-purple-1)",
       },
       {
         name: "Savings",
         value: this.props.savings,
-        fill: "var(--toast-purple-1)",
+        fill: "var(--toast-purple-3)",
       },
     ];
   }
@@ -39,7 +39,14 @@ class Budgeting extends React.Component {
   getCaption() {
     return `Given that your monthly income is $${numWithCommas(
       calcMonthlyValue(this.props.salaryAfterTax)
-    )}, we recommend you set aside $3,625 for fixed expenses or expenses that can’t be easily changed such as rent/mortgage or subscriptions. We also recommend you set aside $2,175 for spending and $1,450 for savings for this month.  `;
+    )}, we recommend you set aside $${numWithCommas(
+      this.props.fixedExpenses
+    )} for fixed expenses or expenses that can’t be easily changed such as rent/mortgage or subscriptions. 
+    We also recommend you set aside $${numWithCommas(
+      this.props.spending
+    )} for spending and $${numWithCommas(
+      this.props.savings
+    )} for savings for this month.  `;
   }
 
   getClasses() {
@@ -73,7 +80,6 @@ class Budgeting extends React.Component {
           label={this.data}
           salaryAfterTax={this.props.salaryAfterTax}
           data={this.data}
-          subheader={calcMonthlyValue(this.props.salaryAfterTax)}
           caption={this.getCaption()}
         />
       </div>

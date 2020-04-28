@@ -1,7 +1,7 @@
 import React from "react";
 import Style from "style-it";
 
-import { PieChart, Pie } from "recharts";
+import { PieChart, Pie, Legend } from "recharts";
 
 import { numWithCommas } from "../../utils/plan-utils";
 
@@ -21,6 +21,9 @@ class ToastPieChart extends React.Component {
   }
 
   render() {
+    if (this.props.subheader) {
+      var subheader = "/$" + numWithCommas(this.props.subheader);
+    }
     const styles = `
         .hidden {
             visibility: hidden;
@@ -47,19 +50,18 @@ class ToastPieChart extends React.Component {
             display: flex;
             align-items: flex-end;
         }
- 
-      
+    
+
         .subheader {
             margin-top: 0.5rem;
             margin-left: 0.25rem;
         }
-        
-        .recharts-bar-rectangle .recharts-rectangle {
-            filter: url(#shadow);
+        .recharts-sector{
+            stroke:none;
         }
-    
-        .recharts-cartesian-axis-line {
-            stroke-linecap: round;
+
+        .recharts-pie-label-line{
+            d:none;
         }
         `;
     return Style.it(
@@ -84,13 +86,14 @@ class ToastPieChart extends React.Component {
           <div className="row">
             <div className="top-right">
               <h3>{this.props.header}</h3>
-              <p className="subheader">
-                / ${numWithCommas(this.props.subheader)}
-              </p>
+              <p className="subheader">{subheader}</p>
             </div>
           </div>
 
-          <PieChart width={400} height={400}>
+          <PieChart
+            width={document.documentElement.clientWidth * 0.35}
+            height={document.documentElement.clientHeight * 0.35}
+          >
             <Pie
               dataKey="value"
               data={this.props.data}
@@ -99,6 +102,7 @@ class ToastPieChart extends React.Component {
               outerRadius={150}
               label={this.getLabel}
             />
+            <Legend layout="horizontal" verticalAlign="bottom" align="right" />
           </PieChart>
         </div>
 

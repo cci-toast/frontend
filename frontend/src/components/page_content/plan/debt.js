@@ -36,7 +36,7 @@ class Debt extends React.Component {
     return `Given that your monthly income is $${numWithCommas(
       calcMonthlyValue(this.props.salaryAfterTax)
     )}, we recommend you put at least $${numWithCommas(
-      this.props.salaryAfterDebt
+      this.props.debtMonthly
     )} towards repaying debt for this month. You are currently on track.
     `;
   }
