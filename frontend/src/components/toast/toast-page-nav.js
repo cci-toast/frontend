@@ -5,21 +5,11 @@ import { connect } from "react-redux";
 
 import { setStep } from "../../redux/actions";
 
-import {
-  getProfileTitlesList,
-  getFactorsTitlesList,
-  getCurrentStep,
-} from "../../redux/selectors";
+import { getCurrentStep } from "../../redux/selectors";
 
 class ToastPageNav extends React.Component {
   constructor(props) {
     super(props);
-
-    if (this.props.profile) {
-      this.titlesList = this.props.profileTitlesList;
-    } else {
-      this.titlesList = this.props.factorsTitlesList;
-    }
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -29,19 +19,19 @@ class ToastPageNav extends React.Component {
   }
 
   isActive(title) {
-    return this.props.currentStep === this.titlesList.indexOf(title)
+    return this.props.currentStep === this.props.titlesList.indexOf(title)
       ? "active"
       : "";
   }
 
   getTitles() {
-    let titlesHTML = this.titlesList.map((title) => {
+    let titlesHTML = this.props.titlesList.map((title) => {
       return (
         <h3
           className={this.isActive(`${title}`)}
           key={title}
           onClick={this.handleClick}
-          name={this.titlesList.indexOf(title)}
+          name={this.props.titlesList.indexOf(title)}
           id={title}
         >
           {title}
@@ -64,11 +54,11 @@ class ToastPageNav extends React.Component {
     };
 
     if (this.props.currentStep !== 0) {
-      for (let i = 0; i < this.titlesList.length; i++) {
+      for (let i = 0; i < this.props.titlesList.length; i++) {
         if (this.props.currentStep === i) {
-          if (document.getElementById(this.titlesList[i]) !== null) {
+          if (document.getElementById(this.props.titlesList[i]) !== null) {
             let currentHeight =
-              document.getElementById(this.titlesList[i]).offsetHeight /
+              document.getElementById(this.props.titlesList[i]).offsetHeight /
               pxToRem;
 
             heightSum = heights.reduce((a, b) => a + b);
@@ -80,9 +70,10 @@ class ToastPageNav extends React.Component {
           }
         }
 
-        if (document.getElementById(this.titlesList[i]) !== null) {
+        if (document.getElementById(this.props.titlesList[i]) !== null) {
           heights.push(
-            document.getElementById(this.titlesList[i]).offsetHeight / pxToRem
+            document.getElementById(this.props.titlesList[i]).offsetHeight /
+              pxToRem
           );
         }
       }
@@ -149,8 +140,6 @@ class ToastPageNav extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentStep: getCurrentStep(state),
-  profileTitlesList: getProfileTitlesList(state),
-  factorsTitlesList: getFactorsTitlesList(state),
 });
 
 export default connect(mapStateToProps, { setStep })(ToastPageNav);
