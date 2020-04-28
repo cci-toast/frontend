@@ -23,7 +23,7 @@ class ToastPieChart extends React.Component {
 
   render() {
     if (this.props.subheader) {
-      var subheader = "/$" + numWithCommas(this.props.subheader);
+      var subheader = "/ $" + numWithCommas(this.props.subheader);
     }
     const styles = `
         .hidden {
