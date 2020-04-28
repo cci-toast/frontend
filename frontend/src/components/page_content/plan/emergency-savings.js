@@ -20,7 +20,7 @@ class EmergencySavings extends React.Component {
       {
         name: "Minimum Target Savings",
         value: this.props.lowerBound,
-        fill: "var(--toast-purple)",
+        fill: "var(--toast-purple-2)",
       },
       {
         name: "Target Savings",

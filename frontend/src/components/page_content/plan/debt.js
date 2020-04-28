@@ -1,28 +1,43 @@
 import React from "react";
-import Center from "react-center";
 import Style from "style-it";
 
 import { connect } from "react-redux";
 
-import { RadialChart } from "react-vis";
-
 import { getDebtMonthly, getSalaryAfterDebt } from "../../../redux/selectors";
 
-import ToastToggle from "../../toast/toast-toggle";
+import { numWithCommas, calcMonthlyValue } from "../../../utils/plan-utils";
+
+import ToastPieChart from "../../toast/toast-pie-chart";
 
 class Debt extends React.Component {
   constructor(props) {
     super(props);
-    this.debtRepayment = [
+
+    this.data = [
       {
-        angle: this.props.debtMonthly,
-        label: "$" + this.props.debtMonthly + " monthly",
+        name: "Salary After Debt",
+        value: this.props.salaryAfterDebt,
+        fill: "var(--toast-neutral-3)",
       },
       {
-        angle: this.props.salaryAfterDebt,
-        label: "$" + this.props.salaryAfterDebt,
+        name: "Target Savings",
+        value: this.props.debtMonthly,
+        fill: "url(#gradient)",
       },
     ];
+  }
+
+  getHeader() {
+    return `$${numWithCommas(this.props.debtMonthly)}`;
+  }
+
+  getCaption() {
+    return `Given that your monthly income is $${numWithCommas(
+      calcMonthlyValue(this.props.salaryAfterTax)
+    )}, we recommend you put at least $${numWithCommas(
+      this.props.debtMonthly
+    )} towards repaying debt for this month. You are currently on track.
+    `;
   }
 
   getClasses() {
@@ -48,18 +63,16 @@ class Debt extends React.Component {
 
     return Style.it(
       `${styles}`,
+
       <div className={this.getClasses()}>
-        <ToastToggle active="Target" inactive="Current" />
-        <Center>
-          <RadialChart
-            colorRange={["#8c92d5", "#444db6"]}
-            data={this.debtRepayment}
-            width={300}
-            height={300}
-            showLabels={true}
-          />
-        </Center>
-        <p>Less than 36% of your income should go toward debt repayment.</p>
+        <ToastPieChart
+          label={this.data}
+          salaryAfterTax={this.props.salaryAfterTax}
+          header={this.getHeader()}
+          data={this.data}
+          subheader={calcMonthlyValue(this.props.salaryAfterTax)}
+          caption={this.getCaption()}
+        />
       </div>
     );
   }

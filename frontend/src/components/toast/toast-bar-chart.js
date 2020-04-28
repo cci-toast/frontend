@@ -73,7 +73,11 @@ class ToastBarChart extends React.Component {
       <div>
         <svg className="hidden">
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--toast-purple)" stopOpacity="1" />
+            <stop
+              offset="0%"
+              stopColor="var(--toast-purple-2)"
+              stopOpacity="1"
+            />
             <stop
               offset="100%"
               stopColor="var(--toast-blue-2)"

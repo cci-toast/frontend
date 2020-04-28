@@ -22,7 +22,7 @@ class Retirement extends React.Component {
       {
         name: "Your Total Savings",
         value: this.props.retirementSavings,
-        fill: "var(--toast-purple)",
+        fill: "var(--toast-purple-2)",
       },
       {
         name: "Total Target Savings",
