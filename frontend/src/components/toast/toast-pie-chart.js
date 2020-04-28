@@ -2,7 +2,6 @@ import React from "react";
 import Style from "style-it";
 
 import { PieChart, Pie } from "recharts";
-import ToastToggle from "./toast-toggle";
 
 import { numWithCommas } from "../../utils/plan-utils";
 
@@ -93,6 +92,7 @@ class ToastPieChart extends React.Component {
 
           <PieChart width={400} height={400}>
             <Pie
+              dataKey="value"
               data={this.props.data}
               cx={200}
               cy={200}
