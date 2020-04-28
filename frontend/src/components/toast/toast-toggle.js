@@ -22,8 +22,7 @@ class ToastToggle extends React.Component {
   }
 
   isActive() {
-    //return this.sliderLabel.current.innerHTML === this.props.active;
-    return true;
+    return this.sliderLabel.current.innerHTML === this.props.active;
   }
 
   render() {
