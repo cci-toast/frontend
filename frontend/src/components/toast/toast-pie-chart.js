@@ -1,27 +1,21 @@
 import React from "react";
 import Style from "style-it";
 
-import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
+import { PieChart, Pie } from "recharts";
+import ToastToggle from "./toast-toggle";
 
 import { numWithCommas } from "../../utils/plan-utils";
 
-class ToastBarChart extends React.Component {
+class ToastPieChart extends React.Component {
   constructor(props) {
     super(props);
 
     this.getLabel = this.getLabel.bind(this);
-    this.maxValue = Math.max(...this.props.data.map((d) => d.value));
   }
 
   getLabel(e) {
     return (
-      <text
-        x={e.x + e.width / 2}
-        y={e.y - 15}
-        fill="var(--toast-black)"
-        textAnchor="middle"
-        dominantBaseline="middle"
-      >
+      <text x={e.x - 1.5} y={e.y} textAnchor="middle">
         {`$${numWithCommas(e.value)}`}
       </text>
     );
@@ -54,7 +48,8 @@ class ToastBarChart extends React.Component {
             display: flex;
             align-items: flex-end;
         }
-    
+ 
+      
         .subheader {
             margin-top: 0.5rem;
             margin-left: 0.25rem;
@@ -84,57 +79,27 @@ class ToastBarChart extends React.Component {
               stopOpacity="1"
             />
           </linearGradient>
-
-          <filter id="shadow">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-            <feOffset dx="4" dy="4" />
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.2" />
-            </feComponentTransfer>
-            <feMerge>
-              <feMergeNode />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
         </svg>
 
         <div className="chart">
-          <div className="top-right">
-            <h3>{this.props.header}</h3>
-            <p className="subheader">
-              / ${numWithCommas(this.props.subheader)}
-            </p>
+          <div className="row">
+            <div className="top-right">
+              <h3>{this.props.header}</h3>
+              <p className="subheader">
+                / ${numWithCommas(this.props.subheader)}
+              </p>
+            </div>
           </div>
 
-          <BarChart
-            width={document.documentElement.clientWidth * 0.45}
-            height={document.documentElement.clientHeight * 0.35}
-            data={this.props.data}
-          >
-            <XAxis
-              dataKey="name"
-              stroke="var(--toast-black)"
-              tickLine={false}
-              axisLine={{
-                strokeWidth: 5,
-                stroke: "var(--toast-neutral-6)",
-              }}
-            />
-            <YAxis
-              hide={true}
-              domain={[0, this.maxValue + this.maxValue / 8]}
-            />
-
-            <Tooltip
-              cursor={{ fill: "var(--toast-neutral-4)" }}
-              contentStyle={{ borderRadius: "0.5rem" }}
-            />
-            <Bar
-              dataKey="value"
-              radius={[5, 5, 5, 5]}
+          <PieChart width={400} height={400}>
+            <Pie
+              data={this.props.data}
+              cx={200}
+              cy={200}
+              outerRadius={150}
               label={this.getLabel}
-            ></Bar>
-          </BarChart>
+            />
+          </PieChart>
         </div>
 
         <p className="caption">{this.props.caption}</p>
@@ -143,4 +108,4 @@ class ToastBarChart extends React.Component {
   }
 }
 
-export default ToastBarChart;
+export default ToastPieChart;
