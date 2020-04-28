@@ -11,10 +11,21 @@ import ToastHelp from "./toast/toast-help";
 import PageContentTemplate from "./page_content/page-content-template";
 
 import { connect } from "react-redux";
-import { getFirstName, getMiddleName, getLastName } from "../redux/selectors";
+import {
+  getFirstName,
+  getMiddleName,
+  getLastName,
+  getProfileTitlesList,
+  getFactorsTitlesList,
+} from "../redux/selectors";
+
+import { resetStep, setSaveText } from "../redux/actions";
 
 class PageTemplate extends React.Component {
   getScreenContent() {
+    this.props.resetStep();
+    this.props.setSaveText("Next");
+
     switch (this.props.page) {
       case "advisorcontact":
         return <AdvisorContactContent {...this.props} />;
@@ -28,13 +39,19 @@ class PageTemplate extends React.Component {
   getLeftNav() {
     switch (this.props.page) {
       case "profile":
-        return <ToastPageNav profile />;
+        return (
+          <ToastPageNav profile titlesList={this.props.profileTitlesList} />
+        );
       case "clients":
-        return <ToastPageNav hidden />;
+        return (
+          <ToastPageNav hidden titlesList={this.props.factorsTitlesList} />
+        );
       case "advisorcontact":
-        return <ToastPageNav hidden />;
+        return (
+          <ToastPageNav hidden titlesList={this.props.factorsTitlesList} />
+        );
       default:
-        return <ToastPageNav />;
+        return <ToastPageNav titlesList={this.props.factorsTitlesList} />;
     }
   }
 
@@ -136,6 +153,10 @@ const mapStateToProps = (state) => ({
   firstName: getFirstName(state),
   middleName: getMiddleName(state),
   lastName: getLastName(state),
+  profileTitlesList: getProfileTitlesList(state),
+  factorsTitlesList: getFactorsTitlesList(state),
 });
 
-export default connect(mapStateToProps)(PageTemplate);
+export default connect(mapStateToProps, { resetStep, setSaveText })(
+  PageTemplate
+);

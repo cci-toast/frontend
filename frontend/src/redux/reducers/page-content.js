@@ -2,6 +2,7 @@ const initialState = {
   currentStep: 0,
   hideSave: false,
   hideCancel: true,
+  saveText: "",
 };
 
 export default function (state = initialState, action) {
@@ -37,6 +38,13 @@ export default function (state = initialState, action) {
         ...state,
         hideSave: save,
         hideCancel: cancel,
+      };
+    }
+    case "setSaveText": {
+      const { save } = action.payload;
+      return {
+        ...state,
+        saveText: save,
       };
     }
     default:

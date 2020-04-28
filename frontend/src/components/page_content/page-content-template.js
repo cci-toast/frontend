@@ -8,12 +8,14 @@ import {
   getCurrentStep,
   getHideSave,
   getHideCancel,
+  getSaveText,
 } from "../../redux/selectors";
 import {
   incrementStep,
   decrementStep,
   resetStep,
   setHideSaveCancel,
+  setSaveText,
 } from "../../redux/actions";
 
 import ActionItemsContent from "./action-items-content";
@@ -26,12 +28,9 @@ import ProfileContent from "./profile-content";
 class PageContentTemplate extends React.Component {
   constructor(props) {
     super(props);
-    this.props.resetStep();
 
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
-
-    this.saveLabel = "Next";
   }
 
   next() {
@@ -59,9 +58,9 @@ class PageContentTemplate extends React.Component {
 
   setProfileSaveCancel() {
     if (this.props.currentStep === 3) {
-      this.saveLabel = "View Plan";
+      this.props.setSaveText("View Plan");
     } else {
-      this.saveLabel = "Next";
+      this.props.setSaveText("Next");
     }
     this.setHideSaveCancel(false, this.props.currentStep === 0);
   }
@@ -112,7 +111,7 @@ class PageContentTemplate extends React.Component {
           <ToastSaveCancel
             saveClicked={this.next}
             cancelClicked={this.prev}
-            saveLabel={this.saveLabel}
+            saveLabel={this.props.saveText}
             cancelLabel="previous"
             hideCancel={this.props.hideCancel}
             hideSave={this.props.hideSave}
@@ -127,6 +126,7 @@ const mapStateToProps = (state) => ({
   currentStep: getCurrentStep(state),
   hideSave: getHideSave(state),
   hideCancel: getHideCancel(state),
+  saveText: getSaveText(state),
 });
 
 export default connect(mapStateToProps, {
@@ -134,4 +134,5 @@ export default connect(mapStateToProps, {
   decrementStep,
   resetStep,
   setHideSaveCancel,
+  setSaveText,
 })(PageContentTemplate);
