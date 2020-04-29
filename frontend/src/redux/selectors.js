@@ -34,9 +34,6 @@ export const isLoggedInClient = (state) => state.loginReducer.isLoggedInClient;
 
 // page content
 export const getCurrentStep = (state) => state.pageContentReducer.currentStep;
-export const getHideSave = (state) => state.pageContentReducer.hideSave;
-export const getHideCancel = (state) => state.pageContentReducer.hideCancel;
-export const getSaveText = (state) => state.pageContentReducer.saveText;
 
 // PROFILE
 

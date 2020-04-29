@@ -4,19 +4,8 @@ import Style from "style-it";
 import ToastSaveCancel from "../toast/toast-save-cancel";
 
 import { connect } from "react-redux";
-import {
-  getCurrentStep,
-  getHideSave,
-  getHideCancel,
-  getSaveText,
-} from "../../redux/selectors";
-import {
-  incrementStep,
-  decrementStep,
-  resetStep,
-  setHideSaveCancel,
-  setSaveText,
-} from "../../redux/actions";
+import { getCurrentStep } from "../../redux/selectors";
+import { incrementStep, decrementStep, resetStep } from "../../redux/actions";
 
 import ActionItemsContent from "./action-items-content";
 import AdvisorContactContent from "./advisor-contact-content";
@@ -31,10 +20,11 @@ class PageContentTemplate extends React.Component {
 
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
+    this.getSave = this.getSave.bind(this);
   }
 
   next() {
-    if (this.saveLabel === "View Plan") {
+    if (this.getSave() === "View Plan") {
       document.location.href = "/plan";
     } else {
       this.props.incrementStep();
@@ -45,43 +35,35 @@ class PageContentTemplate extends React.Component {
     this.props.decrementStep();
   }
 
-  setHideSaveCancel(save, cancel) {
-    this.props.setHideSaveCancel(save, cancel);
+  getHideCancel() {
+    return this.props.currentStep === 0;
   }
 
-  setFactorsSaveCancel() {
-    this.setHideSaveCancel(
-      this.props.currentStep === 4,
-      this.props.currentStep === 0
-    );
+  getHideSave() {
+    return this.props.currentStep === 4 && this.props.page !== "profile";
   }
 
-  setProfileSaveCancel() {
-    if (this.props.currentStep === 3) {
-      this.props.setSaveText("View Plan");
+  getSave() {
+    if (this.props.page === "profile" && this.props.currentStep === 3) {
+      return "View Plan";
     } else {
-      this.props.setSaveText("Next");
+      return "Next";
     }
-    this.setHideSaveCancel(false, this.props.currentStep === 0);
   }
 
   getContent() {
     switch (this.props.page) {
       case "profile":
-        this.setProfileSaveCancel();
         return <ProfileContent {...this.props} />;
       case "plan":
-        this.setFactorsSaveCancel();
         return <PlanContent {...this.props} />;
       case "actionitems":
-        this.setFactorsSaveCancel();
         return <ActionItemsContent {...this.props} />;
       case "advisorcontact":
         return <AdvisorContactContent {...this.props} />;
       case "clients":
         return <ClientsContent {...this.props} />;
       case "configuration":
-        this.setFactorsSaveCancel();
         return <ConfigurationContent {...this.props} />;
       default:
         return <React.Fragment />;
@@ -111,10 +93,10 @@ class PageContentTemplate extends React.Component {
           <ToastSaveCancel
             saveClicked={this.next}
             cancelClicked={this.prev}
-            saveLabel={this.props.saveText}
+            saveLabel={this.getSave()}
             cancelLabel="previous"
-            hideCancel={this.props.hideCancel}
-            hideSave={this.props.hideSave}
+            hideCancel={this.getHideCancel()}
+            hideSave={this.getHideSave()}
           />
         </div>
       </div>
@@ -124,15 +106,10 @@ class PageContentTemplate extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentStep: getCurrentStep(state),
-  hideSave: getHideSave(state),
-  hideCancel: getHideCancel(state),
-  saveText: getSaveText(state),
 });
 
 export default connect(mapStateToProps, {
   incrementStep,
   decrementStep,
   resetStep,
-  setHideSaveCancel,
-  setSaveText,
 })(PageContentTemplate);
