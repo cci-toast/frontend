@@ -83,7 +83,7 @@ class ToastMenu extends React.Component {
         position: inherit;
         background-color: var(--toast-white);
         border-radius: 1rem;
-        box-shadow: 0px 10px 20px 5px var(--toast-neutral-3-transparent-2);
+        box-shadow: 0px 0px 7px 1px var(--toast-neutral-3-transparent-2);
         margin: 9.5rem -2rem 2rem 0;
         width: 10rem;
         max-height: 10rem;
@@ -111,7 +111,7 @@ class ToastMenu extends React.Component {
 
     .list-item:hover {
         cursor: pointer;
-        background-color: var(--toast-blue-2-transparent);
+        background-color: var(--toast-blue-1-transparent);
     }
 
     .icon-text {

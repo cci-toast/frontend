@@ -66,11 +66,11 @@ class ToastButton extends React.Component {
     }
 
     .primary:hover {
-      box-shadow: 0px 5px 12px 1px var(--toast-blue-2-transparent);
+      box-shadow: 2px 3px 5px 1px var(--toast-blue-1-transparent);
     }
 
     .secondary {
-      background-color: var(--toast-blue-1);
+      background-color: var(--toast-blue-2);
       float: right;
       text-transform: uppercase;
       padding: 0.75rem 0;
@@ -89,7 +89,7 @@ class ToastButton extends React.Component {
     }
 
     .tertiary:hover {
-      box-shadow: 0px 1px 8px 0px var(--toast-neutral-3-transparent);
+      box-shadow: 1px 2px 8px 1px var(--toast-neutral-3-transparent);
     }
 
     .quaternary {

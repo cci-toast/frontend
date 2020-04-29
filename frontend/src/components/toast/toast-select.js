@@ -13,6 +13,14 @@ class ToastSelect extends React.Component {
 
     this.input = React.createRef();
     this.select = React.createRef();
+
+    if (this.props.readOnly) {
+      this.backgroundColor = "var(--toast-neutral-5)";
+      this.cursor = "not-allowed";
+    } else {
+      this.backgroundColor = "var(--toast-neutral-6)";
+      this.cursor = "default";
+    }
   }
 
   showInput() {
@@ -49,7 +57,7 @@ class ToastSelect extends React.Component {
     const styles = `
     select {
       align-self: center;
-      background-color: var(--toast-neutral-6);
+      background-color: ${this.backgroundColor};
       font-size: 1rem;
       height: 3rem;
       min-width: 15rem;
@@ -57,6 +65,7 @@ class ToastSelect extends React.Component {
       color: var(--toast-neutral-1);
       border: none;
       outline: none;
+      cursor: ${this.cursor};
     }
 
     .select-wrapper {
@@ -64,9 +73,10 @@ class ToastSelect extends React.Component {
       border-radius: 20rem;
       height: 3rem;
       overflow: hidden;
-      background: var(--toast-neutral-6);
+      background: ${this.backgroundColor};
       margin: 0.5rem 0 1.5rem 0;
       padding: 0 0.5rem;
+      cursor: ${this.cursor};
     }
 
     .container {
@@ -80,7 +90,7 @@ class ToastSelect extends React.Component {
     }
 
     .focused {
-      box-shadow: 0 0 5px var(--toast-blue-1);
+      box-shadow: 0 0 5px var(--toast-blue-2);
     }
 
     .hidden {
@@ -109,6 +119,7 @@ class ToastSelect extends React.Component {
             defaultValue={this.props.defaultValue}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
+            disabled={this.props.readOnly}
           >
             <option value="" disabled>
               {this.props.placeholder}

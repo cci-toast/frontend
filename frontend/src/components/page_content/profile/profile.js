@@ -72,6 +72,7 @@ class Profile extends React.Component {
               name="firstName"
               onChange={this.handleChange}
               required
+              readOnly={this.props.readOnly}
             />
             <ToastInput
               type="text"
@@ -81,6 +82,7 @@ class Profile extends React.Component {
               name="lastName"
               onChange={this.handleChange}
               required
+              readOnly={this.props.readOnly}
             />
           </div>
 
@@ -92,6 +94,7 @@ class Profile extends React.Component {
               value={this.props.middleName}
               name="middleName"
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
             <ToastSelect
               options={getBirthYearOptions()}
@@ -102,6 +105,7 @@ class Profile extends React.Component {
               value={this.props.birthYear}
               id="birthYear"
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </div>
         </div>
@@ -117,6 +121,7 @@ class Profile extends React.Component {
               value={this.props.state}
               id="state"
               onChange={this.handleStateChange}
+              readOnly={this.props.readOnly}
             />
           </div>
           <div className="column">
@@ -128,6 +133,7 @@ class Profile extends React.Component {
               value={this.props.city}
               id="city"
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </div>
         </div>

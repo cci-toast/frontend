@@ -4,9 +4,9 @@
     --toast-black: rgb(26, 26, 26);
     --toast-black-transparent: rgba(26, 26, 26, 0.5);
     --toast-white: rgb(255, 255, 255);
-    --toast-blue-1: rgb(3, 100, 255);
-    --toast-blue-2: rgb(48, 98, 178);
-    --toast-blue-2-transparent: rgb(48, 98, 178, 0.2);
+    --toast-blue-1: rgb(48, 98, 178);
+    --toast-blue-1-transparent: rgb(48, 98, 178, 0.2);
+    --toast-blue-2: rgb(3, 100, 255);
     --toast-purple-1: rgb(67, 9, 112);
     --toast-purple-2: rgb(118, 26, 190);
     --toast-purple-3: rgb(184, 117, 236);
@@ -21,6 +21,7 @@
     --toast-neutral-3-transparent: rgba(172, 172, 172, 0.2);
     --toast-neutral-3-transparent-2: rgba(172, 172, 172, 0.6);
     --toast-neutral-4: rgb(205, 205, 205);
+    --toast-neutral-4-transparent: rgba(205, 205, 205, 0.3);
     --toast-neutral-5: rgb(233, 233, 233);
     --toast-neutral-6: rgb(245, 245, 245);
 }

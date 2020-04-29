@@ -30,7 +30,7 @@ class EmergencySavings extends React.Component {
       {
         name: "Your Income",
         value: this.props.salaryAfterTax,
-        fill: "var(--toast-blue-2)",
+        fill: "var(--toast-blue-1)",
       },
     ];
   }

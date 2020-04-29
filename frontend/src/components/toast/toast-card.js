@@ -6,10 +6,10 @@ class ToastCard extends React.Component {
     const styles = `
     .card {
       background-color: var(--toast-white);
-      padding: 2.5rem 2rem 3.8rem;
+      padding: 3.5rem 3rem 3.8rem;
       border-radius: 3rem 3rem 0rem 0rem;
-      width: 60rem;
-      box-shadow: 0px 10px 20px 5px var(--toast-neutral-3-transparent);
+      width: 53rem;
+      box-shadow: 0px 5px 7px 3px var(--toast-neutral-3-transparent);
     }
       `;
 

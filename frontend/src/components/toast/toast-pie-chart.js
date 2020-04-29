@@ -32,19 +32,19 @@ class ToastPieChart extends React.Component {
         }
     
         .caption {
-            padding: 0 3rem 0 3rem;
+            padding: 0 1rem 0 1rem;
         }
     
         .chart {
             display: flex;
-      align-items: center;
-      flex-direction: column;
-      background-color: var(--toast-neutral-5);
-      padding: 2rem 5rem 5rem 5rem;
-      margin: 1.25rem 3rem 3rem 3rem;
-      border-radius: 0.5rem;
-      height: 47vh;
-      width: 44rem;
+            align-items: center;
+            flex-direction: column;
+            background-color: var(--toast-neutral-5);
+            padding: 2rem 5rem 5rem 2rem;
+            margin: 1.25rem 1rem 2rem 1rem;
+            border-radius: 0.5rem;
+            height: 47vh;
+            width: 44rem;
         }
     
         .top-right {
@@ -54,21 +54,22 @@ class ToastPieChart extends React.Component {
             align-items: flex-end;
             padding-left:20rem;
         }
-    
 
         .subheader {
             margin-top: 0.5rem;
             margin-left: 0.25rem;
         }
+
         .recharts-sector{
-            stroke:none;
+            stroke: none;
         }
 
         .recharts-pie-label-line{
-            d:none;
+            d: none;
         }
+
         .recharts-legend-wrapper{
-            padding-left:20rem;
+            padding-left: 20rem;
             
         }
         `;
@@ -84,7 +85,7 @@ class ToastPieChart extends React.Component {
             />
             <stop
               offset="100%"
-              stopColor="var(--toast-blue-2)"
+              stopColor="var(--toast-blue-1)"
               stopOpacity="1"
             />
           </linearGradient>

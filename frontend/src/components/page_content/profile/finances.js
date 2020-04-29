@@ -75,6 +75,7 @@ class Finances extends React.Component {
             iconHeight={20}
             onChange={this.handleChange}
             step={0.01}
+            readOnly={this.props.readOnly}
             required
           />
 
@@ -94,6 +95,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.additionalIncome}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
         </div>
@@ -113,6 +115,7 @@ class Finances extends React.Component {
               iconWidth={20}
               iconHeight={20}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
         </div>
@@ -128,6 +131,7 @@ class Finances extends React.Component {
               id="housingType"
               value={this.props.housingType}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
 
             <ToastInput
@@ -142,6 +146,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.housingAmount}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
           <hr />
@@ -159,6 +164,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.bill}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
 
@@ -177,6 +183,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.utility}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
           <hr />
@@ -194,6 +201,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.protectionMonthly}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
 
             <ToastInput
@@ -208,6 +216,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.protectionPolicy}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
           <hr />
@@ -225,6 +234,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.loanDebt}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
         </div>
@@ -245,6 +255,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.shopping}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
 
@@ -263,6 +274,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.leisure}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
           <hr />
@@ -280,6 +292,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.transportation}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
 
@@ -298,6 +311,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.subscription}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
 
@@ -316,6 +330,7 @@ class Finances extends React.Component {
               iconHeight={20}
               value={this.props.other}
               onChange={this.handleChange}
+              readOnly={this.props.readOnly}
             />
           </ToastShowHideInput>
         </div>
