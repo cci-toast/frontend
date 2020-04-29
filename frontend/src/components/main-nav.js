@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Style from "style-it";
 
 import ToastLogo from "../toast-logo.png";
@@ -34,7 +33,7 @@ class MainNav extends React.Component {
 
   getLogOut() {
     return (
-      <Link to="/" className="icon-caption" onClick={this.logOut}>
+      <a href="/" className="icon-caption" onClick={this.logOut}>
         <ToastIcon
           name="power"
           width={35}
@@ -43,13 +42,13 @@ class MainNav extends React.Component {
           strokeWidth={1}
         />
         <span className="caption">Log Out</span>
-      </Link>
+      </a>
     );
   }
 
   getLink(link, linkName, iconName) {
     return (
-      <Link to={`/${link}`} className="icon-caption">
+      <a href={`/${link}`} className="icon-caption">
         <ToastIcon
           name={iconName}
           width={35}
@@ -58,7 +57,7 @@ class MainNav extends React.Component {
           strokeWidth={1}
         />
         <span className="caption">{linkName}</span>
-      </Link>
+      </a>
     );
   }
 

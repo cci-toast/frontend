@@ -47,16 +47,6 @@ export const setStep = (step) => ({
   payload: { step },
 });
 
-export const setSaveText = (save) => ({
-  type: "setSaveText",
-  payload: { save },
-});
-
-export const setHideSaveCancel = (save, cancel) => ({
-  type: "setHideSaveCancel",
-  payload: { save, cancel },
-});
-
 // profile
 export const setProfileValue = (valueName, value) => ({
   type: "setProfileValue",

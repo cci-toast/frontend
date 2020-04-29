@@ -19,13 +19,14 @@ import {
   getFactorsTitlesList,
 } from "../redux/selectors";
 
-import { resetStep, setSaveText } from "../redux/actions";
+import { resetStep } from "../redux/actions";
 
 class PageTemplate extends React.Component {
-  getScreenContent() {
+  constructor(props) {
+    super(props);
     this.props.resetStep();
-    this.props.setSaveText("Next");
-
+  }
+  getScreenContent() {
     switch (this.props.page) {
       case "advisorcontact":
         return <AdvisorContactContent {...this.props} />;
@@ -157,6 +158,4 @@ const mapStateToProps = (state) => ({
   factorsTitlesList: getFactorsTitlesList(state),
 });
 
-export default connect(mapStateToProps, { resetStep, setSaveText })(
-  PageTemplate
-);
+export default connect(mapStateToProps, { resetStep })(PageTemplate);
