@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Style from "style-it";
 
 import ToastLogo from "../toast-logo.png";
@@ -34,7 +34,7 @@ class MainNav extends React.Component {
 
   getLogOut() {
     return (
-      <Link to="/" className="icon-caption" onClick={this.logOut}>
+      <NavLink to="/" className="icon-caption" onClick={this.logOut}>
         <ToastIcon
           name="power"
           width={35}
@@ -43,13 +43,18 @@ class MainNav extends React.Component {
           strokeWidth={1}
         />
         <span className="caption">Log Out</span>
-      </Link>
+      </NavLink>
     );
   }
 
   getLink(link, linkName, iconName) {
     return (
-      <Link to={`/${link}`} className="icon-caption">
+      <NavLink
+        to={`/${link}`}
+        className="icon-caption"
+        activeClassName="link-active"
+        exact={true}
+      >
         <ToastIcon
           name={iconName}
           width={35}
@@ -58,7 +63,7 @@ class MainNav extends React.Component {
           strokeWidth={1}
         />
         <span className="caption">{linkName}</span>
-      </Link>
+      </NavLink>
     );
   }
 
@@ -134,6 +139,13 @@ class MainNav extends React.Component {
     .icon-caption:hover {
       background-color: var(--toast-purple-transparent);
       mix-blend-mode: screen;
+    }
+    .link-active{
+      background-color: var(--toast-purple-1);
+      mix-blend-mode: screen;
+    }
+    .link-active:hover{
+      background-color: var(--toast-purple-1);
     }
 `;
 
