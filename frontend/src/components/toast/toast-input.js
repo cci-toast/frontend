@@ -9,6 +9,12 @@ class ToastInput extends React.Component {
 
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+
+    if (this.props.search) {
+      this.backgroundColor = "var(--toast-white)";
+    } else {
+      this.backgroundColor = "var(--toast-neutral-6)";
+    }
   }
 
   onFocus(e) {
@@ -47,7 +53,13 @@ class ToastInput extends React.Component {
   }
 
   getInputClasses() {
-    let classes = ["input-group"];
+    let classes = [];
+
+    if (this.props.search) {
+      classes.push("input-group-search");
+    } else {
+      classes.push("input-group");
+    }
 
     if (this.props.short) {
       classes.push("short");
@@ -60,7 +72,7 @@ class ToastInput extends React.Component {
     const styles = `
     input {
       border-radius: 20rem;
-      background-color: var(--toast-neutral-6);
+      background-color: ${this.backgroundColor};
       font-size: 1rem;
       border: none;
       height: 1.5rem;
@@ -89,8 +101,15 @@ class ToastInput extends React.Component {
     .input-group {
       display: flex;
       border-radius: 2rem;
-      background-color: var(--toast-neutral-6);
+      background-color: ${this.backgroundColor};
       margin: 0.5rem 0 1.5rem 0;
+    }
+
+    .input-group-search {
+      display: flex;
+      border-radius: 2rem;
+      background-color: ${this.backgroundColor};
+      border: 1px solid var(--toast-neutral-4);
     }
     
     .input-group-prepend {
@@ -99,7 +118,7 @@ class ToastInput extends React.Component {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--toast-neutral-6);
+      background-color: ${this.backgroundColor};
       border-top-left-radius: 20rem;
       border-bottom-left-radius: 20rem;
       color: var(--toast-neutral-1);
@@ -119,6 +138,7 @@ class ToastInput extends React.Component {
     .short {
       width: 70%;
     }
+
     `;
 
     return Style.it(

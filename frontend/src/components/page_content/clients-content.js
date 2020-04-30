@@ -3,7 +3,25 @@ import Style from "style-it";
 
 import ClientListEntry from "../client-list-entry";
 
+import { connect } from "react-redux";
+
+import { getFilteredClients } from "../../redux/selectors";
+
 class ClientsContent extends React.Component {
+  getClients() {
+    return this.props.clients.map((client) => {
+      return (
+        <ClientListEntry
+          id={client.id}
+          firstName={client.firstName}
+          middleName={client.middleName}
+          lastName={client.lastName}
+          key={client.id}
+        />
+      );
+    });
+  }
+
   render() {
     const styles = `
     .container {
@@ -14,52 +32,13 @@ class ClientsContent extends React.Component {
 
     return Style.it(
       `${styles}`,
-      <div className="container">
-        <ClientListEntry
-          firstName="John"
-          middleName="Joseph"
-          lastName="Smith"
-        />
-        <ClientListEntry firstName="Sarah" middleName="" lastName="Porter" />
-        <ClientListEntry
-          firstName="John"
-          middleName="Joseph"
-          lastName="Smith"
-        />
-        <ClientListEntry firstName="Sarah" middleName="" lastName="Porter" />
-        <ClientListEntry
-          firstName="John"
-          middleName="Joseph"
-          lastName="Smith"
-        />
-        <ClientListEntry firstName="Sarah" middleName="" lastName="Porter" />
-        <ClientListEntry
-          firstName="John"
-          middleName="Joseph"
-          lastName="Smith"
-        />
-        <ClientListEntry firstName="Sarah" middleName="" lastName="Porter" />
-        <ClientListEntry
-          firstName="John"
-          middleName="Joseph"
-          lastName="Smith"
-        />
-        <ClientListEntry firstName="Sarah" middleName="" lastName="Porter" />
-        <ClientListEntry
-          firstName="John"
-          middleName="Joseph"
-          lastName="Smith"
-        />
-        <ClientListEntry firstName="Sarah" middleName="" lastName="Porter" />
-        <ClientListEntry
-          firstName="John"
-          middleName="Joseph"
-          lastName="Smith"
-        />
-        <ClientListEntry firstName="Sarah" middleName="" lastName="Porter" />
-      </div>
+      <div className="container">{this.getClients()}</div>
     );
   }
 }
 
-export default ClientsContent;
+const mapStateToProps = (state) => ({
+  clients: getFilteredClients(state),
+});
+
+export default connect(mapStateToProps)(ClientsContent);

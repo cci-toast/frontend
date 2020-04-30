@@ -101,6 +101,11 @@ export const setAdvisorValue = (valueName, value) => ({
   payload: { valueName, value },
 });
 
+export const setSearchTerm = (value) => ({
+  type: "setSearchTerm",
+  payload: { value },
+});
+
 // plan
 export const setPlanValue = (valueName, value) => ({
   type: "setPlanValue",

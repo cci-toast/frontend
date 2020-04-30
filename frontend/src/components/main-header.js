@@ -2,6 +2,7 @@ import React from "react";
 import Style from "style-it";
 
 import ClientNav from "./client-nav";
+import ToastSearch from "./toast/toast-search";
 
 class MainHeader extends React.Component {
   getLeftSide() {
@@ -9,16 +10,18 @@ class MainHeader extends React.Component {
       case "header":
         return <h2>{this.props.header}</h2>;
       default:
-        return <React.Fragment></React.Fragment>;
+        return <React.Fragment />;
     }
   }
 
   getRightSide() {
     switch (this.props.rightside) {
       case "nav":
-        return <ClientNav></ClientNav>;
+        return <ClientNav />;
+      case "search":
+        return <ToastSearch />;
       default:
-        return <React.Fragment></React.Fragment>;
+        return <React.Fragment />;
     }
   }
 
