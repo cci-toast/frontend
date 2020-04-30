@@ -1,4 +1,5 @@
 const initialState = {
+  clientId: "",
   firstName: "",
   middleName: "",
   lastName: "",

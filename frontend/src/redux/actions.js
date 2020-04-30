@@ -47,6 +47,10 @@ export const setStep = (step) => ({
   payload: { step },
 });
 
+export const toggleShowPlanReady = () => ({
+  type: "toggleShowPlanReady",
+});
+
 // profile
 export const setProfileValue = (valueName, value) => ({
   type: "setProfileValue",

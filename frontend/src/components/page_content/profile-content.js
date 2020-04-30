@@ -9,10 +9,6 @@ import { resetStep } from "../../redux/actions";
 import { connect } from "react-redux";
 
 class ProfileContent extends React.Component {
-  onSubmit() {
-    // submit form
-  }
-
   componentDidMount() {
     this.props.resetStep();
   }
@@ -22,12 +18,12 @@ class ProfileContent extends React.Component {
 
     return Style.it(
       `${styles}`,
-      <form onSubmit={this.onSubmit}>
+      <React.Fragment>
         <Profile currentStep={this.props.currentStep} />
         <Finances currentStep={this.props.currentStep} />
         <Family currentStep={this.props.currentStep} />
         <Goals currentStep={this.props.currentStep} />
-      </form>
+      </React.Fragment>
     );
   }
 }
