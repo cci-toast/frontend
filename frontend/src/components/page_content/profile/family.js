@@ -74,7 +74,7 @@ class Family extends React.Component {
               label="Partner's Birth Year"
               list="birthYear"
               placeholder="Type in your partner's birth year"
-              value={this.props.partners[0].birthYear}
+              defaultValue={this.props.partners[0].birthYear}
               id="birthYear"
               onChange={this.setPartner}
             />
@@ -123,7 +123,7 @@ class Family extends React.Component {
               label="Child's Education"
               list="childEducation"
               placeholder="Type in your child's education"
-              value={this.props.children[0].education}
+              defaultValue={this.props.children[0].education}
               id="childEducation"
               onChange={this.setChildListValue}
             />
@@ -135,7 +135,7 @@ class Family extends React.Component {
               label="Child's Birth Year"
               list="childBirthYear"
               placeholder="Type in your child's birth year"
-              value={this.props.children[0].birthYear}
+              defaultValue={this.props.children[0].birthYear}
               id="childBirthYear"
               onChange={this.setChildListValue}
             />
