@@ -54,7 +54,7 @@ class Goals extends React.Component {
           name="description"
           label="Goal 1"
           list="goals"
-          placeholder="Type in your goal"
+          placeholder="Select your goal"
           defaultValue={this.props.goals[0].description}
           id="goals"
           onChange={this.setGoalListValue}

@@ -1,12 +1,31 @@
 import React from "react";
 import Style from "style-it";
 
+import ToastInput from "./toast-input";
+
 class ToastSelect extends React.Component {
   constructor(props) {
     super(props);
 
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+    this.showInput = this.showInput.bind(this);
+
+    this.input = React.createRef();
+    this.select = React.createRef();
+  }
+
+  showInput() {
+    let select = this.select.current.children[0];
+    for (let i = 0; i < select.options.length; i++) {
+      if (
+        select.options[i].selected &&
+        select.options[i].value === "Other (Type in)"
+      ) {
+        this.input.current.classList.remove("hidden");
+        this.select.current.classList.add("hidden");
+      }
+    }
   }
 
   onFocus(e) {
@@ -63,6 +82,10 @@ class ToastSelect extends React.Component {
     .focused {
       box-shadow: 0 0 5px var(--toast-blue-1);
     }
+
+    .hidden {
+      display: none;
+    }
     `;
 
     var dropdownOptions = this.props.options.map((option) => (
@@ -74,18 +97,32 @@ class ToastSelect extends React.Component {
       <div className={this.getClasses()}>
         <label className="input-label">{this.props.label}</label>
 
-        <div className="select-wrapper">
+        <div
+          className="select-wrapper"
+          onChange={this.showInput}
+          ref={this.select}
+        >
           <select
             type="text"
             name={this.props.name}
-            placeholder={this.props.placeholder}
-            value={this.props.value}
             onChange={this.props.onChange}
+            defaultValue={this.props.defaultValue}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
           >
+            <option value="" disabled>
+              {this.props.placeholder}
+            </option>
             {dropdownOptions}
           </select>
+        </div>
+
+        <div ref={this.input} className="hidden">
+          <ToastInput
+            type="text"
+            placeholder="Type in your goal"
+            onChange={this.props.onChange}
+          />
         </div>
       </div>
     );
