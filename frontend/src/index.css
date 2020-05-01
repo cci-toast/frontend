@@ -10,7 +10,7 @@
     --toast-purple-1: rgb(67, 9, 112);
     --toast-purple-2: rgb(118, 26, 190);
     --toast-purple-3: rgb(184, 117, 236);
-    --toast-purple-transparent: rgba(118, 26, 190, 0.2);
+    --toast-purple-2-transparent: rgba(118, 26, 190, 0.2);
     --toast-red: rgb(191, 0, 0);
     --toast-red-transparent: rgba(191, 0, 0, 0.2);
     --toast-gradient-1: linear-gradient( 90deg, rgb(118, 26, 190), rgb(48, 98, 178));
