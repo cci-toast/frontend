@@ -20,9 +20,6 @@ import {
 } from "../redux/selectors";
 
 class PageTemplate extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   getScreenContent() {
     switch (this.props.page) {
       case "advisorcontact":
