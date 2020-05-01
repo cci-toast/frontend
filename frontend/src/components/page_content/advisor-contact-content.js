@@ -3,7 +3,7 @@ import Style from "style-it";
 
 import { connect } from "react-redux";
 
-import { setAdvisorValue } from "../../redux/actions";
+import { setAdvisorValue, resetStep } from "../../redux/actions";
 
 import {
   getAdvisorFirstName,
@@ -14,6 +14,10 @@ import {
 } from "../../redux/selectors";
 
 class AdvisorContactContent extends React.Component {
+  componenDidMount() {
+    this.props.resetStep();
+  }
+
   render() {
     const styles = `
     .entry {
@@ -69,4 +73,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   setAdvisorValue,
+  resetStep,
 })(AdvisorContactContent);

@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Style from "style-it";
 
 import ToastLogo from "../toast-logo.png";
@@ -8,7 +9,6 @@ import { connect } from "react-redux";
 
 import { isLoggedInAdvisor, isLoggedInClient } from "../redux/selectors";
 import { logoutClient, logoutAdvisor, resetLogin } from "../redux/actions";
-
 class MainNav extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ class MainNav extends React.Component {
 
   getLogOut() {
     return (
-      <a href="/" className="icon-caption" onClick={this.logOut}>
+      <NavLink to="/" className="icon-caption" onClick={this.logOut}>
         <ToastIcon
           name="power"
           width={35}
@@ -42,13 +42,18 @@ class MainNav extends React.Component {
           strokeWidth={1}
         />
         <span className="caption">Log Out</span>
-      </a>
+      </NavLink>
     );
   }
 
   getLink(link, linkName, iconName) {
     return (
-      <a href={`/${link}`} className="icon-caption">
+      <NavLink
+        to={`/${link}`}
+        className="icon-caption"
+        activeClassName="icon-caption-active"
+        exact={true}
+      >
         <ToastIcon
           name={iconName}
           width={35}
@@ -57,7 +62,7 @@ class MainNav extends React.Component {
           strokeWidth={1}
         />
         <span className="caption">{linkName}</span>
-      </a>
+      </NavLink>
     );
   }
 
@@ -134,6 +139,11 @@ class MainNav extends React.Component {
       background-color: var(--toast-purple-transparent);
       mix-blend-mode: screen;
     }
+    .icon-caption-active {
+      background-color: var(--toast-purple-2);
+      mix-blend-mode: luminosity;
+    }
+
 `;
 
     return Style.it(

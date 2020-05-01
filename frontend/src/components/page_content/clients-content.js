@@ -4,10 +4,15 @@ import Style from "style-it";
 import ClientListEntry from "../client-list-entry";
 
 import { connect } from "react-redux";
-
-import { getFilteredClients } from "../../redux/selectors";
+import { setSearchTerm } from "../../redux/actions";
+import { getFilteredClients, getSearchTerm } from "../../redux/selectors";
 
 class ClientsContent extends React.Component {
+  componenDidMount() {
+    this.props.setSearchTerm("");
+    this.props.searchTerm = "";
+  }
+
   getClients() {
     return this.props.clients.map((client) => {
       return (
@@ -39,6 +44,7 @@ class ClientsContent extends React.Component {
 
 const mapStateToProps = (state) => ({
   clients: getFilteredClients(state),
+  searchTerm: getSearchTerm(state),
 });
 
-export default connect(mapStateToProps)(ClientsContent);
+export default connect(mapStateToProps, { setSearchTerm })(ClientsContent);
