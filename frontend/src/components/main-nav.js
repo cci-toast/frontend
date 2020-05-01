@@ -135,7 +135,7 @@ class MainNav extends React.Component {
       margin-bottom: 2rem;
     }
     
-    .icon-caption:hover:not(.icon-caption-active){
+    .icon-caption:hover {
       background-color: var(--toast-purple-transparent);
       mix-blend-mode: screen;
     }

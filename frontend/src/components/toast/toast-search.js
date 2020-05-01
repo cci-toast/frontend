@@ -34,7 +34,7 @@ class ToastSearch extends React.Component {
         <ToastInput
           type="text"
           placeholder="Search for a client"
-          defaultValue={this.props.searchTerm}
+          value={this.props.searchTerm}
           onChange={this.setSearchTerm}
           iconName="search"
           search

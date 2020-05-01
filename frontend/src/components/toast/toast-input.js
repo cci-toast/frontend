@@ -156,6 +156,7 @@ class ToastInput extends React.Component {
             min={this.props.min}
             list={this.props.list}
             max={this.props.max}
+            input={this.props.input}
             onChange={this.props.onChange}
             required={this.props.required}
             step={this.props.step}

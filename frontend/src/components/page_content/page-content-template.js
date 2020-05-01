@@ -5,7 +5,7 @@ import ToastSaveCancel from "../toast/toast-save-cancel";
 
 import { connect } from "react-redux";
 import { getCurrentStep } from "../../redux/selectors";
-import { incrementStep, decrementStep, resetStep } from "../../redux/actions";
+import { incrementStep, decrementStep } from "../../redux/actions";
 
 import ActionItemsContent from "./action-items-content";
 import AdvisorContactContent from "./advisor-contact-content";
@@ -111,5 +111,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   incrementStep,
   decrementStep,
-  resetStep,
 })(PageContentTemplate);
