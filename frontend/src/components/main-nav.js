@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 
 import { isLoggedInAdvisor, isLoggedInClient } from "../redux/selectors";
 import { logoutClient, logoutAdvisor, resetLogin } from "../redux/actions";
-
 class MainNav extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +51,7 @@ class MainNav extends React.Component {
       <NavLink
         to={`/${link}`}
         className="icon-caption"
-        activeClassName="link-active"
+        activeClassName="icon-caption-active"
         exact={true}
       >
         <ToastIcon
@@ -136,17 +135,15 @@ class MainNav extends React.Component {
       margin-bottom: 2rem;
     }
     
-    .icon-caption:hover {
+    .icon-caption:hover:not(.icon-caption-active){
       background-color: var(--toast-purple-transparent);
       mix-blend-mode: screen;
     }
-    .link-active{
-      background-color: var(--toast-purple-1);
-      mix-blend-mode: screen;
+    .icon-caption-active {
+      background-color: var(--toast-purple-2);
+      mix-blend-mode: luminosity;
     }
-    .link-active:hover{
-      background-color: var(--toast-purple-1);
-    }
+
 `;
 
     return Style.it(

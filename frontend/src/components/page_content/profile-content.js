@@ -5,11 +5,16 @@ import Profile from "./profile/profile";
 import Finances from "./profile/finances";
 import Family from "./profile/family";
 import Goals from "./profile/goals.js";
+import { setStep } from "../../redux/actions";
 import { connect } from "react-redux";
 
 class ProfileContent extends React.Component {
   onSubmit() {
     // submit form
+  }
+
+  componentDidMount() {
+    this.props.setStep(0);
   }
 
   render() {
@@ -27,4 +32,4 @@ class ProfileContent extends React.Component {
   }
 }
 
-export default connect(null)(ProfileContent);
+export default connect(null, { setStep })(ProfileContent);

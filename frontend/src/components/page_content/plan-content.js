@@ -9,6 +9,8 @@ import Budgeting from "../page_content/plan/budgeting";
 
 import { connect } from "react-redux";
 
+import { setStep } from "../../redux/actions";
+
 import {
   getSalaryAfterTax,
   getPartnerSalaries,
@@ -18,6 +20,10 @@ import {
 class PlanContent extends React.Component {
   onSubmit() {
     // submit form
+  }
+
+  componentDidMount() {
+    this.props.setStep(0);
   }
 
   render() {
@@ -59,4 +65,4 @@ const mapStateToProps = (state) => ({
   age: getAge(state),
 });
 
-export default connect(mapStateToProps)(PlanContent);
+export default connect(mapStateToProps, { setStep })(PlanContent);
