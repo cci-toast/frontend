@@ -1,13 +1,12 @@
 import React from "react";
 import Style from "style-it";
 
-import EmergencySavings from "../page_content/configurations/emergency-savings";
-import Protection from "../page_content/configurations/protection";
-import Debt from "../page_content/configurations/debt";
-import Retirement from "../page_content/configurations/retirement";
-import Budgeting from "../page_content/configurations/budgeting";
-
-import { setStep } from "../../redux/actions";
+import EmergencySavings from "../page_content/configuration/emergency-savings";
+import Protection from "../page_content/configuration/protection";
+import Debt from "../page_content/configuration/debt";
+import Retirement from "../page_content/configuration/retirement";
+import Budgeting from "../page_content/configuration/budgeting";
+import { resetStep } from "../../redux/actions";
 import { connect } from "react-redux";
 
 class ConfigurationContent extends React.Component {
@@ -16,7 +15,7 @@ class ConfigurationContent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setStep(0);
+    this.props.resetStep();
   }
 
   render() {
@@ -35,4 +34,4 @@ class ConfigurationContent extends React.Component {
   }
 }
 
-export default connect(null, { setStep })(ConfigurationContent);
+export default connect(null, { resetStep })(ConfigurationContent);

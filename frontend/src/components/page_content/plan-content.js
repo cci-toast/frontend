@@ -9,7 +9,7 @@ import Budgeting from "../page_content/plan/budgeting";
 
 import { connect } from "react-redux";
 
-import { setStep } from "../../redux/actions";
+import { resetStep } from "../../redux/actions";
 
 import {
   getSalaryAfterTax,
@@ -23,7 +23,7 @@ class PlanContent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setStep(0);
+    this.props.resetStep();
   }
 
   render() {
@@ -65,4 +65,4 @@ const mapStateToProps = (state) => ({
   age: getAge(state),
 });
 
-export default connect(mapStateToProps, { setStep })(PlanContent);
+export default connect(mapStateToProps, { resetStep })(PlanContent);

@@ -5,7 +5,7 @@ import Profile from "./profile/profile";
 import Finances from "./profile/finances";
 import Family from "./profile/family";
 import Goals from "./profile/goals.js";
-import { setStep } from "../../redux/actions";
+import { resetStep } from "../../redux/actions";
 import { connect } from "react-redux";
 
 class ProfileContent extends React.Component {
@@ -14,7 +14,7 @@ class ProfileContent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setStep(0);
+    this.props.resetStep();
   }
 
   render() {
@@ -32,4 +32,4 @@ class ProfileContent extends React.Component {
   }
 }
 
-export default connect(null, { setStep })(ProfileContent);
+export default connect(null, { resetStep })(ProfileContent);
