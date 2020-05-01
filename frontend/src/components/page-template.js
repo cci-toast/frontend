@@ -67,10 +67,6 @@ class PageTemplate extends React.Component {
           return <MainHeader header="Your Action Items" leftside="header" />;
         case "advisorcontact":
           return <MainHeader header="Your Advisor" leftside="header" />;
-        case "clients":
-          return <MainHeader header="Your Clients" leftside="header" />;
-        case "configuration":
-          return <MainHeader header="Configure Factors" leftside="header" />;
         default:
           return <MainHeader />;
       }
@@ -101,7 +97,13 @@ class PageTemplate extends React.Component {
             />
           );
         case "clients":
-          return <MainHeader header="Your Clients" leftside="header" />;
+          return (
+            <MainHeader
+              header="Your Clients"
+              leftside="header"
+              rightside="search"
+            />
+          );
         case "configuration":
           return <MainHeader header="Configure Factors" leftside="header" />;
         default:

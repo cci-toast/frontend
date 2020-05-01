@@ -1,6 +1,6 @@
 import { put, takeLatest, all } from "redux-saga/effects";
 
-import { setCities, setProfileValue } from "../actions";
+import { setCities } from "../actions";
 
 import { getStateCode } from "../../utils/select-utils";
 
@@ -21,7 +21,6 @@ function* fetchCities() {
     cities = cities.filter((item, index) => cities.indexOf(item) === index);
 
     yield put(setCities(cities));
-    yield put(setProfileValue("city", cities[0]));
   });
 }
 

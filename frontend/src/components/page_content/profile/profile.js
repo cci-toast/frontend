@@ -25,8 +25,6 @@ class Profile extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
-
-    this.props.fetchCities("Alabama");
   }
 
   handleChange(event) {
@@ -101,7 +99,7 @@ class Profile extends React.Component {
               label="Birth Year"
               list="birthYear"
               placeholder="Type in your birth year"
-              defaultValue={this.props.birthYearOptions}
+              defaultValue={this.props.birthYear}
               id="birthYear"
               onChange={this.handleChange}
             />
@@ -112,24 +110,24 @@ class Profile extends React.Component {
         <div className="row">
           <div className="column">
             <ToastSelect
-              options={this.props.cities}
-              name="city"
-              label="City"
-              placeholder="Select your city"
-              value={this.props.city || this.props.cities[0]}
-              id="city"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="column">
-            <ToastSelect
               options={stateOptions.map((state) => state.name)}
               name="state"
               label="State"
               placeholder="Select your state"
-              value={this.props.state || stateOptions[0].state}
+              defaultValue={this.props.state}
               id="state"
               onChange={this.handleStateChange}
+            />
+          </div>
+          <div className="column">
+            <ToastSelect
+              options={this.props.cities}
+              name="city"
+              label="City"
+              placeholder="Select your city"
+              defaultValue={this.props.city}
+              id="city"
+              onChange={this.handleChange}
             />
           </div>
         </div>
