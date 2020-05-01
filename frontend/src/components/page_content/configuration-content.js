@@ -6,16 +6,13 @@ import Protection from "../page_content/configuration/protection";
 import Debt from "../page_content/configuration/debt";
 import Retirement from "../page_content/configuration/retirement";
 import Budgeting from "../page_content/configuration/budgeting";
-import { resetStep } from "../../redux/actions";
+import { resetStep, setSearchTerm } from "../../redux/actions";
 import { connect } from "react-redux";
 
 class ConfigurationContent extends React.Component {
-  onSubmit() {
-    // submit form
-  }
-
   componentDidMount() {
     this.props.resetStep();
+    this.props.setSearchTerm("");
   }
 
   render() {
@@ -23,15 +20,17 @@ class ConfigurationContent extends React.Component {
 
     return Style.it(
       `${styles}`,
-      <form onSubmit={this.onSubmit}>
+      <React.Fragment>
         <EmergencySavings currentStep={this.props.currentStep} />
         <Protection currentStep={this.props.currentStep} />
         <Debt currentStep={this.props.currentStep} />
         <Retirement currentStep={this.props.currentStep} />
         <Budgeting currentStep={this.props.currentStep} />
-      </form>
+      </React.Fragment>
     );
   }
 }
 
-export default connect(null, { resetStep })(ConfigurationContent);
+export default connect(null, { resetStep, setSearchTerm })(
+  ConfigurationContent
+);

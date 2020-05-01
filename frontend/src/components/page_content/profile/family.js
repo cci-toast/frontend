@@ -112,7 +112,7 @@ class Family extends React.Component {
               type="text"
               label="Child's First Name"
               placeholder="Type in your child's first name"
-              value={this.props.children[0].firstName}
+              defaultValue={this.props.children[0].firstName}
               name="firstName"
               onChange={this.setChildListValue}
             />
