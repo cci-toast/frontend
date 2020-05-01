@@ -9,6 +9,7 @@ import ToastCard from "./toast/toast-card";
 import ToastPageNav from "./toast/toast-page-nav";
 import ToastHelp from "./toast/toast-help";
 import PageContentTemplate from "./page_content/page-content-template";
+import PlanReady from "./plan-ready";
 
 import { connect } from "react-redux";
 import {
@@ -131,6 +132,7 @@ class PageTemplate extends React.Component {
       `${styles}`,
       <div>
         <ToastHelp {...this.props} />
+        <PlanReady />
         <div className="nav-content-container">
           <MainNav user={this.props.user} />
           <div className="right-content">

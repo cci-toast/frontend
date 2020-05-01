@@ -1,6 +1,7 @@
-import { put, takeLatest, all } from "redux-saga/effects";
+import { put, takeLatest, all, select } from "redux-saga/effects";
 
-import { setCities } from "../actions";
+import * as Actions from "../actions";
+import * as Selectors from "../selectors";
 
 import { getStateCode } from "../../utils/select-utils";
 
@@ -20,10 +21,25 @@ function* fetchCities() {
     let cities = response.results.map((result) => result.name);
     cities = cities.filter((item, index) => cities.indexOf(item) === index);
 
-    yield put(setCities(cities));
+    yield put(Actions.setCities(cities));
   });
 }
 
+function* createClient() {
+  yield takeLatest(
+    ["incremementStep", "decrementStep", "setStep"],
+    function* () {
+      let clientId = yield select(Selectors.getClientId);
+
+      if (clientId === "") {
+        // create client -> api POST request
+        yield put(Actions.setProfileValue("clientId", "0"));
+        yield put(Actions.toggleShowPlanReady());
+      }
+    }
+  );
+}
+
 export default function* rootEffect() {
-  yield all([fetchCities()]);
+  yield all([fetchCities(), createClient()]);
 }

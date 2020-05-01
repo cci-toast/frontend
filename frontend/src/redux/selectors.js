@@ -36,10 +36,13 @@ export const isLoggedInClient = (state) => state.loginReducer.isLoggedInClient;
 
 // page content
 export const getCurrentStep = (state) => state.pageContentReducer.currentStep;
+export const getShowPlanReady = (state) =>
+  state.pageContentReducer.showPlanReady;
 
 // PROFILE
 
 // profile
+export const getClientId = (state) => state.profileReducer.clientId;
 export const getFirstName = (state) => state.profileReducer.firstName;
 export const getMiddleName = (state) => state.profileReducer.middleName;
 export const getLastName = (state) => state.profileReducer.lastName;

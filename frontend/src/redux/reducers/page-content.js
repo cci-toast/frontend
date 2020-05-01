@@ -1,5 +1,6 @@
 const initialState = {
   currentStep: 0,
+  showPlanReady: false,
 };
 
 export default function (state = initialState, action) {
@@ -27,6 +28,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentStep: step,
+      };
+    }
+    case "toggleShowPlanReady": {
+      return {
+        ...state,
+        showPlanReady: !state.showPlanReady,
       };
     }
     default:
