@@ -6,15 +6,45 @@ import Protection from "../page_content/action-items/protection";
 import Debt from "../page_content/action-items/debt";
 import Retirement from "../page_content/action-items/retirement";
 import Budgeting from "../page_content/action-items/budgeting";
-
-import { resetStep } from "../../redux/actions";
+import ToastEmpty from "../toast/toast-empty";
 
 import { connect } from "react-redux";
+import { resetStep } from "../../redux/actions";
 
 class ActionItemsContent extends React.Component {
   componentDidMount() {
     this.props.resetStep();
   }
+
+  getContent() {
+    if (this.props.showContent) {
+      return (
+        <div className="action-items">
+          <EmergencySavings currentStep={this.props.currentStep} />
+          <Protection currentStep={this.props.currentStep} />
+          <Debt currentStep={this.props.currentStep} />
+          <Retirement currentStep={this.props.currentStep} />
+          <Budgeting currentStep={this.props.currentStep} />
+        </div>
+      );
+    } else {
+      return (
+        <ToastEmpty
+          header="No Action Items Available"
+          caption={this.getCaption()}
+        />
+      );
+    }
+  }
+
+  getCaption() {
+    if (this.props.user === "client") {
+      return "You currently do not have any action items. Navigate to your profile page and fill out the form to get a baseline plan and action items.";
+    } else if (this.props.user === "advisor") {
+      return "Your client does not have any action items yet. They have not filled out the necessary fields on their profile.";
+    }
+  }
+
   render() {
     const styles = `
     .action-items {
@@ -23,16 +53,7 @@ class ActionItemsContent extends React.Component {
     }
     `;
 
-    return Style.it(
-      `${styles}`,
-      <div className="action-items">
-        <EmergencySavings currentStep={this.props.currentStep} />
-        <Protection currentStep={this.props.currentStep} />
-        <Debt currentStep={this.props.currentStep} />
-        <Retirement currentStep={this.props.currentStep} />
-        <Budgeting currentStep={this.props.currentStep} />
-      </div>
-    );
+    return Style.it(`${styles}`, this.getContent());
   }
 }
 

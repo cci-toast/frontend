@@ -4,7 +4,7 @@ import Style from "style-it";
 import ToastSaveCancel from "../toast/toast-save-cancel";
 
 import { connect } from "react-redux";
-import { getCurrentStep } from "../../redux/selectors";
+import { getCurrentStep, getClientId } from "../../redux/selectors";
 import { incrementStep, decrementStep } from "../../redux/actions";
 
 import ActionItemsContent from "./action-items-content";
@@ -36,11 +36,14 @@ class PageContentTemplate extends React.Component {
   }
 
   getHideCancel() {
-    return this.props.currentStep === 0;
+    return this.props.clientId === "" || this.props.currentStep === 0;
   }
 
   getHideSave() {
-    return this.props.currentStep === 4 && this.props.page !== "profile";
+    return (
+      this.props.clientId === "" ||
+      (this.props.currentStep === 4 && this.props.page !== "profile")
+    );
   }
 
   getSave() {
@@ -51,14 +54,23 @@ class PageContentTemplate extends React.Component {
     }
   }
 
+  showContent() {
+    return this.props.clientId !== "";
+  }
+
   getContent() {
     switch (this.props.page) {
       case "profile":
         return <ProfileContent {...this.props} />;
       case "plan":
-        return <PlanContent {...this.props} />;
+        return <PlanContent {...this.props} showContent={this.showContent()} />;
       case "actionitems":
-        return <ActionItemsContent {...this.props} />;
+        return (
+          <ActionItemsContent
+            {...this.props}
+            showContent={this.showContent()}
+          />
+        );
       case "advisorcontact":
         return <AdvisorContactContent {...this.props} />;
       case "clients":
@@ -106,6 +118,7 @@ class PageContentTemplate extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentStep: getCurrentStep(state),
+  clientId: getClientId(state),
 });
 
 export default connect(mapStateToProps, {

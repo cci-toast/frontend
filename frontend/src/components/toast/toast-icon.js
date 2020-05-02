@@ -174,6 +174,12 @@ class ToastIcon extends React.Component {
         viewBox={this.getViewBox()}
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
+        <defs>
+          <linearGradient id="grad">
+            <stop offset="10%" stopColor="var(--toast-purple-2)" />
+            <stop offset="90%" stopColor="var(--toast-blue-2)" />
+          </linearGradient>
+        </defs>
         {this.getPath()}
       </svg>
     );
