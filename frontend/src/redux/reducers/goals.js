@@ -11,14 +11,11 @@ export default function (state = initialState, action) {
 
     case "setGoalListValue": {
       const { index, valueName, value } = action.payload;
+      var tempGoals = [...state.goals];
+      tempGoals[index][valueName] = value;
       return {
         ...state,
-        goals: state.goals.map((goal) => {
-          if (goal.id === index) {
-            goal[valueName] = value;
-          }
-          return goal;
-        }),
+        goals: tempGoals,
       };
     }
 
