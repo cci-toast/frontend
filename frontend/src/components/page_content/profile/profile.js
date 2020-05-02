@@ -68,7 +68,7 @@ class Profile extends React.Component {
               type="text"
               label="First Name"
               placeholder="Type in your first name"
-              defaultValue={this.props.firstName}
+              value={this.props.firstName}
               name="firstName"
               onChange={this.handleChange}
               required
@@ -77,7 +77,7 @@ class Profile extends React.Component {
               type="text"
               label="Last Name"
               placeholder="Type in your last name"
-              defaultValue={this.props.lastName}
+              value={this.props.lastName}
               name="lastName"
               onChange={this.handleChange}
               required
@@ -89,7 +89,7 @@ class Profile extends React.Component {
               type="text"
               label="Middle Name"
               placeholder="Type in your middle name"
-              defaultValue={this.props.middleName}
+              value={this.props.middleName}
               name="middleName"
               onChange={this.handleChange}
             />
@@ -99,7 +99,7 @@ class Profile extends React.Component {
               label="Birth Year"
               list="birthYear"
               placeholder="Type in your birth year"
-              defaultValue={this.props.birthYear}
+              value={this.props.birthYear}
               id="birthYear"
               onChange={this.handleChange}
             />
@@ -114,7 +114,7 @@ class Profile extends React.Component {
               name="state"
               label="State"
               placeholder="Select your state"
-              defaultValue={this.props.state}
+              value={this.props.state}
               id="state"
               onChange={this.handleStateChange}
             />
@@ -125,7 +125,7 @@ class Profile extends React.Component {
               name="city"
               label="City"
               placeholder="Select your city"
-              defaultValue={this.props.city}
+              value={this.props.city}
               id="city"
               onChange={this.handleChange}
             />

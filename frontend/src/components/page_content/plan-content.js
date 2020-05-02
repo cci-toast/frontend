@@ -10,7 +10,7 @@ import ToastEmpty from "../toast/toast-empty";
 import { connect } from "react-redux";
 
 import {
-  getSalaryAfterTax,
+  getSalaryAfterTaxValue,
   getPartnerSalaries,
   getAge,
 } from "../../redux/selectors";
@@ -70,7 +70,7 @@ class PlanContent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  salaryAfterTax: getSalaryAfterTax(state),
+  salaryAfterTax: getSalaryAfterTaxValue(state),
   partnerSalaries: getPartnerSalaries(state),
   age: getAge(state),
 });

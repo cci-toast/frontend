@@ -57,17 +57,40 @@ export const getAge = createSelector(
 );
 
 // finances
-export const getSalaryAfterTax = (state) =>
+export const getSalaryAfterTaxValue = (state) =>
   state.financesReducer.salaryAfterTax;
-export const getMonthlySalaryAfterTax = createSelector(
-  [getSalaryAfterTax],
+export const getMonthlySalaryAfterTaxValue = createSelector(
+  [getSalaryAfterTaxValue],
   calcMonthlyValue
 );
-export const getShopping = (state) => state.financesReducer.shopping;
-export const getProtectionMonthly = (state) =>
-  state.financesReducer.protectionMonthly;
-export const getProtectionPolicy = (state) =>
-  state.financesReducer.protectionPolicy;
+export const getAdditionalIncomeValue = (state) =>
+  state.financesReducer.additionalIncome;
+
+export const getProtectionMonthly = (state) => {
+  return state.financesReducer.protection.length === 0
+    ? 0
+    : state.financesReducer.protection[0].protectionMonthly.toString();
+};
+export const getProtectionPolicy = (state) => {
+  return state.financesReducer.protection.length === 0
+    ? 0
+    : state.financesReducer.protection[0].protectionPolicy.toString();
+};
+
+export const getRetirementValue = (state) => state.financesReducer.retirement;
+
+export const getHousingValue = (state) => state.financesReducer.housing;
+export const getBillValue = (state) => state.financesReducer.bill;
+export const getUtilityValue = (state) => state.financesReducer.utility;
+
+export const getLoanDebtValue = (state) => state.financesReducer.loanDebt;
+export const getShoppingValue = (state) => state.financesReducer.shopping;
+export const getLeisureValue = (state) => state.financesReducer.leisure;
+export const getTransportationValue = (state) =>
+  state.financesReducer.transportation;
+export const getSubscriptionValue = (state) =>
+  state.financesReducer.subscription;
+export const getOtherValue = (state) => state.financesReducer.other;
 
 // family
 export const getPartners = (state) => state.familyReducer.partners;
@@ -85,12 +108,15 @@ export const getGoals = (state) => state.goalsReducer.goals;
 // PLAN
 
 // protection
+
+export const getProtectionValue = (state) => state.financesReducer.protection;
+
 export const getProtectionMultiplier = createSelector(
   [getAge],
   calcProtectionMultiplier
 );
 export const getProtectionPolicyPlan = createSelector(
-  [getSalaryAfterTax, getProtectionMultiplier],
+  [getSalaryAfterTaxValue, getProtectionMultiplier],
   calcProtection
 );
 export const getProtectionMonthlyPlan = (state) =>
@@ -98,17 +124,17 @@ export const getProtectionMonthlyPlan = (state) =>
 
 // emergency savings
 export const getSavingsLowerBound = createSelector(
-  [getMonthlySalaryAfterTax],
+  [getMonthlySalaryAfterTaxValue],
   calcSavingsLowerBound
 );
 export const getSavingsUpperBound = createSelector(
-  [getMonthlySalaryAfterTax],
+  [getMonthlySalaryAfterTaxValue],
   calcSavingsUpperBound
 );
 
 // retirement
 export const getHouseholdIncome = createSelector(
-  [getSalaryAfterTax, getPartnerSalariesSum],
+  [getSalaryAfterTaxValue, getPartnerSalariesSum],
   (salaryAfterTax, partnerSalariesSum) => salaryAfterTax + partnerSalariesSum
 );
 export const getRetirementMultiplier = createSelector(
@@ -116,35 +142,42 @@ export const getRetirementMultiplier = createSelector(
   calcRetirementMultiplier
 );
 export const getRetirement = createSelector(
-  [getSalaryAfterTax, getRetirementMultiplier],
+  [getSalaryAfterTaxValue, getRetirementMultiplier],
   calcRetirement
 );
-export const getRetirementSavings = (state) =>
-  state.financesReducer.retirementSavings;
+export const getRetirementSavings = (state) => {
+  return state.financesReducer.retirement.length === 0
+    ? 0
+    : state.financesReducer.retirement[0].retirementSavings.toString();
+};
+
 export const getRetirementYears = createSelector([getAge], calcRetirementYears);
 
 export const getRetirementMonthly = createSelector(
-  [getMonthlySalaryAfterTax, getRetirementYears],
+  [getMonthlySalaryAfterTaxValue, getRetirementYears],
   calcRetirementMonthly
 );
 
 // debt
 export const getDebtMonthly = createSelector(
-  [getSalaryAfterTax],
+  [getSalaryAfterTaxValue],
   calcDebtMonthly
 );
 export const getSalaryAfterDebt = createSelector(
-  [getDebtMonthly, getMonthlySalaryAfterTax],
+  [getDebtMonthly, getMonthlySalaryAfterTaxValue],
   calcSalaryAfterDebt
 );
 
 // budgeting
-export const getSavings = createSelector([getSalaryAfterTax], calcSavings);
+export const getSavings = createSelector([getSalaryAfterTaxValue], calcSavings);
 export const getFixedExpenses = createSelector(
-  [getSalaryAfterTax],
+  [getSalaryAfterTaxValue],
   calcFixedExpenses
 );
-export const getSpending = createSelector([getSalaryAfterTax], calcSpending);
+export const getSpending = createSelector(
+  [getSalaryAfterTaxValue],
+  calcSpending
+);
 
 // advisor
 export const getAdvisorFirstName = (state) => state.advisorReducer.firstName;

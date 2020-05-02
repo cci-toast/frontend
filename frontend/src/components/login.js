@@ -169,7 +169,7 @@ class Login extends React.Component {
                   label="Email"
                   onChange={this.setEmail}
                   name="email"
-                  defaultValue={this.props.email}
+                  value={this.props.email}
                   short
                   required
                 />
@@ -182,7 +182,7 @@ class Login extends React.Component {
                   label="Password"
                   onChange={this.setPassword}
                   name="password"
-                  defaultValue={this.props.password}
+                  value={this.props.password}
                   short
                   required
                 />
