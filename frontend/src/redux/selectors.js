@@ -63,11 +63,27 @@ export const getMonthlySalaryAfterTax = createSelector(
   [getSalaryAfterTax],
   calcMonthlyValue
 );
-export const getShopping = (state) => state.financesReducer.shopping;
-export const getProtectionMonthly = (state) =>
-  state.financesReducer.protectionMonthly;
+export const getAdditionalIncome = (state) =>
+  state.financesReducer.additionalIncome;
+
+export const getRetirement = (state) => state.financesReducer.retirement;
+
+export const getHousingType = (state) => state.financesReducer.housingType;
+export const getHousingAmount = (state) => state.financesReducer.housingAmount;
 export const getProtectionPolicy = (state) =>
   state.financesReducer.protectionPolicy;
+export const getProtectionMonthly = (state) =>
+  state.financesReducer.protectionMonthly;
+export const getBill = (state) => state.financesReducer.bill;
+export const getUtility = (state) => state.financesReducer.utility;
+
+export const getLoanDebt = (state) => state.financesReducer.loanDebt;
+export const getShopping = (state) => state.financesReducer.shopping;
+export const getLeisure = (state) => state.financesReducer.leisure;
+export const getTransportation = (state) =>
+  state.financesReducer.transportation;
+export const getSubscription = (state) => state.financesReducer.subscription;
+export const getOther = (state) => state.financesReducer.other;
 
 // family
 export const getPartners = (state) => state.familyReducer.partners;
@@ -106,21 +122,20 @@ export const getSavingsUpperBound = createSelector(
   calcSavingsUpperBound
 );
 
-// retirement
 export const getHouseholdIncome = createSelector(
   [getSalaryAfterTax, getPartnerSalariesSum],
   (salaryAfterTax, partnerSalariesSum) => salaryAfterTax + partnerSalariesSum
 );
+// retirement
 export const getRetirementMultiplier = createSelector(
   [getAge],
   calcRetirementMultiplier
 );
-export const getRetirement = createSelector(
+export const getRetirementTargetSavings = createSelector(
   [getSalaryAfterTax, getRetirementMultiplier],
   calcRetirement
 );
-export const getRetirementSavings = (state) =>
-  state.financesReducer.retirementSavings;
+
 export const getRetirementYears = createSelector([getAge], calcRetirementYears);
 
 export const getRetirementMonthly = createSelector(

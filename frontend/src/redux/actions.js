@@ -73,8 +73,9 @@ export const setGoalListValue = (index, valueName, value) => ({
   payload: { index, valueName, value },
 });
 
-export const addGoal = () => ({
+export const addGoal = (goalFields) => ({
   type: "addGoal",
+  payload: { goalFields },
 });
 
 // finances
@@ -83,15 +84,21 @@ export const setFinancesValue = (valueName, value) => ({
   payload: { valueName, value },
 });
 
-export const setShopping = (value) => ({
-  type: "setShopping",
-  payload: { value },
+// family
+
+export const addPartner = (partnerFields) => ({
+  type: "addPartner",
+  payload: { partnerFields },
 });
 
-// family
 export const setPartnerListValue = (index, valueName, value) => ({
   type: "setPartnerListValue",
   payload: { index, valueName, value },
+});
+
+export const addChild = (childFields) => ({
+  type: "addChild",
+  payload: { childFields },
 });
 
 export const setChildListValue = (index, valueName, value) => ({

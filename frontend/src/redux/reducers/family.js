@@ -1,47 +1,34 @@
 const initialState = {
-  partners: [
-    {
-      id: 0,
-      firstName: "",
-      lastName: "",
-      birthYear: 2020,
-      salary: 70000,
-    },
-  ],
-  children: [
-    {
-      id: 0,
-      firstName: "",
-      birthYear: 2020,
-      education: "",
-    },
-  ],
+  partners: [],
+  children: [],
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case "addPartner": {
+      const { partnerFields } = action.payload;
+      return { ...state, partners: [...state.partners, partnerFields] };
+    }
     case "setPartnerListValue": {
       const { index, valueName, value } = action.payload;
+      let tempPartners = [...state.partners];
+      tempPartners[index][valueName] = value;
       return {
         ...state,
-        partners: state.partners.map((partner) => {
-          if (partner.id === index) {
-            partner[valueName] = value;
-          }
-          return partner;
-        }),
+        partners: tempPartners,
       };
+    }
+    case "addChild": {
+      const { childFields } = action.payload;
+      return { ...state, children: [...state.children, childFields] };
     }
     case "setChildListValue": {
       const { index, valueName, value } = action.payload;
+      let tempChildren = [...state.children];
+      tempChildren[index][valueName] = value;
       return {
         ...state,
-        children: state.children.map((child) => {
-          if (child.id === index) {
-            child[valueName] = value;
-          }
-          return child;
-        }),
+        children: tempChildren,
       };
     }
     default:

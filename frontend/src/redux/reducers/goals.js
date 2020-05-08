@@ -1,42 +1,24 @@
 const initialState = {
-  goals: [
-    {
-      id: 0,
-      description: "",
-      amount: 0.0,
-      endDate: "",
-    },
-  ],
+  goals: [],
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case "addGoal": {
+      const { goalFields } = action.payload;
+      return { ...state, goals: [...state.goals, goalFields] };
+    }
+
     case "setGoalListValue": {
       const { index, valueName, value } = action.payload;
+      let tempGoals = [...state.goals];
+      tempGoals[index][valueName] = value;
       return {
         ...state,
-        goals: state.goals.map((goal) => {
-          if (goal.id === index) {
-            goal[valueName] = value;
-          }
-          return goal;
-        }),
+        goals: tempGoals,
       };
     }
-    case "addGoal": {
-      return {
-        ...state,
-        goals: [
-          ...state.goals,
-          {
-            id: state.goals.length + 1,
-            description: "",
-            amount: 0.0,
-            endDate: "",
-          },
-        ],
-      };
-    }
+
     default:
       return state;
   }
