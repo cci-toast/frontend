@@ -52,7 +52,6 @@ class Goals extends React.Component {
             list="goals"
             placeholder="Type in your goal"
             id="goals"
-            onChange={this.setGoalListValue}
           />
 
           <ToastInput

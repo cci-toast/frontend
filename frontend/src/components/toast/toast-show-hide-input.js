@@ -15,11 +15,16 @@ class ToastShowHideInput extends React.Component {
   isEmpty() {
     let result = true;
 
-    let checkEmpty = React.Children.map(this.props.children, (child, i) => {
-      return !!child.props.value;
-    });
+    let checkEmpty = React.Children.map(
+      this.props.children,
+      (child) => !!child.props.value
+    );
 
-    for (var x of checkEmpty) if (x) result = false;
+    for (var x of checkEmpty) {
+      if (x) {
+        result = false;
+      }
+    }
 
     return result;
   }
@@ -35,10 +40,10 @@ class ToastShowHideInput extends React.Component {
 
   render() {
     const styles = `
-    .hide{
+    .hide {
       display:none;
     }
-    .show{
+    .show {
       display:block;
     }
     `;

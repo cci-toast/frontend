@@ -3,7 +3,7 @@ import Center from "react-center";
 import ToastButton from "./toast-button";
 import Style from "style-it";
 
-/*Expects an array and duplicates the "children".  Set maxItems to limit the number of duplicates.  
+/* Expects an array and duplicates the "children".  Set maxItems to limit the number of duplicates.  
 To pass in value(s) that only need to be shown once refer to toast-show-hide-input. */
 class ToastDuplicateInputButton extends React.Component {
   constructor(props) {
@@ -12,17 +12,20 @@ class ToastDuplicateInputButton extends React.Component {
   }
 
   getClasses() {
-    let classes = "";
+    let classes = [];
     if (this.props.maxItems && this.props.maxItems <= this.props.value.length) {
-      classes = "hideBtn";
-      return classes;
+      classes.push("hideBtn");
+      return classes.join(" ");
     }
   }
 
   duplicateInput() {
-    if (this.props.maxItems && this.props.maxItems <= this.props.value.length)
+    if (this.props.maxItems && this.props.maxItems <= this.props.value.length) {
       return;
-    if (this.props.onDuplicate) this.props.onDuplicate(this.props.fields);
+    }
+    if (this.props.onDuplicate) {
+      this.props.onDuplicate(this.props.fields);
+    }
   }
 
   render() {
@@ -33,14 +36,17 @@ class ToastDuplicateInputButton extends React.Component {
           value: data[child.props.name],
           onChange: (e) => {
             const { name, value } = e.target;
-            if (this.props.onChange) this.props.onChange(index, name, value);
+
+            if (this.props.onChange) {
+              this.props.onChange(index, name, value);
+            }
           },
         })
       );
     };
 
     const styles = `
-    .hideBtn{
+    .hide-btn { 
       display:none;
     }
     `;

@@ -23,7 +23,7 @@ import {
   getOther,
 } from "../../../redux/selectors";
 
-import { setFinances } from "../../../redux/actions";
+import { setFinancesValue } from "../../../redux/actions";
 import { housingOptions } from "../../../utils/select-utils";
 
 class Finances extends React.Component {
@@ -43,7 +43,7 @@ class Finances extends React.Component {
 
   handleChange(event) {
     const { name, value } = event.target;
-    this.props.setFinances(name, value);
+    this.props.setFinancesValue(name, value);
   }
 
   render() {
@@ -343,5 +343,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  setFinances,
+  setFinancesValue,
 })(Finances);
