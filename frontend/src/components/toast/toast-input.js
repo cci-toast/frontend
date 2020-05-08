@@ -12,13 +12,19 @@ class ToastInput extends React.Component {
 
     if (this.props.search) {
       this.backgroundColor = "var(--toast-white)";
+    } else if (this.props.readOnly) {
+      this.backgroundColor = "var(--toast-neutral-5)";
+      this.cursor = "not-allowed";
     } else {
       this.backgroundColor = "var(--toast-neutral-6)";
+      this.cursor = "text";
     }
   }
 
   onFocus(e) {
-    e.currentTarget.parentNode.classList.add("focused");
+    if (!this.props.readOnly) {
+      e.currentTarget.parentNode.classList.add("focused");
+    }
   }
 
   onBlur(e) {
@@ -96,6 +102,7 @@ class ToastInput extends React.Component {
     
     input {
       box-shadow: none;
+      cursor: ${this.cursor};
     }
     
     .input-group {
@@ -132,7 +139,7 @@ class ToastInput extends React.Component {
     }
     
     .focused {
-      box-shadow: 0 0 5px var(--toast-blue-1);
+      box-shadow: 0 0 5px var(--toast-blue-2);
     }
 
     .short {
@@ -161,6 +168,7 @@ class ToastInput extends React.Component {
             step={this.props.step}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
+            readOnly={this.props.readOnly}
           />
         </div>
       </div>

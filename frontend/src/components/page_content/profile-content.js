@@ -13,16 +13,32 @@ class ProfileContent extends React.Component {
     this.props.resetStep();
   }
 
+  isAdvisor() {
+    return this.props.user === "advisor";
+  }
+
   render() {
     const styles = ``;
 
     return Style.it(
       `${styles}`,
       <React.Fragment>
-        <Profile currentStep={this.props.currentStep} />
-        <Finances currentStep={this.props.currentStep} />
-        <Family currentStep={this.props.currentStep} />
-        <Goals currentStep={this.props.currentStep} />
+        <Profile
+          currentStep={this.props.currentStep}
+          readOnly={this.isAdvisor()}
+        />
+        <Finances
+          currentStep={this.props.currentStep}
+          readOnly={this.isAdvisor()}
+        />
+        <Family
+          currentStep={this.props.currentStep}
+          readOnly={this.isAdvisor()}
+        />
+        <Goals
+          currentStep={this.props.currentStep}
+          readOnly={this.isAdvisor()}
+        />
       </React.Fragment>
     );
   }

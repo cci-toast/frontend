@@ -119,7 +119,7 @@ class PageTemplate extends React.Component {
         display: flex;
         justify-content: space-between;
         height: calc(90vh - 1rem);
-        width: calc(100vw - 13rem - 8rem);
+        width: calc(100vw - 23rem);
     }
 
     .right-content {

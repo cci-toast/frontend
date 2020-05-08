@@ -52,7 +52,7 @@ class ClientListEntry extends React.Component {
     }
 
     .link:hover {
-      color: var(--toast-blue-1);
+      color: var(--toast-blue-2);
     }
 
     .ellipsis {

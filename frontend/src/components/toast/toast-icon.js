@@ -177,7 +177,7 @@ class ToastIcon extends React.Component {
         <defs>
           <linearGradient id="grad">
             <stop offset="10%" stopColor="var(--toast-purple-2)" />
-            <stop offset="90%" stopColor="var(--toast-blue-2)" />
+            <stop offset="90%" stopColor="var(--toast-blue-1)" />
           </linearGradient>
         </defs>
         {this.getPath()}

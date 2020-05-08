@@ -65,13 +65,17 @@ class Family extends React.Component {
             label="Partner's First Name"
             name="firstName"
             placeholder="Type in your partner's first name"
+            readOnly={this.props.readOnly}
           />
+
           <ToastInput
             type="text"
             label="Partner's Last Name"
             name="lastName"
             placeholder="Type in your partner's last name"
+            readOnly={this.props.readOnly}
           />
+
           <ToastSelect
             options={getBirthYearOptions()}
             name="birthYear"
@@ -81,7 +85,9 @@ class Family extends React.Component {
             id="birthYear"
             iconWidth={20}
             iconHeight={20}
+            readOnly={this.props.readOnly}
           />
+
           <ToastInput
             type="number"
             min={0.0}
@@ -92,6 +98,7 @@ class Family extends React.Component {
             step={0.01}
             iconWidth={20}
             iconHeight={20}
+            readOnly={this.props.readOnly}
           />
         </ToastDuplicateInputButton>
         <hr />
@@ -108,6 +115,7 @@ class Family extends React.Component {
             label="Child's First Name"
             placeholder="Type in your child's first name"
             name="firstName"
+            readOnly={this.props.readOnly}
           />
 
           <ToastSelect
@@ -117,6 +125,7 @@ class Family extends React.Component {
             list="childEducation"
             placeholder="Type in your child's education"
             id="childEducation"
+            readOnly={this.props.readOnly}
           />
 
           <ToastSelect
@@ -126,6 +135,7 @@ class Family extends React.Component {
             list="childBirthYear"
             placeholder="Type in your child's birth year"
             id="childBirthYear"
+            readOnly={this.props.readOnly}
           />
         </ToastDuplicateInputButton>
       </div>

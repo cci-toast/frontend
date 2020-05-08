@@ -38,8 +38,8 @@ class Protection extends React.Component {
       align-items: center;
       flex-direction: column;
       background-color: var(--toast-neutral-5);
-      padding: 2rem 5rem 5rem 5rem;
-      margin: 1.25rem 3rem 3rem 3rem;
+      padding: 2rem 5rem 5rem 2rem;
+      margin: 1.25rem 1rem 2rem 1rem;
       border-radius: 0.5rem;
       height: 47vh;
       width: 44rem;
@@ -86,7 +86,7 @@ class Protection extends React.Component {
     }
 
     .bg-blue {
-      background-color: var(--toast-blue-2);
+      background-color: var(--toast-blue-1);
     }
 
     .text-grad {
@@ -96,11 +96,11 @@ class Protection extends React.Component {
     }
 
     .text-blue {
-      color: var(--toast-blue-2);
+      color: var(--toast-blue-1);
     }
 
     .caption {
-      padding: 0 3rem 0 3rem;
+      padding: 0 1rem 0 1rem;
     }
 
     .line {

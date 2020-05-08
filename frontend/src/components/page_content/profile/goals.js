@@ -52,6 +52,7 @@ class Goals extends React.Component {
             list="goals"
             placeholder="Type in your goal"
             id="goals"
+            readOnly={this.props.readOnly}
           />
 
           <ToastInput
@@ -64,9 +65,15 @@ class Goals extends React.Component {
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
+            readOnly={this.props.readOnly}
           />
 
-          <ToastInput type="date" label="Goal End Date" name="endDate" />
+          <ToastInput
+            type="date"
+            label="Goal End Date"
+            name="endDate"
+            readOnly={this.props.readOnly}
+          />
         </ToastDuplicateInputButton>
       </div>
     );
