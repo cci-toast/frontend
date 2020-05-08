@@ -1,12 +1,14 @@
 import React from "react";
 import Style from "style-it";
 
+import { Link } from "react-router-dom";
+
 import ToastButton from "./toast/toast-button";
 
 class ClientNav extends React.Component {
   getButton(label, iconName, href) {
     return (
-      <a href={`/${href}`}>
+      <Link to={`/${href}`} className="link">
         <ToastButton
           tertiary
           type="button"
@@ -17,7 +19,7 @@ class ClientNav extends React.Component {
           iconStroke="var(--toast-neutral-1)"
           iconStrokeWidth={2}
         />
-      </a>
+      </Link>
     );
   }
 
@@ -25,6 +27,10 @@ class ClientNav extends React.Component {
     const styles = `
     .wrapper {
        width: 30rem;
+    }
+
+    .link:focus {
+      box-shadow: 0 0 5px var(--toast-blue-2);
     }
     `;
 
