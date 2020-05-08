@@ -170,7 +170,7 @@ class Login extends React.Component {
                   onChange={this.setEmail}
                   name="email"
                   value={this.props.email}
-                  short
+                  medium
                   required
                 />
                 <ToastInput
@@ -183,7 +183,7 @@ class Login extends React.Component {
                   onChange={this.setPassword}
                   name="password"
                   value={this.props.password}
-                  short
+                  medium
                   required
                 />
               </div>

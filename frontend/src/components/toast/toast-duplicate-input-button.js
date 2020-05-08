@@ -1,5 +1,4 @@
 import React from "react";
-import Center from "react-center";
 import ToastButton from "./toast-button";
 import Style from "style-it";
 
@@ -12,11 +11,11 @@ class ToastDuplicateInputButton extends React.Component {
   }
 
   getClasses() {
-    let classes = [];
+    let classes = ["button"];
     if (this.props.maxItems && this.props.maxItems <= this.props.value.length) {
-      classes.push("hideBtn");
-      return classes.join(" ");
+      classes.push("hide-btn");
     }
+    return classes.join(" ");
   }
 
   duplicateInput() {
@@ -47,7 +46,18 @@ class ToastDuplicateInputButton extends React.Component {
 
     const styles = `
     .hide-btn { 
-      display:none;
+      display: none;
+    }
+
+    .inputs {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      margin-left: -1rem;
     }
     `;
 
@@ -55,17 +65,17 @@ class ToastDuplicateInputButton extends React.Component {
       `${styles}`,
       <div>
         {(this.props.value || []).map((data, index) => (
-          <div key={index}>{updateChildrenWithProps(index, data)}</div>
+          <div className="inputs" key={index}>
+            {updateChildrenWithProps(index, data)}
+          </div>
         ))}
 
         <div className={this.getClasses()}>
-          <Center>
-            <ToastButton
-              handleClick={this.duplicateInput}
-              tertiary
-              label={this.props.label}
-            />
-          </Center>
+          <ToastButton
+            handleClick={this.duplicateInput}
+            tertiary
+            label={this.props.label}
+          />
         </div>
       </div>
     );

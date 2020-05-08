@@ -44,12 +44,25 @@ class ToastSelect extends React.Component {
     e.currentTarget.parentNode.classList.remove("focused");
   }
 
+  getPlaceholder() {
+    if (this.props.name === "education") {
+      return "Type in your child's education";
+    } else if (this.props.name === "description") {
+      return "Type in your goal";
+    }
+  }
+
   getClasses() {
     let classes = ["container"];
 
     if (this.props.required) {
       classes.push("required");
     }
+
+    if (this.props.short) {
+      classes.push("short");
+    }
+
     return classes.join(" ");
   }
 
@@ -74,9 +87,10 @@ class ToastSelect extends React.Component {
       height: 3rem;
       overflow: hidden;
       background: ${this.backgroundColor};
-      margin: 0.5rem 0 1.5rem 0;
+      margin: 0.5rem 2rem 1.5rem 0;
       padding: 0 0.5rem;
       cursor: ${this.cursor};
+      width: 23.5rem;
     }
 
     .container {
@@ -95,6 +109,10 @@ class ToastSelect extends React.Component {
 
     .hidden {
       display: none;
+    }
+
+    .short {
+      width: 48%;
     }
     `;
 
@@ -132,7 +150,7 @@ class ToastSelect extends React.Component {
         <div ref={this.input} className="hidden">
           <ToastInput
             type="text"
-            placeholder="Type in your goal"
+            placeholder={this.getPlaceholder()}
             onChange={this.props.onChange}
           />
         </div>

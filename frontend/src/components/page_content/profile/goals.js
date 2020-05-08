@@ -26,10 +26,6 @@ class Goals extends React.Component {
 
   render() {
     const styles = `
-    .wrapper {
-        display: flex;
-    }
-    
     .hidden {
         display: none;
     }
@@ -48,9 +44,9 @@ class Goals extends React.Component {
           <ToastSelect
             options={goalOptions}
             name="description"
-            label="Goal 1"
+            label="Goal"
             list="goals"
-            placeholder="Type in your goal"
+            placeholder="Select your goal"
             id="goals"
             readOnly={this.props.readOnly}
           />
@@ -59,7 +55,7 @@ class Goals extends React.Component {
             type="number"
             label="Amount"
             name="amount"
-            placeholder="1,000"
+            placeholder="Type in your goal amount"
             min={0.0}
             step={0.01}
             iconName="dollarsign"
@@ -70,7 +66,7 @@ class Goals extends React.Component {
 
           <ToastInput
             type="date"
-            label="Goal End Date"
+            label="End Date"
             name="endDate"
             readOnly={this.props.readOnly}
           />

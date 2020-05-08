@@ -67,6 +67,10 @@ class ToastInput extends React.Component {
       classes.push("input-group");
     }
 
+    if (this.props.medium) {
+      classes.push("medium");
+    }
+
     if (this.props.short) {
       classes.push("short");
     }
@@ -83,9 +87,9 @@ class ToastInput extends React.Component {
       border: none;
       height: 1.5rem;
       min-width: 15rem;
-      width: 100%;
       padding: 0.75rem 1rem;
       color: var(--toast-neutral-1);
+      width: 24.5rem;
     }
 
     input[type="date"] {
@@ -109,7 +113,8 @@ class ToastInput extends React.Component {
       display: flex;
       border-radius: 2rem;
       background-color: ${this.backgroundColor};
-      margin: 0.5rem 0 1.5rem 0;
+      margin: 0.5rem 2rem 1.5rem 0;
+      width: 24.5rem;
     }
 
     .input-group-search {
@@ -142,10 +147,13 @@ class ToastInput extends React.Component {
       box-shadow: 0 0 5px var(--toast-blue-2);
     }
 
-    .short {
+    .medium {
       width: 70%;
     }
 
+    .short {
+      width: 48%;
+    }
     `;
 
     return Style.it(
