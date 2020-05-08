@@ -79,8 +79,8 @@ export const addGoal = (goalFields) => ({
 });
 
 // finances
-export const setFinancesSingle = (valueName, value) => ({
-  type: "setFinancesSingle",
+export const setFinances = (valueName, value) => ({
+  type: "setFinances",
   payload: { valueName, value },
 });
 
