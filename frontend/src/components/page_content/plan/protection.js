@@ -57,12 +57,11 @@ class Protection extends React.Component {
       height: 14rem;
     }
 
-    .first-col {
-      padding-right: 5rem;
+    .col h5 {
+      margin: 0;
     }
 
-    .col h5 {
-      padding: 0 0 1rem 0;
+    .col h2 {
       margin: 0;
     }
 
@@ -113,13 +112,19 @@ class Protection extends React.Component {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 2rem;
     }
 
     .horiz-line-container {
       position: absolute;
       height: 47vh;
       width: 44rem;
+    }
+
+    .table-item {
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     `;
 
@@ -128,39 +133,74 @@ class Protection extends React.Component {
       <div className={this.getClasses()}>
         <div className="chart">
           <div className="table">
-            <div className="col first-col">
-              <h5 className="corner">Corner</h5>
-              <h5>Policy</h5>
-              <h5>Monthly</h5>
-            </div>
             <div className="col">
-              <h5>Target</h5>
-              <h2 className="text-bg bg-gradient">
-                {`$${numWithCommas(this.props.policyPlan)}`}
-              </h2>
-              <h2 className="text-grad">{`$${numWithCommas(
-                this.props.monthlyPlan
-              )}`}</h2>
+              <div className="table-item">
+                <h5 className="corner">Corner</h5>
+              </div>
+
+              <div className="table-item">
+                <h5>Policy</h5>
+              </div>
+
+              <svg height="2" width="100%">
+                <line x1="300" y1="1" x2="0" y2="1" className="line" />
+              </svg>
+
+              <div className="table-item">
+                <h5>Monthly</h5>
+              </div>
             </div>
+
+            <div className="col">
+              <div className="table-item">
+                <h5>Target</h5>
+              </div>
+
+              <div className="table-item">
+                <h2 className="text-bg bg-gradient">
+                  {`$${numWithCommas(this.props.policyPlan)}`}
+                </h2>
+              </div>
+
+              <svg height="2" width="100%">
+                <line x1="300" y1="1" x2="0" y2="1" className="line" />
+              </svg>
+
+              <div className="table-item">
+                <h2 className="text-grad">{`$${numWithCommas(
+                  this.props.monthlyPlan
+                )}`}</h2>
+              </div>
+            </div>
+
             <div className="vert-line-container">
-              <svg height="300" width="8" className="line">
-                <line x1="2" y1="380" x2="2" y2="0" />
+              <svg height="300" width="2" className="line">
+                <line x1="1" y1="380" x2="1" y2="0" />
               </svg>
             </div>
+
             <div className="col">
-              <h5>Current</h5>
-              <h2 className="text-bg bg-blue">{`$${numWithCommas(
-                this.props.policy
-              )}`}</h2>
-              <h2 className="text-blue">{`$${numWithCommas(
-                this.props.monthly
-              )}`}</h2>
+              <div className="table-item">
+                <h5>Current</h5>
+              </div>
+
+              <div className="table-item">
+                <h2 className="text-bg bg-blue">{`$${numWithCommas(
+                  this.props.policy
+                )}`}</h2>
+              </div>
+
+              <svg height="2" width="100%">
+                <line x1="300" y1="1" x2="0" y2="1" className="line" />
+              </svg>
+
+              <div className="table-item">
+                <h2 className="text-blue">{`$${numWithCommas(
+                  this.props.monthly
+                )}`}</h2>
+              </div>
             </div>
           </div>
-
-          <svg height="210" width="500" className="horiz-line-container">
-            <line x1="50" y1="260" x2="670" y2="260" className="line" />
-          </svg>
         </div>
         <p className="caption">
           Given that your personal annual net income is $
