@@ -120,6 +120,7 @@ class ToastSelect extends React.Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             disabled={this.props.readOnly}
+            title={this.props.placeholder}
           >
             <option value="" disabled>
               {this.props.placeholder}

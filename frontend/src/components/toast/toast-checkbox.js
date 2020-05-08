@@ -53,7 +53,7 @@ class ToastCheckbox extends React.Component {
     return Style.it(
       `${styles}`,
       <div className="input-group">
-        <input type="checkbox" />
+        <input type="checkbox" title="Checkbox" />
         <label className={this.getLabelClasses()}>{this.props.text}</label>
       </div>
     );

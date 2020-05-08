@@ -42,14 +42,21 @@ class AdvisorContactContent extends React.Component {
 
         <div className="entry">
           <label>Email</label>
-          <a href={`mailto:${this.props.email}`} target="blank_">
+          <a
+            href={`mailto:${this.props.email}`}
+            target="blank_"
+            title="Click to email your advisor"
+          >
             <p>{this.props.email}</p>
           </a>
         </div>
 
         <div className="entry">
           <label>Phone Number</label>
-          <a href={`tel:${this.props.phoneNumber}`}>
+          <a
+            href={`tel:${this.props.phoneNumber}`}
+            title="Click to call your advisor"
+          >
             <p>{this.props.phoneNumber}</p>
           </a>
         </div>

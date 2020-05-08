@@ -101,7 +101,7 @@ class Profile extends React.Component {
               name="birthYear"
               label="Birth Year"
               list="birthYear"
-              placeholder="Type in your birth year"
+              placeholder="Select your birth year"
               value={this.props.birthYear}
               id="birthYear"
               onChange={this.handleChange}

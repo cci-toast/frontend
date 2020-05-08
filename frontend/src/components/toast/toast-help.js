@@ -124,6 +124,7 @@ class ToastSaveCancel extends React.Component {
             height={24}
             stroke="var(--toast-neutral-1)"
             strokeWidth={2}
+            title="Help"
           />
         </div>
 

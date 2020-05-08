@@ -106,7 +106,7 @@ class PageContentTemplate extends React.Component {
             saveClicked={this.next}
             cancelClicked={this.prev}
             saveLabel={this.getSave()}
-            cancelLabel="previous"
+            cancelLabel="Previous"
             hideCancel={this.getHideCancel()}
             hideSave={this.getHideSave()}
           />

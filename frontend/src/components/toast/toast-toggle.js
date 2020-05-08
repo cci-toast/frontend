@@ -70,10 +70,12 @@ class ToastToggle extends React.Component {
       `${styles}`,
       <div className="wrapper" onClick={this.onSlide}>
         <div ref={this.slider} className="slider">
-          <label ref={this.sliderLabel}>{this.props.active}</label>
+          <label ref={this.sliderLabel} title={this.props.active}>
+            {this.props.active}
+          </label>
         </div>
         <label>{this.props.active}</label>
-        <label>{this.props.inactive}</label>
+        <label title={this.props.inactive}>{this.props.inactive}</label>
       </div>
     );
   }

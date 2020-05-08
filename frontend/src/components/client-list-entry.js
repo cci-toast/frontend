@@ -76,7 +76,12 @@ class ClientListEntry extends React.Component {
     return Style.it(
       `${styles}`,
       <div className="entry">
-        <a href="/profile" className="link" onClick={this.setClient}>
+        <a
+          href="/profile"
+          className="link"
+          onClick={this.setClient}
+          title="Click to view the client's profile"
+        >
           {this.props.firstName} {this.props.middleName} {this.props.lastName}
         </a>
 
@@ -94,6 +99,7 @@ class ClientListEntry extends React.Component {
               width={24}
               height={24}
               fill="var(--toast-neutral-1)"
+              title="Click to view your client's profile, plan, action items"
             />
           </div>
         </ToastMenu>
