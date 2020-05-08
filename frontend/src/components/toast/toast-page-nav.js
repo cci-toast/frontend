@@ -32,6 +32,7 @@ class ToastPageNav extends React.Component {
           key={title}
           onClick={this.handleClick}
           name={this.props.titlesList.indexOf(title)}
+          title={title}
           id={title}
         >
           {title}

@@ -162,6 +162,7 @@ class ToastInput extends React.Component {
             value={this.props.value || ""}
             min={this.props.min}
             list={this.props.list}
+            title={this.props.placeholder}
             max={this.props.max}
             onChange={this.props.onChange}
             required={this.props.required}

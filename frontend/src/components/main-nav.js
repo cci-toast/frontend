@@ -33,7 +33,12 @@ class MainNav extends React.Component {
 
   getLogOut() {
     return (
-      <NavLink to="/" className="icon-caption" onClick={this.logOut}>
+      <NavLink
+        to="/"
+        className="icon-caption"
+        onClick={this.logOut}
+        title="Log Out"
+      >
         <ToastIcon
           name="power"
           width={35}
@@ -53,6 +58,7 @@ class MainNav extends React.Component {
         className="icon-caption"
         activeClassName="icon-caption-active"
         exact={true}
+        title={linkName}
       >
         <ToastIcon
           name={iconName}
@@ -154,6 +160,7 @@ class MainNav extends React.Component {
             src={ToastLogo}
             rel="icon"
             alt=""
+            title="Profile"
             className="logo"
             onClick={this.goHome}
           />

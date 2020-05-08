@@ -128,6 +128,7 @@ class ToastButton extends React.Component {
         className={this.getClasses()}
         type="Button"
         onClick={this.props.handleClick}
+        title={this.props.label}
       >
         {this.getIcon()}
         {this.props.label}

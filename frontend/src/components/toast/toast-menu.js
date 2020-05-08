@@ -51,6 +51,7 @@ class ToastMenu extends React.Component {
             key={`${this.props.links[num]}`}
             onMouseDown={this.setClose}
             onClick={this.setClient}
+            title={this.props.labels[num]}
           >
             <div className="list-item">
               <div className="icon-text">
