@@ -2,53 +2,28 @@ import React from "react";
 import Style from "style-it";
 import ToastInput from "../../toast/toast-input";
 import ToastSelect from "../../toast/toast-select";
-import ToastDuplicateButton from "../../toast/toast-duplicate-button";
-
+import ToastShowHideInput from "../../toast/toast-show-hide-input";
 import { connect } from "react-redux";
 
 import {
-  getSalaryAfterTaxValue,
-  getAdditionalIncomeValue,
-  getRetirementValue,
-  getHousingValue,
-  getBillValue,
-  getUtilityValue,
-  getProtectionValue,
-  getLoanDebtValue,
-  getShoppingValue,
-  getLeisureValue,
-  getTransportationValue,
-  getSubscriptionValue,
-  getOtherValue,
+  getSalaryAfterTax,
+  getAdditionalIncome,
+  getRetirement,
+  getHousingType,
+  getHousingAmount,
+  getBill,
+  getUtility,
+  getProtectionMonthly,
+  getProtectionPolicy,
+  getLoanDebt,
+  getShopping,
+  getLeisure,
+  getTransportation,
+  getSubscription,
+  getOther,
 } from "../../../redux/selectors";
 
-import {
-  setSalaryAfterTaxValue,
-  setAdditionalIncomeValue,
-  addAdditionalIncome,
-  setRetirementValue,
-  addRetirement,
-  setHousingValue,
-  addHousing,
-  addBill,
-  setBillValue,
-  addUtility,
-  setUtilityValue,
-  addLoanDebt,
-  setLoanDebtValue,
-  addShopping,
-  setShoppingValue,
-  setProtectionValue,
-  addProtection,
-  addLeisure,
-  setLeisureValue,
-  addTransportation,
-  setTransportationValue,
-  addSubscription,
-  setSubscriptionValue,
-  addOther,
-  setOtherValue,
-} from "../../../redux/actions";
+import { setFinancesSingle } from "../../../redux/actions";
 import { housingOptions } from "../../../utils/select-utils";
 
 class Finances extends React.Component {
@@ -68,7 +43,7 @@ class Finances extends React.Component {
 
   handleChange(event) {
     const { name, value } = event.target;
-    this.props.setSalaryAfterTaxValue(name, value);
+    this.props.setFinancesSingle(name, value);
   }
 
   render() {
@@ -103,16 +78,9 @@ class Finances extends React.Component {
             required
           />
 
-          <ToastDuplicateButton
+          <ToastShowHideInput
             id="additionalIncome"
-            maxItems={1}
             label="Add Additional Income"
-            fields={{
-              additionalIncome: "",
-            }}
-            value={this.props.additionalIncome}
-            onChange={this.props.setAdditionalIncomeValue}
-            onDuplicate={this.props.addAdditionalIncome}
           >
             <ToastInput
               type="number"
@@ -124,57 +92,42 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.additionalIncome}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
         </div>
 
         <div>
           <h4>Savings</h4>
-          <ToastDuplicateButton
-            id="retirement"
-            maxItems={1}
-            label="Add Retirement"
-            fields={{
-              retirementSavings: "",
-            }}
-            value={this.props.retirement}
-            onChange={this.props.setRetirementValue}
-            onDuplicate={this.props.addRetirement}
-          >
+          <ToastShowHideInput id="retirement" label="Add Retirement">
             <ToastInput
               type="number"
               label="Retirement Savings"
-              name="retirementSavings"
+              name="retirement"
               placeholder="Type in how much you have total in savings for retirement"
               min={0.0}
               step={0.01}
               iconName="dollarsign"
+              value={this.props.retirement}
               iconWidth={20}
               iconHeight={20}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
         </div>
 
         <div>
           <h4>Bills</h4>
 
-          <ToastDuplicateButton
-            id="housing"
-            maxItems={1}
-            label="Add Housing"
-            fields={{
-              housingType: "",
-              housingAmount: "",
-            }}
-            value={this.props.housing}
-            onChange={this.props.setHousingValue}
-            onDuplicate={this.props.addHousing}
-          >
+          <ToastShowHideInput id="housing" label="Add Housing">
             <ToastSelect
               options={housingOptions}
               name="housingType"
               label="Housing Type"
               id="housingType"
+              value={this.props.housingType}
+              onChange={this.handleChange}
             />
 
             <ToastInput
@@ -187,73 +140,48 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.housingAmount}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
           <hr />
 
-          <ToastDuplicateButton
-            id="bill"
-            maxItems={1}
-            label="Add Bills"
-            fields={{
-              billAmount: "",
-            }}
-            value={this.props.bill}
-            onChange={this.props.setBillValue}
-            onDuplicate={this.props.addBill}
-          >
+          <ToastShowHideInput id="bill" label="Add Bills">
             <ToastInput
               type="number"
               label="Bill Amount"
-              name="billAmount"
+              name="bill"
               placeholder="Type in your amount spent on bills this month"
               min={0.0}
               step={0.01}
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.bill}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
 
           <hr />
 
-          <ToastDuplicateButton
-            id="utility"
-            maxItems={1}
-            label="Add Utilities"
-            fields={{
-              utilityAmount: "",
-            }}
-            value={this.props.utility}
-            onChange={this.props.setUtilityValue}
-            onDuplicate={this.props.addUtility}
-          >
+          <ToastShowHideInput id="utility" label="Add Utilities">
             <ToastInput
               type="number"
               label="Utility Amount"
-              name="utilityAmount"
+              name="utility"
               placeholder="Type in the total amount spent on utilities this month"
               min={0.0}
               step={0.01}
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.utility}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
           <hr />
 
-          <ToastDuplicateButton
-            id="protection"
-            maxItems={1}
-            label="Add Life Insurance"
-            fields={{
-              protectionMonthly: "",
-              protectionPolicy: "",
-            }}
-            value={this.props.protection}
-            onChange={this.props.setProtectionValue}
-            onDuplicate={this.props.addProtection}
-          >
+          <ToastShowHideInput id="protection" label="Add Life Insurance">
             <ToastInput
               type="number"
               label="Insurance Amount"
@@ -264,6 +192,8 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.protectionMonthly}
+              onChange={this.handleChange}
             />
 
             <ToastInput
@@ -276,21 +206,13 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.protectionPolicy}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
           <hr />
 
-          <ToastDuplicateButton
-            id="loanDebt"
-            maxItems={1}
-            label="Add Loans/Debts"
-            fields={{
-              loanDebt: "",
-            }}
-            value={this.props.loanDebt}
-            onChange={this.props.setLoanDebtValue}
-            onDuplicate={this.props.addLoanDebt}
-          >
+          <ToastShowHideInput id="loanDebt" label="Add Loans/Debts">
             <ToastInput
               type="number"
               label="Loan/Debt Amount"
@@ -301,24 +223,16 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.loanDebt}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
         </div>
 
         <div>
           <h4>Expenses</h4>
 
-          <ToastDuplicateButton
-            id="shopping"
-            maxItems={1}
-            label="Add Shopping"
-            fields={{
-              shopping: "",
-            }}
-            value={this.props.shopping}
-            onChange={this.props.setShoppingValue}
-            onDuplicate={this.props.addShopping}
-          >
+          <ToastShowHideInput id="shopping" label="Add Shopping">
             <ToastInput
               type="number"
               label="Shopping Amount"
@@ -329,22 +243,14 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.shopping}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
 
           <hr />
 
-          <ToastDuplicateButton
-            id="leisure"
-            maxItems={1}
-            label="Add Leisure"
-            fields={{
-              leisure: "",
-            }}
-            value={this.props.leisure}
-            onChange={this.props.setLeisureValue}
-            onDuplicate={this.props.addLeisure}
-          >
+          <ToastShowHideInput id="leisure" label="Add Leisure">
             <ToastInput
               type="number"
               label="Leisure Amount"
@@ -355,21 +261,13 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.leisure}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
           <hr />
 
-          <ToastDuplicateButton
-            id="transportation"
-            maxItems={1}
-            label="Add Transportation"
-            fields={{
-              transportation: "",
-            }}
-            value={this.props.transportation}
-            onChange={this.props.setTransportationValue}
-            onDuplicate={this.props.addTransportation}
-          >
+          <ToastShowHideInput id="transportation" label="Add Transportation">
             <ToastInput
               type="number"
               label="Transportation Amount"
@@ -380,22 +278,14 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.transportation}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
 
           <hr />
 
-          <ToastDuplicateButton
-            id="subscriptions"
-            maxItems={1}
-            label="Add Subscriptions"
-            fields={{
-              subscriptions: "",
-            }}
-            value={this.props.subscription}
-            onChange={this.props.setSubscriptionValue}
-            onDuplicate={this.props.addSubscription}
-          >
+          <ToastShowHideInput id="subscriptions" label="Add Subscriptions">
             <ToastInput
               type="number"
               label="Subscription Amount"
@@ -406,22 +296,14 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.subscription}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
 
           <hr />
 
-          <ToastDuplicateButton
-            id="other"
-            maxItems={1}
-            label="Add Other"
-            fields={{
-              other: "",
-            }}
-            value={this.props.other}
-            onChange={this.props.setOtherValue}
-            onDuplicate={this.props.addOther}
-          >
+          <ToastShowHideInput id="other" label="Add Other">
             <ToastInput
               type="number"
               label="Other Amount"
@@ -432,8 +314,10 @@ class Finances extends React.Component {
               iconName="dollarsign"
               iconWidth={20}
               iconHeight={20}
+              value={this.props.other}
+              onChange={this.handleChange}
             />
-          </ToastDuplicateButton>
+          </ToastShowHideInput>
         </div>
       </div>
     );
@@ -441,45 +325,23 @@ class Finances extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  salaryAfterTax: getSalaryAfterTaxValue(state),
-  additionalIncome: getAdditionalIncomeValue(state),
-  retirement: getRetirementValue(state),
-  housing: getHousingValue(state),
-  bill: getBillValue(state),
-  utility: getUtilityValue(state),
-  protection: getProtectionValue(state),
-  loanDebt: getLoanDebtValue(state),
-  shopping: getShoppingValue(state),
-  leisure: getLeisureValue(state),
-  transportation: getTransportationValue(state),
-  subscription: getSubscriptionValue(state),
-  other: getOtherValue(state),
+  salaryAfterTax: getSalaryAfterTax(state),
+  additionalIncome: getAdditionalIncome(state),
+  retirement: getRetirement(state),
+  housingType: getHousingType(state),
+  housingAmount: getHousingAmount(state),
+  bill: getBill(state),
+  utility: getUtility(state),
+  protectionPolicy: getProtectionPolicy(state),
+  protectionMonthly: getProtectionMonthly(state),
+  loanDebt: getLoanDebt(state),
+  shopping: getShopping(state),
+  leisure: getLeisure(state),
+  transportation: getTransportation(state),
+  subscription: getSubscription(state),
+  other: getOther(state),
 });
 
 export default connect(mapStateToProps, {
-  setSalaryAfterTaxValue,
-  setAdditionalIncomeValue,
-  setRetirementValue,
-  addRetirement,
-  setHousingValue,
-  addHousing,
-  setBillValue,
-  addBill,
-  setUtilityValue,
-  addUtility,
-  setProtectionValue,
-  addProtection,
-  setLoanDebtValue,
-  addLoanDebt,
-  setShoppingValue,
-  addShopping,
-  addAdditionalIncome,
-  addLeisure,
-  setLeisureValue,
-  addTransportation,
-  setTransportationValue,
-  addSubscription,
-  setSubscriptionValue,
-  addOther,
-  setOtherValue,
+  setFinancesSingle,
 })(Finances);

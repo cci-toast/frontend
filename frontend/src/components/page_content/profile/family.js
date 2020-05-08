@@ -4,7 +4,7 @@ import Style from "style-it";
 
 import ToastInput from "../../toast/toast-input";
 import ToastSelect from "../../toast/toast-select";
-import ToastDuplicateButton from "../../toast/toast-duplicate-button";
+import ToastDuplicateInputButton from "../../toast/toast-duplicate-input-button";
 
 import { connect } from "react-redux";
 
@@ -47,7 +47,7 @@ class Family extends React.Component {
     return Style.it(
       `${styles}`,
       <div className={this.getClasses()}>
-        <ToastDuplicateButton
+        <ToastDuplicateInputButton
           id="partner"
           label="Add Partner"
           fields={{
@@ -93,9 +93,10 @@ class Family extends React.Component {
             iconWidth={20}
             iconHeight={20}
           />
-        </ToastDuplicateButton>
+        </ToastDuplicateInputButton>
         <hr />
-        <ToastDuplicateButton
+
+        <ToastDuplicateInputButton
           label="Add Child"
           fields={{ firstName: "", education: "", birthYear: 2020 }}
           value={this.props.children}
@@ -126,7 +127,7 @@ class Family extends React.Component {
             placeholder="Type in your child's birth year"
             id="childBirthYear"
           />
-        </ToastDuplicateButton>
+        </ToastDuplicateInputButton>
       </div>
     );
   }
@@ -143,5 +144,3 @@ export default connect(mapStateToProps, {
   addPartner,
   addChild,
 })(Family);
-
-//export default Family;

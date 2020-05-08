@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 import { numWithCommas } from "../../../utils/plan-utils";
 
 import {
+  getRetirementTargetSavings,
   getRetirement,
-  getRetirementSavings,
   getRetirementYears,
   getRetirementMonthly,
 } from "../../../redux/selectors";
@@ -26,7 +26,7 @@ class Retirement extends React.Component {
       },
       {
         name: "Total Target Savings",
-        value: this.props.retirement,
+        value: this.props.retirementTargetSavings,
         fill: "url(#gradient)",
       },
     ];
@@ -60,7 +60,7 @@ class Retirement extends React.Component {
       <div className={this.getClasses()}>
         <ToastBarChart
           salaryAfterTax={this.props.salaryAfterTax}
-          header={`$${numWithCommas(this.props.retirement)}`}
+          header={`$${numWithCommas(this.props.retirementTargetSavings)}`}
           data={this.data}
           subheader={this.props.retirementSavings}
           caption={this.getCaption()}
@@ -71,8 +71,8 @@ class Retirement extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  retirement: getRetirement(state),
-  retirementSavings: getRetirementSavings(state),
+  retirementTargetSavings: getRetirementTargetSavings(state),
+  retirementSavings: getRetirement(state),
   retirementYears: getRetirementYears(state),
   retirementMonthly: getRetirementMonthly(state),
 });

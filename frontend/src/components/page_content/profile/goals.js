@@ -3,7 +3,7 @@ import Style from "style-it";
 
 import ToastInput from "../../toast/toast-input";
 import ToastSelect from "../../toast/toast-select";
-import ToastDuplicateButton from "../../toast/toast-duplicate-button";
+import ToastDuplicateInputButton from "../../toast/toast-duplicate-input-button";
 
 import { connect } from "react-redux";
 
@@ -38,7 +38,7 @@ class Goals extends React.Component {
     return Style.it(
       `${styles}`,
       <div className={this.getClasses()}>
-        <ToastDuplicateButton
+        <ToastDuplicateInputButton
           label="Add Goal"
           fields={{ goal: "", amount: "", endDate: "" }}
           value={this.props.goals}
@@ -68,7 +68,7 @@ class Goals extends React.Component {
           />
 
           <ToastInput type="date" label="Goal End Date" name="endDate" />
-        </ToastDuplicateButton>
+        </ToastDuplicateInputButton>
       </div>
     );
   }
