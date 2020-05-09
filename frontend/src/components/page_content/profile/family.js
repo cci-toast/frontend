@@ -15,6 +15,8 @@ import {
   addChild,
   setPartnerListValue,
   setChildListValue,
+  deleteChild,
+  deletePartner,
 } from "../../../redux/actions";
 
 import {
@@ -60,6 +62,7 @@ class Family extends React.Component {
           value={this.props.partners}
           onChange={this.props.setPartnerListValue}
           onDuplicate={this.props.addPartner}
+          onDelete={this.props.deletePartner}
         >
           <ToastInput
             type="text"
@@ -111,6 +114,7 @@ class Family extends React.Component {
           value={this.props.children}
           onChange={this.props.setChildListValue}
           onDuplicate={this.props.addChild}
+          onDelete={this.props.deleteChild}
         >
           <ToastInput
             type="text"
@@ -155,4 +159,6 @@ export default connect(mapStateToProps, {
   setChildListValue,
   addPartner,
   addChild,
+  deleteChild,
+  deletePartner,
 })(Family);

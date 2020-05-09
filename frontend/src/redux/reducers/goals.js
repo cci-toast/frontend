@@ -18,6 +18,15 @@ export default function (state = initialState, action) {
         goals: tempGoals,
       };
     }
+    case "deleteGoal": {
+      const { index } = action.payload;
+      let tempGoals = [...state.goals];
+      tempGoals.splice(index, 1);
+      return {
+        ...state,
+        goals: tempGoals,
+      };
+    }
 
     default:
       return state;

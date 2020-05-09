@@ -1,5 +1,6 @@
 import React from "react";
 import ToastButton from "./toast-button";
+import ToastDeleteButton from "./toast-delete-button";
 import Style from "style-it";
 
 /* Expects an array and duplicates the "children".  Set maxItems to limit the number of duplicates.  
@@ -8,6 +9,17 @@ class ToastDuplicateInputButton extends React.Component {
   constructor(props) {
     super(props);
     this.duplicateInput = this.duplicateInput.bind(this);
+    this.deleteSelection = this.deleteSelection.bind(this);
+  }
+
+  deleteSelection(i) {
+    if (window.confirm("Are you sure you wish to delete this item?")) {
+      if (this.props.onDelete) {
+        this.props.onDelete(i);
+      }
+    } else {
+      return;
+    }
   }
 
   getClasses() {
@@ -59,14 +71,23 @@ class ToastDuplicateInputButton extends React.Component {
       justify-content: center;
       margin-left: -1rem;
     }
+
+
     `;
 
     return Style.it(
       `${styles}`,
       <div>
         {(this.props.value || []).map((data, index) => (
-          <div className="inputs" key={index}>
-            {updateChildrenWithProps(index, data)}
+          <div key={index}>
+            <div className="row">
+              <ToastDeleteButton
+                handleClick={() => {
+                  this.deleteSelection(index);
+                }}
+              />
+            </div>
+            <div className="inputs">{updateChildrenWithProps(index, data)}</div>
           </div>
         ))}
 

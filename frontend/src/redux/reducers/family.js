@@ -18,6 +18,16 @@ export default function (state = initialState, action) {
         partners: tempPartners,
       };
     }
+    case "deletePartner": {
+      const { index } = action.payload;
+      let tempPartner = [...state.partners];
+      tempPartner.splice(index, 1);
+      return {
+        ...state,
+        partners: tempPartner,
+      };
+    }
+
     case "addChild": {
       const { childFields } = action.payload;
       return { ...state, children: [...state.children, childFields] };
@@ -29,6 +39,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         children: tempChildren,
+      };
+    }
+    case "deleteChild": {
+      const { index } = action.payload;
+      let tempChild = [...state.children];
+      tempChild.splice(index, 1);
+      return {
+        ...state,
+        children: tempChild,
       };
     }
     default:
