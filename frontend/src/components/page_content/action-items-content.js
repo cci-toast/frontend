@@ -16,15 +16,34 @@ class ActionItemsContent extends React.Component {
     this.props.resetStep();
   }
 
+  isAdvisor() {
+    return this.props.user === "advisor";
+  }
+
   getContent() {
     if (this.props.showContent) {
       return (
         <div className="action-items">
-          <EmergencySavings currentStep={this.props.currentStep} />
-          <Protection currentStep={this.props.currentStep} />
-          <Debt currentStep={this.props.currentStep} />
-          <Retirement currentStep={this.props.currentStep} />
-          <Budgeting currentStep={this.props.currentStep} />
+          <EmergencySavings
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+          <Protection
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+          <Debt
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+          <Retirement
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+          <Budgeting
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
         </div>
       );
     } else {

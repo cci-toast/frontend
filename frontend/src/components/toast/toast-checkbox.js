@@ -2,6 +2,18 @@ import React from "react";
 import Style from "style-it";
 
 class ToastCheckbox extends React.Component {
+  constructor(props) {
+    super(props);
+
+    if (this.props.readOnly) {
+      this.backgroundColor = "var(--toast-neutral-4)";
+      this.cursor = "not-allowed";
+    } else {
+      this.backgroundColor = "var(--toast-neutral-5)";
+      this.cursor = "pointer";
+    }
+  }
+
   getLabelClasses() {
     let classes = ["label"];
 
@@ -20,7 +32,7 @@ class ToastCheckbox extends React.Component {
     }
     
     input[type="checkbox"] {
-      background-color: var(--toast-neutral-5);
+      background-color: ${this.backgroundColor};
       width: 1.2rem;
       height: 1.2rem;
       border-radius: 3px;
@@ -30,7 +42,7 @@ class ToastCheckbox extends React.Component {
       align-items: center;
       justify-content: center;
       outline: none;
-      cursor: pointer;
+      cursor: ${this.cursor};
       font-size: 13px;
     }
   
@@ -53,7 +65,11 @@ class ToastCheckbox extends React.Component {
     return Style.it(
       `${styles}`,
       <div className="input-group">
-        <input type="checkbox" title="Checkbox" />
+        <input
+          type="checkbox"
+          title="Checkbox"
+          disabled={this.props.readOnly}
+        />
         <label className={this.getLabelClasses()}>{this.props.text}</label>
       </div>
     );
