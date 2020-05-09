@@ -38,6 +38,8 @@ export const isLoggedInClient = (state) => state.loginReducer.isLoggedInClient;
 export const getCurrentStep = (state) => state.pageContentReducer.currentStep;
 export const getShowPlanReady = (state) =>
   state.pageContentReducer.showPlanReady;
+export const getAddedFinancesStep = (state) =>
+  state.pageContentReducer.addedFinancesStep;
 
 // PROFILE
 

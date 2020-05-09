@@ -63,6 +63,7 @@ class Family extends React.Component {
           onChange={this.props.setPartnerListValue}
           onDuplicate={this.props.addPartner}
           onDelete={this.props.deletePartner}
+          maxItems={1}
         >
           <ToastInput
             type="text"
@@ -115,6 +116,7 @@ class Family extends React.Component {
           onChange={this.props.setChildListValue}
           onDuplicate={this.props.addChild}
           onDelete={this.props.deleteChild}
+          maxItems={2}
         >
           <ToastInput
             type="text"

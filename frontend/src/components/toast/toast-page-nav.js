@@ -15,7 +15,10 @@ class ToastPageNav extends React.Component {
   }
 
   handleClick(event) {
-    this.props.setStep(parseInt(event.target.getAttribute("name")));
+    this.props.setStep(
+      "currentStep",
+      parseInt(event.target.getAttribute("name"))
+    );
   }
 
   isActive(title) {

@@ -23,10 +23,14 @@ class ToastDuplicateInputButton extends React.Component {
   }
 
   getClasses() {
-    let classes = ["button"];
+    let classes = [];
+
     if (this.props.maxItems && this.props.maxItems <= this.props.value.length) {
       classes.push("hide-btn");
+    } else {
+      classes.push("button");
     }
+
     return classes.join(" ");
   }
 

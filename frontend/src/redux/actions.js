@@ -30,21 +30,24 @@ export const resetLogin = () => ({
 });
 
 // page content
-export const incrementStep = () => ({
+export const incrementStep = (stepName) => ({
   type: "incrementStep",
+  payload: { stepName },
 });
 
-export const decrementStep = () => ({
+export const decrementStep = (stepName) => ({
   type: "decrementStep",
+  payload: { stepName },
 });
 
-export const resetStep = () => ({
+export const resetStep = (stepName) => ({
   type: "resetStep",
+  payload: { stepName },
 });
 
-export const setStep = (step) => ({
+export const setStep = (stepName, stepNumber) => ({
   type: "setStep",
-  payload: { step },
+  payload: { stepName, stepNumber },
 });
 
 export const toggleShowPlanReady = () => ({

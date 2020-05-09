@@ -18,7 +18,7 @@ import { resetStep } from "../../redux/actions";
 
 class PlanContent extends React.Component {
   componentDidMount() {
-    this.props.resetStep();
+    this.props.resetStep("currentStep");
   }
 
   getContent() {

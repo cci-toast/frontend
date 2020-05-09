@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 
 class ProfileContent extends React.Component {
   componentDidMount() {
-    this.props.resetStep();
+    this.props.resetStep("currentStep");
   }
 
   isAdvisor() {

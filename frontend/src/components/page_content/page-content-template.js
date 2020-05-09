@@ -4,7 +4,11 @@ import Style from "style-it";
 import ToastSaveCancel from "../toast/toast-save-cancel";
 
 import { connect } from "react-redux";
-import { getCurrentStep, getClientId } from "../../redux/selectors";
+import {
+  getCurrentStep,
+  getClientId,
+  getAddedFinancesStep,
+} from "../../redux/selectors";
 import { incrementStep, decrementStep } from "../../redux/actions";
 
 import ActionItemsContent from "./action-items-content";
@@ -26,13 +30,22 @@ class PageContentTemplate extends React.Component {
   next() {
     if (this.getSave() === "View Plan") {
       document.location.href = "/plan";
+    } else if (
+      this.props.currentStep === 1 &&
+      this.props.addedFinancesStep < 2
+    ) {
+      this.props.incrementStep("addedFinancesStep");
     } else {
-      this.props.incrementStep();
+      this.props.incrementStep("currentStep");
     }
   }
 
   prev() {
-    this.props.decrementStep();
+    if (this.props.currentStep === 1 && this.props.addedFinancesStep > 0) {
+      this.props.decrementStep("addedFinancesStep");
+    } else {
+      this.props.decrementStep("currentStep");
+    }
   }
 
   getHideCancel() {
@@ -119,6 +132,7 @@ class PageContentTemplate extends React.Component {
 const mapStateToProps = (state) => ({
   currentStep: getCurrentStep(state),
   clientId: getClientId(state),
+  addedFinancesStep: getAddedFinancesStep(state),
 });
 
 export default connect(mapStateToProps, {

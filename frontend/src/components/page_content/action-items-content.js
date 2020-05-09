@@ -13,7 +13,7 @@ import { resetStep } from "../../redux/actions";
 
 class ActionItemsContent extends React.Component {
   componentDidMount() {
-    this.props.resetStep();
+    this.props.resetStep("currentStep");
   }
 
   isAdvisor() {

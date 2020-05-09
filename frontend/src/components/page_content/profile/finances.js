@@ -19,6 +19,7 @@ import {
   getTransportation,
   getSubscription,
   getOther,
+  getAddedFinancesStep,
 } from "../../../redux/selectors";
 
 import { setFinancesValue } from "../../../redux/actions";
@@ -29,10 +30,44 @@ class Finances extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
-  getClasses() {
+
+  getFinancesClasses() {
     let classes = [""];
 
     if (this.props.currentStep !== 1) {
+      classes.push("hidden");
+    }
+
+    return classes.join(" ");
+  }
+
+  getFirstPageClasses() {
+    let classes = [""];
+
+    if (
+      this.props.currentStep !== 1 ||
+      (this.props.currentStep === 1 && this.props.addedFinancesStep !== 0)
+    ) {
+      classes.push("hidden");
+    }
+
+    return classes.join(" ");
+  }
+
+  getSecondPageClasses() {
+    let classes = [""];
+
+    if (this.props.addedFinancesStep !== 1) {
+      classes.push("hidden");
+    }
+
+    return classes.join(" ");
+  }
+
+  getThirdPageClasses() {
+    let classes = [""];
+
+    if (this.props.addedFinancesStep !== 2) {
       classes.push("hidden");
     }
 
@@ -62,227 +97,233 @@ class Finances extends React.Component {
 
     return Style.it(
       `${styles}`,
-      <div className={this.getClasses()}>
-        <h4>Savings</h4>
+      <div className={this.getFinancesClasses()}>
+        <div className={this.getFirstPageClasses()}>
+          <h4>Savings</h4>
 
-        <ToastShowHideInput id="retirement" label="Add Retirement">
-          <ToastInput
-            type="number"
-            label="Retirement Savings"
-            name="retirement"
-            placeholder="Type in your retirement savings"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            value={this.props.retirement}
-            iconWidth={20}
-            iconHeight={20}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="retirement" label="Add Retirement">
+            <ToastInput
+              type="number"
+              label="Retirement Savings"
+              name="retirement"
+              placeholder="Type in your retirement savings"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              value={this.props.retirement}
+              iconWidth={20}
+              iconHeight={20}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <hr />
-        <h4>Bills</h4>
+          <hr />
+          <h4>Bills</h4>
 
-        <ToastShowHideInput id="housing" label="Add Housing">
-          <ToastSelect
-            options={housingOptions}
-            name="housingType"
-            label="Housing Type"
-            id="housingType"
-            value={this.props.housingType}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-            placeholder="Select your housing type"
-          />
+          <ToastShowHideInput id="housing" label="Add Housing">
+            <ToastSelect
+              options={housingOptions}
+              name="housingType"
+              label="Housing Type"
+              id="housingType"
+              value={this.props.housingType}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+              placeholder="Select your housing type"
+            />
 
-          <ToastInput
-            type="number"
-            label="Housing (Monthly)"
-            name="housingAmount"
-            placeholder="Type in your amount spent on housing"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.housingAmount}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+            <ToastInput
+              type="number"
+              label="Housing (Monthly)"
+              name="housingAmount"
+              placeholder="Type in your amount spent on housing"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.housingAmount}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <ToastShowHideInput id="bill" label="Add Bills">
-          <ToastInput
-            type="number"
-            label="Bills (Monthly)"
-            name="bill"
-            placeholder="Type in your amount spent on bills"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.bill}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="bill" label="Add Bills">
+            <ToastInput
+              type="number"
+              label="Bills (Monthly)"
+              name="bill"
+              placeholder="Type in your amount spent on bills"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.bill}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <ToastShowHideInput id="utility" label="Add Utilities">
-          <ToastInput
-            type="number"
-            label="Utilities (Monthly)"
-            name="utility"
-            placeholder="Type in your amount spent on utilities"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.utility}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="utility" label="Add Utilities">
+            <ToastInput
+              type="number"
+              label="Utilities (Monthly)"
+              name="utility"
+              placeholder="Type in your amount spent on utilities"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.utility}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
+        </div>
 
-        <ToastShowHideInput id="protection" label="Add Life Insurance">
-          <ToastInput
-            type="number"
-            label="Life Insurance (Monthly)"
-            name="protectionMonthly"
-            placeholder="Type in your amount spent on life insurance"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.protectionMonthly}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
+        <div className={this.getSecondPageClasses()}>
+          <ToastShowHideInput id="protection" label="Add Life Insurance">
+            <ToastInput
+              type="number"
+              label="Life Insurance (Monthly)"
+              name="protectionMonthly"
+              placeholder="Type in your amount spent on life insurance"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.protectionMonthly}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
 
-          <ToastInput
-            type="number"
-            label="Insurance Policy Coverage"
-            name="protectionPolicy"
-            placeholder="Type in your life insurance coverage"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.protectionPolicy}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+            <ToastInput
+              type="number"
+              label="Insurance Policy Coverage"
+              name="protectionPolicy"
+              placeholder="Type in your life insurance coverage"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.protectionPolicy}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <ToastShowHideInput id="loanDebt" label="Add Loans & Debt">
-          <ToastInput
-            type="number"
-            label="Loans & Debt (Monthly)"
-            name="loanDebt"
-            placeholder="Type in your payment towards loans & debt"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.loanDebt}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="loanDebt" label="Add Loans & Debt">
+            <ToastInput
+              type="number"
+              label="Loans & Debt (Monthly)"
+              name="loanDebt"
+              placeholder="Type in your payment towards loans & debt"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.loanDebt}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <hr />
-        <h4>Expenses</h4>
+          <hr />
+          <h4>Expenses</h4>
 
-        <ToastShowHideInput id="shopping" label="Add Shopping">
-          <ToastInput
-            type="number"
-            label="Shopping (Monthly)"
-            name="shopping"
-            placeholder="Type in your amount spent on shopping"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.shopping}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="shopping" label="Add Shopping">
+            <ToastInput
+              type="number"
+              label="Shopping (Monthly)"
+              name="shopping"
+              placeholder="Type in your amount spent on shopping"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.shopping}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <ToastShowHideInput id="leisure" label="Add Leisure">
-          <ToastInput
-            type="number"
-            label="Leisure (Monthly)"
-            name="leisure"
-            placeholder="Type in your amount spent on leisure"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.leisure}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="leisure" label="Add Leisure">
+            <ToastInput
+              type="number"
+              label="Leisure (Monthly)"
+              name="leisure"
+              placeholder="Type in your amount spent on leisure"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.leisure}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <ToastShowHideInput id="transportation" label="Add Transportation">
-          <ToastInput
-            type="number"
-            label="Transportation (Monthly)"
-            name="transportation"
-            placeholder="Type in your amount spent on transportation"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.transportation}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="transportation" label="Add Transportation">
+            <ToastInput
+              type="number"
+              label="Transportation (Monthly)"
+              name="transportation"
+              placeholder="Type in your amount spent on transportation"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.transportation}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
+        </div>
 
-        <ToastShowHideInput id="subscriptions" label="Add Subscriptions">
-          <ToastInput
-            type="number"
-            label="Subscription (Monthly)"
-            name="subscription"
-            placeholder="Type in your amount spent on subscriptions"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.subscription}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+        <div className={this.getThirdPageClasses()}>
+          <ToastShowHideInput id="subscriptions" label="Add Subscriptions">
+            <ToastInput
+              type="number"
+              label="Subscription (Monthly)"
+              name="subscription"
+              placeholder="Type in your amount spent on subscriptions"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.subscription}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
 
-        <ToastShowHideInput id="other" label="Add Other">
-          <ToastInput
-            type="number"
-            label="Other (Monthly)"
-            name="other"
-            placeholder="Type in your amount spent on other items"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.other}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
+          <ToastShowHideInput id="other" label="Add Other">
+            <ToastInput
+              type="number"
+              label="Other (Monthly)"
+              name="other"
+              placeholder="Type in your amount spent on other items"
+              min={0.0}
+              step={0.01}
+              iconName="dollarsign"
+              iconWidth={20}
+              iconHeight={20}
+              value={this.props.other}
+              onChange={this.handleChange}
+              readOnly={this.props.readOnly}
+            />
+          </ToastShowHideInput>
+        </div>
       </div>
     );
   }
@@ -302,6 +343,7 @@ const mapStateToProps = (state) => ({
   transportation: getTransportation(state),
   subscription: getSubscription(state),
   other: getOther(state),
+  addedFinancesStep: getAddedFinancesStep(state),
 });
 
 export default connect(mapStateToProps, {

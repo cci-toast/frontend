@@ -15,7 +15,7 @@ class ConfigurationContent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.resetStep();
+    this.props.resetStep("currentStep");
   }
 
   render() {

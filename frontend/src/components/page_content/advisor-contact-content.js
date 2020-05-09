@@ -15,7 +15,7 @@ import {
 
 class AdvisorContactContent extends React.Component {
   componenDidMount() {
-    this.props.resetStep();
+    this.props.resetStep("currentStep");
   }
 
   render() {

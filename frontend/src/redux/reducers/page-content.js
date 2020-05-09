@@ -1,33 +1,37 @@
 const initialState = {
   currentStep: 0,
   showPlanReady: false,
+  addedFinancesStep: 0,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case "incrementStep": {
+      const { stepName } = action.payload;
       return {
         ...state,
-        currentStep: state.currentStep + 1,
+        [stepName]: state[stepName] + 1,
       };
     }
     case "decrementStep": {
+      const { stepName } = action.payload;
       return {
         ...state,
-        currentStep: state.currentStep - 1,
+        [stepName]: state[stepName] - 1,
       };
     }
     case "resetStep": {
+      const { stepName } = action.payload;
       return {
         ...state,
-        currentStep: 0,
+        [stepName]: 0,
       };
     }
     case "setStep": {
-      const { step } = action.payload;
+      const { stepName, stepNumber } = action.payload;
       return {
         ...state,
-        currentStep: step,
+        [stepName]: stepNumber,
       };
     }
     case "toggleShowPlanReady": {
