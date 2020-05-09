@@ -73,8 +73,7 @@ class ToastDuplicateInputButton extends React.Component {
     }
 
     .wrapper {
-      justify-content: flex-end;
-      padding-bottom: 2.3rem;
+      padding-bottom: 2.25rem;
     }
     `;
 
