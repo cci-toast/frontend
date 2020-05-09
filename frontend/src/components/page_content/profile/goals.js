@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 
 import { getGoals } from "../../../redux/selectors";
 
-import { setGoalListValue, addGoal } from "../../../redux/actions";
+import { setGoalListValue, addGoal, deleteGoal } from "../../../redux/actions";
 
 import { goalOptions } from "../../../utils/select-utils";
 
@@ -40,6 +40,7 @@ class Goals extends React.Component {
           value={this.props.goals}
           onChange={this.props.setGoalListValue}
           onDuplicate={this.props.addGoal}
+          onDelete={this.props.deleteGoal}
         >
           <ToastSelect
             options={goalOptions}
@@ -83,4 +84,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   setGoalListValue,
   addGoal,
+  deleteGoal,
 })(Goals);

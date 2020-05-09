@@ -78,6 +78,11 @@ export const addGoal = (goalFields) => ({
   payload: { goalFields },
 });
 
+export const deleteGoal = (index) => ({
+  type: "deleteGoal",
+  payload: { index },
+});
+
 // finances
 export const setFinancesValue = (valueName, value) => ({
   type: "setFinancesValue",
@@ -96,6 +101,11 @@ export const setPartnerListValue = (index, valueName, value) => ({
   payload: { index, valueName, value },
 });
 
+export const deletePartner = (index) => ({
+  type: "deletePartner",
+  payload: { index },
+});
+
 export const addChild = (childFields) => ({
   type: "addChild",
   payload: { childFields },
@@ -106,6 +116,10 @@ export const setChildListValue = (index, valueName, value) => ({
   payload: { index, valueName, value },
 });
 
+export const deleteChild = (index) => ({
+  type: "deleteChild",
+  payload: { index },
+});
 // advisor
 export const setAdvisorValue = (valueName, value) => ({
   type: "setAdvisorValue",
