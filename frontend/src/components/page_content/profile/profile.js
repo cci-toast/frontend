@@ -181,6 +181,7 @@ class Profile extends React.Component {
             <ToastShowHideInput
               id="additionalIncome"
               label="Add Additional Income"
+              readOnly={this.props.readOnly}
             >
               <ToastInput
                 type="number"
