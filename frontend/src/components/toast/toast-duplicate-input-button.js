@@ -13,7 +13,7 @@ class ToastDuplicateInputButton extends React.Component {
   }
 
   deleteSelection(i) {
-    if (window.confirm("Are you sure you wish to delete this item?")) {
+    if (window.confirm("Are you sure you want to delete this item?")) {
       if (this.props.onDelete) {
         this.props.onDelete(i);
       }
@@ -65,14 +65,17 @@ class ToastDuplicateInputButton extends React.Component {
       display: flex;
       flex-wrap: wrap;
     }
-
+    
     .button {
       display: flex;
       justify-content: center;
       margin-left: -1rem;
     }
 
-
+    .wrapper {
+      justify-content: flex-end;
+      padding-bottom: 2.3rem;
+    }
     `;
 
     return Style.it(
@@ -80,7 +83,7 @@ class ToastDuplicateInputButton extends React.Component {
       <div>
         {(this.props.value || []).map((data, index) => (
           <div key={index}>
-            <div className="row">
+            <div className="wrapper">
               <ToastDeleteButton
                 handleClick={() => {
                   this.deleteSelection(index);

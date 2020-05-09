@@ -9,7 +9,7 @@ class ToastDeleteButton extends React.Component {
     .icon {
         cursor: pointer;
         padding-bottom: 0.5rem;
-        
+        float: right;
     }
     `;
 
