@@ -29,10 +29,36 @@ class ToastShowHideInput extends React.Component {
     return result;
   }
 
+  getContentClasses() {
+    let classes = [""];
+
+    if (this.isEmpty()) {
+      classes.push("hide");
+    } else {
+      classes.push("show");
+      classes.push("inputs");
+    }
+
+    return classes.join(" ");
+  }
+
+  getButtonClasses() {
+    let classes = [""];
+
+    if (this.isEmpty()) {
+      classes.push("show");
+    } else {
+      classes.push("hide");
+    }
+
+    return classes.join(" ");
+  }
+
   showInput() {
     if (this.content.current.classList.contains("hide")) {
       this.content.current.classList.remove("hide");
       this.content.current.classList.add("show");
+      this.content.current.classList.add("inputs");
       this.button.current.classList.remove("show");
       this.button.current.classList.add("hide");
     }
@@ -41,21 +67,33 @@ class ToastShowHideInput extends React.Component {
   render() {
     const styles = `
     .hide {
-      display:none;
+      display: none;
     }
+
     .show {
-      display:block;
+      display: block;
+    }
+
+    .inputs {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      margin-left: -1rem;
     }
     `;
 
     return Style.it(
       `${styles}`,
       <div>
-        <div ref={this.content} className={this.isEmpty() ? "hide" : "show"}>
+        <div ref={this.content} className={this.getContentClasses()}>
           {this.props.children}
         </div>
 
-        <div ref={this.button} className={this.isEmpty() ? "show" : "hide"}>
+        <div ref={this.button} className={this.getButtonClasses()}>
           <Center>
             <ToastButton
               handleClick={this.showInput}

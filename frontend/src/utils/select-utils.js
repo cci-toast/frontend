@@ -122,7 +122,11 @@ export const subscriptionOptions = [
 
 export const loandebtOptions = ["Credit Card", "School/Student", "Medical"];
 
-export const childEducationOptions = ["College", "Going to College"];
+export const childEducationOptions = [
+  "College",
+  "Going to College",
+  "Other (Type in)",
+];
 
 export const getBirthYearOptions = (maxOffset) => {
   if (maxOffset == null) {

@@ -24,7 +24,7 @@ import {
 
 class Family extends React.Component {
   getClasses() {
-    let classes = [""];
+    let classes = ["family"];
 
     if (this.props.currentStep !== 2) {
       classes.push("hidden");
@@ -35,12 +35,13 @@ class Family extends React.Component {
 
   render() {
     const styles = `
-    .wrapper {
-        display: flex;
-    }
-
     .hidden {
         display: none;
+    }
+
+    hr {
+      width: 100%;
+      margin: 2rem 0;
     }
     `;
 
@@ -81,7 +82,7 @@ class Family extends React.Component {
             name="birthYear"
             label="Partner's Birth Year"
             list="birthYear"
-            placeholder="Type in your partner's birth year"
+            placeholder="Select your partner's birth year"
             id="birthYear"
             iconWidth={20}
             iconHeight={20}
@@ -91,8 +92,8 @@ class Family extends React.Component {
           <ToastInput
             type="number"
             min={0.0}
-            label="Partner's Annual Salary After Taxes"
-            placeholder="50,000"
+            label="Partner's Personal Annual Net Income"
+            placeholder="Type in your partner's income"
             name="salary"
             iconName="dollarsign"
             step={0.01}
@@ -101,6 +102,7 @@ class Family extends React.Component {
             readOnly={this.props.readOnly}
           />
         </ToastDuplicateInputButton>
+
         <hr />
 
         <ToastDuplicateInputButton
@@ -123,7 +125,7 @@ class Family extends React.Component {
             name="education"
             label="Child's Education"
             list="childEducation"
-            placeholder="Type in your child's education"
+            placeholder="Select your child's education"
             id="childEducation"
             readOnly={this.props.readOnly}
           />
@@ -133,7 +135,7 @@ class Family extends React.Component {
             name="birthYear"
             label="Child's Birth Year"
             list="childBirthYear"
-            placeholder="Type in your child's birth year"
+            placeholder="Select your child's birth year"
             id="childBirthYear"
             readOnly={this.props.readOnly}
           />
