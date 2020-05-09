@@ -23,10 +23,10 @@ class Protection extends React.Component {
     return Style.it(
       `${styles}`,
       <div className={this.getClasses()}>
-        <ToastCheckbox text="action item text" />
-        <ToastCheckbox text="action item text" />
-        <ToastCheckbox text="action item text" />
-        <ToastCheckbox text="action item text" />
+        <ToastCheckbox text="action item text" readOnly={this.props.readOnly} />
+        <ToastCheckbox text="action item text" readOnly={this.props.readOnly} />
+        <ToastCheckbox text="action item text" readOnly={this.props.readOnly} />
+        <ToastCheckbox text="action item text" readOnly={this.props.readOnly} />
       </div>
     );
   }
