@@ -26,7 +26,7 @@ import {
 
 class Family extends React.Component {
   getClasses() {
-    let classes = ["family"];
+    let classes = ["overflow "];
 
     if (this.props.currentStep !== 2) {
       classes.push("hidden");
@@ -44,6 +44,10 @@ class Family extends React.Component {
     hr {
       width: 100%;
       margin: 2rem 0;
+    }
+
+    .overflow {
+      overflow-y: auto;
     }
     `;
 
