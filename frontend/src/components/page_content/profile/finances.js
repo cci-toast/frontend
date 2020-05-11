@@ -69,7 +69,11 @@ class Finances extends React.Component {
       <div className={this.getClasses()}>
         <h4>Savings</h4>
 
-        <ToastShowHideInput id="retirement" label="Add Retirement">
+        <ToastShowHideInput
+          id="retirement"
+          label="Add Retirement"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Retirement Savings"
@@ -89,7 +93,11 @@ class Finances extends React.Component {
         <hr />
         <h4>Bills</h4>
 
-        <ToastShowHideInput id="housing" label="Add Housing">
+        <ToastShowHideInput
+          id="housing"
+          label="Add Housing"
+          readOnly={this.props.readOnly}
+        >
           <ToastSelect
             options={housingOptions}
             name="housingType"
@@ -117,7 +125,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="bill" label="Add Bills">
+        <ToastShowHideInput
+          id="bill"
+          label="Add Bills"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Bills (Monthly)"
@@ -134,7 +146,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="utility" label="Add Utilities">
+        <ToastShowHideInput
+          id="utility"
+          label="Add Utilities"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Utilities (Monthly)"
@@ -151,7 +167,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="protection" label="Add Life Insurance">
+        <ToastShowHideInput
+          id="protection"
+          label="Add Life Insurance"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Life Insurance (Monthly)"
@@ -183,7 +203,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="loanDebt" label="Add Loans & Debt">
+        <ToastShowHideInput
+          id="loanDebt"
+          label="Add Loans & Debt"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Loans & Debt (Monthly)"
@@ -203,7 +227,11 @@ class Finances extends React.Component {
         <hr />
         <h4>Expenses</h4>
 
-        <ToastShowHideInput id="shopping" label="Add Shopping">
+        <ToastShowHideInput
+          id="shopping"
+          label="Add Shopping"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Shopping (Monthly)"
@@ -220,7 +248,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="leisure" label="Add Leisure">
+        <ToastShowHideInput
+          id="leisure"
+          label="Add Leisure"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Leisure (Monthly)"
@@ -237,7 +269,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="transportation" label="Add Transportation">
+        <ToastShowHideInput
+          id="transportation"
+          label="Add Transportation"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Transportation (Monthly)"
@@ -254,7 +290,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="subscriptions" label="Add Subscriptions">
+        <ToastShowHideInput
+          id="subscriptions"
+          label="Add Subscriptions"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Subscription (Monthly)"
@@ -271,7 +311,11 @@ class Finances extends React.Component {
           />
         </ToastShowHideInput>
 
-        <ToastShowHideInput id="other" label="Add Other">
+        <ToastShowHideInput
+          id="other"
+          label="Add Other"
+          readOnly={this.props.readOnly}
+        >
           <ToastInput
             type="number"
             label="Other (Monthly)"

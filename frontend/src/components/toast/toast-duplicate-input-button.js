@@ -10,22 +10,33 @@ class ToastDuplicateInputButton extends React.Component {
     super(props);
     this.duplicateInput = this.duplicateInput.bind(this);
     this.deleteSelection = this.deleteSelection.bind(this);
+
+    if (this.props.readOnly) {
+      for (let i = 0; i < this.props.maxItems; i++) {
+        this.duplicateInput();
+      }
+    }
   }
 
   deleteSelection(i) {
-    if (window.confirm("Are you sure you want to delete this item?")) {
-      if (this.props.onDelete) {
-        this.props.onDelete(i);
-      }
-    } else {
-      return;
+    if (
+      window.confirm("Are you sure you want to delete this item?") &&
+      this.props.onDelete &&
+      !this.props.readOnly
+    ) {
+      this.props.onDelete(i);
     }
   }
 
   getClasses() {
-    let classes = ["button"];
-    if (this.props.maxItems && this.props.maxItems <= this.props.value.length) {
+    let classes = [];
+    if (
+      (this.props.maxItems && this.props.maxItems <= this.props.value.length) ||
+      this.props.readOnly
+    ) {
       classes.push("hide-btn");
+    } else {
+      classes.push("button");
     }
     return classes.join(" ");
   }
@@ -37,6 +48,16 @@ class ToastDuplicateInputButton extends React.Component {
     if (this.props.onDuplicate) {
       this.props.onDuplicate(this.props.fields);
     }
+  }
+
+  getDeleteButtonClasses() {
+    let classes = ["wrapper"];
+
+    if (this.props.readOnly) {
+      classes.push("hide-btn");
+    }
+
+    return classes.join(" ");
   }
 
   render() {
@@ -73,7 +94,8 @@ class ToastDuplicateInputButton extends React.Component {
     }
 
     .wrapper {
-      padding-bottom: 2.25rem;
+      display: flex;
+      justify-content: space-between;
     }
     `;
 
@@ -82,7 +104,12 @@ class ToastDuplicateInputButton extends React.Component {
       <div>
         {(this.props.value || []).map((data, index) => (
           <div key={index}>
-            <div className="wrapper">
+            <div className={this.getDeleteButtonClasses()}>
+              <h4>
+                {index !== 0
+                  ? this.props.label.substr(3) + " " + (index + 1)
+                  : this.props.label.substr(3)}
+              </h4>
               <ToastDeleteButton
                 handleClick={() => {
                   this.deleteSelection(index);

@@ -44,6 +44,8 @@ class Goals extends React.Component {
           onChange={this.props.setGoalListValue}
           onDuplicate={this.props.addGoal}
           onDelete={this.props.deleteGoal}
+          readOnly={this.props.readOnly}
+          maxItems={3}
         >
           <ToastSelect
             options={goalOptions}
