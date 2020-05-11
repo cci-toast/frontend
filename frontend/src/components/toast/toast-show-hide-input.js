@@ -32,7 +32,7 @@ class ToastShowHideInput extends React.Component {
   getContentClasses() {
     let classes = [""];
 
-    if (this.isEmpty()) {
+    if (this.isEmpty() && !this.props.readOnly) {
       classes.push("hide");
     } else {
       classes.push("show");
@@ -45,7 +45,7 @@ class ToastShowHideInput extends React.Component {
   getButtonClasses() {
     let classes = [""];
 
-    if (this.isEmpty()) {
+    if (this.isEmpty() && !this.props.readOnly) {
       classes.push("show");
     } else {
       classes.push("hide");
