@@ -3,6 +3,7 @@ const initialState = {
   password: "",
   isLoggedInAdvisor: false,
   isLoggedInClient: false,
+  authKey: "",
 };
 
 export default function (state = initialState, action) {
@@ -52,6 +53,14 @@ export default function (state = initialState, action) {
         password: "",
         isLoggedInAdvisor: false,
         isLoggedInClient: false,
+        authKey: "",
+      };
+    }
+    case "setAuthKey": {
+      const { authKey } = action.payload;
+      return {
+        ...state,
+        authKey: authKey,
       };
     }
     default:

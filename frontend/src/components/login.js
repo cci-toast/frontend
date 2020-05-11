@@ -32,11 +32,9 @@ class Login extends React.Component {
     switch (this.props.user) {
       case "client":
         this.props.loginClient();
-        document.location.href = "/profile";
         break;
       case "advisor":
         this.props.loginAdvisor();
-        document.location.href = "/clients";
         break;
       default:
         this.error.current.classList.remove("hidden");

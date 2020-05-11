@@ -29,6 +29,11 @@ export const resetLogin = () => ({
   type: "resetLogin",
 });
 
+export const setAuthKey = (authKey) => ({
+  type: "setAuthKey",
+  payload: { authKey },
+});
+
 // page content
 export const incrementStep = () => ({
   type: "incrementStep",
@@ -65,6 +70,10 @@ export const setCities = (cities) => ({
 export const fetchCities = (state) => ({
   type: "fetchCities",
   payload: { state },
+});
+
+export const resetProfile = (state) => ({
+  type: "resetProfile",
 });
 
 // goals
@@ -139,8 +148,13 @@ export const setPlanValue = (valueName, value) => ({
 
 // api
 
-export const fetchClientProfile = () => ({
-  type: "fetchClientProfile",
+export const fetchClientProfileId = (clientId) => ({
+  type: "fetchClientProfileId",
+  payload: { clientId },
+});
+
+export const fetchClientProfileEmail = () => ({
+  type: "fetchClientProfileEmail",
 });
 
 export const fetchClients = () => ({

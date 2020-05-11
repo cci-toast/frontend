@@ -33,6 +33,7 @@ export const getUser = createSelector([getEmail, getPassword], lookupUser);
 export const isLoggedInAdvisor = (state) =>
   state.loginReducer.isLoggedInAdvisor;
 export const isLoggedInClient = (state) => state.loginReducer.isLoggedInClient;
+export const getAuthKey = (state) => state.loginReducer.authKey;
 
 // page content
 export const getCurrentStep = (state) => state.pageContentReducer.currentStep;

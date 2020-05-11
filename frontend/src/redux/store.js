@@ -10,8 +10,7 @@ import rootEffect from "./effects";
 const persistConfig = {
   key: "root",
   storage: storage,
-  // whitelist: ["loginReducer", "profileReducer"],
-  whitelist: ["loginReducer"],
+  whitelist: ["loginReducer", "profileReducer"],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleware();

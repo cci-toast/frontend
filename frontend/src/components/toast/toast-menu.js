@@ -6,7 +6,7 @@ import ToastIcon from "./toast-icon";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { setProfileValue, fetchClientProfile } from "../../redux/actions";
+import { setProfileValue, fetchClientProfileId } from "../../redux/actions";
 
 class ToastMenu extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class ToastMenu extends React.Component {
     this.props.setProfileValue("middleName", this.props.middleName);
     this.props.setProfileValue("lastName", this.props.lastName);
 
-    this.props.fetchClientProfile();
+    this.props.fetchClientProfileId();
   }
 
   createMenu() {
@@ -145,5 +145,5 @@ class ToastMenu extends React.Component {
 
 export default connect(null, {
   setProfileValue,
-  fetchClientProfile,
+  fetchClientProfileId,
 })(ToastMenu);

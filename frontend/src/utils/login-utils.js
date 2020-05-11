@@ -1,22 +1,22 @@
 export const users = [
   {
-    email: "client@client.com",
+    email: "jsmith100@client.com",
     password: "client",
     user: "client",
   },
   {
-    email: "advisor@advisor.com",
+    email: "jbrown200@client.com",
+    password: "client",
+    user: "client",
+  },
+  {
+    email: "mevans300@advisor.com",
     password: "advisor",
     user: "advisor",
   },
   {
-    email: "jbrown46@gmail.com",
-    password: "apple",
-    user: "client",
-  },
-  {
-    email: "mkelly200@gmail.com",
-    password: "milk",
+    email: "mkelly400@advisor.com",
+    password: "advisor",
     user: "advisor",
   },
 ];

@@ -7,7 +7,7 @@ import ToastMenu from "./toast/toast-menu";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { setProfileValue, fetchClientProfile } from "../redux/actions";
+import { fetchClientProfileId } from "../redux/actions";
 
 class ClientListEntry extends React.Component {
   constructor(props) {
@@ -19,18 +19,8 @@ class ClientListEntry extends React.Component {
     this.setClient = this.setClient.bind(this);
   }
 
-  setClient(event) {
-    let name = event.target.innerHTML.split(" ");
-    let firstName = name[0];
-    let middleName = name[1];
-    let lastName = name[2];
-    this.props.setProfileValue("id", this.props.id);
-    // these should be set already
-    // this.props.setProfileValue("firstName", firstName);
-    // this.props.setProfileValue("middleName", middleName);
-    // this.props.setProfileValue("lastName", lastName);
-
-    this.props.fetchClientProfile();
+  setClient() {
+    this.props.fetchClientProfileId(this.props.id);
   }
 
   render() {
@@ -83,7 +73,7 @@ class ClientListEntry extends React.Component {
       `${styles}`,
       <div className="entry">
         <Link
-          href="/profile"
+          to="/profile"
           className="link"
           onClick={this.setClient}
           title="Click to view the client's profile"
@@ -115,6 +105,5 @@ class ClientListEntry extends React.Component {
 }
 
 export default connect(null, {
-  setProfileValue,
-  fetchClientProfile,
+  fetchClientProfileId,
 })(ClientListEntry);

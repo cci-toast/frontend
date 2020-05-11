@@ -41,7 +41,7 @@ class PageContentTemplate extends React.Component {
 
   getHideSave() {
     return (
-      this.props.clientId === "" ||
+      (this.props.clientId === "" && this.props.currentStep !== 0) ||
       (this.props.currentStep === 4 && this.props.page !== "profile")
     );
   }
