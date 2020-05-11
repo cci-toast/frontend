@@ -94,7 +94,8 @@ class ToastDuplicateInputButton extends React.Component {
     }
 
     .wrapper {
-      padding-bottom: 2.25rem;
+      display: flex;
+      justify-content: space-between;
     }
     `;
 
@@ -104,6 +105,11 @@ class ToastDuplicateInputButton extends React.Component {
         {(this.props.value || []).map((data, index) => (
           <div key={index}>
             <div className={this.getDeleteButtonClasses()}>
+              <h4>
+                {index !== 0
+                  ? this.props.label.substr(3) + " " + (index + 1)
+                  : this.props.label.substr(3)}
+              </h4>
               <ToastDeleteButton
                 handleClick={() => {
                   this.deleteSelection(index);
