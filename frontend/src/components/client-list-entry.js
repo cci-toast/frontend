@@ -4,8 +4,10 @@ import Style from "style-it";
 import ToastIcon from "./toast/toast-icon";
 import ToastMenu from "./toast/toast-menu";
 
+import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
-import { setProfileValue } from "../redux/actions";
+import { fetchClientProfileId } from "../redux/actions";
 
 class ClientListEntry extends React.Component {
   constructor(props) {
@@ -17,14 +19,8 @@ class ClientListEntry extends React.Component {
     this.setClient = this.setClient.bind(this);
   }
 
-  setClient(event) {
-    let name = event.target.innerHTML.split(" ");
-    let firstName = name[0];
-    let middleName = name[1];
-    let lastName = name[2];
-    this.props.setProfileValue("firstName", firstName);
-    this.props.setProfileValue("middleName", middleName);
-    this.props.setProfileValue("lastName", lastName);
+  setClient() {
+    this.props.fetchClientProfileId(this.props.id);
   }
 
   render() {
@@ -76,14 +72,14 @@ class ClientListEntry extends React.Component {
     return Style.it(
       `${styles}`,
       <div className="entry">
-        <a
-          href="/profile"
+        <Link
+          to="/profile"
           className="link"
           onClick={this.setClient}
           title="Click to view the client's profile"
         >
           {this.props.firstName} {this.props.middleName} {this.props.lastName}
-        </a>
+        </Link>
 
         <ToastMenu
           labels={this.menuLabels}
@@ -109,5 +105,5 @@ class ClientListEntry extends React.Component {
 }
 
 export default connect(null, {
-  setProfileValue,
+  fetchClientProfileId,
 })(ClientListEntry);

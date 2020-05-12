@@ -122,6 +122,7 @@ class ToastInput extends React.Component {
       border-radius: 2rem;
       background-color: ${this.backgroundColor};
       border: 1px solid var(--toast-neutral-4);
+      width: 20rem;
     }
     
     .input-group-prepend {

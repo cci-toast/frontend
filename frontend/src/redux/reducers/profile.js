@@ -25,6 +25,19 @@ export default function (state = initialState, action) {
         cities: cities,
       };
     }
+    case "resetProfile": {
+      return {
+        ...state,
+        clientId: "",
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        birthYear: 1980,
+        city: "",
+        state: "",
+        cities: [],
+      };
+    }
     default:
       return state;
   }

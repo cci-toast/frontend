@@ -12,7 +12,6 @@ const persistConfig = {
   storage: storage,
   whitelist: ["loginReducer", "profileReducer"],
 };
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleware();
 

@@ -134,7 +134,7 @@ class ToastSelect extends React.Component {
             type="text"
             name={this.props.name}
             onChange={this.props.onChange}
-            defaultValue={this.props.defaultValue}
+            value={this.props.value}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             disabled={this.props.readOnly}

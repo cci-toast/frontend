@@ -6,11 +6,17 @@ import ClientListEntry from "../client-list-entry";
 import { connect } from "react-redux";
 import { setSearchTerm } from "../../redux/actions";
 import { getFilteredClients, getSearchTerm } from "../../redux/selectors";
+import { fetchClients } from "../../redux/actions";
 
 class ClientsContent extends React.Component {
-  componenDidMount() {
+  constructor(props) {
+    super(props);
+
+    this.props.fetchClients();
+  }
+
+  componentDidMount() {
     this.props.setSearchTerm("");
-    this.props.searchTerm = "";
   }
 
   getClients() {
@@ -47,4 +53,7 @@ const mapStateToProps = (state) => ({
   searchTerm: getSearchTerm(state),
 });
 
-export default connect(mapStateToProps, { setSearchTerm })(ClientsContent);
+export default connect(mapStateToProps, {
+  fetchClients,
+  setSearchTerm,
+})(ClientsContent);
