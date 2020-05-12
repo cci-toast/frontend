@@ -101,6 +101,10 @@ export const getTotalIncome = createSelector(
   [getSalaryAfterTax, getAdditionalIncome],
   (salary, income) => Number(salary || 0) + Number(income || 0)
 );
+export const getSavingsFactorUpperBound = (state) =>
+  state.planReducer.emergencySavingsFactorUpper;
+export const getSavingsFactorLowerBound = (state) =>
+  state.planReducer.emergencySavingsFactorLower;
 
 // retirement
 export const getRetirementMultiplier = (state) =>
