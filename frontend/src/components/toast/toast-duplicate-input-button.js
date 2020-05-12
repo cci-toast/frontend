@@ -114,6 +114,7 @@ class ToastDuplicateInputButton extends React.Component {
                 handleClick={() => {
                   this.deleteSelection(index);
                 }}
+                readOnly={this.props.readOnly}
               />
             </div>
             <div className="inputs">{updateChildrenWithProps(index, data)}</div>
