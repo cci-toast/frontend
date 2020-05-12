@@ -75,7 +75,6 @@ export const getProtectionPolicy = (state) =>
   state.financesReducer.protectionPolicy;
 export const getProtectionMonthly = (state) =>
   state.financesReducer.protectionMonthly;
-export const getBill = (state) => state.financesReducer.bill;
 export const getUtility = (state) => state.financesReducer.utility;
 
 export const getLoanDebt = (state) => state.financesReducer.loanDebt;
@@ -85,6 +84,7 @@ export const getTransportation = (state) =>
   state.financesReducer.transportation;
 export const getSubscription = (state) => state.financesReducer.subscription;
 export const getOther = (state) => state.financesReducer.other;
+export const getExpensesId = (state) => state.financesReducer.expensesId;
 
 // family
 export const getPartners = (state) => state.familyReducer.partners;

@@ -46,7 +46,7 @@ class Goals extends React.Component {
         >
           <ToastSelect
             options={goalOptions}
-            name="description"
+            name="goal"
             label="Goal"
             list="goals"
             placeholder="Select your goal"
