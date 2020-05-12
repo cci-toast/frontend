@@ -83,6 +83,7 @@ class Finances extends React.Component {
             iconHeight={20}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you have saved up for your retirement."
           />
         </ToastShowHideInput>
 
@@ -103,6 +104,7 @@ class Finances extends React.Component {
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
             placeholder="Select your housing type"
+            helpText="Select your housing type."
           />
 
           <ToastInput
@@ -118,6 +120,7 @@ class Finances extends React.Component {
             value={this.props.housingAmount}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on housing."
           />
         </ToastShowHideInput>
 
@@ -139,6 +142,8 @@ class Finances extends React.Component {
             value={this.props.bill}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on bills."
+            helpExamples="lawn service, pharmacy"
           />
         </ToastShowHideInput>
 
@@ -160,6 +165,8 @@ class Finances extends React.Component {
             value={this.props.utility}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on utilities."
+            helpExamples="water, electricity, gas, sewer, internet, telephone, tv"
           />
         </ToastShowHideInput>
 
@@ -181,6 +188,7 @@ class Finances extends React.Component {
             value={this.props.protectionMonthly}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on life insurance."
           />
 
           <ToastInput
@@ -196,6 +204,7 @@ class Finances extends React.Component {
             value={this.props.protectionPolicy}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount for your life insurance policy coverage."
           />
         </ToastShowHideInput>
 
@@ -217,6 +226,8 @@ class Finances extends React.Component {
             value={this.props.loanDebt}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you pay per month towards loans and debt."
+            helpExamples="credit card, student loans, medical"
           />
         </ToastShowHideInput>
 
@@ -241,6 +252,8 @@ class Finances extends React.Component {
             value={this.props.shopping}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on shopping."
+            helpExamples="groceries, clothing/shoes"
           />
         </ToastShowHideInput>
 
@@ -262,6 +275,8 @@ class Finances extends React.Component {
             value={this.props.leisure}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on leisure."
+            helpExamples="concerts, dining, vacation, sports"
           />
         </ToastShowHideInput>
 
@@ -283,6 +298,8 @@ class Finances extends React.Component {
             value={this.props.transportation}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on transportation."
+            helpExamples="car, bus, train, flight"
           />
         </ToastShowHideInput>
 
@@ -304,6 +321,8 @@ class Finances extends React.Component {
             value={this.props.subscription}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on subscriptions."
+            helpExamples="Spotify, Netflix, Hulu, gym, magazine"
           />
         </ToastShowHideInput>
 
@@ -325,6 +344,7 @@ class Finances extends React.Component {
             value={this.props.other}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on other items."
           />
         </ToastShowHideInput>
       </div>

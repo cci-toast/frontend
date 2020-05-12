@@ -52,6 +52,7 @@ class Goals extends React.Component {
             placeholder="Select your goal"
             id="goals"
             readOnly={this.props.readOnly}
+            helpText="Select your goal or select 'Other (Type in)' to type in your own goal."
           />
 
           <ToastInput
@@ -65,6 +66,7 @@ class Goals extends React.Component {
             iconWidth={20}
             iconHeight={20}
             readOnly={this.props.readOnly}
+            helpText="Type in the amount associated with your goal."
           />
 
           <ToastInput
@@ -72,6 +74,7 @@ class Goals extends React.Component {
             label="End Date"
             name="endDate"
             readOnly={this.props.readOnly}
+            helpText="Type in your goal end date."
           />
         </ToastDuplicateInputButton>
       </div>
