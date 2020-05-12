@@ -2,6 +2,7 @@ import React from "react";
 import Style from "style-it";
 
 import ToastInput from "./toast-input";
+import ToastIcon from "./toast-icon";
 
 class ToastSelect extends React.Component {
   constructor(props) {
@@ -10,9 +11,13 @@ class ToastSelect extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.showInput = this.showInput.bind(this);
+    this.onMouseOverHelp = this.onMouseOverHelp.bind(this);
+    this.onMouseOutHelp = this.onMouseOutHelp.bind(this);
 
     this.input = React.createRef();
     this.select = React.createRef();
+    this.helpOverlay = React.createRef();
+    this.triangle = React.createRef();
 
     if (this.props.readOnly) {
       this.backgroundColor = "var(--toast-neutral-5)";
@@ -20,6 +25,12 @@ class ToastSelect extends React.Component {
     } else {
       this.backgroundColor = "var(--toast-neutral-6)";
       this.cursor = "default";
+    }
+
+    if (this.props.helpExamples) {
+      this.helpOverlayMargin = "-4rem";
+    } else {
+      this.helpOverlayMargin = "-3rem";
     }
   }
 
@@ -52,6 +63,16 @@ class ToastSelect extends React.Component {
     }
   }
 
+  onMouseOverHelp() {
+    this.helpOverlay.current.classList.remove("hidden");
+    this.triangle.current.classList.remove("hidden");
+  }
+
+  onMouseOutHelp() {
+    this.helpOverlay.current.classList.add("hidden");
+    this.triangle.current.classList.add("hidden");
+  }
+
   getClasses() {
     let classes = ["container"];
 
@@ -61,6 +82,16 @@ class ToastSelect extends React.Component {
 
     if (this.props.short) {
       classes.push("short");
+    }
+
+    return classes.join(" ");
+  }
+
+  getHelpIconClasses() {
+    let classes = ["help-icon"];
+
+    if (this.props.readOnly || this.props.search) {
+      classes.push("hidden");
     }
 
     return classes.join(" ");
@@ -111,8 +142,50 @@ class ToastSelect extends React.Component {
       display: none;
     }
 
-    .short {
-      width: 48%;
+    .label-icon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 24.5rem;
+    }
+
+    .help-icon {
+      margin-right: 1rem;
+    }
+
+    .help-overlay {
+      background-color: var(--toast-neutral-1);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      color: var(--toast-neutral-6);
+      font-size: 0.8125rem;
+      position: absolute;
+      margin-top: ${this.helpOverlayMargin};
+      margin-left: 1rem;
+    }
+
+    .help-overlay p {
+      color: var(--toast-neutral-6);
+      font-size: 0.8125rem;
+      margin: 0;
+      width: 100%;
+    }
+
+    .help-examples {
+      font-style: italic;
+    }
+
+    .help-container {
+      display: flex;
+      justify-content: flex-end;
+      width: 24rem;
+    }
+
+    .triangle {
+      margin-top: -1rem;
+      margin-left: -0.5rem;
+      position: absolute;
+      fill: var(--toast-neutral-1);
     }
     `;
 
@@ -122,8 +195,46 @@ class ToastSelect extends React.Component {
 
     return Style.it(
       `${styles}`,
-      <div className={this.getClasses()}>
-        <label className="input-label">{this.props.label}</label>
+      <div className={this.getClasses()} onMouseOut={this.onMouseOutHelp}>
+        <div className="help-container">
+          <div className="help-overlay hidden" ref={this.helpOverlay}>
+            <p>
+              {this.props.helpText}
+              <br />
+              <span
+                className={this.props.helpExamples ? "help-examples" : "hidden"}
+              >
+                Examples:{" "}
+              </span>
+              {this.props.helpExamples}
+            </p>
+          </div>
+          <svg
+            height="20"
+            width="20"
+            className="triangle hidden"
+            ref={this.triangle}
+          >
+            <polygon points="0,0 20,0 10,10" />
+          </svg>
+        </div>
+
+        <div className="label-icon">
+          <label className="input-label">{this.props.label}</label>
+          <div
+            className={this.getHelpIconClasses()}
+            onMouseOver={this.onMouseOverHelp}
+            onMouseOut={this.onMouseOutHelp}
+          >
+            <ToastIcon
+              name="helpcircle"
+              width={20}
+              height={20}
+              stroke="var(--toast-neutral-1)"
+              strokeWidth={2}
+            />
+          </div>
+        </div>
 
         <div
           className="select-wrapper"
@@ -152,6 +263,7 @@ class ToastSelect extends React.Component {
             type="text"
             placeholder={this.getPlaceholder()}
             onChange={this.props.onChange}
+            select
           />
         </div>
       </div>

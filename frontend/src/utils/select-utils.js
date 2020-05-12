@@ -69,58 +69,7 @@ export const getStateCode = (name) => {
   return null;
 };
 
-export const utilityOptions = [
-  "Water",
-  "Electricity",
-  "Gas",
-  "Sewer",
-  "Internet",
-  "Telephone",
-  "TV",
-];
-
-export const insuranceOptions = [
-  "Health Insurance",
-  "Life Insurance",
-  "Dental Insurance",
-  "Car Insurance",
-  "Homeowners/RentInsurance",
-  "Life Insurance",
-  "Flood Insurance",
-  "Pet Insurance",
-  "Disability Insurance",
-  "Umbrella Insurance",
-];
-
 export const housingOptions = ["Rent", "Mortgage"];
-
-export const billOptions = [
-  "Rent",
-  "Mortgage",
-  "Lawn Service",
-  "Water",
-  "Electricity",
-  "Gas",
-  "Sewer",
-  "Internet",
-  "Telephone",
-  "TV",
-];
-
-export const shoppingOptions = ["Groceries", "Clothing/Shoes"];
-
-export const leisureOptions = ["Concert", "Dining", "Vacation", "Sports"];
-
-export const transportationOptions = ["Car", "Bus", "Train", "Flight"];
-
-export const subscriptionOptions = [
-  "Music Subscription (Spotify, Apple Music)",
-  "TV/Movie Subscription (Netflix, Hulu, Disney+)",
-  "Gym Membership",
-  "Magazine Subscription",
-];
-
-export const loandebtOptions = ["Credit Card", "School/Student", "Medical"];
 
 export const childEducationOptions = [
   "College",

@@ -169,6 +169,7 @@ class Login extends React.Component {
                   name="email"
                   value={this.props.email}
                   medium
+                  helpText="Type in your email. This field is required."
                   required
                 />
                 <ToastInput
@@ -182,6 +183,7 @@ class Login extends React.Component {
                   name="password"
                   value={this.props.password}
                   medium
+                  helpText="Type in your password. This field is required."
                   required
                 />
               </div>
