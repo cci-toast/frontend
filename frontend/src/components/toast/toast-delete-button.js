@@ -5,7 +5,7 @@ import ToastIcon from "./toast-icon";
 
 class ToastDeleteButton extends React.Component {
   getIconClasses() {
-    let classes = ["icon "];
+    let classes = ["icon"];
 
     if (this.props.readOnly) {
       classes.push("hide-icon");
