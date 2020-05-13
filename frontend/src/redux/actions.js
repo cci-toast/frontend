@@ -77,6 +77,11 @@ export const resetProfile = (state) => ({
 });
 
 // goals
+export const setGoalsValue = (valueName, value) => ({
+  type: "setGoalsValue",
+  payload: { valueName, value },
+});
+
 export const setGoalListValue = (index, valueName, value) => ({
   type: "setGoalListValue",
   payload: { index, valueName, value },
@@ -87,18 +92,32 @@ export const addGoal = (goalFields) => ({
   payload: { goalFields },
 });
 
-export const deleteGoal = (index) => ({
+export const deleteGoal = (index, id) => ({
   type: "deleteGoal",
-  payload: { index },
+  payload: { index, id },
+});
+
+export const resetGoals = (state) => ({
+  type: "resetGoals",
 });
 
 // finances
+
 export const setFinancesValue = (valueName, value) => ({
   type: "setFinancesValue",
   payload: { valueName, value },
 });
 
+export const resetFinances = () => ({
+  type: "resetFinances",
+});
+
 // family
+
+export const setFamilyValue = (valueName, value) => ({
+  type: "setFamilyValue",
+  payload: { valueName, value },
+});
 
 export const addPartner = (partnerFields) => ({
   type: "addPartner",
@@ -110,9 +129,9 @@ export const setPartnerListValue = (index, valueName, value) => ({
   payload: { index, valueName, value },
 });
 
-export const deletePartner = (index) => ({
+export const deletePartner = (index, id) => ({
   type: "deletePartner",
-  payload: { index },
+  payload: { index, id },
 });
 
 export const addChild = (childFields) => ({
@@ -125,10 +144,15 @@ export const setChildListValue = (index, valueName, value) => ({
   payload: { index, valueName, value },
 });
 
-export const deleteChild = (index) => ({
+export const deleteChild = (index, id) => ({
   type: "deleteChild",
-  payload: { index },
+  payload: { index, id },
 });
+
+export const resetFamily = (state) => ({
+  type: "resetFamily",
+});
+
 // advisor
 export const setAdvisorValue = (valueName, value) => ({
   type: "setAdvisorValue",

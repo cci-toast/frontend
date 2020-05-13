@@ -9,7 +9,6 @@ import {
   getRetirement,
   getHousingType,
   getHousingAmount,
-  getBill,
   getUtility,
   getProtectionMonthly,
   getProtectionPolicy,
@@ -121,29 +120,6 @@ class Finances extends React.Component {
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
             helpText="Enter the amount you spend per month on housing."
-          />
-        </ToastShowHideInput>
-
-        <ToastShowHideInput
-          id="bill"
-          label="Add Bills"
-          readOnly={this.props.readOnly}
-        >
-          <ToastInput
-            type="number"
-            label="Bills (Monthly)"
-            name="bill"
-            placeholder="Type in your amount spent on bills"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.bill}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
-            helpText="Enter the amount you spend per month on bills."
-            helpExamples="lawn service, pharmacy"
           />
         </ToastShowHideInput>
 
@@ -356,7 +332,6 @@ const mapStateToProps = (state) => ({
   retirement: getRetirement(state),
   housingType: getHousingType(state),
   housingAmount: getHousingAmount(state),
-  bill: getBill(state),
   utility: getUtility(state),
   protectionPolicy: getProtectionPolicy(state),
   protectionMonthly: getProtectionMonthly(state),

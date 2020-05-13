@@ -18,13 +18,13 @@ class ToastDuplicateInputButton extends React.Component {
     }
   }
 
-  deleteSelection(i) {
+  deleteSelection(i, id) {
     if (
       window.confirm("Are you sure you want to delete this item?") &&
       this.props.onDelete &&
       !this.props.readOnly
     ) {
-      this.props.onDelete(i);
+      this.props.onDelete(i, id);
     }
   }
 
@@ -112,7 +112,7 @@ class ToastDuplicateInputButton extends React.Component {
               </h4>
               <ToastDeleteButton
                 handleClick={() => {
-                  this.deleteSelection(index);
+                  this.deleteSelection(index, data.id);
                 }}
                 readOnly={this.props.readOnly}
               />

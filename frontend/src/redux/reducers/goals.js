@@ -4,6 +4,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case "setGoalsValue": {
+      const { valueName, value } = action.payload;
+      return {
+        ...state,
+        [valueName]: value,
+      };
+    }
     case "addGoal": {
       const { goalFields } = action.payload;
       return { ...state, goals: [...state.goals, goalFields] };
