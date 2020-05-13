@@ -92,6 +92,27 @@ function* fetchClients() {
   });
 }
 
+function* fetchAdvisorContact() {
+  yield takeLatest("fetchAdvisorContact", function* (action) {
+    const authKey = yield select(Selectors.getAuthKey);
+    const response = yield fetch(
+      `${baseURL}/api/advisors/e98bdfc2-2902-4893-a9a5-4e91e1a5d40c`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${authKey}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => response.json());
+
+    yield put(Actions.setAdvisorValue("firstName", response.first_name));
+    yield put(Actions.setAdvisorValue("lastName", response.last_name));
+    yield put(Actions.setAdvisorValue("address", response.address));
+    yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
+  });
+}
+
 function* fetchClientProfileEmail() {
   yield takeLatest("fetchClientProfileEmail", function* (action) {
     let email = yield select(Selectors.getEmail);
@@ -319,6 +340,7 @@ export default function* rootEffect() {
     fetchClientProfileId(),
     fetchClientProfileEmail(),
     fetchClients(),
+    fetchAdvisorContact(),
     authLoginAdvisor(),
     authLoginClient(),
   ]);

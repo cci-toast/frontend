@@ -160,3 +160,7 @@ export const fetchClientProfileEmail = () => ({
 export const fetchClients = () => ({
   type: "fetchClients",
 });
+
+export const fetchAdvisorContact = () => ({
+  type: "fetchAdvisorContact",
+});

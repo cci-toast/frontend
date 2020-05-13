@@ -19,6 +19,11 @@ export const users = [
     password: "advisor",
     user: "advisor",
   },
+  {
+    email: "toastyclient@gmail.com",
+    password: "client",
+    user: "client",
+  },
 ];
 
 export function lookupUser(email, password) {
