@@ -182,39 +182,47 @@ function* fetchClientProfileEmail() {
     let email = yield select(Selectors.getEmail);
     const response = yield readAPI(`${baseURL}/api/clients?email=${email}`);
 
-    yield put(Actions.fetchCities(response.results[0].state));
-
-    let profileValues = {
-      firstName: response.results[0].first_name,
-      middleName: response.results[0].middle_name,
-      lastName: response.results[0].last_name,
-      birthYear: response.results[0].birth_year,
-      city: response.results[0].city,
-      state: response.results[0].state,
-      clientId: response.results[0].id,
-    };
-
-    let financesValues = {
-      salaryAfterTax: response.results[0].personal_annual_net_income,
-      additionalIncome: response.results[0].additional_income,
-    };
-
     if (response.results.length > 0) {
+      yield put(Actions.fetchCities(response.results[0].state));
+
+      let profileValues = {
+        firstName: response.results[0].first_name,
+        middleName: response.results[0].middle_name,
+        lastName: response.results[0].last_name,
+        birthYear: response.results[0].birth_year,
+        city: response.results[0].city,
+        state: response.results[0].state,
+        clientId: response.results[0].id,
+      };
+
+      let financesValues = {
+        salaryAfterTax: Number(response.results[0].personal_annual_net_income),
+        additionalIncome: Number(response.results[0].additional_income),
+      };
+
       for (let propName in profileValues) {
+        if (profileValues[propName] === "" || profileValues[propName] === 0) {
+          delete profileValues[propName];
+        }
         yield put(Actions.setProfileValue(propName, profileValues[propName]));
       }
+
       for (let propName in financesValues) {
+        if (financesValues[propName] === "" || financesValues[propName] === 0) {
+          delete financesValues[propName];
+        }
         yield put(Actions.setFinancesValue(propName, financesValues[propName]));
       }
 
       // fetch the rest of the profile, plan, action items
       yield fetchExpenses();
-      // yield fetchDebt();
+      yield fetchDebt();
       yield fetchPartners();
       yield fetchChildren();
       yield fetchGoals();
     }
     yield delay(1000);
+
     yield put((document.location.href = "/profile"));
   });
 }
@@ -225,33 +233,40 @@ function* fetchClientProfileId() {
       `${baseURL}/api/clients/${action.payload.clientId}`
     );
 
-    yield put(Actions.fetchCities(response.results[0].state));
+    yield put(Actions.fetchCities(response.state));
 
     let profileValues = {
-      firstName: response.results[0].first_name,
-      middleName: response.results[0].middle_name,
-      lastName: response.results[0].last_name,
-      birthYear: response.results[0].birth_year,
-      city: response.results[0].city,
-      state: response.results[0].state,
-      clientId: response.results[0].id,
+      firstName: response.first_name,
+      middleName: response.middle_name,
+      lastName: response.last_name,
+      birthYear: response.birth_year,
+      city: response.city,
+      state: response.state,
+      clientId: response.id,
     };
 
     let financesValues = {
-      salaryAfterTax: response.results[0].personal_annual_net_income,
-      additionalIncome: response.results[0].additional_income,
+      salaryAfterTax: Number(response.personal_annual_net_income),
+      additionalIncome: Number(response.additional_income),
     };
 
     for (let propName in profileValues) {
+      if (profileValues[propName] === "" || profileValues[propName] === 0) {
+        delete profileValues[propName];
+      }
       yield put(Actions.setProfileValue(propName, profileValues[propName]));
     }
+
     for (let propName in financesValues) {
+      if (financesValues[propName] === "" || financesValues[propName] === 0) {
+        delete financesValues[propName];
+      }
       yield put(Actions.setFinancesValue(propName, financesValues[propName]));
     }
 
     // fetch the rest of the profile, plan, action items
     yield fetchExpenses();
-    // yield fetchDebt();
+    yield fetchDebt();
     yield fetchPartners();
     yield fetchChildren();
     yield fetchGoals();
@@ -265,20 +280,25 @@ function* fetchExpenses() {
   if (response.results.length !== 0) {
     let financesValues = {
       expensesId: response.results[0].id,
-      housingAmount: response.results[0].bills_housing,
+      housingAmount: Number(response.results[0].bills_housing),
       housingType: response.results[0].housing_type,
-      shopping: response.results[0].expense_shopping,
-      leisure: response.results[0].expense_leisure,
-      utility: response.results[0].bills_utilities,
-      transportation: response.results[0].expense_transportation,
-      subscription: response.results[0].expense_subscriptions,
-      other: response.results[0].expense_other,
-      protectionMonthly: response.results[0].current_monthly_protection_payment,
-      protectionPolicy: response.results[0].current_protection_coverage,
+      shopping: Number(response.results[0].expense_shopping),
+      leisure: Number(response.results[0].expense_leisure),
+      utility: Number(response.results[0].bills_utilities),
+      transportation: Number(response.results[0].expense_transportation),
+      subscription: Number(response.results[0].expense_subscriptions),
+      other: Number(response.results[0].expense_other),
+      protectionMonthly: Number(
+        response.results[0].current_monthly_protection_payment
+      ),
+      protectionPolicy: Number(response.results[0].current_protection_coverage),
+      retirement: Number(response.results[0].current_retirement_savings),
     };
-    // retirement: responses.results[0].current_retirement_savings
 
     for (let propName in financesValues) {
+      if (financesValues[propName] === "" || financesValues[propName] === 0) {
+        delete financesValues[propName];
+      }
       yield put(Actions.setFinancesValue(propName, financesValues[propName]));
     }
   }
@@ -286,22 +306,25 @@ function* fetchExpenses() {
   return response;
 }
 
-// function* fetchDebt() {
-//   const id = yield select(Selectors.getClientId);
-//   let response = yield readAPI(`${baseURL}/api/debt?client=${id}`);
+function* fetchDebt() {
+  const id = yield select(Selectors.getClientId);
+  let response = yield readAPI(`${baseURL}/api/debt?client=${id}`);
 
-//   if (response.results.length !== 0) {
-//     let financesValues = {
-//       loanDebt: response.results[0].current_monthly_debt_payment,
-//     };
+  if (response.results.length !== 0) {
+    let financesValues = {
+      loanDebt: Number(response.results[0].debt_monthly_amount),
+    };
 
-//     for (let propName in financesValues) {
-//       yield put(Actions.setFinancesValue(propName, financesValues[propName]));
-//     }
-//   }
+    for (let propName in financesValues) {
+      if (financesValues[propName] === "" || financesValues[propName] === 0) {
+        delete financesValues[propName];
+      }
+      yield put(Actions.setFinancesValue(propName, financesValues[propName]));
+    }
+  }
 
-//   return response;
-// }
+  return response;
+}
 
 function* fetchPartners() {
   const id = yield select(Selectors.getClientId);
@@ -315,10 +338,18 @@ function* fetchPartners() {
         firstName: partner.first_name,
         lastName: partner.last_name,
         birthYear: partner.birth_year,
-        salary: partner.personal_annual_net_income,
+        salary: Number(partner.personal_annual_net_income),
         id: partner.id,
       })
     );
+
+    for (let i = 0; i < partners.length; i++) {
+      for (let propName in partners[i]) {
+        if (partners[i][propName] === "" || partners[i][propName] === 0) {
+          delete partners[i][propName];
+        }
+      }
+    }
 
     yield put(Actions.setFamilyValue("partners", partners));
   }
@@ -342,6 +373,14 @@ function* fetchChildren() {
       })
     );
 
+    for (let i = 0; i < children.length; i++) {
+      for (let propName in children[i]) {
+        if (children[i][propName] === "" || children[i][propName] === 0) {
+          delete children[i][propName];
+        }
+      }
+    }
+
     yield put(Actions.setFamilyValue("children", children));
   }
 
@@ -358,11 +397,19 @@ function* fetchGoals() {
     response.results.map((goal) =>
       goals.push({
         goal: goal.goal_type,
-        amount: goal.goal_value,
+        amount: Number(goal.goal_value),
         endDate: goal.goal_end_date,
         id: goal.id,
       })
     );
+
+    for (let i = 0; i < goals.length; i++) {
+      for (let propName in goals[i]) {
+        if (goals[i][propName] === "" || goals[i][propName] === 0) {
+          delete goals[i][propName];
+        }
+      }
+    }
 
     yield put(Actions.setGoalsValue("goals", goals));
   }
@@ -371,61 +418,68 @@ function* fetchGoals() {
 }
 
 function* saveClientProfile() {
-  yield takeLatest(["incrementStep", "decrementStep", "setStep"], function* (
-    action
-  ) {
-    const id = yield select(Selectors.getClientId);
-    const firstName = yield select(Selectors.getFirstName);
-    const lastName = yield select(Selectors.getLastName);
-    const middleName = yield select(Selectors.getMiddleName);
-    const birthYear = yield select(Selectors.getBirthYear);
-    const email = yield select(Selectors.getEmail);
-    const city = yield select(Selectors.getCity);
-    const state = yield select(Selectors.getState);
-    const salaryAfterTax = yield select(Selectors.getSalaryAfterTax);
-    const additionalIncome = yield select(Selectors.getAdditionalIncome);
+  yield takeLatest(
+    ["incrementStep", "decrementStep", "setStep", "resetStep"],
+    function* (action) {
+      const advisorId = yield select(Selectors.getAdvisorId);
+      if (advisorId === "") {
+        const id = yield select(Selectors.getClientId);
+        const firstName = yield select(Selectors.getFirstName);
+        const lastName = yield select(Selectors.getLastName);
+        const middleName = yield select(Selectors.getMiddleName);
+        const birthYear = yield select(Selectors.getBirthYear);
+        const email = yield select(Selectors.getEmail);
+        const city = yield select(Selectors.getCity);
+        const state = yield select(Selectors.getState);
+        const salaryAfterTax = yield select(Selectors.getSalaryAfterTax);
+        const additionalIncome = yield select(Selectors.getAdditionalIncome);
 
-    let body = {
-      first_name: firstName,
-      last_name: lastName,
-      birth_year: birthYear,
-      email: email,
-      personal_annual_net_income: salaryAfterTax,
-      middle_name: middleName,
-      city: city,
-      state: state,
-      additional_income: additionalIncome,
-    };
+        let body = {
+          first_name: firstName,
+          last_name: lastName,
+          birth_year: birthYear,
+          email: email,
+          personal_annual_net_income: salaryAfterTax,
+          middle_name: middleName,
+          city: city,
+          state: state,
+          additional_income: additionalIncome,
+        };
 
-    for (let propName in body) {
-      if (body[propName] === "") {
-        delete body[propName];
+        for (let propName in body) {
+          if (body[propName] === "") {
+            delete body[propName];
+          }
+        }
+
+        if (
+          (id === "" || id === undefined) &&
+          firstName !== "" &&
+          lastName !== "" &&
+          birthYear !== "" &&
+          email !== "" &&
+          salaryAfterTax !== ""
+        ) {
+          let response = yield writeAPI("POST", `${baseURL}/api/clients`, body);
+
+          if (response !== undefined) {
+            yield put(Actions.setProfileValue("clientId", response.id));
+            yield put(Actions.toggleShowPlanReady());
+          }
+        } else {
+          if (id !== "") {
+            // update profile, expenses, partners, children, goals, debt
+            yield writeAPI("PATCH", `${baseURL}/api/clients/${id}`, body);
+            yield saveExpenses();
+            yield savePartners();
+            yield saveChildren();
+            yield saveGoals();
+            yield saveDebt();
+          }
+        }
       }
     }
-
-    if (
-      (id === "" || id === undefined) &&
-      firstName !== "" &&
-      lastName !== "" &&
-      birthYear !== "" &&
-      email !== "" &&
-      salaryAfterTax !== ""
-    ) {
-      let response = yield writeAPI("POST", `${baseURL}/api/clients`, body);
-
-      if (response !== undefined) {
-        yield put(Actions.setProfileValue("clientId", response.id));
-        yield put(Actions.toggleShowPlanReady());
-      }
-    } else {
-      // update profile, expenses, partners, children, goals, debt
-      yield writeAPI("PATCH", `${baseURL}/api/clients/${id}`, body);
-      yield saveExpenses();
-      yield savePartners();
-      yield saveChildren();
-      yield saveGoals();
-    }
-  });
+  );
 }
 
 function* saveExpenses() {
@@ -440,14 +494,13 @@ function* saveExpenses() {
   const other = yield select(Selectors.getOther);
   const protectionMonthly = yield select(Selectors.getProtectionMonthly);
   const protectionCoverage = yield select(Selectors.getProtectionPolicy);
-  // const retirement = yield select(Selectors.getRetirement);
+  const retirement = yield select(Selectors.getRetirement);
 
   let body = {
     client: id,
     bills_housing: housingAmount,
     housing_type: housingType,
     bills_utilities: utility,
-    bills_insurance: "",
     expense_shopping: shopping,
     expense_leisure: leisure,
     expense_transportation: transportation,
@@ -455,8 +508,8 @@ function* saveExpenses() {
     expense_other: other,
     current_monthly_protection_payment: protectionMonthly,
     current_protection_coverage: protectionCoverage,
+    current_retirement_savings: retirement,
   };
-  // current_retirement_savings: retirement
 
   for (let propName in body) {
     if (body[propName] === "") {
@@ -464,42 +517,44 @@ function* saveExpenses() {
     }
   }
 
-  let currentExpenses = yield fetchExpenses();
+  if (id !== "") {
+    let currentExpenses = yield fetchExpenses();
 
-  if (currentExpenses.results.length === 0) {
-    let response = yield writeAPI("POST", `${baseURL}/api/expenses`, body);
-    yield put(Actions.setFinancesValue("expensesId", response.id));
-  } else {
-    let expensesId = currentExpenses.results[0].id;
-    yield writeAPI("PATCH", `${baseURL}/api/expenses/${expensesId}`, body);
+    if (currentExpenses.results.length === 0) {
+      let response = yield writeAPI("POST", `${baseURL}/api/expenses`, body);
+      yield put(Actions.setFinancesValue("expensesId", response.id));
+    } else {
+      let expensesId = currentExpenses.results[0].id;
+      yield writeAPI("PATCH", `${baseURL}/api/expenses/${expensesId}`, body);
+    }
   }
 }
 
-// function* saveDebt() {
-//   const id = yield select(Selectors.getClientId);
-//   const loanDebt = yield select(Selectors.getLoanDebt);
+function* saveDebt() {
+  const id = yield select(Selectors.getClientId);
+  const loanDebt = yield select(Selectors.getLoanDebt);
 
-//   let body = {
-//     client: id,
-//     current_monthly_amount: loanDebt,
-//   };
+  let body = {
+    client: id,
+    debt_monthly_amount: loanDebt,
+  };
 
-//   for (let propName in body) {
-//     if (body[propName] === "") {
-//       delete body[propName];
-//     }
-//   }
+  for (let propName in body) {
+    if (body[propName] === "") {
+      delete body[propName];
+    }
+  }
 
-//   let currentDebt = yield fetchExpenses();
+  let currentDebt = yield fetchDebt();
 
-//   if (currentDebt.results.length === 0) {
-//     let response = yield writeAPI("POST", `${baseURL}/api/debt`, body);
-//     yield put(Actions.setFinancesValue("debtId", response.id));
-//   } else {
-//     let debtId = currentDebt.results[0].id;
-//     yield writeAPI("PATCH", `${baseURL}/api/debt/${debtId}`, body);
-//   }
-// }
+  if (currentDebt.results.length === 0) {
+    let response = yield writeAPI("POST", `${baseURL}/api/debt`, body);
+    yield put(Actions.setFinancesValue("debtId", response.id));
+  } else {
+    let debtId = currentDebt.results[0].id;
+    yield writeAPI("PATCH", `${baseURL}/api/debt/${debtId}`, body);
+  }
+}
 
 function* deletePartner() {
   yield takeLatest(["deletePartner"], function* (action) {
