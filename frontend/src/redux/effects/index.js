@@ -182,7 +182,11 @@ function* fetchClientProfileEmail() {
     let email = yield select(Selectors.getEmail);
     const response = yield readAPI(`${baseURL}/api/clients?email=${email}`);
 
+<<<<<<< HEAD
     if (response.results.length > 0) {
+=======
+    if (response.results.length !== 0) {
+>>>>>>> [#216] - read/write rest of client profile bug fixes
       yield put(Actions.fetchCities(response.results[0].state));
 
       let profileValues = {
@@ -194,6 +198,7 @@ function* fetchClientProfileEmail() {
         state: response.results[0].state,
         clientId: response.results[0].id,
       };
+<<<<<<< HEAD
 
       let financesValues = {
         salaryAfterTax: Number(response.results[0].personal_annual_net_income),
@@ -222,6 +227,33 @@ function* fetchClientProfileEmail() {
       yield fetchGoals();
     }
     yield delay(1000);
+=======
+
+      let financesValues = {
+        salaryAfterTax: response.results[0].personal_annual_net_income,
+        additionalIncome: response.results[0].additional_income,
+      };
+
+      if (response.results.length > 0) {
+        for (let propName in profileValues) {
+          yield put(Actions.setProfileValue(propName, profileValues[propName]));
+        }
+        for (let propName in financesValues) {
+          yield put(
+            Actions.setFinancesValue(propName, financesValues[propName])
+          );
+        }
+
+        // fetch the rest of the profile, plan, action items
+        yield fetchExpenses();
+        // yield fetchDebt();
+        yield fetchPartners();
+        yield fetchChildren();
+        yield fetchGoals();
+      }
+      yield delay(1000);
+    }
+>>>>>>> [#216] - read/write rest of client profile bug fixes
 
     yield put((document.location.href = "/profile"));
   });
@@ -246,8 +278,13 @@ function* fetchClientProfileId() {
     };
 
     let financesValues = {
+<<<<<<< HEAD
       salaryAfterTax: Number(response.personal_annual_net_income),
       additionalIncome: Number(response.additional_income),
+=======
+      salaryAfterTax: response.personal_annual_net_income,
+      additionalIncome: response.additional_income,
+>>>>>>> [#216] - read/write rest of client profile bug fixes
     };
 
     for (let propName in profileValues) {
@@ -418,6 +455,7 @@ function* fetchGoals() {
 }
 
 function* saveClientProfile() {
+<<<<<<< HEAD
   yield takeLatest(
     ["incrementStep", "decrementStep", "setStep", "resetStep"],
     function* (action) {
@@ -477,6 +515,63 @@ function* saveClientProfile() {
             yield saveDebt();
           }
         }
+=======
+  yield takeLatest(["incrementStep", "decrementStep", "setStep"], function* (
+    action
+  ) {
+    const advisorId = yield select(Selectors.getAdvisorId);
+    if (advisorId === "") {
+      const id = yield select(Selectors.getClientId);
+      const firstName = yield select(Selectors.getFirstName);
+      const lastName = yield select(Selectors.getLastName);
+      const middleName = yield select(Selectors.getMiddleName);
+      const birthYear = yield select(Selectors.getBirthYear);
+      const email = yield select(Selectors.getEmail);
+      const city = yield select(Selectors.getCity);
+      const state = yield select(Selectors.getState);
+      const salaryAfterTax = yield select(Selectors.getSalaryAfterTax);
+      const additionalIncome = yield select(Selectors.getAdditionalIncome);
+
+      let body = {
+        first_name: firstName,
+        last_name: lastName,
+        birth_year: birthYear,
+        email: email,
+        personal_annual_net_income: salaryAfterTax,
+        middle_name: middleName,
+        city: city,
+        state: state,
+        additional_income: additionalIncome,
+      };
+
+      for (let propName in body) {
+        if (body[propName] === "") {
+          delete body[propName];
+        }
+      }
+
+      if (
+        (id === "" || id === undefined) &&
+        firstName !== "" &&
+        lastName !== "" &&
+        birthYear !== "" &&
+        email !== "" &&
+        salaryAfterTax !== ""
+      ) {
+        let response = yield writeAPI("POST", `${baseURL}/api/clients`, body);
+
+        if (response !== undefined) {
+          yield put(Actions.setProfileValue("clientId", response.id));
+          yield put(Actions.toggleShowPlanReady());
+        }
+      } else {
+        // update profile, expenses, partners, children, goals, debt
+        yield writeAPI("PATCH", `${baseURL}/api/clients/${id}`, body);
+        yield saveExpenses();
+        yield savePartners();
+        yield saveChildren();
+        yield saveGoals();
+>>>>>>> [#216] - read/write rest of client profile bug fixes
       }
     }
   );
