@@ -58,7 +58,7 @@ class ToastSelect extends React.Component {
   getPlaceholder() {
     if (this.props.name === "education") {
       return "Type in your child's education";
-    } else if (this.props.name === "description") {
+    } else if (this.props.name === "goal") {
       return "Type in your goal";
     }
   }

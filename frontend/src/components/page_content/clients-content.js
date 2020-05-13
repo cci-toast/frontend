@@ -2,6 +2,7 @@ import React from "react";
 import Style from "style-it";
 
 import ClientListEntry from "../client-list-entry";
+import ToastEmpty from "../toast/toast-empty";
 
 import { connect } from "react-redux";
 import { setSearchTerm } from "../../redux/actions";
@@ -33,6 +34,19 @@ class ClientsContent extends React.Component {
     });
   }
 
+  getContent() {
+    if (this.props.clients.length !== 0) {
+      return <div className="container">{this.getClients()}</div>;
+    } else {
+      return (
+        <ToastEmpty
+          header="No Clients Found"
+          caption="You currently do not have any clients or your search returned no clients."
+        />
+      );
+    }
+  }
+
   render() {
     const styles = `
     .container {
@@ -41,10 +55,7 @@ class ClientsContent extends React.Component {
     }
     `;
 
-    return Style.it(
-      `${styles}`,
-      <div className="container">{this.getClients()}</div>
-    );
+    return Style.it(`${styles}`, this.getContent());
   }
 }
 
