@@ -174,6 +174,10 @@ export const setPlanValue = (valueName, value) => ({
   payload: { valueName, value },
 });
 
+export const resetPlan = () => ({
+  type: "resetPlan",
+});
+
 // api
 
 export const fetchClientProfileId = (clientId) => ({

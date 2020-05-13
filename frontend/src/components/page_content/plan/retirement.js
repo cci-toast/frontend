@@ -18,12 +18,12 @@ class Retirement extends React.Component {
 
     this.data = [
       {
-        name: "Your Total Savings",
-        value: this.props.retirementSavings,
+        name: "Your Savings",
+        value: this.props.retirementSavings || 0,
         fill: "var(--toast-purple-2)",
       },
       {
-        name: "Total Target Savings",
+        name: "Target Savings",
         value: this.props.retirementTargetSavings,
         fill: "url(#gradient)",
       },

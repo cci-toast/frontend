@@ -42,7 +42,7 @@ class EmergencySavings extends React.Component {
   }
 
   getCaption() {
-    return `Given that your personal annual net income is $${numWithCommas(
+    return `Given that your income is $${numWithCommas(
       this.props.salaryAfterTax
     )}, your minimum recommended
     emergency savings is $${numWithCommas(this.props.lowerBound)}. Your
