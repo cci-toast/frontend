@@ -16,6 +16,7 @@ const persistConfig = {
     "financesReducer",
     "familyReducer",
     "goalsReducer",
+    "advisorReducer",
   ],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);

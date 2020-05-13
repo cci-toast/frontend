@@ -163,6 +163,7 @@ export const getFixedExpenses = createSelector(
 export const getSpending = createSelector([getSalaryAfterTax], calcSpending);
 
 // advisor
+export const getAdvisorId = (state) => state.advisorReducer.id;
 export const getAdvisorFirstName = (state) => state.advisorReducer.firstName;
 export const getAdvisorLastName = (state) => state.advisorReducer.lastName;
 export const getAdvisorEmail = (state) => state.advisorReducer.email;
