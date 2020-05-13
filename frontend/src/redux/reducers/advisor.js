@@ -1,4 +1,5 @@
 const initialState = {
+  id: "",
   firstName: "Jimmy",
   lastName: "Black",
   email: "jblack92@gmail.com",
@@ -21,6 +22,18 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchTerm: value,
+      };
+    }
+    case "resetAdvisor": {
+      return {
+        ...state,
+        id: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        address: "",
+        clients: [],
       };
     }
     default:

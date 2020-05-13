@@ -164,6 +164,10 @@ export const setSearchTerm = (value) => ({
   payload: { value },
 });
 
+export const resetAdvisor = () => ({
+  type: "resetAdvisor",
+});
+
 // plan
 export const setPlanValue = (valueName, value) => ({
   type: "setPlanValue",

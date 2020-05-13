@@ -89,6 +89,7 @@ function* authLoginAdvisor() {
     }).then((response) => response.json());
 
     yield put(Actions.setAuthKey(response.key));
+    yield fetchAdvisorEmail();
     yield put((document.location.href = "/clients"));
   });
 }
@@ -114,9 +115,19 @@ function* authLoginClient() {
     yield put(Actions.resetFinances());
     yield put(Actions.resetFamily());
     yield put(Actions.resetGoals());
+    yield put(Actions.resetAdvisor());
 
     yield put(Actions.fetchClientProfileEmail());
   });
+}
+
+function* fetchAdvisorEmail() {
+  let email = yield select(Selectors.getEmail);
+
+  const response = yield readAPI(`${baseURL}/api/advisors?email=${email}`);
+  yield put(Actions.setAdvisorValue("id", response.results[0].id));
+
+  return response;
 }
 
 function* fetchClients() {
@@ -126,9 +137,12 @@ function* fetchClients() {
     yield put(Actions.resetFinances());
     yield put(Actions.resetFamily());
     yield put(Actions.resetGoals());
+    yield put(Actions.resetAdvisor());
+
+    let advisor = yield fetchAdvisorEmail();
 
     const response = yield readAPI(
-      `${baseURL}/api/clients?limit=2000&offset=0)`
+      `${baseURL}/api/clients?advisor=${advisor.results[0].id}&limit=2000&offset=0`
     );
 
     const clients = response.results.map((client) => {
