@@ -78,7 +78,7 @@ export const childEducationOptions = [
 ];
 
 export const getBirthYearOptions = (maxOffset) => {
-  if (maxOffset == null) {
+  if (maxOffset === undefined) {
     maxOffset = 120;
   }
   let thisYear = new Date().getFullYear();
