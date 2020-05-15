@@ -182,6 +182,15 @@ function* fetchClientProfileEmail() {
     let email = yield select(Selectors.getEmail);
     const response = yield readAPI(`${baseURL}/api/clients?email=${email}`);
 
+    let state = yield select(Selectors.getState);
+    let city = yield select(Selectors.getCity);
+
+    if (state === "" && city === "") {
+      yield put(Actions.setProfileValue("state", "Pennsylvania"));
+      yield put(Actions.fetchCities("Pennsylvania"));
+      yield put(Actions.setProfileValue("city", "Philadelphia"));
+    }
+
     if (response.results.length > 0) {
       yield put(Actions.fetchCities(response.results[0].state));
 
@@ -233,7 +242,16 @@ function* fetchClientProfileId() {
       `${baseURL}/api/clients/${action.payload.clientId}`
     );
 
-    yield put(Actions.fetchCities(response.state));
+    let state = yield select(Selectors.getState);
+    let city = yield select(Selectors.getCity);
+
+    if (state === "" && city === "") {
+      yield put(Actions.setProfileValue("state", "Pennsylvania"));
+      yield put(Actions.fetchCities("Pennsylvania"));
+      yield put(Actions.setProfileValue("city", "Philadelphia"));
+    } else {
+      yield put(Actions.fetchCities(response.state));
+    }
 
     let profileValues = {
       firstName: response.first_name,
