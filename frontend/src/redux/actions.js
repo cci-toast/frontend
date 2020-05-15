@@ -169,6 +169,7 @@ export const resetAdvisor = () => ({
 });
 
 // plan
+
 export const setPlanValue = (valueName, value) => ({
   type: "setPlanValue",
   payload: { valueName, value },
@@ -176,6 +177,37 @@ export const setPlanValue = (valueName, value) => ({
 
 export const resetPlan = () => ({
   type: "resetPlan",
+});
+
+// action items
+
+export const setActionItems = (actionItems) => ({
+  type: "setActionItems",
+  payload: { actionItems },
+});
+
+export const setActionItemListValue = (index, valueName, value) => ({
+  type: "setActionItemListValue",
+  payload: { index, valueName, value },
+});
+
+export const addActionItem = (actionItemFields) => ({
+  type: "addActionItem",
+  payload: { actionItemFields },
+});
+
+export const deleteActionItem = (index, id) => ({
+  type: "deleteActionItem",
+  payload: { index, id },
+});
+
+export const resetActionItems = () => ({
+  type: "resetActionItems",
+});
+
+export const toggleActionItem = (index) => ({
+  type: "toggleActionItem",
+  payload: { index },
 });
 
 // api

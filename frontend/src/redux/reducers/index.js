@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+import actionItemsReducer from "./action-items";
 import advisorReducer from "./advisor";
 import familyReducer from "./family";
 import financesReducer from "./finances";
@@ -11,6 +12,7 @@ import profileReducer from "./profile";
 import toastPageNavReducer from "./toast-page-nav";
 
 export default combineReducers({
+  actionItemsReducer,
   advisorReducer,
   familyReducer,
   financesReducer,

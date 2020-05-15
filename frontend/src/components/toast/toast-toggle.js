@@ -9,20 +9,28 @@ class ToastToggle extends React.Component {
     this.sliderLabel = React.createRef();
 
     this.onSlide = this.onSlide.bind(this);
+
+    if (this.props.actionItems) {
+      this.width = "8rem";
+      this.transform = "5.25rem";
+    } else {
+      this.width = "10rem";
+      this.transform = "5.875rem";
+    }
+
+    this.props.activeLabel(this.props.active);
   }
 
   onSlide() {
     if (this.slider.current.classList.contains("slider-after")) {
       this.slider.current.classList.remove("slider-after");
       this.sliderLabel.current.innerHTML = this.props.active;
+      this.props.activeLabel(this.sliderLabel.current.innerHTML);
     } else {
       this.slider.current.classList.add("slider-after");
       this.sliderLabel.current.innerHTML = this.props.inactive;
+      this.props.activeLabel(this.sliderLabel.current.innerHTML);
     }
-  }
-
-  isActive() {
-    return this.sliderLabel.current.innerHTML === this.props.active;
   }
 
   render() {
@@ -41,12 +49,12 @@ class ToastToggle extends React.Component {
       }
 
       .slider-after {
-        transform: translateX(5.875rem);
+        transform: translateX(${this.transform});
       }
 
       .wrapper {
           height: 1.5rem;
-          width: 10rem;
+          width: ${this.width};
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -63,7 +71,7 @@ class ToastToggle extends React.Component {
 
       label {
         cursor: pointer;
-    }
+      }
     `;
 
     return Style.it(

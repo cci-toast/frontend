@@ -69,6 +69,9 @@ class ToastCheckbox extends React.Component {
           type="checkbox"
           title="Checkbox"
           disabled={this.props.readOnly}
+          checked={this.props.checked}
+          onChange={this.props.onChange}
+          name={this.props.name}
         />
         <label className={this.getLabelClasses()}>{this.props.text}</label>
       </div>
