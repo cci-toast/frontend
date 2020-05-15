@@ -20,7 +20,7 @@ export const users = [
     user: "advisor",
   },
   {
-    email: "toastyclient@gmail.com",
+    email: "wick@wicks.com",
     password: "client",
     user: "client",
   },

@@ -5,7 +5,7 @@ import * as Selectors from "../selectors";
 
 import { getStateCode } from "../../utils/select-utils";
 
-const baseURL = "https://toastbackend.herokuapp.com";
+const baseURL = "https://toastapi.herokuapp.com";
 
 function* fetchCities() {
   yield takeLatest("fetchCities", function* (action) {
@@ -158,24 +158,22 @@ function* fetchClients() {
   });
 }
 
+function* fetchClientMatchedAdvisor() {
+  let id = yield select(Selectors.getClientId);
+  const response = yield readAPI(`${baseURL}/api/clients/${id}`);
+  let advisor = response.advisor;
+  return advisor;
+}
+
 function* fetchAdvisorContact() {
   yield takeLatest("fetchAdvisorContact", function* (action) {
-    const authKey = yield select(Selectors.getAuthKey);
-    const response = yield fetch(
-      `${baseURL}/api/advisors/e98bdfc2-2902-4893-a9a5-4e91e1a5d40c`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Token ${authKey}`,
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((response) => response.json());
-
+    let advisor = yield fetchClientMatchedAdvisor();
+    const response = yield readAPI(`${baseURL}/api/advisors/${advisor}`);
     yield put(Actions.setAdvisorValue("firstName", response.first_name));
     yield put(Actions.setAdvisorValue("lastName", response.last_name));
-    yield put(Actions.setAdvisorValue("address", response.address));
+    yield put(Actions.setAdvisorValue("email", response.email));
     yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
+    yield put(Actions.setAdvisorValue("address", response.address));
   });
 }
 
