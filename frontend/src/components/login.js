@@ -32,11 +32,9 @@ class Login extends React.Component {
     switch (this.props.user) {
       case "client":
         this.props.loginClient();
-        document.location.href = "/profile";
         break;
       case "advisor":
         this.props.loginAdvisor();
-        document.location.href = "/clients";
         break;
       default:
         this.error.current.classList.remove("hidden");
@@ -171,6 +169,7 @@ class Login extends React.Component {
                   name="email"
                   value={this.props.email}
                   medium
+                  helpText="Type in your email. This field is required."
                   required
                 />
                 <ToastInput
@@ -184,6 +183,7 @@ class Login extends React.Component {
                   name="password"
                   value={this.props.password}
                   medium
+                  helpText="Type in your password. This field is required."
                   required
                 />
               </div>

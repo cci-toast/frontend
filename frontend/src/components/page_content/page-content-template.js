@@ -4,7 +4,11 @@ import Style from "style-it";
 import ToastSaveCancel from "../toast/toast-save-cancel";
 
 import { connect } from "react-redux";
-import { getCurrentStep, getClientId } from "../../redux/selectors";
+import {
+  getCurrentStep,
+  getClientId,
+  getFilteredClients,
+} from "../../redux/selectors";
 import { incrementStep, decrementStep } from "../../redux/actions";
 
 import ActionItemsContent from "./action-items-content";
@@ -41,7 +45,7 @@ class PageContentTemplate extends React.Component {
 
   getHideSave() {
     return (
-      this.props.clientId === "" ||
+      (this.props.clientId === "" && this.props.currentStep !== 0) ||
       (this.props.currentStep === 4 && this.props.page !== "profile")
     );
   }
@@ -119,6 +123,7 @@ class PageContentTemplate extends React.Component {
 const mapStateToProps = (state) => ({
   currentStep: getCurrentStep(state),
   clientId: getClientId(state),
+  clients: getFilteredClients(state),
 });
 
 export default connect(mapStateToProps, {

@@ -9,7 +9,6 @@ import {
   getRetirement,
   getHousingType,
   getHousingAmount,
-  getBill,
   getUtility,
   getProtectionMonthly,
   getProtectionPolicy,
@@ -79,14 +78,15 @@ class Finances extends React.Component {
             label="Retirement Savings"
             name="retirement"
             placeholder="Type in your retirement savings"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             value={this.props.retirement}
             iconWidth={20}
             iconHeight={20}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you have saved up for your retirement."
           />
         </ToastShowHideInput>
 
@@ -107,6 +107,7 @@ class Finances extends React.Component {
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
             placeholder="Select your housing type"
+            helpText="Select your housing type."
           />
 
           <ToastInput
@@ -114,35 +115,15 @@ class Finances extends React.Component {
             label="Housing (Monthly)"
             name="housingAmount"
             placeholder="Type in your amount spent on housing"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.housingAmount}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
-          />
-        </ToastShowHideInput>
-
-        <ToastShowHideInput
-          id="bill"
-          label="Add Bills"
-          readOnly={this.props.readOnly}
-        >
-          <ToastInput
-            type="number"
-            label="Bills (Monthly)"
-            name="bill"
-            placeholder="Type in your amount spent on bills"
-            min={0.0}
-            step={0.01}
-            iconName="dollarsign"
-            iconWidth={20}
-            iconHeight={20}
-            value={this.props.bill}
-            onChange={this.handleChange}
-            readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on housing."
           />
         </ToastShowHideInput>
 
@@ -156,14 +137,16 @@ class Finances extends React.Component {
             label="Utilities (Monthly)"
             name="utility"
             placeholder="Type in your amount spent on utilities"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.utility}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on utilities."
+            helpExamples="water, electricity, gas, sewer, internet, telephone, tv"
           />
         </ToastShowHideInput>
 
@@ -177,14 +160,15 @@ class Finances extends React.Component {
             label="Life Insurance (Monthly)"
             name="protectionMonthly"
             placeholder="Type in your amount spent on life insurance"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.protectionMonthly}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on life insurance."
           />
 
           <ToastInput
@@ -192,14 +176,15 @@ class Finances extends React.Component {
             label="Insurance Policy Coverage"
             name="protectionPolicy"
             placeholder="Type in your life insurance coverage"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.protectionPolicy}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount for your life insurance policy coverage."
           />
         </ToastShowHideInput>
 
@@ -213,14 +198,16 @@ class Finances extends React.Component {
             label="Loans & Debt (Monthly)"
             name="loanDebt"
             placeholder="Type in your payment towards loans & debt"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.loanDebt}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you pay per month towards loans and debt."
+            helpExamples="credit card, student loans, medical"
           />
         </ToastShowHideInput>
 
@@ -237,14 +224,16 @@ class Finances extends React.Component {
             label="Shopping (Monthly)"
             name="shopping"
             placeholder="Type in your amount spent on shopping"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.shopping}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on shopping."
+            helpExamples="groceries, clothing/shoes"
           />
         </ToastShowHideInput>
 
@@ -258,14 +247,16 @@ class Finances extends React.Component {
             label="Leisure (Monthly)"
             name="leisure"
             placeholder="Type in your amount spent on leisure"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.leisure}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on leisure."
+            helpExamples="concerts, dining, vacation, sports"
           />
         </ToastShowHideInput>
 
@@ -279,14 +270,16 @@ class Finances extends React.Component {
             label="Transportation (Monthly)"
             name="transportation"
             placeholder="Type in your amount spent on transportation"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.transportation}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on transportation."
+            helpExamples="car, bus, train, flight"
           />
         </ToastShowHideInput>
 
@@ -300,14 +293,16 @@ class Finances extends React.Component {
             label="Subscription (Monthly)"
             name="subscription"
             placeholder="Type in your amount spent on subscriptions"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.subscription}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on subscriptions."
+            helpExamples="Spotify, Netflix, Hulu, gym, magazine"
           />
         </ToastShowHideInput>
 
@@ -321,14 +316,15 @@ class Finances extends React.Component {
             label="Other (Monthly)"
             name="other"
             placeholder="Type in your amount spent on other items"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}
             value={this.props.other}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter the amount you spend per month on other items."
           />
         </ToastShowHideInput>
       </div>
@@ -340,7 +336,6 @@ const mapStateToProps = (state) => ({
   retirement: getRetirement(state),
   housingType: getHousingType(state),
   housingAmount: getHousingAmount(state),
-  bill: getBill(state),
   utility: getUtility(state),
   protectionPolicy: getProtectionPolicy(state),
   protectionMonthly: getProtectionMonthly(state),

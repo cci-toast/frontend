@@ -8,8 +8,6 @@ import { numWithCommas } from "../../../utils/plan-utils";
 import {
   getRetirementTargetSavings,
   getRetirement,
-  getRetirementYears,
-  getRetirementMonthly,
 } from "../../../redux/selectors";
 
 import ToastBarChart from "../../toast/toast-bar-chart";
@@ -20,12 +18,12 @@ class Retirement extends React.Component {
 
     this.data = [
       {
-        name: "Your Total Savings",
-        value: this.props.retirementSavings,
+        name: "Your Savings",
+        value: this.props.retirementSavings || 0,
         fill: "var(--toast-purple-2)",
       },
       {
-        name: "Total Target Savings",
+        name: "Target Savings",
         value: this.props.retirementTargetSavings,
         fill: "url(#gradient)",
       },
@@ -33,9 +31,12 @@ class Retirement extends React.Component {
   }
 
   getCaption() {
-    return `Given your age and personal annual net income is $${this.props.salaryAfterTax}, we recommend you set aside $261,000 for
-    your retirement savings. We recommend that you set aside $${this.props.retirementMonthly} monthly
-    for ${this.props.retirementYears} years to reach your recommended total savings.`;
+    return `Given your age and personal annual net income is $${numWithCommas(
+      this.props.salaryAfterTax
+    )}, we recommend you set aside $${numWithCommas(
+      this.props.retirementTargetSavings
+    )} for
+    your retirement savings.`;
   }
 
   getClasses() {
@@ -73,8 +74,6 @@ class Retirement extends React.Component {
 const mapStateToProps = (state) => ({
   retirementTargetSavings: getRetirementTargetSavings(state),
   retirementSavings: getRetirement(state),
-  retirementYears: getRetirementYears(state),
-  retirementMonthly: getRetirementMonthly(state),
 });
 
 export default connect(mapStateToProps)(Retirement);

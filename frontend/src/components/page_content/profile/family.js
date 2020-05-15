@@ -76,6 +76,7 @@ class Family extends React.Component {
             name="firstName"
             placeholder="Type in your partner's first name"
             readOnly={this.props.readOnly}
+            helpText="Enter your partner's first name."
           />
 
           <ToastInput
@@ -84,6 +85,7 @@ class Family extends React.Component {
             name="lastName"
             placeholder="Type in your partner's last name"
             readOnly={this.props.readOnly}
+            helpText="Enter your partner's last name."
           />
 
           <ToastSelect
@@ -96,19 +98,21 @@ class Family extends React.Component {
             iconWidth={20}
             iconHeight={20}
             readOnly={this.props.readOnly}
+            helpText="Select your partner's birth year."
           />
 
           <ToastInput
             type="number"
-            min={0.0}
+            min={0}
             label="Partner's Personal Annual Net Income"
             placeholder="Type in your partner's income"
             name="salary"
             iconName="dollarsign"
-            step={0.01}
+            step={1}
             iconWidth={20}
             iconHeight={20}
             readOnly={this.props.readOnly}
+            helpText="Enter your partner's personal annual net income. This is their income after taxes (take home pay)."
           />
         </ToastDuplicateInputButton>
 
@@ -130,6 +134,7 @@ class Family extends React.Component {
             placeholder="Type in your child's first name"
             name="firstName"
             readOnly={this.props.readOnly}
+            helpText="Enter your child's first name."
           />
 
           <ToastSelect
@@ -140,6 +145,7 @@ class Family extends React.Component {
             placeholder="Select your child's education"
             id="childEducation"
             readOnly={this.props.readOnly}
+            helpText="Select your child's level of education."
           />
 
           <ToastSelect
@@ -150,6 +156,7 @@ class Family extends React.Component {
             placeholder="Select your child's birth year"
             id="childBirthYear"
             readOnly={this.props.readOnly}
+            helpText="Select your child's birth year."
           />
         </ToastDuplicateInputButton>
       </div>

@@ -5,6 +5,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case "setFamilyValue": {
+      const { valueName, value } = action.payload;
+      return {
+        ...state,
+        [valueName]: value,
+      };
+    }
     case "addPartner": {
       const { partnerFields } = action.payload;
       return { ...state, partners: [...state.partners, partnerFields] };
@@ -48,6 +55,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         children: tempChild,
+      };
+    }
+    case "resetFamily": {
+      return {
+        ...state,
+        partners: [],
+        children: [],
       };
     }
     default:

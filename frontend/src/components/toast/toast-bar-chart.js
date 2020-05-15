@@ -102,7 +102,7 @@ class ToastBarChart extends React.Component {
           <div className="top-right">
             <h3>{this.props.header}</h3>
             <p className="subheader">
-              / ${numWithCommas(this.props.subheader)}
+              / ${numWithCommas(this.props.subheader || 0)}
             </p>
           </div>
 

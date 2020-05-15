@@ -3,7 +3,7 @@ const initialState = {
   firstName: "",
   middleName: "",
   lastName: "",
-  birthYear: 1980,
+  birthYear: 0,
   city: "",
   state: "",
   cities: [],
@@ -23,6 +23,19 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cities: cities,
+      };
+    }
+    case "resetProfile": {
+      return {
+        ...state,
+        clientId: "",
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        birthYear: 0,
+        city: "",
+        state: "",
+        cities: [],
       };
     }
     default:

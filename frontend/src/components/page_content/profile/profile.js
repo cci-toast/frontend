@@ -96,6 +96,7 @@ class Profile extends React.Component {
             onChange={this.handleChange}
             required
             readOnly={this.props.readOnly}
+            helpText="Enter your first name. This field is required."
           />
 
           <ToastInput
@@ -106,6 +107,7 @@ class Profile extends React.Component {
             name="middleName"
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Enter your middle name."
           />
 
           <ToastInput
@@ -117,6 +119,7 @@ class Profile extends React.Component {
             onChange={this.handleChange}
             required
             readOnly={this.props.readOnly}
+            helpText="Enter your last name. This field is required."
           />
 
           <ToastSelect
@@ -129,6 +132,7 @@ class Profile extends React.Component {
             id="birthYear"
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Select your birth year. This field is required."
             required
           />
 
@@ -141,6 +145,7 @@ class Profile extends React.Component {
             id="state"
             onChange={this.handleStateChange}
             readOnly={this.props.readOnly}
+            helpText="Select the state you live in."
           />
 
           <ToastSelect
@@ -152,6 +157,7 @@ class Profile extends React.Component {
             id="city"
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
+            helpText="Select the city you live in."
           />
         </div>
 
@@ -162,7 +168,7 @@ class Profile extends React.Component {
           <div className="column">
             <ToastInput
               type="number"
-              min={0.0}
+              min={0}
               label="Personal Annual Net Income (After Taxes)"
               placeholder="Type in your income"
               value={this.props.salaryAfterTax}
@@ -171,8 +177,9 @@ class Profile extends React.Component {
               iconWidth={20}
               iconHeight={20}
               onChange={this.handleIncomeChange}
-              step={0.01}
+              step={1}
               readOnly={this.props.readOnly}
+              helpText="Enter your personal annual net income. This is your income after taxes (take home pay)."
               required
             />
           </div>
@@ -188,14 +195,15 @@ class Profile extends React.Component {
                 label="Additional Income (Annual)"
                 name="additionalIncome"
                 placeholder="Type in your additional income"
-                min={0.0}
-                step={0.01}
+                min={0}
+                step={1}
                 iconName="dollarsign"
                 iconWidth={20}
                 iconHeight={20}
                 value={this.props.additionalIncome}
                 onChange={this.handleIncomeChange}
                 readOnly={this.props.readOnly}
+                helpText="Enter the amount of additional income you receive."
               />
             </ToastShowHideInput>
           </div>

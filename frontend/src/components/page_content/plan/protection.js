@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 
 import {
   getProtectionPolicyPlan,
-  getProtectionMonthlyPlan,
-  getProtectionMonthly,
   getProtectionPolicy,
 } from "../../../redux/selectors";
 
@@ -78,24 +76,13 @@ class Protection extends React.Component {
       color: var(--toast-white);
       border-radius: 0.5rem;
       margin: 0;
-    }
-
-    .bg-gradient {
       background: var(--toast-gradient-1);
-    }
-
-    .bg-blue {
-      background-color: var(--toast-blue-1);
     }
 
     .text-grad {
       background: var(--toast-gradient-1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-    }
-
-    .text-blue {
-      color: var(--toast-blue-1);
     }
 
     .caption {
@@ -135,11 +122,7 @@ class Protection extends React.Component {
           <div className="table">
             <div className="col">
               <div className="table-item">
-                <h5 className="corner">Corner</h5>
-              </div>
-
-              <div className="table-item">
-                <h5>Policy</h5>
+                <h5>Target Policy</h5>
               </div>
 
               <svg height="2" width="100%">
@@ -147,17 +130,13 @@ class Protection extends React.Component {
               </svg>
 
               <div className="table-item">
-                <h5>Monthly</h5>
+                <h5>Current Policy</h5>
               </div>
             </div>
 
             <div className="col">
               <div className="table-item">
-                <h5>Target</h5>
-              </div>
-
-              <div className="table-item">
-                <h2 className="text-bg bg-gradient">
+                <h2 className="text-bg">
                   {`$${numWithCommas(this.props.policyPlan)}`}
                 </h2>
               </div>
@@ -168,35 +147,7 @@ class Protection extends React.Component {
 
               <div className="table-item">
                 <h2 className="text-grad">{`$${numWithCommas(
-                  this.props.monthlyPlan
-                )}`}</h2>
-              </div>
-            </div>
-
-            <div className="vert-line-container">
-              <svg height="300" width="2" className="line">
-                <line x1="1" y1="380" x2="1" y2="0" />
-              </svg>
-            </div>
-
-            <div className="col">
-              <div className="table-item">
-                <h5>Current</h5>
-              </div>
-
-              <div className="table-item">
-                <h2 className="text-bg bg-blue">{`$${numWithCommas(
-                  this.props.policy
-                )}`}</h2>
-              </div>
-
-              <svg height="2" width="100%">
-                <line x1="300" y1="1" x2="0" y2="1" className="line" />
-              </svg>
-
-              <div className="table-item">
-                <h2 className="text-blue">{`$${numWithCommas(
-                  this.props.monthly
+                  this.props.policy || 0
                 )}`}</h2>
               </div>
             </div>
@@ -205,9 +156,7 @@ class Protection extends React.Component {
         <p className="caption">
           Given that your personal annual net income is $
           {numWithCommas(this.props.salaryAfterTax)}, we recommend you have a
-          life insurance policy of ${numWithCommas(this.props.policyPlan)} with
-          a monthly payment of ${numWithCommas(this.props.monthlyPlan)} per
-          month.
+          life insurance policy of ${numWithCommas(this.props.policyPlan)}.
         </p>
       </div>
     );
@@ -216,9 +165,7 @@ class Protection extends React.Component {
 
 const mapStateToProps = (state) => ({
   policyPlan: getProtectionPolicyPlan(state),
-  monthlyPlan: getProtectionMonthlyPlan(state),
   policy: getProtectionPolicy(state),
-  monthly: getProtectionMonthly(state),
 });
 
 export default connect(mapStateToProps)(Protection);
