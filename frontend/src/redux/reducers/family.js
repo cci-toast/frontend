@@ -57,6 +57,13 @@ export default function (state = initialState, action) {
         children: tempChild,
       };
     }
+    case "resetFamily": {
+      return {
+        ...state,
+        partners: [],
+        children: [],
+      };
+    }
     default:
       return state;
   }

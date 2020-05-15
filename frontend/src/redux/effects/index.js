@@ -116,6 +116,7 @@ function* authLoginClient() {
     yield put(Actions.resetFamily());
     yield put(Actions.resetGoals());
     yield put(Actions.resetAdvisor());
+    yield put(Actions.resetPlan());
 
     yield put(Actions.fetchClientProfileEmail());
   });
@@ -138,6 +139,7 @@ function* fetchClients() {
     yield put(Actions.resetFamily());
     yield put(Actions.resetGoals());
     yield put(Actions.resetAdvisor());
+    yield put(Actions.resetPlan());
 
     let advisor = yield fetchAdvisorEmail();
 
@@ -205,8 +207,12 @@ function* fetchClientProfileEmail() {
       };
 
       let financesValues = {
-        salaryAfterTax: Number(response.results[0].personal_annual_net_income),
-        additionalIncome: Number(response.results[0].additional_income),
+        salaryAfterTax: Math.ceil(
+          Number(response.results[0].personal_annual_net_income)
+        ),
+        additionalIncome: Math.ceil(
+          Number(response.results[0].additional_income)
+        ),
       };
 
       for (let propName in profileValues) {
@@ -229,6 +235,7 @@ function* fetchClientProfileEmail() {
       yield fetchPartners();
       yield fetchChildren();
       yield fetchGoals();
+      yield fetchPlan();
     }
     yield delay(1000);
 
@@ -264,8 +271,8 @@ function* fetchClientProfileId() {
     };
 
     let financesValues = {
-      salaryAfterTax: Number(response.personal_annual_net_income),
-      additionalIncome: Number(response.additional_income),
+      salaryAfterTax: Math.ceil(Number(response.personal_annual_net_income)),
+      additionalIncome: Math.ceil(Number(response.additional_income)),
     };
 
     for (let propName in profileValues) {
@@ -288,6 +295,7 @@ function* fetchClientProfileId() {
     yield fetchPartners();
     yield fetchChildren();
     yield fetchGoals();
+    yield fetchPlan();
   });
 }
 
@@ -298,19 +306,27 @@ function* fetchExpenses() {
   if (response.results.length !== 0) {
     let financesValues = {
       expensesId: response.results[0].id,
-      housingAmount: Number(response.results[0].bills_housing),
+      housingAmount: Math.ceil(Number(response.results[0].bills_housing)),
       housingType: response.results[0].housing_type,
-      shopping: Number(response.results[0].expense_shopping),
-      leisure: Number(response.results[0].expense_leisure),
-      utility: Number(response.results[0].bills_utilities),
-      transportation: Number(response.results[0].expense_transportation),
-      subscription: Number(response.results[0].expense_subscriptions),
-      other: Number(response.results[0].expense_other),
-      protectionMonthly: Number(
-        response.results[0].current_monthly_protection_payment
+      shopping: Math.ceil(Number(response.results[0].expense_shopping)),
+      leisure: Math.ceil(Number(response.results[0].expense_leisure)),
+      utility: Math.ceil(Number(response.results[0].bills_utilities)),
+      transportation: Math.ceil(
+        Number(response.results[0].expense_transportation)
       ),
-      protectionPolicy: Number(response.results[0].current_protection_coverage),
-      retirement: Number(response.results[0].current_retirement_savings),
+      subscription: Math.ceil(
+        Number(response.results[0].expense_subscriptions)
+      ),
+      other: Math.ceil(Number(response.results[0].expense_other)),
+      protectionMonthly: Math.ceil(
+        Number(response.results[0].current_monthly_protection_payment)
+      ),
+      protectionPolicy: Math.ceil(
+        Number(response.results[0].current_protection_coverage)
+      ),
+      retirement: Math.ceil(
+        Number(response.results[0].current_retirement_savings)
+      ),
     };
 
     for (let propName in financesValues) {
@@ -330,7 +346,7 @@ function* fetchDebt() {
 
   if (response.results.length !== 0) {
     let financesValues = {
-      loanDebt: Number(response.results[0].debt_monthly_amount),
+      loanDebt: Math.ceil(Number(response.results[0].debt_monthly_amount)),
     };
 
     for (let propName in financesValues) {
@@ -356,7 +372,7 @@ function* fetchPartners() {
         firstName: partner.first_name,
         lastName: partner.last_name,
         birthYear: partner.birth_year,
-        salary: Number(partner.personal_annual_net_income),
+        salary: Math.ceil(Number(partner.personal_annual_net_income)),
         id: partner.id,
       })
     );
@@ -415,7 +431,7 @@ function* fetchGoals() {
     response.results.map((goal) =>
       goals.push({
         goal: goal.goal_type,
-        amount: Number(goal.goal_value),
+        amount: Math.ceil(Number(goal.goal_value)),
         endDate: goal.goal_end_date,
         id: goal.id,
       })
@@ -430,6 +446,59 @@ function* fetchGoals() {
     }
 
     yield put(Actions.setGoalsValue("goals", goals));
+  }
+
+  return response;
+}
+
+function* fetchPlan() {
+  const id = yield select(Selectors.getClientId);
+  let response = yield readAPI(`${baseURL}/api/plan?client=${id}`);
+
+  if (response.results.length !== 0) {
+    let planValues = {
+      id: response.results[0].id,
+      emergencySavingsFactorUpper:
+        response.results[0].emergency_savings_factor_upper,
+      emergencySavingsFactorLower:
+        response.results[0].emergency_savings_factor_lower,
+      budgetSavingsFactor: response.results[0].budget_savings_factor,
+      budgetFixedExpensesFactor:
+        response.results[0].budget_fixed_expenses_factor,
+      budgetSpendingFactor: response.results[0].budget_spending_factor,
+      debtRepaymentFactor: response.results[0].debt_repayment_factor,
+      retirementFactor: response.results[0].retirement_factor,
+      isOnTrackDebt: response.results[0].on_track,
+      protectionFactor: response.results[0].protection_factor,
+      retirement: Math.ceil(
+        Number(response.results[0].recommended_retirement_value)
+      ),
+      monthlyMaxDebt: Math.ceil(
+        Number(response.results[0].recommended_monthly_maximum_debt_amount)
+      ),
+      emergencySavingsUpper: Math.ceil(
+        Number(response.results[0].recommended_emergency_savings_range_upper)
+      ),
+      emergencySavingsLower: Math.ceil(
+        Number(response.results[0].recommended_emergency_savings_range_lower)
+      ),
+      budgetSavings: Math.ceil(
+        Number(response.results[0].recommended_budget_savings_value)
+      ),
+      budgetFixedExpenses: Math.ceil(
+        Number(response.results[0].recommended_budget_fixed_expenses_value)
+      ),
+      budgetSpending: Math.ceil(
+        Number(response.results[0].recommended_budget_spending_value)
+      ),
+      protection: Math.ceil(
+        Number(response.results[0].recommended_protection_value)
+      ),
+    };
+
+    for (let propName in planValues) {
+      yield put(Actions.setPlanValue(propName, planValues[propName]));
+    }
   }
 
   return response;
@@ -465,6 +534,17 @@ function* saveClientProfile() {
         };
 
         for (let propName in body) {
+          if (
+            propName === "personal_annual_net_income" &&
+            body[propName] === ""
+          ) {
+            body.personal_annual_net_income = 0;
+          } else if (
+            propName === "additional_income" &&
+            body[propName] === ""
+          ) {
+            body.additional_income = 0;
+          }
           if (body[propName] === "") {
             delete body[propName];
           }
@@ -482,7 +562,10 @@ function* saveClientProfile() {
 
           if (response !== undefined) {
             yield put(Actions.setProfileValue("clientId", response.id));
+
             yield put(Actions.toggleShowPlanReady());
+            yield savePlan();
+            yield fetchPlan();
           }
         } else {
           if (id !== "") {
@@ -493,6 +576,9 @@ function* saveClientProfile() {
             yield saveChildren();
             yield saveGoals();
             yield saveDebt();
+            yield savePlan();
+
+            yield fetchPlan();
           }
         }
       }
@@ -530,8 +616,10 @@ function* saveExpenses() {
   };
 
   for (let propName in body) {
-    if (body[propName] === "") {
+    if (propName === "housing_type" && body[propName] === "") {
       delete body[propName];
+    } else if (body[propName] === "") {
+      body[propName] = 0;
     }
   }
 
@@ -559,7 +647,7 @@ function* saveDebt() {
 
   for (let propName in body) {
     if (body[propName] === "") {
-      delete body[propName];
+      body[propName] = 0;
     }
   }
 
@@ -602,7 +690,12 @@ function* savePartners() {
       };
 
       for (let propName in body) {
-        if (body[propName] === "") {
+        if (
+          propName === "personal_annual_net_income" &&
+          body[propName] === ""
+        ) {
+          body.personal_annual_net_income = 0;
+        } else if (body[propName] === "") {
           delete body[propName];
         }
       }
@@ -618,7 +711,12 @@ function* savePartners() {
       };
 
       for (let propName in body) {
-        if (body[propName] === "") {
+        if (
+          propName === "personal_annual_net_income" &&
+          body[propName] === ""
+        ) {
+          body.personal_annual_net_income = 0;
+        } else if (body[propName] === "") {
           delete body[propName];
         }
       }
@@ -709,7 +807,9 @@ function* saveGoals() {
       };
 
       for (let propName in body) {
-        if (body[propName] === "") {
+        if (propName === "goal_value" && body[propName] === "") {
+          body.goal_value = 0;
+        } else if (body[propName] === "") {
           delete body[propName];
         }
       }
@@ -724,7 +824,9 @@ function* saveGoals() {
       };
 
       for (let propName in body) {
-        if (body[propName] === "") {
+        if (propName === "goal_value" && body[propName] === "") {
+          body.goal_value = 0;
+        } else if (body[propName] === "") {
           delete body[propName];
         }
       }
@@ -732,6 +834,27 @@ function* saveGoals() {
       let id = goals[i].id;
       yield writeAPI("PATCH", `${baseURL}/api/goals/${id}`, body);
     }
+  }
+}
+
+function* savePlan() {
+  const id = yield select(Selectors.getClientId);
+
+  let body = {
+    client: id,
+  };
+
+  for (let propName in body) {
+    if (body[propName] === "") {
+      delete body[propName];
+    }
+  }
+
+  let currentPlan = yield fetchPlan();
+
+  if (currentPlan.results.length === 0) {
+    let response = yield writeAPI("POST", `${baseURL}/api/plan`, body);
+    yield put(Actions.setPlanValue("id", response.id));
   }
 }
 

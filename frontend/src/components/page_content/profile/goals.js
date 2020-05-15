@@ -60,8 +60,8 @@ class Goals extends React.Component {
             label="Amount"
             name="amount"
             placeholder="Type in your goal amount"
-            min={0.0}
-            step={0.01}
+            min={0}
+            step={1}
             iconName="dollarsign"
             iconWidth={20}
             iconHeight={20}

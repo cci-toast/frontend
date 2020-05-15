@@ -99,12 +99,12 @@ class Family extends React.Component {
 
           <ToastInput
             type="number"
-            min={0.0}
+            min={0}
             label="Partner's Personal Annual Net Income"
             placeholder="Type in your partner's income"
             name="salary"
             iconName="dollarsign"
-            step={0.01}
+            step={1}
             iconWidth={20}
             iconHeight={20}
             readOnly={this.props.readOnly}

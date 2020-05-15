@@ -3,7 +3,11 @@ import Style from "style-it";
 
 import { connect } from "react-redux";
 
-import { getDebtMonthly, getSalaryAfterDebt } from "../../../redux/selectors";
+import {
+  getDebtMonthly,
+  getSalaryAfterDebt,
+  isOnTrackDebt,
+} from "../../../redux/selectors";
 
 import { numWithCommas, calcMonthlyValue } from "../../../utils/plan-utils";
 
@@ -31,12 +35,22 @@ class Debt extends React.Component {
     return `$${numWithCommas(this.props.debtMonthly)}`;
   }
 
+  getOnTrack() {
+    if (this.props.isOnTrackDebt === undefined) {
+      return "";
+    } else if (this.props.isOnTrackDebt) {
+      return "You are currently on track.";
+    } else {
+      return "You are currently not on track.";
+    }
+  }
+
   getCaption() {
     return `Given that your monthly income is $${numWithCommas(
       calcMonthlyValue(this.props.salaryAfterTax)
     )}, we recommend you put at least $${numWithCommas(
       this.props.debtMonthly
-    )} towards repaying debt for this month. You are currently on track.
+    )} towards repaying debt for this month. ${this.getOnTrack()}
     `;
   }
 
@@ -81,6 +95,7 @@ class Debt extends React.Component {
 const mapStateToProps = (state) => ({
   debtMonthly: getDebtMonthly(state),
   salaryAfterDebt: getSalaryAfterDebt(state),
+  isOnTrackDebt: isOnTrackDebt(state),
 });
 
 export default connect(mapStateToProps)(Debt);

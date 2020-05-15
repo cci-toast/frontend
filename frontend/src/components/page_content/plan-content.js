@@ -9,11 +9,7 @@ import ToastEmpty from "../toast/toast-empty";
 
 import { connect } from "react-redux";
 
-import {
-  getSalaryAfterTax,
-  getPartnerSalaries,
-  getAge,
-} from "../../redux/selectors";
+import { getTotalIncome } from "../../redux/selectors";
 import { resetStep } from "../../redux/actions";
 
 class PlanContent extends React.Component {
@@ -41,7 +37,6 @@ class PlanContent extends React.Component {
           <Retirement
             currentStep={this.props.currentStep}
             salaryAfterTax={this.props.salaryAfterTax}
-            age={this.props.age}
           />
           <Budgeting
             currentStep={this.props.currentStep}
@@ -70,9 +65,7 @@ class PlanContent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  salaryAfterTax: getSalaryAfterTax(state),
-  partnerSalaries: getPartnerSalaries(state),
-  age: getAge(state),
+  salaryAfterTax: getTotalIncome(state),
 });
 
 export default connect(mapStateToProps, { resetStep })(PlanContent);
