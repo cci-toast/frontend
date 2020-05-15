@@ -31,7 +31,11 @@ class Retirement extends React.Component {
   }
 
   getCaption() {
-    return `Given your age and personal annual net income is $${this.props.salaryAfterTax}, we recommend you set aside $261,000 for
+    return `Given your age and personal annual net income is $${numWithCommas(
+      this.props.salaryAfterTax
+    )}, we recommend you set aside $${numWithCommas(
+      this.props.retirementTargetSavings
+    )} for
     your retirement savings.`;
   }
 
