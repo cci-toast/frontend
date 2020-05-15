@@ -13,7 +13,14 @@ import {
   getAdvisorAddress,
 } from "../../redux/selectors";
 
+import { fetchAdvisorContact } from "../../redux/actions";
 class AdvisorContactContent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.props.fetchAdvisorContact();
+  }
+
   componenDidMount() {
     this.props.resetStep();
   }
@@ -81,4 +88,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   setAdvisorValue,
   resetStep,
+  fetchAdvisorContact,
 })(AdvisorContactContent);

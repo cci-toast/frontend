@@ -5,7 +5,7 @@ import * as Selectors from "../selectors";
 
 import { getStateCode } from "../../utils/select-utils";
 
-const baseURL = "https://toastbackend.herokuapp.com";
+const baseURL = "https://toastapi.herokuapp.com";
 
 function* fetchCities() {
   yield takeLatest("fetchCities", function* (action) {
@@ -155,6 +155,25 @@ function* fetchClients() {
     });
 
     yield put(Actions.setAdvisorValue("clients", clients));
+  });
+}
+
+function* fetchClientMatchedAdvisor() {
+  let id = yield select(Selectors.getClientId);
+  const response = yield readAPI(`${baseURL}/api/clients/${id}`);
+  let advisor = response.advisor;
+  return advisor;
+}
+
+function* fetchAdvisorContact() {
+  yield takeLatest("fetchAdvisorContact", function* (action) {
+    let advisor = yield fetchClientMatchedAdvisor();
+    const response = yield readAPI(`${baseURL}/api/advisors/${advisor}`);
+    yield put(Actions.setAdvisorValue("firstName", response.first_name));
+    yield put(Actions.setAdvisorValue("lastName", response.last_name));
+    yield put(Actions.setAdvisorValue("email", response.email));
+    yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
+    yield put(Actions.setAdvisorValue("address", response.address));
   });
 }
 
@@ -650,6 +669,7 @@ export default function* rootEffect() {
     fetchClientProfileId(),
     fetchClientProfileEmail(),
     fetchClients(),
+    fetchAdvisorContact(),
     authLoginAdvisor(),
     authLoginClient(),
     deletePartner(),
