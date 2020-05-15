@@ -11,7 +11,6 @@ import {
   calcSavings,
   calcFixedExpenses,
   calcSpending,
-  calcRetirementMonthly,
   numWithCommas,
 } from "./plan-utils";
 
@@ -161,12 +160,6 @@ test("calcFixedExpenses - multiply salary by 0.5 & divide by 12", () => {
 
 test("calcSpending - multiply salary by 0.3 & divide by 12", () => {
   expect(calcSpending(5000)).toBe(125);
-});
-
-// calcRetirementMonthly
-
-test("calcRetirementMonthly - divide monthly salary by years", () => {
-  expect(calcRetirementMonthly(5000, 2)).toBe(2500);
 });
 
 // numWithCommas

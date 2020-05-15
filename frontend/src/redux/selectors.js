@@ -11,8 +11,6 @@ import {
   calcSavings,
   calcFixedExpenses,
   calcSpending,
-  calcRetirementYears,
-  calcRetirementMonthly,
 } from "../utils/plan-utils";
 import { lookupUser } from "../utils/login-utils";
 import { filterClients } from "../utils/search-utils";
@@ -135,13 +133,6 @@ export const getRetirementMultiplier = createSelector(
 export const getRetirementTargetSavings = createSelector(
   [getSalaryAfterTax, getRetirementMultiplier],
   calcRetirement
-);
-
-export const getRetirementYears = createSelector([getAge], calcRetirementYears);
-
-export const getRetirementMonthly = createSelector(
-  [getMonthlySalaryAfterTax, getRetirementYears],
-  calcRetirementMonthly
 );
 
 // debt
