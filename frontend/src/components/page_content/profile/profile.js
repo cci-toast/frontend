@@ -168,7 +168,7 @@ class Profile extends React.Component {
           <div className="column">
             <ToastInput
               type="number"
-              min={0.0}
+              min={0}
               label="Personal Annual Net Income (After Taxes)"
               placeholder="Type in your income"
               value={this.props.salaryAfterTax}
@@ -177,7 +177,7 @@ class Profile extends React.Component {
               iconWidth={20}
               iconHeight={20}
               onChange={this.handleIncomeChange}
-              step={0.01}
+              step={1}
               readOnly={this.props.readOnly}
               helpText="Enter your personal annual net income. This is your income after taxes (take home pay)."
               required
@@ -195,8 +195,8 @@ class Profile extends React.Component {
                 label="Additional Income (Annual)"
                 name="additionalIncome"
                 placeholder="Type in your additional income"
-                min={0.0}
-                step={0.01}
+                min={0}
+                step={1}
                 iconName="dollarsign"
                 iconWidth={20}
                 iconHeight={20}
