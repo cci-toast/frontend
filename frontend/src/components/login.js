@@ -77,7 +77,8 @@ class Login extends React.Component {
 
     .toast {
       color: var(--toast-white);
-      font-family: Libra Baskerville;
+      margin-top: 1rem;
+      font-family: Cambria;
     }
 
     .tag-line {
