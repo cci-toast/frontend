@@ -42,6 +42,10 @@ class PageTemplate extends React.Component {
         return (
           <ToastPageNav hidden titlesList={this.props.factorsTitlesList} />
         );
+      case "actionitems":
+        return (
+          <ToastPageNav hidden titlesList={this.props.factorsTitlesList} />
+        );
       case "advisorcontact":
         return (
           <ToastPageNav hidden titlesList={this.props.factorsTitlesList} />

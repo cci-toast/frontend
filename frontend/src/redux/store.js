@@ -18,6 +18,7 @@ const persistConfig = {
     "goalsReducer",
     "advisorReducer",
     "planReducer",
+    "actionItemsReducer",
   ],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);

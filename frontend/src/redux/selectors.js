@@ -130,6 +130,9 @@ export const getSpending = (state) => state.planReducer.budgetSpending;
 export const getSpendingMultiplier = (state) =>
   state.planReducer.budgetSpendingFactor;
 
+// action items
+export const getActionItems = (state) => state.actionItemsReducer.actionItems;
+
 // advisor
 export const getAdvisorId = (state) => state.advisorReducer.id;
 export const getAdvisorFirstName = (state) => state.advisorReducer.firstName;

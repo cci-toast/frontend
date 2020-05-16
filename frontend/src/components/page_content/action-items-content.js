@@ -1,17 +1,32 @@
 import React from "react";
 import Style from "style-it";
 
-import EmergencySavings from "../page_content/action-items/emergency-savings";
-import Protection from "../page_content/action-items/protection";
-import Debt from "../page_content/action-items/debt";
-import Retirement from "../page_content/action-items/retirement";
-import Budgeting from "../page_content/action-items/budgeting";
 import ToastEmpty from "../toast/toast-empty";
+import ToastCheckbox from "../toast/toast-checkbox";
+import ToastDuplicateInputButton from "../toast/toast-duplicate-input-button";
+import ToastInput from "../toast/toast-input";
+import ToastToggle from "../toast/toast-toggle";
 
 import { connect } from "react-redux";
-import { resetStep } from "../../redux/actions";
+import {
+  resetStep,
+  addActionItem,
+  deleteActionItem,
+  setActionItemListValue,
+  toggleActionItem,
+} from "../../redux/actions";
+import { getActionItems } from "../../redux/selectors";
 
 class ActionItemsContent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.setActiveToggle = this.setActiveToggle.bind(this);
+    this.onChange = this.onChange.bind(this);
+
+    this.actionItems = React.createRef();
+    this.advisorEdit = React.createRef();
+  }
+
   componentDidMount() {
     this.props.resetStep();
   }
@@ -20,32 +35,29 @@ class ActionItemsContent extends React.Component {
     return this.props.user === "advisor";
   }
 
-  getContent() {
-    if (this.props.showContent) {
-      return (
-        <div className="action-items">
-          <EmergencySavings
-            currentStep={this.props.currentStep}
-            readOnly={this.isAdvisor()}
-          />
-          <Protection
-            currentStep={this.props.currentStep}
-            readOnly={this.isAdvisor()}
-          />
-          <Debt
-            currentStep={this.props.currentStep}
-            readOnly={this.isAdvisor()}
-          />
-          <Retirement
-            currentStep={this.props.currentStep}
-            readOnly={this.isAdvisor()}
-          />
-          <Budgeting
-            currentStep={this.props.currentStep}
-            readOnly={this.isAdvisor()}
-          />
-        </div>
-      );
+  onChange(event) {
+    const { name } = event.target;
+    this.props.toggleActionItem(name);
+  }
+
+  getActionItems() {
+    if (this.props.actionItems.length !== 0) {
+      return this.props.actionItems.map((actionItem) => {
+        if (actionItem.description !== "") {
+          return (
+            <ToastCheckbox
+              name={this.props.actionItems.indexOf(actionItem)}
+              text={actionItem.description}
+              readOnly={this.isAdvisor()}
+              key={actionItem.description}
+              checked={actionItem.completed}
+              onChange={this.onChange}
+            />
+          );
+        } else {
+          return "";
+        }
+      });
     } else {
       return (
         <ToastEmpty
@@ -54,6 +66,65 @@ class ActionItemsContent extends React.Component {
         />
       );
     }
+  }
+
+  setActiveToggle(active) {
+    if (
+      active === "View" &&
+      this.advisorEdit.current !== null &&
+      this.actionItems !== null
+    ) {
+      this.advisorEdit.current.classList.add("hidden");
+      this.actionItems.current.classList.remove("hidden");
+    } else if (
+      active === "Edit" &&
+      this.advisorEdit.current !== null &&
+      this.actionItems !== null
+    ) {
+      this.advisorEdit.current.classList.remove("hidden");
+      this.actionItems.current.classList.add("hidden");
+    }
+  }
+
+  getContent() {
+    return (
+      <div className="wrap">
+        <div className={this.isAdvisor() ? "" : "hidden"}>
+          <div className="toggle">
+            <ToastToggle
+              active="View"
+              inactive="Edit"
+              actionItems
+              activeLabel={this.setActiveToggle}
+            />
+          </div>
+
+          <div ref={this.advisorEdit} className="inputs hidden">
+            <ToastDuplicateInputButton
+              label="Add Action Item"
+              fields={{ id: "", description: "", completed: false }}
+              value={this.props.actionItems}
+              onChange={this.props.setActionItemListValue}
+              onDuplicate={this.props.addActionItem}
+              onDelete={this.props.deleteActionItem}
+            >
+              <ToastInput
+                type="text"
+                label="Action Item"
+                name="description"
+                placeholder="Type in an action item"
+                readOnly={this.props.readOnly}
+                helpText="Enter an action item for your client."
+              />
+            </ToastDuplicateInputButton>
+          </div>
+        </div>
+
+        <div className="action-items" ref={this.actionItems}>
+          {this.getActionItems()}
+        </div>
+      </div>
+    );
   }
 
   getCaption() {
@@ -66,9 +137,24 @@ class ActionItemsContent extends React.Component {
 
   render() {
     const styles = `
+    .wrap {
+      height: calc(90vh - 10rem);
+      overflow: auto;
+    }
+
     .action-items {
       display: flex;
       flex-direction: column;
+    }
+
+    .toggle {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+    }
+
+    .hidden {
+      display: none;
     }
     `;
 
@@ -76,4 +162,14 @@ class ActionItemsContent extends React.Component {
   }
 }
 
-export default connect(null, { resetStep })(ActionItemsContent);
+const mapStateToProps = (state) => ({
+  actionItems: getActionItems(state),
+});
+
+export default connect(mapStateToProps, {
+  resetStep,
+  addActionItem,
+  deleteActionItem,
+  setActionItemListValue,
+  toggleActionItem,
+})(ActionItemsContent);

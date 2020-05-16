@@ -117,6 +117,7 @@ function* authLoginClient() {
     yield put(Actions.resetGoals());
     yield put(Actions.resetAdvisor());
     yield put(Actions.resetPlan());
+    yield put(Actions.resetActionItems());
 
     yield put(Actions.fetchClientProfileEmail());
   });
@@ -140,6 +141,7 @@ function* fetchClients() {
     yield put(Actions.resetGoals());
     yield put(Actions.resetAdvisor());
     yield put(Actions.resetPlan());
+    yield put(Actions.resetActionItems());
 
     let advisor = yield fetchAdvisorEmail();
 
@@ -236,6 +238,7 @@ function* fetchClientProfileEmail() {
       yield fetchChildren();
       yield fetchGoals();
       yield fetchPlan();
+      yield fetchActionItems();
     }
     yield delay(1000);
 
@@ -296,6 +299,7 @@ function* fetchClientProfileId() {
     yield fetchChildren();
     yield fetchGoals();
     yield fetchPlan();
+    yield fetchActionItems();
   });
 }
 
@@ -504,6 +508,35 @@ function* fetchPlan() {
   return response;
 }
 
+function* fetchActionItems() {
+  const id = yield select(Selectors.getClientId);
+  let response = yield readAPI(`${baseURL}/api/action_items?client=${id}`);
+
+  let actionItems = [];
+
+  if (response.results.length !== 0) {
+    response.results.map((actionItem) =>
+      actionItems.push({
+        description: actionItem.description,
+        completed: actionItem.completed,
+        id: actionItem.id,
+      })
+    );
+
+    for (let i = 0; i < actionItems.length; i++) {
+      for (let propName in actionItems[i]) {
+        if (actionItems[i][propName] === "") {
+          delete actionItems[i][propName];
+        }
+      }
+    }
+
+    yield put(Actions.setActionItems(actionItems));
+  }
+
+  return response;
+}
+
 function* saveClientProfile() {
   yield takeLatest(
     ["incrementStep", "decrementStep", "setStep", "resetStep"],
@@ -566,6 +599,7 @@ function* saveClientProfile() {
             yield put(Actions.toggleShowPlanReady());
             yield savePlan();
             yield fetchPlan();
+            yield fetchActionItems();
           }
         } else {
           if (id !== "") {
@@ -577,11 +611,21 @@ function* saveClientProfile() {
             yield saveGoals();
             yield saveDebt();
             yield savePlan();
+            yield saveActionItems();
 
             yield fetchPlan();
           }
         }
       }
+    }
+  );
+}
+
+function* saveActionItemsAdvisor() {
+  yield takeLatest(
+    ["incrementStep", "decrementStep", "setStep", "resetStep"],
+    function* (action) {
+      yield saveActionItems();
     }
   );
 }
@@ -858,6 +902,62 @@ function* savePlan() {
   }
 }
 
+function* deleteActionItem() {
+  yield takeLatest(["deleteActionItem"], function* (action) {
+    const authKey = yield select(Selectors.getAuthKey);
+    yield fetch(`${baseURL}/api/action_items/${action.payload.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${authKey}`,
+        "Content-Type": "application/json",
+      },
+    });
+  });
+}
+
+function* saveActionItems() {
+  const id = yield select(Selectors.getClientId);
+  const actionItems = yield select(Selectors.getActionItems);
+
+  for (let i = 0; i < actionItems.length; i++) {
+    if (actionItems[i].id === "") {
+      let body = {
+        client: id,
+        description: actionItems[i].description,
+        completed: actionItems[i].completed,
+      };
+
+      for (let propName in body) {
+        if (body[propName] === "") {
+          delete body[propName];
+        }
+      }
+
+      let response = yield writeAPI(
+        "POST",
+        `${baseURL}/api/action_items`,
+        body
+      );
+
+      yield put(Actions.setActionItemListValue(i, "id", response.id));
+    } else {
+      let body = {
+        description: actionItems[i].description,
+        completed: actionItems[i].completed,
+      };
+
+      for (let propName in body) {
+        if (body[propName] === "") {
+          delete body[propName];
+        }
+      }
+
+      let id = actionItems[i].id;
+      yield writeAPI("PATCH", `${baseURL}/api/action_items/${id}`, body);
+    }
+  }
+}
+
 export default function* rootEffect() {
   yield all([
     fetchCities(),
@@ -871,5 +971,7 @@ export default function* rootEffect() {
     deletePartner(),
     deleteChild(),
     deleteGoal(),
+    deleteActionItem(),
+    saveActionItemsAdvisor(),
   ]);
 }
