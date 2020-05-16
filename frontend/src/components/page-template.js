@@ -5,6 +5,7 @@ import MainHeader from "./main-header";
 import MainNav from "./main-nav";
 import AdvisorContactContent from "./page_content/advisor-contact-content";
 import ClientsContent from "./page_content/clients-content";
+import ActionItemsContent from "./page_content/action-items-content";
 import ToastCard from "./toast/toast-card";
 import ToastPageNav from "./toast/toast-page-nav";
 import ToastHelp from "./toast/toast-help";
@@ -27,6 +28,8 @@ class PageTemplate extends React.Component {
         return <AdvisorContactContent {...this.props} />;
       case "clients":
         return <ClientsContent {...this.props} />;
+      case "actionitems":
+        return <ActionItemsContent {...this.props} />;
       default:
         return <PageContentTemplate {...this.props} />;
     }
