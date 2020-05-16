@@ -29,7 +29,7 @@ class Finances extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   getClasses() {
-    let classes = [""];
+    let classes = ["overflow"];
 
     if (this.props.currentStep !== 1) {
       classes.push("hidden");
@@ -47,6 +47,12 @@ class Finances extends React.Component {
     const styles = `
     .hidden {
       display: none;
+    }
+
+    .overflow {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: calc(90vh - 10.5rem);
     }
 
     hr {

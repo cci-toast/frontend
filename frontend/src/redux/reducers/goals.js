@@ -34,7 +34,12 @@ export default function (state = initialState, action) {
         goals: tempGoals,
       };
     }
-
+    case "resetGoals": {
+      return {
+        ...state,
+        goals: [],
+      };
+    }
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import Style from "style-it";
 
-import { PieChart, Pie, Legend } from "recharts";
+import { PieChart, Pie, Legend, Surface } from "recharts";
 
 import { numWithCommas } from "../../utils/plan-utils";
 
@@ -13,10 +13,48 @@ class ToastPieChart extends React.Component {
   }
 
   getLabel(e) {
+    let xValue = e.x;
+    if (e.x > 180) {
+      xValue = e.x + 15;
+    } else if (e.x < 180) {
+      xValue = e.x - 15;
+    }
     return (
-      <text x={e.x - 1.5} y={e.y} textAnchor="middle">
+      <text x={xValue} y={e.y} textAnchor="middle">
         {`$${numWithCommas(e.value)}`}
       </text>
+    );
+  }
+
+  renderCusomizedLegend(props) {
+    return (
+      <div className="customized-legend">
+        {props.payload.map((entry) => {
+          const { name, fill } = entry.payload;
+          return (
+            <span className="legend-item" key={`${name}-1`}>
+              <Surface
+                width={40}
+                height={25}
+                viewBox="0 0 25 40"
+                key={`${name}-2`}
+              >
+                <rect
+                  x="0"
+                  width="40"
+                  height="25"
+                  rx="5"
+                  fill={fill}
+                  key={`${name}-3`}
+                />
+              </Surface>
+              <span className="legend-label" key={`${name}-4`}>
+                {name}
+              </span>
+            </span>
+          );
+        })}
+      </div>
     );
   }
 
@@ -48,10 +86,9 @@ class ToastPieChart extends React.Component {
     
         .top-right {
             align-self: flex-end;
-            padding-bottom: 4rem;
             display: flex;
             align-items: flex-end;
-            padding-left:20rem;
+            padding-left: 20rem;
         }
 
         .subheader {
@@ -61,15 +98,32 @@ class ToastPieChart extends React.Component {
 
         .recharts-sector{
             stroke: none;
+            filter: url(#shadow);
         }
 
         .recharts-pie-label-line{
             d: none;
         }
 
-        .recharts-legend-wrapper{
-            padding-left: 20rem;
-            
+        .customized-legend {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.5rem;
+          width: 16rem;
+        }
+
+        .legend-label {
+          margin-left: 0.5rem;
+        }
+
+        .row {
+          width: 100%;
+          padding-bottom: 1rem;
         }
         `;
     return Style.it(
@@ -88,6 +142,18 @@ class ToastPieChart extends React.Component {
               stopOpacity="1"
             />
           </linearGradient>
+
+          <filter id="shadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+            <feOffset dx="4" dy="4" />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="0.2" />
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </svg>
 
         <div className="chart">
@@ -97,7 +163,7 @@ class ToastPieChart extends React.Component {
           </div>
 
           <PieChart
-            width={document.documentElement.clientWidth * 0.35}
+            width={document.documentElement.clientWidth * 0.4}
             height={document.documentElement.clientHeight * 0.4}
           >
             <Pie
@@ -108,7 +174,12 @@ class ToastPieChart extends React.Component {
               outerRadius={150}
               label={this.getLabel}
             />
-            <Legend layout="vertical" verticalAlign="bottom" align="right" />
+            <Legend
+              layout="vertical"
+              verticalAlign="bottom"
+              align="right"
+              content={this.renderCusomizedLegend}
+            />
           </PieChart>
         </div>
 

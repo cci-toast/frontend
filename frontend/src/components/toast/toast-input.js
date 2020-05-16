@@ -158,8 +158,8 @@ class ToastInput extends React.Component {
       display: flex;
       border-radius: 2rem;
       background-color: ${this.backgroundColor};
-      margin: 0.5rem 2rem 1.5rem 0;
-      width: 24.5rem;
+      margin: 0.5rem 2rem 1.5rem 0.25rem;
+      width: 24rem;
     }
 
     .input-group-search {

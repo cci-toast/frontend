@@ -179,6 +179,10 @@ export const resetPlan = () => ({
   type: "resetPlan",
 });
 
+export const resetConfigs = () => ({
+  type: "resetConfigs",
+});
+
 // action items
 
 export const setActionItems = (actionItems) => ({

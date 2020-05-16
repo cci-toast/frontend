@@ -21,12 +21,12 @@ class Debt extends React.Component {
 
     this.data = [
       {
-        name: "Salary After Debt",
+        name: "Remaining Monthly Income",
         value: this.props.salaryAfterDebt,
         fill: "var(--toast-neutral-3)",
       },
       {
-        name: "Max Savings",
+        name: "Target Monthly Payment",
         value: this.props.debtMonthly,
         fill: "url(#gradient)",
       },

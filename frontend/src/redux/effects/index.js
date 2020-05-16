@@ -90,6 +90,7 @@ function* authLoginAdvisor() {
 
     yield put(Actions.setAuthKey(response.key));
     yield fetchAdvisorEmail();
+    yield put(Actions.resetConfigs());
     yield put((document.location.href = "/clients"));
   });
 }
@@ -164,20 +165,25 @@ function* fetchClients() {
 
 function* fetchClientMatchedAdvisor() {
   let id = yield select(Selectors.getClientId);
-  const response = yield readAPI(`${baseURL}/api/clients/${id}`);
-  let advisor = response.advisor;
+  let advisor = null;
+  if (id !== "") {
+    const response = yield readAPI(`${baseURL}/api/clients/${id}`);
+    advisor = response.advisor;
+  }
   return advisor;
 }
 
 function* fetchAdvisorContact() {
   yield takeLatest("fetchAdvisorContact", function* (action) {
     let advisor = yield fetchClientMatchedAdvisor();
-    const response = yield readAPI(`${baseURL}/api/advisors/${advisor}`);
-    yield put(Actions.setAdvisorValue("firstName", response.first_name));
-    yield put(Actions.setAdvisorValue("lastName", response.last_name));
-    yield put(Actions.setAdvisorValue("email", response.email));
-    yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
-    yield put(Actions.setAdvisorValue("address", response.address));
+    if (advisor !== null) {
+      const response = yield readAPI(`${baseURL}/api/advisors/${advisor}`);
+      yield put(Actions.setAdvisorValue("firstName", response.first_name));
+      yield put(Actions.setAdvisorValue("lastName", response.last_name));
+      yield put(Actions.setAdvisorValue("email", response.email));
+      yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
+      yield put(Actions.setAdvisorValue("address", response.address));
+    }
   });
 }
 
@@ -237,12 +243,20 @@ function* fetchClientProfileEmail() {
       yield fetchPartners();
       yield fetchChildren();
       yield fetchGoals();
-      yield fetchPlan();
+      let plan = yield fetchPlan();
       yield fetchActionItems();
-    }
-    yield delay(1000);
 
-    yield put((document.location.href = "/profile"));
+      if (plan.results.length !== 0) {
+        yield delay(1000);
+        yield put((document.location.href = "/plan"));
+      } else {
+        yield delay(1000);
+        yield put((document.location.href = "/profile"));
+      }
+    } else {
+      yield delay(1000);
+      yield put((document.location.href = "/profile"));
+    }
   });
 }
 
@@ -535,6 +549,74 @@ function* fetchActionItems() {
   }
 
   return response;
+}
+function* fetchPlanId() {
+  const id = yield select(Selectors.getClientId);
+  let response = yield readAPI(`${baseURL}/api/plan?client=${id}`);
+
+  if (response.results.length !== 0) {
+    return response.results[0].id;
+  } else {
+    return "";
+  }
+}
+
+function* saveFactors() {
+  yield takeLatest(
+    ["incrementStep", "decrementStep", "setStep", "resetStep"],
+    function* (action) {
+      let clients = yield select(Selectors.getClients);
+      let clientIds = clients.map((client) => client.id);
+
+      for (let i = 0; i < clientIds.length; i++) {
+        let planId = yield fetchPlanId();
+
+        if (planId !== "") {
+          let emergencySavingsFactorUpper = yield select(
+            Selectors.getSavingsFactorUpperBound
+          );
+          let emergencySavingsFactorLower = yield select(
+            Selectors.getSavingsFactorLowerBound
+          );
+          let budgetSavingsFactor = yield select(
+            Selectors.getSavingsMultiplier
+          );
+          let budgetFixedExpensesFactor = yield select(
+            Selectors.getFixedExpensesMultiplier
+          );
+          let budgetSpendingFactor = yield select(
+            Selectors.getSpendingMultiplier
+          );
+          let debtRepaymentFactor = yield select(Selectors.getDebtMultiplier);
+          let retirementFactor = yield select(
+            Selectors.getRetirementMultiplier
+          );
+          let protectionFactor = yield select(
+            Selectors.getProtectionMultiplier
+          );
+
+          let body = {
+            emergency_savings_factor_upper: emergencySavingsFactorUpper,
+            emergency_savings_factor_lower: emergencySavingsFactorLower,
+            budget_savings_factor: budgetSavingsFactor,
+            budget_fixed_expenses_factor: budgetFixedExpensesFactor,
+            budget_spending_factor: budgetSpendingFactor,
+            debt_repayment_factor: debtRepaymentFactor,
+            retirement_factor: retirementFactor,
+            protection_factor: protectionFactor,
+          };
+
+          for (let propName in body) {
+            if (body[propName] === "") {
+              delete body[propName];
+            }
+          }
+
+          yield writeAPI("PATCH", `${baseURL}/api/plan/${planId}`, body);
+        }
+      }
+    }
+  );
 }
 
 function* saveClientProfile() {
@@ -973,5 +1055,6 @@ export default function* rootEffect() {
     deleteGoal(),
     deleteActionItem(),
     saveActionItemsAdvisor(),
+    saveFactors(),
   ]);
 }

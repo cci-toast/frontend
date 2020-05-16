@@ -52,7 +52,7 @@ class Profile extends React.Component {
   }
 
   getClasses() {
-    let classes = [""];
+    let classes = ["overflow"];
 
     if (this.props.currentStep !== 0) {
       classes.push("hidden");
@@ -80,6 +80,12 @@ class Profile extends React.Component {
 
     .row {
       align-items: center;
+    }
+
+    .overflow {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: calc(90vh - 10.5rem);
     }
     `;
 

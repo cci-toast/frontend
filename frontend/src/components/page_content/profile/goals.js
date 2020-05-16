@@ -15,7 +15,7 @@ import { goalOptions } from "../../../utils/select-utils";
 
 class Goals extends React.Component {
   getClasses() {
-    let classes = [""];
+    let classes = ["overflow"];
 
     if (this.props.currentStep !== 3) {
       classes.push("hidden");
@@ -28,6 +28,11 @@ class Goals extends React.Component {
     const styles = `
     .hidden {
         display: none;
+    }
+    .overflow {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: calc(90vh - 10.5rem)
     }
     `;
 
@@ -42,7 +47,6 @@ class Goals extends React.Component {
           onDuplicate={this.props.addGoal}
           onDelete={this.props.deleteGoal}
           readOnly={this.props.readOnly}
-          maxItems={3}
         >
           <ToastSelect
             options={goalOptions}
