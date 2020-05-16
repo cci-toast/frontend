@@ -19,6 +19,7 @@ import {
   getLastName,
   getProfileTitlesList,
   getFactorsTitlesList,
+  getClientId,
 } from "../redux/selectors";
 
 class PageTemplate extends React.Component {
@@ -52,6 +53,13 @@ class PageTemplate extends React.Component {
       case "advisorcontact":
         return (
           <ToastPageNav hidden titlesList={this.props.factorsTitlesList} />
+        );
+      case "plan":
+        return (
+          <ToastPageNav
+            titlesList={this.props.factorsTitlesList}
+            hidden={this.props.clientId === ""}
+          />
         );
       default:
         return <ToastPageNav titlesList={this.props.factorsTitlesList} />;
@@ -169,6 +177,7 @@ const mapStateToProps = (state) => ({
   lastName: getLastName(state),
   profileTitlesList: getProfileTitlesList(state),
   factorsTitlesList: getFactorsTitlesList(state),
+  clientId: getClientId(state),
 });
 
 export default connect(mapStateToProps)(PageTemplate);
