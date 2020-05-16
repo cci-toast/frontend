@@ -806,7 +806,7 @@ function* savePartners() {
   const partners = yield select(Selectors.getPartners);
 
   for (let i = 0; i < partners.length; i++) {
-    if (partners[i].id === undefined) {
+    if (partners[i].id === undefined || partners[i].id === "") {
       let body = {
         client: id,
         first_name: partners[i].firstName,
@@ -826,8 +826,10 @@ function* savePartners() {
         }
       }
 
-      let response = yield writeAPI("POST", `${baseURL}/api/partner`, body);
-      yield put(Actions.setPartnerListValue(i, "id", response.id));
+      if (body.firstName !== undefined) {
+        let response = yield writeAPI("POST", `${baseURL}/api/partner`, body);
+        yield put(Actions.setPartnerListValue(i, "id", response.id));
+      }
     } else {
       let body = {
         first_name: partners[i].firstName,
@@ -871,7 +873,7 @@ function* saveChildren() {
   const children = yield select(Selectors.getChildren);
 
   for (let i = 0; i < children.length; i++) {
-    if (children[i].id === undefined) {
+    if (children[i].id === undefined || children[i].id === "") {
       let body = {
         client: id,
         first_name: children[i].firstName,
@@ -885,8 +887,10 @@ function* saveChildren() {
         }
       }
 
-      let response = yield writeAPI("POST", `${baseURL}/api/children`, body);
-      yield put(Actions.setChildListValue(i, "id", response.id));
+      if (body.firstName !== undefined) {
+        let response = yield writeAPI("POST", `${baseURL}/api/children`, body);
+        yield put(Actions.setChildListValue(i, "id", response.id));
+      }
     } else {
       let body = {
         first_name: children[i].firstName,
@@ -924,7 +928,7 @@ function* saveGoals() {
   const goals = yield select(Selectors.getGoals);
 
   for (let i = 0; i < goals.length; i++) {
-    if (goals[i].id === undefined) {
+    if (goals[i].id === undefined || goals[i].id === "") {
       let body = {
         client: id,
         goal_type: goals[i].goal,
@@ -940,8 +944,10 @@ function* saveGoals() {
         }
       }
 
-      let response = yield writeAPI("POST", `${baseURL}/api/goals`, body);
-      yield put(Actions.setGoalListValue(i, "id", response.id));
+      if (body.goal_type !== undefined) {
+        let response = yield writeAPI("POST", `${baseURL}/api/goals`, body);
+        yield put(Actions.setGoalListValue(i, "id", response.id));
+      }
     } else {
       let body = {
         goal_type: goals[i].goal,
