@@ -31,7 +31,7 @@ class Goals extends React.Component {
     }
     .overflow {
       overflow-y: auto;
-      height: calc(72vh - 5.5rem);
+      height: calc(75vh - 5.5rem);
     }
     `;
 
