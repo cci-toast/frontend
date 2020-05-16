@@ -15,7 +15,7 @@ import { goalOptions } from "../../../utils/select-utils";
 
 class Goals extends React.Component {
   getClasses() {
-    let classes = ["overflow "];
+    let classes = ["overflow"];
 
     if (this.props.currentStep !== 3) {
       classes.push("hidden");
