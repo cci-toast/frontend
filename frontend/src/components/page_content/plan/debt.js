@@ -8,6 +8,7 @@ import {
   getSalaryAfterDebt,
   isOnTrackDebt,
   getLoanDebt,
+  getDebtMultiplier,
 } from "../../../redux/selectors";
 
 import { numWithCommas, calcMonthlyValue } from "../../../utils/plan-utils";
@@ -42,7 +43,7 @@ class Debt extends React.Component {
       },
       {
         name: "Current Savings",
-        value: parseFloat(this.props.loanDebt || "0"),
+        value: this.props.loanDebt || 0,
         fill: "url(#gradient)",
       },
     ];
@@ -59,15 +60,15 @@ class Debt extends React.Component {
   }
 
   getOnTrack() {
-    //let isOntrack = this.props.isOnTrackDebt; // Use backend
-    let isOntrack =
-      parseFloat(this.props.loanDebt || "0") <= this.props.debtMonthly; // Use calculated
+    let isOntrack = this.props.loanDebt <= this.props.debtMonthly;
     if (isOntrack === undefined) {
       return "";
     } else if (isOntrack) {
       return "You are currently on track.";
     } else {
-      return "You are currently not on track since you plan to repay debt that is more than 36% your monthly income.";
+      return `You are currently not on track since you plan to repay debt that is more than ${
+        this.props.debtMultiplier * 100
+      }% your monthly income.`;
     }
   }
 
@@ -151,6 +152,7 @@ const mapStateToProps = (state) => ({
   salaryAfterDebt: getSalaryAfterDebt(state),
   isOnTrackDebt: isOnTrackDebt(state),
   loanDebt: getLoanDebt(state),
+  debtMultiplier: getDebtMultiplier(state),
 });
 
 export default connect(mapStateToProps)(Debt);

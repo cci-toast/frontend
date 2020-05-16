@@ -768,7 +768,7 @@ function* saveDebt() {
 
   let body = {
     client: id,
-    debt_monthly_amount: loanDebt,
+    debt_monthly_amount: Number(loanDebt),
   };
 
   for (let propName in body) {
