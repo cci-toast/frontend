@@ -28,19 +28,44 @@ class MainHeader extends React.Component {
   render() {
     const styles = `
     .wrapper {
-       display: flex;
-       justify-content: space-between;
-       align-items: center;
-       height: 10vh;
-       width: calc(100vw - 13rem - 8rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 10vh;
+      width: calc(100vw - 13rem - 8rem);
+    }
+
+    .wrapper-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .autosave {
+      font-style: italic;
+      color: var(--toast-neutral-1);
+      align-self: flex-end;
+      margin: 0 5rem 0.5rem 0;
+      font-size: 0.875rem;
+    }
+    
+    .hide-autosave {
+      visibility: hidden;
     }
     `;
 
     return Style.it(
       `${styles}`,
       <div className="wrapper">
-        {this.getLeftSide()}
-        {this.getRightSide()}
+        <div className="wrapper-top">
+          {this.getLeftSide()}
+          {this.getRightSide()}
+        </div>
+        <div
+          className={this.props.autoSaveHeader ? "autosave" : "hide-autosave"}
+        >
+          Your progress is autosaved
+        </div>
       </div>
     );
   }

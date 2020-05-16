@@ -25,8 +25,11 @@ class ClientNav extends React.Component {
 
   render() {
     const styles = `
-    .wrapper {
+    .wrap {
        width: 30rem;
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
     }
 
     .link:focus {
@@ -36,7 +39,7 @@ class ClientNav extends React.Component {
 
     return Style.it(
       `${styles}`,
-      <div className="wrapper">
+      <div className="wrap">
         {this.getButton("profile", "user", "profile")}
         {this.getButton("plan", "barchart", "plan")}
         {this.getButton("action items", "checkcircle", "actionitems")}
