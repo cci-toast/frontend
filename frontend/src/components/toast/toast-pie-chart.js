@@ -4,7 +4,6 @@ import Style from "style-it";
 import { PieChart, Pie, Legend } from "recharts";
 
 import { numWithCommas } from "../../utils/plan-utils";
-import ToastToggle from "./toast-toggle";
 
 class ToastPieChart extends React.Component {
   constructor(props) {
