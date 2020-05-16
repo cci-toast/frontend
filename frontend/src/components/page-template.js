@@ -74,7 +74,9 @@ class PageTemplate extends React.Component {
         case "profile":
           return (
             <MainHeader
-              header={`${this.props.firstName} ${this.props.middleName} ${this.props.lastName}'s Profile`}
+              header={`${this.props.firstName} ${this.props.middleName || ""} ${
+                this.props.lastName
+              }'s Profile`}
               leftside="header"
               rightside="nav"
             />
