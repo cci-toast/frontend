@@ -90,6 +90,7 @@ function* authLoginAdvisor() {
 
     yield put(Actions.setAuthKey(response.key));
     yield fetchAdvisorEmail();
+    yield put(Actions.resetConfigs());
     yield put((document.location.href = "/clients"));
   });
 }
@@ -549,6 +550,74 @@ function* fetchActionItems() {
 
   return response;
 }
+function* fetchPlanId() {
+  const id = yield select(Selectors.getClientId);
+  let response = yield readAPI(`${baseURL}/api/plan?client=${id}`);
+
+  if (response.results.length !== 0) {
+    return response.results[0].id;
+  } else {
+    return "";
+  }
+}
+
+function* saveFactors() {
+  yield takeLatest(
+    ["incrementStep", "decrementStep", "setStep", "resetStep"],
+    function* (action) {
+      let clients = yield select(Selectors.getClients);
+      let clientIds = clients.map((client) => client.id);
+
+      for (let i = 0; i < clientIds.length; i++) {
+        let planId = yield fetchPlanId();
+
+        if (planId !== "") {
+          let emergencySavingsFactorUpper = yield select(
+            Selectors.getSavingsFactorUpperBound
+          );
+          let emergencySavingsFactorLower = yield select(
+            Selectors.getSavingsFactorLowerBound
+          );
+          let budgetSavingsFactor = yield select(
+            Selectors.getSavingsMultiplier
+          );
+          let budgetFixedExpensesFactor = yield select(
+            Selectors.getFixedExpensesMultiplier
+          );
+          let budgetSpendingFactor = yield select(
+            Selectors.getSpendingMultiplier
+          );
+          let debtRepaymentFactor = yield select(Selectors.getDebtMultiplier);
+          let retirementFactor = yield select(
+            Selectors.getRetirementMultiplier
+          );
+          let protectionFactor = yield select(
+            Selectors.getProtectionMultiplier
+          );
+
+          let body = {
+            emergency_savings_factor_upper: emergencySavingsFactorUpper,
+            emergency_savings_factor_lower: emergencySavingsFactorLower,
+            budget_savings_factor: budgetSavingsFactor,
+            budget_fixed_expenses_factor: budgetFixedExpensesFactor,
+            budget_spending_factor: budgetSpendingFactor,
+            debt_repayment_factor: debtRepaymentFactor,
+            retirement_factor: retirementFactor,
+            protection_factor: protectionFactor,
+          };
+
+          for (let propName in body) {
+            if (body[propName] === "") {
+              delete body[propName];
+            }
+          }
+
+          yield writeAPI("PATCH", `${baseURL}/api/plan/${planId}`, body);
+        }
+      }
+    }
+  );
+}
 
 function* saveClientProfile() {
   yield takeLatest(
@@ -986,5 +1055,6 @@ export default function* rootEffect() {
     deleteGoal(),
     deleteActionItem(),
     saveActionItemsAdvisor(),
+    saveFactors(),
   ]);
 }
