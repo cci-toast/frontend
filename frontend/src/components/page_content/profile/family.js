@@ -48,6 +48,7 @@ class Family extends React.Component {
 
     .overflow {
       overflow-y: auto;
+      overflow-x: hidden;
       height: calc(90vh - 10.5rem);
     }
     `;
