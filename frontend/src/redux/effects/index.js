@@ -237,12 +237,20 @@ function* fetchClientProfileEmail() {
       yield fetchPartners();
       yield fetchChildren();
       yield fetchGoals();
-      yield fetchPlan();
+      let plan = yield fetchPlan();
       yield fetchActionItems();
-    }
-    yield delay(1000);
 
-    yield put((document.location.href = "/profile"));
+      if (plan.results.length !== 0) {
+        yield delay(1000);
+        yield put((document.location.href = "/plan"));
+      } else {
+        yield delay(1000);
+        yield put((document.location.href = "/profile"));
+      }
+    } else {
+      yield delay(1000);
+      yield put((document.location.href = "/profile"));
+    }
   });
 }
 
