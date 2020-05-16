@@ -18,6 +18,17 @@ class ToastDuplicateInputButton extends React.Component {
     }
   }
 
+  // Duplicates the input.  If maxItems is set and it's reached the "max" then it will stop duplicating.
+  duplicateInput() {
+    if (this.props.maxItems && this.props.maxItems <= this.props.value.length) {
+      return;
+    }
+    if (this.props.onDuplicate) {
+      this.props.onDuplicate(this.props.fields);
+    }
+  }
+
+  // Delete confirmation box for deleting items.  If "Ok" is clicked then it will delete the input group.  Clicking "Cancel" will keep it as is.
   deleteSelection(i, id) {
     if (
       window.confirm("Are you sure you want to delete this item?") &&
@@ -28,6 +39,18 @@ class ToastDuplicateInputButton extends React.Component {
     }
   }
 
+  // Classes for the delete button.  Hides the button if it is the advisor portal.
+  getDeleteButtonClasses() {
+    let classes = ["wrapper"];
+
+    if (this.props.readOnly) {
+      classes.push("hide-btn");
+    }
+
+    return classes.join(" ");
+  }
+
+  // Classes for the duplicate button.  Hides it is it's readonly or if maxItems is set.
   getClasses() {
     let classes = [];
     if (
@@ -41,23 +64,17 @@ class ToastDuplicateInputButton extends React.Component {
     return classes.join(" ");
   }
 
-  duplicateInput() {
-    if (this.props.maxItems && this.props.maxItems <= this.props.value.length) {
-      return;
+  getValues() {
+    let value = this.props.value;
+    if (!value) {
+      value = [];
     }
-    if (this.props.onDuplicate) {
-      this.props.onDuplicate(this.props.fields);
+    //Opens one field group by default if there isn't one open for the advisor portal.
+    if (this.props.readOnly && this.props.value.length === 0) {
+      return [this.props.fields];
+    } else {
+      return value;
     }
-  }
-
-  getDeleteButtonClasses() {
-    let classes = ["wrapper"];
-
-    if (this.props.readOnly) {
-      classes.push("hide-btn");
-    }
-
-    return classes.join(" ");
   }
 
   render() {
@@ -102,7 +119,7 @@ class ToastDuplicateInputButton extends React.Component {
     return Style.it(
       `${styles}`,
       <div>
-        {(this.props.value || []).map((data, index) => (
+        {this.getValues().map((data, index) => (
           <div key={index}>
             <div className={this.getDeleteButtonClasses()}>
               <h4>

@@ -26,7 +26,7 @@ import {
 
 class Family extends React.Component {
   getClasses() {
-    let classes = ["family"];
+    let classes = ["overflow "];
 
     if (this.props.currentStep !== 2) {
       classes.push("hidden");
@@ -44,6 +44,11 @@ class Family extends React.Component {
     hr {
       width: 100%;
       margin: 2rem 0;
+    }
+
+    .overflow {
+      overflow-y: auto;
+      height: calc(90vh - 10.5rem);
     }
     `;
 
@@ -64,7 +69,6 @@ class Family extends React.Component {
           onDuplicate={this.props.addPartner}
           onDelete={this.props.deletePartner}
           readOnly={this.props.readOnly}
-          maxItems={1}
         >
           <ToastInput
             type="text"
@@ -122,7 +126,6 @@ class Family extends React.Component {
           onDuplicate={this.props.addChild}
           onDelete={this.props.deleteChild}
           readOnly={this.props.readOnly}
-          maxItems={2}
         >
           <ToastInput
             type="text"
