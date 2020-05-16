@@ -26,7 +26,7 @@ import {
 
 class Family extends React.Component {
   getClasses() {
-    let classes = ["overflow "];
+    let classes = ["overflow"];
 
     if (this.props.currentStep !== 2) {
       classes.push("hidden");
