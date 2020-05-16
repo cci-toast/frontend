@@ -11,7 +11,6 @@ class ToastPieChart extends React.Component {
     super(props);
 
     this.getLabel = this.getLabel.bind(this);
-    this.setActiveToggle = this.setActiveToggle.bind(this);
   }
 
   getLabel(e) {
@@ -20,10 +19,6 @@ class ToastPieChart extends React.Component {
         {`$${numWithCommas(e.value)}`}
       </text>
     );
-  }
-
-  setActiveToggle() {
-    // this must be defined to use ToastToggle
   }
 
   render() {
@@ -97,17 +92,9 @@ class ToastPieChart extends React.Component {
         </svg>
 
         <div className="chart">
-          <div className="row">
-            <ToastToggle
-              active="Target"
-              inactive="Current"
-              activeLabel={this.setActiveToggle}
-            />
-
-            <div className="top-right">
-              <h3>{this.props.header}</h3>
-              <p className="subheader">{subheader}</p>
-            </div>
+          <div className="top-right">
+            <h3>{this.props.header}</h3>
+            <p className="subheader">{subheader}</p>
           </div>
 
           <PieChart
