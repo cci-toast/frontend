@@ -118,10 +118,10 @@ class ToastSelect extends React.Component {
       height: 3rem;
       overflow: hidden;
       background: ${this.backgroundColor};
-      margin: 0.5rem 2rem 1.5rem 0;
+      margin: 0.5rem 2rem 1.5rem 0.25rem;
       padding: 0 0.5rem;
       cursor: ${this.cursor};
-      width: 23.5rem;
+      width: 23rem;
     }
 
     .container {
