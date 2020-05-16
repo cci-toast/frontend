@@ -48,6 +48,7 @@ class Family extends React.Component {
 
     .overflow {
       overflow-y: auto;
+      height: calc(72vh - 5.5rem);
     }
     `;
 
@@ -68,7 +69,6 @@ class Family extends React.Component {
           onDuplicate={this.props.addPartner}
           onDelete={this.props.deletePartner}
           readOnly={this.props.readOnly}
-          maxItems={1}
         >
           <ToastInput
             type="text"
@@ -126,7 +126,6 @@ class Family extends React.Component {
           onDuplicate={this.props.addChild}
           onDelete={this.props.deleteChild}
           readOnly={this.props.readOnly}
-          maxItems={2}
         >
           <ToastInput
             type="text"

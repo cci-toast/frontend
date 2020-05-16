@@ -51,6 +51,7 @@ class Finances extends React.Component {
 
     .overflow {
       overflow-y: auto;
+      height: calc(75vh - 5.5rem);
     }
 
     hr {

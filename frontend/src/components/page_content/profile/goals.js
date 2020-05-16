@@ -31,6 +31,7 @@ class Goals extends React.Component {
     }
     .overflow {
       overflow-y: auto;
+      height: calc(72vh - 5.5rem);
     }
     `;
 
@@ -45,7 +46,6 @@ class Goals extends React.Component {
           onDuplicate={this.props.addGoal}
           onDelete={this.props.deleteGoal}
           readOnly={this.props.readOnly}
-          maxItems={3}
         >
           <ToastSelect
             options={goalOptions}
