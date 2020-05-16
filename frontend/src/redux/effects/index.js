@@ -164,20 +164,25 @@ function* fetchClients() {
 
 function* fetchClientMatchedAdvisor() {
   let id = yield select(Selectors.getClientId);
-  const response = yield readAPI(`${baseURL}/api/clients/${id}`);
-  let advisor = response.advisor;
+  let advisor = null;
+  if (id !== "") {
+    const response = yield readAPI(`${baseURL}/api/clients/${id}`);
+    advisor = response.advisor;
+  }
   return advisor;
 }
 
 function* fetchAdvisorContact() {
   yield takeLatest("fetchAdvisorContact", function* (action) {
     let advisor = yield fetchClientMatchedAdvisor();
-    const response = yield readAPI(`${baseURL}/api/advisors/${advisor}`);
-    yield put(Actions.setAdvisorValue("firstName", response.first_name));
-    yield put(Actions.setAdvisorValue("lastName", response.last_name));
-    yield put(Actions.setAdvisorValue("email", response.email));
-    yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
-    yield put(Actions.setAdvisorValue("address", response.address));
+    if (advisor !== null) {
+      const response = yield readAPI(`${baseURL}/api/advisors/${advisor}`);
+      yield put(Actions.setAdvisorValue("firstName", response.first_name));
+      yield put(Actions.setAdvisorValue("lastName", response.last_name));
+      yield put(Actions.setAdvisorValue("email", response.email));
+      yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
+      yield put(Actions.setAdvisorValue("address", response.address));
+    }
   });
 }
 
