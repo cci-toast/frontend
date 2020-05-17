@@ -74,7 +74,6 @@ class Debt extends React.Component {
 
   getToggleClasses() {
     let classes = ["toggle"];
-    console.log(this.props.loanDebt);
     if (this.props.loanDebt === undefined || 0) {
       classes.push("hidden");
     }
