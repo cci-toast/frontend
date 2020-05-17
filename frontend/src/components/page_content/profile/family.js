@@ -115,7 +115,7 @@ class Family extends React.Component {
             iconWidth={20}
             iconHeight={20}
             readOnly={this.props.readOnly}
-            helpText="Enter your partner's personal annual net income. This is their income after taxes (take home pay)."
+            helpText="Enter your partner's income after taxes (take home pay)."
           />
         </ToastDuplicateInputButton>
 

@@ -93,7 +93,9 @@ class PageTemplate extends React.Component {
         case "plan":
           return (
             <MainHeader
-              header={`${this.props.firstName} ${this.props.middleName} ${this.props.lastName}'s Plan`}
+              header={`${this.props.firstName} ${this.props.middleName || ""} ${
+                this.props.lastName
+              }'s Plan`}
               leftside="header"
               rightside="nav"
             />
@@ -101,7 +103,9 @@ class PageTemplate extends React.Component {
         case "actionitems":
           return (
             <MainHeader
-              header={`${this.props.firstName} ${this.props.middleName} ${this.props.lastName}'s Action Items`}
+              header={`${this.props.firstName} ${this.props.middleName || ""} ${
+                this.props.lastName
+              }'s Action Items`}
               leftside="header"
               rightside="nav"
             />
