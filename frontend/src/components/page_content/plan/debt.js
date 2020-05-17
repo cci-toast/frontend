@@ -72,6 +72,15 @@ class Debt extends React.Component {
     }
   }
 
+  getToggleClasses() {
+    let classes = ["toggle"];
+    console.log(this.props.loanDebt);
+    if (this.props.loanDebt === undefined || 0) {
+      classes.push("hidden");
+    }
+    return classes.join(" ");
+  }
+
   getCaption() {
     return `Given that your monthly income is $${numWithCommas(
       calcMonthlyValue(this.props.salaryAfterTax)
@@ -117,7 +126,7 @@ class Debt extends React.Component {
     .toggle {
         position: relative;
         z-index: 1;
-        top: 95px;
+        top: 60px;
         left: 40px;
     }
     `;
@@ -126,7 +135,7 @@ class Debt extends React.Component {
       `${styles}`,
 
       <div className={this.getClasses()}>
-        <div className="toggle">
+        <div className={this.getToggleClasses()}>
           <ToastToggle
             active="Target"
             inactive="Current"
