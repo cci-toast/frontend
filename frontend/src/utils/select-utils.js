@@ -71,11 +71,7 @@ export const getStateCode = (name) => {
 
 export const housingOptions = ["Rent", "Mortgage"];
 
-export const childEducationOptions = [
-  "College",
-  "Going to College",
-  "Other (Type in)",
-];
+export const childEducationOptions = ["College", "Going to College"];
 
 export const getBirthYearOptions = (maxOffset) => {
   if (maxOffset === undefined) {
