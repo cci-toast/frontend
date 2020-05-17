@@ -62,7 +62,13 @@ class PageTemplate extends React.Component {
     if (this.props.user === "client") {
       switch (this.props.page) {
         case "profile":
-          return <MainHeader header="Your Profile" leftside="header" />;
+          return (
+            <MainHeader
+              header="Your Profile"
+              leftside="header"
+              autoSaveHeader
+            />
+          );
         case "plan":
           return <MainHeader header="Your Plan" leftside="header" />;
         case "actionitems":
