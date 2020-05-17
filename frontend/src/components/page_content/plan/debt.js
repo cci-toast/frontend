@@ -126,8 +126,8 @@ class Debt extends React.Component {
     .toggle {
         position: relative;
         z-index: 1;
-        top: 60px;
-        left: 40px;
+        top: 3.75rem;
+        left: 2.5rem;
     }
     `;
 
