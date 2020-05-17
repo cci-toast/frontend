@@ -40,12 +40,7 @@ class ToastPieChart extends React.Component {
           const { name, fill } = entry.payload;
           return (
             <span className="legend-item" key={`${name}-1`}>
-              <Surface
-                width={40}
-                height={25}
-                viewBox="0 0 25 40"
-                key={`${name}-2`}
-              >
+              <Surface width={40} height={25} key={`${name}-2`}>
                 <rect
                   x="0"
                   width="40"
