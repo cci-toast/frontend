@@ -826,7 +826,7 @@ function* savePartners() {
         }
       }
 
-      if (body.firstName !== undefined) {
+      if (body.first_name !== undefined) {
         let response = yield writeAPI("POST", `${baseURL}/api/partner`, body);
         yield put(Actions.setPartnerListValue(i, "id", response.id));
       }
@@ -887,7 +887,7 @@ function* saveChildren() {
         }
       }
 
-      if (body.firstName !== undefined) {
+      if (body.first_name !== undefined) {
         let response = yield writeAPI("POST", `${baseURL}/api/children`, body);
         yield put(Actions.setChildListValue(i, "id", response.id));
       }
