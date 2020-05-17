@@ -41,7 +41,7 @@ class Goals extends React.Component {
       <div className={this.getClasses()}>
         <ToastDuplicateInputButton
           label="Add Goal"
-          fields={{ goal: "", amount: "", endDate: "" }}
+          fields={{ id: "", goal: "", amount: "", endDate: "" }}
           value={this.props.goals}
           onChange={this.props.setGoalListValue}
           onDuplicate={this.props.addGoal}
@@ -57,6 +57,7 @@ class Goals extends React.Component {
             id="goals"
             readOnly={this.props.readOnly}
             helpText="Select your goal or select 'Other (Type in)' to type in your own goal."
+            required
           />
 
           <ToastInput
