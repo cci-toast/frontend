@@ -35,14 +35,14 @@ class Debt extends React.Component {
 
     this.actual = [
       {
-        name: "Salary After Debt",
+        name: "Remaining Monthly Income",
         value:
           calcMonthlyValue(this.props.salaryAfterTax) - this.props.loanDebt ||
           0,
         fill: "var(--toast-neutral-3)",
       },
       {
-        name: "Current Savings",
+        name: "Current Monthly Savings",
         value: this.props.loanDebt || 0,
         fill: "url(#gradient)",
       },
@@ -113,17 +113,26 @@ class Debt extends React.Component {
     .hidden {
         display: none;
     }
+
+    .toggle {
+        position: relative;
+        z-index: 1;
+        top: 95px;
+        left: 40px;
+    }
     `;
 
     return Style.it(
       `${styles}`,
 
       <div className={this.getClasses()}>
-        <ToastToggle
-          active="Target"
-          inactive="Current"
-          activeLabel={this.setActiveToggle}
-        />
+        <div className="toggle">
+          <ToastToggle
+            active="Target"
+            inactive="Current"
+            activeLabel={this.setActiveToggle}
+          />
+        </div>
         <div ref={this.targetDebt} className="">
           <ToastPieChart
             label={this.data}
@@ -140,6 +149,7 @@ class Debt extends React.Component {
             salaryAfterTax={this.props.salaryAfterTax}
             data={this.actual}
             caption={this.getCaption()}
+            header="&nbsp;"
           />
         </div>
       </div>
