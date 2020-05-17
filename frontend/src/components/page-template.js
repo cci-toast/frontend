@@ -5,6 +5,7 @@ import MainHeader from "./main-header";
 import MainNav from "./main-nav";
 import AdvisorContactContent from "./page_content/advisor-contact-content";
 import ClientsContent from "./page_content/clients-content";
+import ActionItemsContent from "./page_content/action-items-content";
 import ToastCard from "./toast/toast-card";
 import ToastPageNav from "./toast/toast-page-nav";
 import ToastHelp from "./toast/toast-help";
@@ -18,6 +19,7 @@ import {
   getLastName,
   getProfileTitlesList,
   getFactorsTitlesList,
+  getClientId,
 } from "../redux/selectors";
 
 class PageTemplate extends React.Component {
@@ -27,6 +29,8 @@ class PageTemplate extends React.Component {
         return <AdvisorContactContent {...this.props} />;
       case "clients":
         return <ClientsContent {...this.props} />;
+      case "actionitems":
+        return <ActionItemsContent {...this.props} />;
       default:
         return <PageContentTemplate {...this.props} />;
     }
@@ -50,6 +54,13 @@ class PageTemplate extends React.Component {
         return (
           <ToastPageNav hidden titlesList={this.props.factorsTitlesList} />
         );
+      case "plan":
+        return (
+          <ToastPageNav
+            titlesList={this.props.factorsTitlesList}
+            hidden={this.props.clientId === ""}
+          />
+        );
       default:
         return <ToastPageNav titlesList={this.props.factorsTitlesList} />;
     }
@@ -59,7 +70,13 @@ class PageTemplate extends React.Component {
     if (this.props.user === "client") {
       switch (this.props.page) {
         case "profile":
-          return <MainHeader header="Your Profile" leftside="header" />;
+          return (
+            <MainHeader
+              header="Your Profile"
+              leftside="header"
+              autoSaveHeader
+            />
+          );
         case "plan":
           return <MainHeader header="Your Plan" leftside="header" />;
         case "actionitems":
@@ -84,7 +101,9 @@ class PageTemplate extends React.Component {
         case "plan":
           return (
             <MainHeader
-              header={`${this.props.firstName} ${this.props.middleName} ${this.props.lastName}'s Plan`}
+              header={`${this.props.firstName} ${this.props.middleName || ""} ${
+                this.props.lastName
+              }'s Plan`}
               leftside="header"
               rightside="nav"
             />
@@ -92,7 +111,9 @@ class PageTemplate extends React.Component {
         case "actionitems":
           return (
             <MainHeader
-              header={`${this.props.firstName} ${this.props.middleName} ${this.props.lastName}'s Action Items`}
+              header={`${this.props.firstName} ${this.props.middleName || ""} ${
+                this.props.lastName
+              }'s Action Items`}
               leftside="header"
               rightside="nav"
             />
@@ -160,6 +181,7 @@ const mapStateToProps = (state) => ({
   lastName: getLastName(state),
   profileTitlesList: getProfileTitlesList(state),
   factorsTitlesList: getFactorsTitlesList(state),
+  clientId: getClientId(state),
 });
 
 export default connect(mapStateToProps)(PageTemplate);

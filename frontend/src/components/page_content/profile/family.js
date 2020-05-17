@@ -60,6 +60,7 @@ class Family extends React.Component {
           id="partner"
           label="Add Partner"
           fields={{
+            id: "",
             firstName: "",
             birthYear: "",
             lastName: "",
@@ -78,6 +79,7 @@ class Family extends React.Component {
             placeholder="Type in your partner's first name"
             readOnly={this.props.readOnly}
             helpText="Enter your partner's first name."
+            required
           />
 
           <ToastInput
@@ -113,7 +115,7 @@ class Family extends React.Component {
             iconWidth={20}
             iconHeight={20}
             readOnly={this.props.readOnly}
-            helpText="Enter your partner's personal annual net income. This is their income after taxes (take home pay)."
+            helpText="Enter your partner's income after taxes (take home pay)."
           />
         </ToastDuplicateInputButton>
 
@@ -121,7 +123,7 @@ class Family extends React.Component {
 
         <ToastDuplicateInputButton
           label="Add Child"
-          fields={{ firstName: "", education: "", birthYear: 2020 }}
+          fields={{ id: "", firstName: "", education: "", birthYear: 2020 }}
           value={this.props.children}
           onChange={this.props.setChildListValue}
           onDuplicate={this.props.addChild}
@@ -135,6 +137,7 @@ class Family extends React.Component {
             name="firstName"
             readOnly={this.props.readOnly}
             helpText="Enter your child's first name."
+            required
           />
 
           <ToastSelect

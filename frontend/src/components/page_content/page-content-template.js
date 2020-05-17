@@ -11,9 +11,6 @@ import {
 } from "../../redux/selectors";
 import { incrementStep, decrementStep } from "../../redux/actions";
 
-import ActionItemsContent from "./action-items-content";
-import AdvisorContactContent from "./advisor-contact-content";
-import ClientsContent from "./clients-content";
 import ConfigurationContent from "./configuration-content";
 import PlanContent from "./plan-content";
 import ProfileContent from "./profile-content";
@@ -40,14 +37,22 @@ class PageContentTemplate extends React.Component {
   }
 
   getHideCancel() {
-    return this.props.clientId === "" || this.props.currentStep === 0;
+    if (this.props.user === "client") {
+      return this.props.clientId === "" || this.props.currentStep === 0;
+    } else {
+      return this.props.currentStep === 0;
+    }
   }
 
   getHideSave() {
-    return (
-      (this.props.clientId === "" && this.props.currentStep !== 0) ||
-      (this.props.currentStep === 4 && this.props.page !== "profile")
-    );
+    if (this.props.user === "client") {
+      return (
+        (this.props.clientId === "" && this.props.page !== "Profile") ||
+        (this.props.currentStep === 4 && this.props.page !== "profile")
+      );
+    } else {
+      return this.props.currentStep === 4 && this.props.page !== "profile";
+    }
   }
 
   getSave() {
@@ -68,17 +73,6 @@ class PageContentTemplate extends React.Component {
         return <ProfileContent {...this.props} />;
       case "plan":
         return <PlanContent {...this.props} showContent={this.showContent()} />;
-      case "actionitems":
-        return (
-          <ActionItemsContent
-            {...this.props}
-            showContent={this.showContent()}
-          />
-        );
-      case "advisorcontact":
-        return <AdvisorContactContent {...this.props} />;
-      case "clients":
-        return <ClientsContent {...this.props} />;
       case "configuration":
         return <ConfigurationContent {...this.props} />;
       default:

@@ -148,7 +148,7 @@ class Finances extends React.Component {
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
             helpText="Enter the amount you spend per month on utilities."
-            helpExamples="water, electricity, gas, sewer, internet, telephone, tv"
+            helpExamples="water, electricity, gas, sewer, internet, phone, tv"
           />
         </ToastShowHideInput>
 
@@ -208,7 +208,7 @@ class Finances extends React.Component {
             value={this.props.loanDebt}
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
-            helpText="Enter the amount you pay per month towards loans and debt."
+            helpText="Enter the amount you pay per month towards loans/debt."
             helpExamples="credit card, student loans, medical"
           />
         </ToastShowHideInput>

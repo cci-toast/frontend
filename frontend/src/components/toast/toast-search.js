@@ -22,7 +22,7 @@ class ToastSearch extends React.Component {
     const styles = `
     .wrapper {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         margin: 0.5rem 3rem 0.5rem 0;
         width: 20rem;
     }

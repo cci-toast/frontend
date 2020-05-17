@@ -32,14 +32,26 @@ class ToastSelect extends React.Component {
     } else {
       this.helpOverlayMargin = "-3rem";
     }
+
+    if (this.props.noScroll) {
+      this.helpPosition = "absolute";
+    } else {
+      this.helpPosition = "relative";
+    }
+  }
+
+  componentDidMount() {
+    this.showInput();
   }
 
   showInput() {
     let select = this.select.current.children[0];
     for (let i = 0; i < select.options.length; i++) {
       if (
-        select.options[i].selected &&
-        select.options[i].value === "Other (Type in)"
+        (select.options[i].selected &&
+          select.options[i].value === "Other (Type in)") ||
+        (!this.props.options.includes(this.props.value) &&
+          this.props.value !== "")
       ) {
         this.input.current.classList.remove("hidden");
         this.select.current.classList.add("hidden");
@@ -128,7 +140,7 @@ class ToastSelect extends React.Component {
       height: 6.25rem;
     }
 
-    .required .input-label:after {
+    .required .input-label-select:after {
       content: "*";
       color: var(--toast-red);
       margin-left: 0.125rem;
@@ -159,12 +171,14 @@ class ToastSelect extends React.Component {
       padding: 0.5rem;
       color: var(--toast-neutral-6);
       font-size: 0.8125rem;
-      position: absolute;
+      position: inherit;
       margin-top: ${this.helpOverlayMargin};
-      margin-left: 1rem;
+      margin-left: -0.25rem;
     }
 
     .help-overlay p {
+      display: flex;
+      flex-direction: column;
       color: var(--toast-neutral-6);
       font-size: 0.8125rem;
       margin: 0;
@@ -175,17 +189,30 @@ class ToastSelect extends React.Component {
       font-style: italic;
     }
 
+    .hidden {
+      display: none;
+    }
+
     .help-container {
       display: flex;
       justify-content: flex-end;
       width: 24rem;
+      position: ${this.helpPosition};
     }
 
     .triangle {
-      margin-top: -1rem;
-      margin-left: -0.5rem;
-      position: absolute;
+      position: inherit;
       fill: var(--toast-neutral-1);
+      right: 1.25rem;
+      top: -1rem;
+    }
+
+    .help-container-absolute {
+      position: absolute;
+      width: 24rem;
+      display: flex;
+      justify-content: flex-end;
+      margin-left: 0.75rem;
     }
     `;
 
@@ -197,30 +224,34 @@ class ToastSelect extends React.Component {
       `${styles}`,
       <div className={this.getClasses()} onMouseOut={this.onMouseOutHelp}>
         <div className="help-container">
-          <div className="help-overlay hidden" ref={this.helpOverlay}>
-            <p>
-              {this.props.helpText}
-              <br />
-              <span
-                className={this.props.helpExamples ? "help-examples" : "hidden"}
-              >
-                Examples:{" "}
+          <div className="help-container-absolute">
+            <div className="help-overlay hidden" ref={this.helpOverlay}>
+              <span>
+                {this.props.helpText}
+                <br />
+                <span
+                  className={
+                    this.props.helpExamples ? "help-examples" : "hidden"
+                  }
+                >
+                  Examples:{" "}
+                </span>
+                {this.props.helpExamples}
               </span>
-              {this.props.helpExamples}
-            </p>
+            </div>
+            <svg
+              height="20"
+              width="20"
+              className="triangle hidden"
+              ref={this.triangle}
+            >
+              <polygon points="0,0 20,0 10,10" />
+            </svg>
           </div>
-          <svg
-            height="20"
-            width="20"
-            className="triangle hidden"
-            ref={this.triangle}
-          >
-            <polygon points="0,0 20,0 10,10" />
-          </svg>
         </div>
 
         <div className="label-icon">
-          <label className="input-label">{this.props.label}</label>
+          <label className="input-label-select">{this.props.label}</label>
           <div
             className={this.getHelpIconClasses()}
             onMouseOver={this.onMouseOverHelp}
@@ -262,7 +293,13 @@ class ToastSelect extends React.Component {
           <ToastInput
             type="text"
             placeholder={this.getPlaceholder()}
+            name={this.props.name}
             onChange={this.props.onChange}
+            value={this.props.value}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            disabled={this.props.readOnly}
+            title={this.props.placeholder}
             select
           />
         </div>
