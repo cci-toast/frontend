@@ -103,6 +103,7 @@ class Profile extends React.Component {
             required
             readOnly={this.props.readOnly}
             helpText="Enter your first name. This field is required."
+            noScroll
           />
 
           <ToastInput
@@ -114,6 +115,7 @@ class Profile extends React.Component {
             onChange={this.handleChange}
             readOnly={this.props.readOnly}
             helpText="Enter your middle name."
+            noScroll
           />
 
           <ToastInput
@@ -185,7 +187,7 @@ class Profile extends React.Component {
               onChange={this.handleIncomeChange}
               step={1}
               readOnly={this.props.readOnly}
-              helpText="Enter your personal annual net income. This is your income after taxes (take home pay)."
+              helpText="Enter your income after taxes (take home pay)."
               required
             />
           </div>

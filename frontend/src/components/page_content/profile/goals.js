@@ -56,7 +56,7 @@ class Goals extends React.Component {
             placeholder="Select your goal"
             id="goals"
             readOnly={this.props.readOnly}
-            helpText="Select your goal or select 'Other (Type in)' to type in your own goal."
+            helpText="Select a goal or select 'Other (Type in)' to create your own."
             required
           />
 
