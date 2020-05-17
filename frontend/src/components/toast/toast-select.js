@@ -34,12 +34,18 @@ class ToastSelect extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.showInput();
+  }
+
   showInput() {
     let select = this.select.current.children[0];
     for (let i = 0; i < select.options.length; i++) {
       if (
-        select.options[i].selected &&
-        select.options[i].value === "Other (Type in)"
+        (select.options[i].selected &&
+          select.options[i].value === "Other (Type in)") ||
+        (!this.props.options.includes(this.props.value) &&
+          this.props.value !== "")
       ) {
         this.input.current.classList.remove("hidden");
         this.select.current.classList.add("hidden");
@@ -128,7 +134,7 @@ class ToastSelect extends React.Component {
       height: 6.25rem;
     }
 
-    .required .input-label:after {
+    .required .input-label-select:after {
       content: "*";
       color: var(--toast-red);
       margin-left: 0.125rem;
@@ -220,7 +226,7 @@ class ToastSelect extends React.Component {
         </div>
 
         <div className="label-icon">
-          <label className="input-label">{this.props.label}</label>
+          <label className="input-label-select">{this.props.label}</label>
           <div
             className={this.getHelpIconClasses()}
             onMouseOver={this.onMouseOverHelp}
@@ -262,7 +268,13 @@ class ToastSelect extends React.Component {
           <ToastInput
             type="text"
             placeholder={this.getPlaceholder()}
+            name={this.props.name}
             onChange={this.props.onChange}
+            value={this.props.value}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            disabled={this.props.readOnly}
+            title={this.props.placeholder}
             select
           />
         </div>
