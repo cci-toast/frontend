@@ -37,19 +37,16 @@ class PageContentTemplate extends React.Component {
   }
 
   getHideCancel() {
-    if (this.props.user === "client") {
-      return this.props.clientId === "" || this.props.currentStep === 0;
+    if (this.props.user === "client" && this.props.page === "plan") {
+      return this.props.clientId === "";
     } else {
       return this.props.currentStep === 0;
     }
   }
 
   getHideSave() {
-    if (this.props.user === "client") {
-      return (
-        (this.props.clientId === "" && this.props.page !== "Profile") ||
-        (this.props.currentStep === 4 && this.props.page !== "profile")
-      );
+    if (this.props.user === "client" && this.props.page === "plan") {
+      return this.props.clientId === "";
     } else {
       return this.props.currentStep === 4 && this.props.page !== "profile";
     }
