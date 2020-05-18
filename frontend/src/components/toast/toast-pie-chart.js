@@ -73,7 +73,7 @@ class ToastPieChart extends React.Component {
             flex-direction: column;
             background-color: var(--toast-neutral-5);
             padding: 2rem 5rem 5rem 2rem;
-            margin: -1.25rem 1rem 2rem 1rem;
+            margin: 0rem 1rem 2rem 1rem;
             border-radius: 0.5rem;
             height: 47vh;
             width: 44rem;

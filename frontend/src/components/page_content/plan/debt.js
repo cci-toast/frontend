@@ -90,7 +90,7 @@ class Debt extends React.Component {
   }
 
   getClasses() {
-    let classes = [""];
+    let classes = ["chart"];
 
     if (this.props.currentStep !== 2) {
       classes.push("hidden");
@@ -116,6 +116,10 @@ class Debt extends React.Component {
     const styles = `
     .wrapper {
         display: flex;
+    }
+    
+    .chart {
+     margin-top: -1.25rem;
     }
     
     .hidden {
