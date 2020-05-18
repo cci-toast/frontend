@@ -121,7 +121,7 @@ class Debt extends React.Component {
     .chart {
      margin-top: -1.25rem;
     }
-    
+
     .hidden {
         display: none;
     }
@@ -129,7 +129,7 @@ class Debt extends React.Component {
     .toggle {
         position: relative;
         z-index: 1;
-        top: 3.75rem;
+        top: 5rem;
         left: 2.5rem;
     }
     `;
