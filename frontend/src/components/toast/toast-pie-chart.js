@@ -4,15 +4,12 @@ import Style from "style-it";
 import { PieChart, Pie, Legend, Surface } from "recharts";
 
 import { numWithCommas } from "../../utils/plan-utils";
-import ToastToggle from "./toast-toggle";
 
 class ToastPieChart extends React.Component {
   constructor(props) {
     super(props);
 
     this.getLabel = this.getLabel.bind(this);
-    this.setActiveToggle = this.setActiveToggle.bind(this);
-    this.renderCusomizedLegend = this.renderCusomizedLegend.bind(this);
   }
 
   getLabel(e) {
@@ -27,10 +24,6 @@ class ToastPieChart extends React.Component {
         {`$${numWithCommas(e.value)}`}
       </text>
     );
-  }
-
-  setActiveToggle() {
-    // this must be defined to use ToastToggle
   }
 
   renderCusomizedLegend(props) {
@@ -59,6 +52,7 @@ class ToastPieChart extends React.Component {
       </div>
     );
   }
+
   render() {
     if (this.props.subheader) {
       var subheader = "/ $" + numWithCommas(this.props.subheader);
@@ -79,7 +73,7 @@ class ToastPieChart extends React.Component {
             flex-direction: column;
             background-color: var(--toast-neutral-5);
             padding: 2rem 5rem 5rem 2rem;
-            margin: 1.25rem 1rem 2rem 1rem;
+            margin: 0rem 1rem 2rem 1rem;
             border-radius: 0.5rem;
             height: 47vh;
             width: 44rem;
@@ -158,17 +152,9 @@ class ToastPieChart extends React.Component {
         </svg>
 
         <div className="chart">
-          <div className="row">
-            <ToastToggle
-              active="Target"
-              inactive="Current"
-              activeLabel={this.setActiveToggle}
-            />
-
-            <div className="top-right">
-              <h3>{this.props.header}</h3>
-              <p className="subheader">{subheader}</p>
-            </div>
+          <div className="top-right">
+            <h3>{this.props.header}</h3>
+            <p className="subheader">{subheader}</p>
           </div>
 
           <PieChart

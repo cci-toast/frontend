@@ -49,7 +49,7 @@ class Budgeting extends React.Component {
   }
 
   getClasses() {
-    let classes = [""];
+    let classes = ["chart"];
 
     if (this.props.currentStep !== 4) {
       classes.push("hidden");
@@ -60,6 +60,9 @@ class Budgeting extends React.Component {
 
   render() {
     const styles = `
+    .chart {
+      margin-top: 1.25rem;
+    }
     .wrapper {
         display: flex;
     }
@@ -78,6 +81,7 @@ class Budgeting extends React.Component {
           salaryAfterTax={this.props.salaryAfterTax}
           data={this.data}
           caption={this.getCaption()}
+          header="&nbsp;"
         />
       </div>
     );
