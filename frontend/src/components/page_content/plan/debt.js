@@ -75,7 +75,7 @@ class Debt extends React.Component {
   getToggleClasses() {
     let classes = ["toggle"];
     if (this.props.loanDebt === undefined || 0) {
-      classes.push("hidden");
+      classes.push("hide-visibility");
     }
     return classes.join(" ");
   }
@@ -124,6 +124,10 @@ class Debt extends React.Component {
 
     .hidden {
         display: none;
+    }
+
+    .hide-visibility {
+        visibility: hidden;
     }
 
     .toggle {
