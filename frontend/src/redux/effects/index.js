@@ -768,6 +768,7 @@ function* saveExpenses() {
     } else {
       let expensesId = currentExpenses.results[0].id;
       yield writeAPI("PATCH", `${baseURL}/api/expenses/${expensesId}`, body);
+      yield fetchExpenses();
     }
   }
 }
@@ -778,7 +779,7 @@ function* saveDebt() {
 
   let body = {
     client: id,
-    debt_monthly_amount: Math.ceil(Number(loanDebt)),
+    debt_monthly_amount: Math.ceil(Number(loanDebt || 0)),
   };
 
   for (let propName in body) {
@@ -795,6 +796,7 @@ function* saveDebt() {
   } else {
     let debtId = currentDebt.results[0].id;
     yield writeAPI("PATCH", `${baseURL}/api/debt/${debtId}`, body);
+    yield fetchDebt();
   }
 }
 
@@ -861,6 +863,7 @@ function* savePartners() {
 
       let id = partners[i].id;
       yield writeAPI("PATCH", `${baseURL}/api/partner/${id}`, body);
+      yield fetchPartners();
     }
   }
 }
@@ -916,6 +919,7 @@ function* saveChildren() {
 
       let id = children[i].id;
       yield writeAPI("PATCH", `${baseURL}/api/children/${id}`, body);
+      yield fetchChildren();
     }
   }
 }
@@ -975,6 +979,7 @@ function* saveGoals() {
 
       let id = goals[i].id;
       yield writeAPI("PATCH", `${baseURL}/api/goals/${id}`, body);
+      yield fetchGoals();
     }
   }
 }
@@ -1052,6 +1057,7 @@ function* saveActionItems() {
 
       let id = actionItems[i].id;
       yield writeAPI("PATCH", `${baseURL}/api/action_items/${id}`, body);
+      yield fetchActionItems();
     }
   }
 }
