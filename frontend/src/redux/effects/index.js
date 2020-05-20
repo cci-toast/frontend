@@ -91,6 +91,8 @@ function* authLoginAdvisor() {
     yield put(Actions.setAuthKey(response.key));
     yield fetchAdvisorEmail();
     yield put(Actions.resetConfigs());
+    yield fetchClientsForce();
+    yield fetchFactors();
     yield put((document.location.href = "/clients"));
   });
 }
@@ -133,33 +135,36 @@ function* fetchAdvisorEmail() {
   return response;
 }
 
+function* fetchClientsForce() {
+  yield put(Actions.resetProfile());
+  yield put(Actions.resetFinances());
+  yield put(Actions.resetFamily());
+  yield put(Actions.resetGoals());
+  yield put(Actions.resetAdvisor());
+  yield put(Actions.resetPlan());
+  yield put(Actions.resetActionItems());
+
+  let advisor = yield fetchAdvisorEmail();
+
+  const response = yield readAPI(
+    `${baseURL}/api/clients?advisor=${advisor.results[0].id}&limit=2000&offset=0`
+  );
+
+  const clients = response.results.map((client) => {
+    return {
+      id: client.id,
+      firstName: client.first_name,
+      middleName: client.middle_name,
+      lastName: client.last_name,
+    };
+  });
+
+  yield put(Actions.setAdvisorValue("clients", clients));
+}
+
 function* fetchClients() {
   yield takeLatest("fetchClients", function* (action) {
-    // reset entire profile, plan, action items
-    yield put(Actions.resetProfile());
-    yield put(Actions.resetFinances());
-    yield put(Actions.resetFamily());
-    yield put(Actions.resetGoals());
-    yield put(Actions.resetAdvisor());
-    yield put(Actions.resetPlan());
-    yield put(Actions.resetActionItems());
-
-    let advisor = yield fetchAdvisorEmail();
-
-    const response = yield readAPI(
-      `${baseURL}/api/clients?advisor=${advisor.results[0].id}&limit=2000&offset=0`
-    );
-
-    const clients = response.results.map((client) => {
-      return {
-        id: client.id,
-        firstName: client.first_name,
-        middleName: client.middle_name,
-        lastName: client.last_name,
-      };
-    });
-
-    yield put(Actions.setAdvisorValue("clients", clients));
+    yield fetchClientsForce();
   });
 }
 
@@ -561,60 +566,65 @@ function* fetchPlanId() {
   }
 }
 
+function* fetchFactors() {
+  let clients = yield select(Selectors.getClients);
+  let clientIds = clients.map((client) => client.id);
+
+  for (let i = 0; i < clientIds.length; i++) {
+    yield fetchPlan();
+  }
+}
+
 function* saveFactors() {
+  let clients = yield select(Selectors.getClients);
+  let clientIds = clients.map((client) => client.id);
+
+  for (let i = 0; i < clientIds.length; i++) {
+    let planId = yield fetchPlanId();
+
+    if (planId !== "") {
+      let emergencySavingsFactorUpper = yield select(
+        Selectors.getSavingsFactorUpperBound
+      );
+      let emergencySavingsFactorLower = yield select(
+        Selectors.getSavingsFactorLowerBound
+      );
+      let budgetSavingsFactor = yield select(Selectors.getSavingsMultiplier);
+      let budgetFixedExpensesFactor = yield select(
+        Selectors.getFixedExpensesMultiplier
+      );
+      let budgetSpendingFactor = yield select(Selectors.getSpendingMultiplier);
+      let debtRepaymentFactor = yield select(Selectors.getDebtMultiplier);
+      let retirementFactor = yield select(Selectors.getRetirementMultiplier);
+      let protectionFactor = yield select(Selectors.getProtectionMultiplier);
+
+      let body = {
+        emergency_savings_factor_upper: emergencySavingsFactorUpper,
+        emergency_savings_factor_lower: emergencySavingsFactorLower,
+        budget_savings_factor: budgetSavingsFactor,
+        budget_fixed_expenses_factor: budgetFixedExpensesFactor,
+        budget_spending_factor: budgetSpendingFactor,
+        debt_repayment_factor: debtRepaymentFactor,
+        retirement_factor: retirementFactor,
+        protection_factor: protectionFactor,
+      };
+
+      for (let propName in body) {
+        if (body[propName] === "") {
+          delete body[propName];
+        }
+      }
+
+      yield writeAPI("PATCH", `${baseURL}/api/plan/${planId}`, body);
+    }
+  }
+}
+
+function* saveFactorsOnStep() {
   yield takeLatest(
     ["incrementStep", "decrementStep", "setStep", "resetStep"],
     function* (action) {
-      let clients = yield select(Selectors.getClients);
-      let clientIds = clients.map((client) => client.id);
-
-      for (let i = 0; i < clientIds.length; i++) {
-        let planId = yield fetchPlanId();
-
-        if (planId !== "") {
-          let emergencySavingsFactorUpper = yield select(
-            Selectors.getSavingsFactorUpperBound
-          );
-          let emergencySavingsFactorLower = yield select(
-            Selectors.getSavingsFactorLowerBound
-          );
-          let budgetSavingsFactor = yield select(
-            Selectors.getSavingsMultiplier
-          );
-          let budgetFixedExpensesFactor = yield select(
-            Selectors.getFixedExpensesMultiplier
-          );
-          let budgetSpendingFactor = yield select(
-            Selectors.getSpendingMultiplier
-          );
-          let debtRepaymentFactor = yield select(Selectors.getDebtMultiplier);
-          let retirementFactor = yield select(
-            Selectors.getRetirementMultiplier
-          );
-          let protectionFactor = yield select(
-            Selectors.getProtectionMultiplier
-          );
-
-          let body = {
-            emergency_savings_factor_upper: emergencySavingsFactorUpper,
-            emergency_savings_factor_lower: emergencySavingsFactorLower,
-            budget_savings_factor: budgetSavingsFactor,
-            budget_fixed_expenses_factor: budgetFixedExpensesFactor,
-            budget_spending_factor: budgetSpendingFactor,
-            debt_repayment_factor: debtRepaymentFactor,
-            retirement_factor: retirementFactor,
-            protection_factor: protectionFactor,
-          };
-
-          for (let propName in body) {
-            if (body[propName] === "") {
-              delete body[propName];
-            }
-          }
-
-          yield writeAPI("PATCH", `${baseURL}/api/plan/${planId}`, body);
-        }
-      }
+      yield saveFactors();
     }
   );
 }
@@ -1062,5 +1072,7 @@ export default function* rootEffect() {
     deleteActionItem(),
     saveActionItemsAdvisor(),
     saveFactors(),
+    saveFactorsOnStep(),
+    fetchFactors(),
   ]);
 }
