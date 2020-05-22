@@ -7,7 +7,7 @@ import { getStateCode } from "../../utils/select-utils";
 
 const baseURL = "https://toastapi.herokuapp.com";
 
-function* fetchCities() {
+export function* fetchCities() {
   yield takeLatest("fetchCities", function* (action) {
     const response = yield fetch(
       `https://parseapi.back4app.com/classes/Usabystate_${getStateCode(
@@ -27,7 +27,7 @@ function* fetchCities() {
   });
 }
 
-function* readAPI(url) {
+export function* readAPI(url) {
   const authKey = yield select(Selectors.getAuthKey);
   return yield fetch(url, {
     method: "GET",
@@ -50,7 +50,7 @@ function* readAPI(url) {
     });
 }
 
-function* writeAPI(type, url, body) {
+export function* writeAPI(type, url, body) {
   const authKey = yield select(Selectors.getAuthKey);
   return yield fetch(url, {
     method: type,
@@ -74,7 +74,7 @@ function* writeAPI(type, url, body) {
     });
 }
 
-function* authLoginAdvisor() {
+export function* authLoginAdvisor() {
   yield takeLatest(["loginAdvisor"], function* () {
     let response = yield fetch(`${baseURL}/auth/login/`, {
       method: "POST",
@@ -97,7 +97,7 @@ function* authLoginAdvisor() {
   });
 }
 
-function* authLoginClient() {
+export function* authLoginClient() {
   yield takeLatest(["loginClient"], function* () {
     let response = yield fetch(`${baseURL}/auth/login/`, {
       method: "POST",
@@ -126,7 +126,7 @@ function* authLoginClient() {
   });
 }
 
-function* fetchAdvisorEmail() {
+export function* fetchAdvisorEmail() {
   let email = yield select(Selectors.getEmail);
 
   const response = yield readAPI(`${baseURL}/api/advisors?email=${email}`);
@@ -135,7 +135,7 @@ function* fetchAdvisorEmail() {
   return response;
 }
 
-function* fetchClientsForce() {
+export function* fetchClientsForce() {
   yield put(Actions.resetProfile());
   yield put(Actions.resetFinances());
   yield put(Actions.resetFamily());
@@ -162,13 +162,13 @@ function* fetchClientsForce() {
   yield put(Actions.setAdvisorValue("clients", clients));
 }
 
-function* fetchClients() {
+export function* fetchClients() {
   yield takeLatest("fetchClients", function* (action) {
     yield fetchClientsForce();
   });
 }
 
-function* fetchClientMatchedAdvisor() {
+export function* fetchClientMatchedAdvisor() {
   let id = yield select(Selectors.getClientId);
   let advisor = null;
   if (id !== "") {
@@ -178,7 +178,7 @@ function* fetchClientMatchedAdvisor() {
   return advisor;
 }
 
-function* fetchAdvisorContact() {
+export function* fetchAdvisorContact() {
   yield takeLatest("fetchAdvisorContact", function* (action) {
     let advisor = yield fetchClientMatchedAdvisor();
     if (advisor !== null) {
@@ -192,7 +192,7 @@ function* fetchAdvisorContact() {
   });
 }
 
-function* fetchClientProfileEmail() {
+export function* fetchClientProfileEmail() {
   yield takeLatest("fetchClientProfileEmail", function* (action) {
     let email = yield select(Selectors.getEmail);
     const response = yield readAPI(`${baseURL}/api/clients?email=${email}`);
@@ -265,7 +265,7 @@ function* fetchClientProfileEmail() {
   });
 }
 
-function* fetchClientProfileId() {
+export function* fetchClientProfileId() {
   yield takeLatest("fetchClientProfileId", function* (action) {
     const response = yield readAPI(
       `${baseURL}/api/clients/${action.payload.clientId}`
@@ -322,7 +322,7 @@ function* fetchClientProfileId() {
   });
 }
 
-function* fetchExpenses() {
+export function* fetchExpenses() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/expenses?client=${id}`);
 
@@ -363,7 +363,7 @@ function* fetchExpenses() {
   return response;
 }
 
-function* fetchDebt() {
+export function* fetchDebt() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/debt?client=${id}`);
 
@@ -383,7 +383,7 @@ function* fetchDebt() {
   return response;
 }
 
-function* fetchPartners() {
+export function* fetchPartners() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/partner?client=${id}`);
 
@@ -414,7 +414,7 @@ function* fetchPartners() {
   return response;
 }
 
-function* fetchChildren() {
+export function* fetchChildren() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/children?client=${id}`);
 
@@ -444,7 +444,7 @@ function* fetchChildren() {
   return response;
 }
 
-function* fetchGoals() {
+export function* fetchGoals() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/goals?client=${id}`);
 
@@ -474,7 +474,7 @@ function* fetchGoals() {
   return response;
 }
 
-function* fetchPlan() {
+export function* fetchPlan() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/plan?client=${id}`);
 
@@ -527,7 +527,7 @@ function* fetchPlan() {
   return response;
 }
 
-function* fetchActionItems() {
+export function* fetchActionItems() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/action_items?client=${id}`);
 
@@ -555,7 +555,7 @@ function* fetchActionItems() {
 
   return response;
 }
-function* fetchPlanId() {
+export function* fetchPlanId() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/plan?client=${id}`);
 
@@ -566,7 +566,7 @@ function* fetchPlanId() {
   }
 }
 
-function* fetchFactors() {
+export function* fetchFactors() {
   let clients = yield select(Selectors.getClients);
   let clientIds = clients.map((client) => client.id);
 
@@ -575,7 +575,7 @@ function* fetchFactors() {
   }
 }
 
-function* saveFactors() {
+export function* saveFactors() {
   let clients = yield select(Selectors.getClients);
   let clientIds = clients.map((client) => client.id);
 
@@ -620,7 +620,7 @@ function* saveFactors() {
   }
 }
 
-function* saveFactorsOnStep() {
+export function* saveFactorsOnStep() {
   yield takeLatest(
     ["incrementStep", "decrementStep", "setStep", "resetStep"],
     function* (action) {
@@ -629,7 +629,7 @@ function* saveFactorsOnStep() {
   );
 }
 
-function* saveClientProfile() {
+export function* saveClientProfile() {
   yield takeLatest(
     ["incrementStep", "decrementStep", "setStep", "resetStep"],
     function* (action) {
@@ -713,7 +713,7 @@ function* saveClientProfile() {
   );
 }
 
-function* saveActionItemsAdvisor() {
+export function* saveActionItemsAdvisor() {
   yield takeLatest(
     ["incrementStep", "decrementStep", "setStep", "resetStep"],
     function* (action) {
@@ -722,7 +722,7 @@ function* saveActionItemsAdvisor() {
   );
 }
 
-function* saveExpenses() {
+export function* saveExpenses() {
   const id = yield select(Selectors.getClientId);
   const housingType = yield select(Selectors.getHousingType);
   const housingAmount = yield select(Selectors.getHousingAmount);
@@ -773,7 +773,7 @@ function* saveExpenses() {
   }
 }
 
-function* saveDebt() {
+export function* saveDebt() {
   const id = yield select(Selectors.getClientId);
   const loanDebt = yield select(Selectors.getLoanDebt);
 
@@ -800,7 +800,7 @@ function* saveDebt() {
   }
 }
 
-function* deletePartner() {
+export function* deletePartner() {
   yield takeLatest(["deletePartner"], function* (action) {
     const authKey = yield select(Selectors.getAuthKey);
     yield fetch(`${baseURL}/api/partner/${action.payload.id}`, {
@@ -813,7 +813,7 @@ function* deletePartner() {
   });
 }
 
-function* savePartners() {
+export function* savePartners() {
   const id = yield select(Selectors.getClientId);
   const partners = yield select(Selectors.getPartners);
 
@@ -868,7 +868,7 @@ function* savePartners() {
   }
 }
 
-function* deleteChild() {
+export function* deleteChild() {
   yield takeLatest(["deleteChild"], function* (action) {
     const authKey = yield select(Selectors.getAuthKey);
     yield fetch(`${baseURL}/api/children/${action.payload.id}`, {
@@ -881,7 +881,7 @@ function* deleteChild() {
   });
 }
 
-function* saveChildren() {
+export function* saveChildren() {
   const id = yield select(Selectors.getClientId);
   const children = yield select(Selectors.getChildren);
 
@@ -924,7 +924,7 @@ function* saveChildren() {
   }
 }
 
-function* deleteGoal() {
+export function* deleteGoal() {
   yield takeLatest(["deleteGoal"], function* (action) {
     const authKey = yield select(Selectors.getAuthKey);
     yield fetch(`${baseURL}/api/goals/${action.payload.id}`, {
@@ -937,7 +937,7 @@ function* deleteGoal() {
   });
 }
 
-function* saveGoals() {
+export function* saveGoals() {
   const id = yield select(Selectors.getClientId);
   const goals = yield select(Selectors.getGoals);
 
@@ -984,7 +984,7 @@ function* saveGoals() {
   }
 }
 
-function* savePlan() {
+export function* savePlan() {
   const id = yield select(Selectors.getClientId);
 
   let body = {
@@ -1018,7 +1018,7 @@ function* deleteActionItem() {
   });
 }
 
-function* saveActionItems() {
+export function* saveActionItems() {
   const id = yield select(Selectors.getClientId);
   const actionItems = yield select(Selectors.getActionItems);
 
