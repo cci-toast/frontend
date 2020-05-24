@@ -3,6 +3,7 @@ import Style from "style-it";
 
 import ToastInput from "../../toast/toast-input";
 import ToastSelect from "../../toast/toast-select";
+import ToastIcon from "../../toast/toast-icon";
 import ToastShowHideInput from "../../toast/toast-show-hide-input";
 
 import { connect } from "react-redux";
@@ -33,6 +34,31 @@ class Profile extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
     this.handleIncomeChange = this.handleIncomeChange.bind(this);
+    this.dismissError = this.dismissError.bind(this);
+
+    this.error = React.createRef();
+  }
+
+  validationClasses() {
+    let classes = ["error"];
+    if (this.validationMessage() === "") {
+      classes.push("hidden");
+    }
+    return classes.join(" ");
+  }
+
+  validationMessage() {
+    let validation = [];
+    if (!this.props.firstName) {
+      validation.push("first name");
+    }
+    if (!this.props.lastName) {
+      validation.push("last name");
+    }
+    if (!this.props.salaryAfterTax) {
+      validation.push("net income");
+    }
+    return validation.join(", ");
   }
 
   handleChange(event) {
@@ -51,6 +77,10 @@ class Profile extends React.Component {
     this.props.fetchCities(value);
   }
 
+  dismissError() {
+    this.error.current.classList.add("hidden");
+  }
+
   getClasses() {
     let classes = ["overflow"];
 
@@ -63,10 +93,6 @@ class Profile extends React.Component {
 
   render() {
     const styles = `
-    .hidden {
-        display: none;
-    }
-
     hr {
       width: 100%;
       margin: 2rem 0;
@@ -87,12 +113,53 @@ class Profile extends React.Component {
       overflow-x: hidden;
       height: calc(90vh - 10.5rem);
     }
+
+    .error {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--toast-red-transparent);
+      width: 93%;
+      border-radius: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+    }
+
+    .error-text {
+      font-size: 0.875rem;
+      color: var(--toast-red);
+    }
+
+    .error-icon {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
     `;
 
     return Style.it(
       `${styles}`,
       <div className={this.getClasses()}>
         <div className="profile">
+          <div ref={this.error} className={this.validationClasses()}>
+            <p className="error-text">
+              Please fill out the required fields: {this.validationMessage()}
+            </p>
+            <div onClick={this.dismissError}>
+              <div className="error-icon">
+                <ToastIcon
+                  name="x"
+                  width={24}
+                  height={24}
+                  strokeWidth={2}
+                  stroke="var(--toast-red)"
+                />
+              </div>
+            </div>
+          </div>
           <ToastInput
             type="text"
             label="First Name"

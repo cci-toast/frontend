@@ -48,6 +48,12 @@ class MainHeader extends React.Component {
       margin: 0 5rem 0.5rem 0;
       font-size: 0.875rem;
     }
+
+    .autosave::before {
+    content: "*";
+    color: var(--toast-red);
+    margin-left: 0.125rem;
+    }
     
     .hide-autosave {
       visibility: hidden;
@@ -61,9 +67,11 @@ class MainHeader extends React.Component {
           {this.getLeftSide()}
           {this.getRightSide()}
         </div>
+
         <div
           className={this.props.autoSaveHeader ? "autosave" : "hide-autosave"}
         >
+          = Required field <br />
           Your progress is autosaved
         </div>
       </div>
