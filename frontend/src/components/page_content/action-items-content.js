@@ -15,7 +15,8 @@ import {
   setActionItemListValue,
   toggleActionItem,
 } from "../../redux/actions";
-import { getActionItems } from "../../redux/selectors";
+import { getActionItems, isLoading } from "../../redux/selectors";
+import ToastLoading from "../toast/toast-loading";
 
 class ActionItemsContent extends React.Component {
   constructor(props) {
@@ -41,7 +42,9 @@ class ActionItemsContent extends React.Component {
   }
 
   getActionItems() {
-    if (this.props.actionItems.length !== 0) {
+    if (this.props.isLoading) {
+      return <ToastLoading />;
+    } else if (this.props.actionItems.length !== 0 && !this.props.isLoading) {
       return this.props.actionItems.map((actionItem) => {
         if (actionItem.description !== "") {
           return (
@@ -164,6 +167,7 @@ class ActionItemsContent extends React.Component {
 
 const mapStateToProps = (state) => ({
   actionItems: getActionItems(state),
+  isLoading: isLoading(state),
 });
 
 export default connect(mapStateToProps, {

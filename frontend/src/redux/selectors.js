@@ -24,6 +24,7 @@ export const getAuthKey = (state) => state.loginReducer.authKey;
 export const getCurrentStep = (state) => state.pageContentReducer.currentStep;
 export const getShowPlanReady = (state) =>
   state.pageContentReducer.showPlanReady;
+export const isLoading = (state) => state.pageContentReducer.isLoading;
 
 // PROFILE
 

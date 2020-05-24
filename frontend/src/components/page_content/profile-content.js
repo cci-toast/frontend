@@ -1,11 +1,13 @@
 import React from "react";
-import Style from "style-it";
 
 import Profile from "./profile/profile";
 import Finances from "./profile/finances";
 import Family from "./profile/family";
 import Goals from "./profile/goals.js";
+import ToastLoading from "../toast/toast-loading";
+
 import { resetStep } from "../../redux/actions";
+import { isLoading } from "../../redux/selectors";
 import { connect } from "react-redux";
 
 class ProfileContent extends React.Component {
@@ -17,31 +19,40 @@ class ProfileContent extends React.Component {
     return this.props.user === "advisor";
   }
 
-  render() {
-    const styles = ``;
+  getContent() {
+    if (this.props.isLoading) {
+      return <ToastLoading />;
+    } else {
+      return (
+        <React.Fragment>
+          <Profile
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+          <Finances
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+          <Family
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+          <Goals
+            currentStep={this.props.currentStep}
+            readOnly={this.isAdvisor()}
+          />
+        </React.Fragment>
+      );
+    }
+  }
 
-    return Style.it(
-      `${styles}`,
-      <React.Fragment>
-        <Profile
-          currentStep={this.props.currentStep}
-          readOnly={this.isAdvisor()}
-        />
-        <Finances
-          currentStep={this.props.currentStep}
-          readOnly={this.isAdvisor()}
-        />
-        <Family
-          currentStep={this.props.currentStep}
-          readOnly={this.isAdvisor()}
-        />
-        <Goals
-          currentStep={this.props.currentStep}
-          readOnly={this.isAdvisor()}
-        />
-      </React.Fragment>
-    );
+  render() {
+    return this.getContent();
   }
 }
 
-export default connect(null, { resetStep })(ProfileContent);
+const mapStateToProps = (state) => ({
+  isLoading: isLoading(state),
+});
+
+export default connect(mapStateToProps, { resetStep })(ProfileContent);

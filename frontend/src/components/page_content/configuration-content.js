@@ -1,12 +1,14 @@
 import React from "react";
-import Style from "style-it";
 
 import EmergencySavings from "../page_content/configuration/emergency-savings";
 import Protection from "../page_content/configuration/protection";
 import Debt from "../page_content/configuration/debt";
 import Retirement from "../page_content/configuration/retirement";
 import Budgeting from "../page_content/configuration/budgeting";
-import { resetStep } from "../../redux/actions";
+import ToastLoading from "../toast/toast-loading";
+
+import { resetStep, setIsLoading } from "../../redux/actions";
+import { isLoading } from "../../redux/selectors";
 import { connect } from "react-redux";
 
 class ConfigurationContent extends React.Component {
@@ -14,20 +16,31 @@ class ConfigurationContent extends React.Component {
     this.props.resetStep();
   }
 
-  render() {
-    const styles = ``;
+  getContent() {
+    if (this.props.isLoading) {
+      return <ToastLoading />;
+    } else {
+      return (
+        <React.Fragment>
+          <EmergencySavings currentStep={this.props.currentStep} />
+          <Protection currentStep={this.props.currentStep} />
+          <Debt currentStep={this.props.currentStep} />
+          <Retirement currentStep={this.props.currentStep} />
+          <Budgeting currentStep={this.props.currentStep} />
+        </React.Fragment>
+      );
+    }
+  }
 
-    return Style.it(
-      `${styles}`,
-      <React.Fragment>
-        <EmergencySavings currentStep={this.props.currentStep} />
-        <Protection currentStep={this.props.currentStep} />
-        <Debt currentStep={this.props.currentStep} />
-        <Retirement currentStep={this.props.currentStep} />
-        <Budgeting currentStep={this.props.currentStep} />
-      </React.Fragment>
-    );
+  render() {
+    return this.getContent();
   }
 }
 
-export default connect(null, { resetStep })(ConfigurationContent);
+const mapStateToProps = (state) => ({
+  isLoading: isLoading(state),
+});
+
+export default connect(mapStateToProps, { resetStep, setIsLoading })(
+  ConfigurationContent
+);

@@ -6,10 +6,11 @@ import Debt from "../page_content/plan/debt";
 import Retirement from "../page_content/plan/retirement";
 import Budgeting from "../page_content/plan/budgeting";
 import ToastEmpty from "../toast/toast-empty";
+import ToastLoading from "../toast/toast-loading";
 
 import { connect } from "react-redux";
 
-import { getTotalIncome } from "../../redux/selectors";
+import { getTotalIncome, isLoading } from "../../redux/selectors";
 import { resetStep } from "../../redux/actions";
 
 class PlanContent extends React.Component {
@@ -18,7 +19,9 @@ class PlanContent extends React.Component {
   }
 
   getContent() {
-    if (this.props.showContent) {
+    if (this.props.isLoading) {
+      return <ToastLoading />;
+    } else if (this.props.showContent && !this.props.isLoading) {
       return (
         <React.Fragment>
           <EmergencySavings
@@ -66,6 +69,7 @@ class PlanContent extends React.Component {
 
 const mapStateToProps = (state) => ({
   salaryAfterTax: getTotalIncome(state),
+  isLoading: isLoading(state),
 });
 
 export default connect(mapStateToProps, { resetStep })(PlanContent);

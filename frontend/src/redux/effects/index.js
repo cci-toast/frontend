@@ -189,6 +189,7 @@ export function* fetchAdvisorContact() {
       yield put(Actions.setAdvisorValue("phoneNumber", response.phone_number));
       yield put(Actions.setAdvisorValue("address", response.address));
     }
+    yield put(Actions.setIsLoading(false));
   });
 }
 
@@ -555,6 +556,39 @@ export function* fetchActionItems() {
 
   return response;
 }
+
+function* loadingState() {
+  yield takeLatest(
+    [
+      "loginClient",
+      "loginAdvisor",
+      "incrementStep",
+      "decrementStep",
+      "setStep",
+      "resetStep",
+    ],
+    function* (action) {
+      yield put(Actions.setIsLoading(true));
+    }
+  );
+
+  yield takeLatest(
+    [
+      "setActionItems",
+      "setProfileValue",
+      "setGoalsValue",
+      "setFinancesValue",
+      "setFamilyValue",
+      "setAdvisorValue",
+      "setPlanValue",
+    ],
+    function* (action) {
+      yield delay(100);
+      yield put(Actions.setIsLoading(false));
+    }
+  );
+}
+
 export function* fetchPlanId() {
   const id = yield select(Selectors.getClientId);
   let response = yield readAPI(`${baseURL}/api/plan?client=${id}`);
@@ -618,6 +652,7 @@ export function* saveFactors() {
       yield writeAPI("PATCH", `${baseURL}/api/plan/${planId}`, body);
     }
   }
+  yield put(Actions.setIsLoading(false));
 }
 
 export function* saveFactorsOnStep() {
@@ -1080,5 +1115,6 @@ export default function* rootEffect() {
     saveFactors(),
     saveFactorsOnStep(),
     fetchFactors(),
+    loadingState(),
   ]);
 }
