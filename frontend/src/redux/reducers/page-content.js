@@ -1,6 +1,7 @@
 const initialState = {
   currentStep: 0,
   showPlanReady: false,
+  isLoading: false,
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +35,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         showPlanReady: !state.showPlanReady,
+      };
+    }
+    case "setIsLoading": {
+      const { isLoading } = action.payload;
+      return {
+        ...state,
+        isLoading: isLoading,
       };
     }
     default:

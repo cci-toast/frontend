@@ -2,10 +2,11 @@ import React from "react";
 import Style from "style-it";
 
 import ToastEmpty from "../toast/toast-empty";
+import ToastLoading from "../toast/toast-loading";
 
 import { connect } from "react-redux";
 
-import { setAdvisorValue, resetStep } from "../../redux/actions";
+import { setAdvisorValue, resetStep, setIsLoading } from "../../redux/actions";
 
 import {
   getAdvisorFirstName,
@@ -13,6 +14,7 @@ import {
   getAdvisorEmail,
   getAdvisorPhoneNumber,
   getAdvisorAddress,
+  isLoading,
 } from "../../redux/selectors";
 
 import { fetchAdvisorContact } from "../../redux/actions";
@@ -20,6 +22,7 @@ class AdvisorContactContent extends React.Component {
   constructor(props) {
     super(props);
 
+    this.props.setIsLoading(true);
     this.props.fetchAdvisorContact();
   }
 
@@ -28,7 +31,9 @@ class AdvisorContactContent extends React.Component {
   }
 
   getContent() {
-    if (this.props.firstName !== "") {
+    if (this.props.isLoading) {
+      return <ToastLoading />;
+    } else if (this.props.firstName !== "" && !this.props.isLoading) {
       return (
         <div>
           <div className="entry">
@@ -97,10 +102,12 @@ const mapStateToProps = (state) => ({
   email: getAdvisorEmail(state),
   phoneNumber: getAdvisorPhoneNumber(state),
   address: getAdvisorAddress(state),
+  isLoading: isLoading(state),
 });
 
 export default connect(mapStateToProps, {
   setAdvisorValue,
   resetStep,
   fetchAdvisorContact,
+  setIsLoading,
 })(AdvisorContactContent);

@@ -3,10 +3,15 @@ import Style from "style-it";
 
 import ClientListEntry from "../client-list-entry";
 import ToastEmpty from "../toast/toast-empty";
+import ToastLoading from "../toast/toast-loading";
 
 import { connect } from "react-redux";
-import { setSearchTerm } from "../../redux/actions";
-import { getFilteredClients, getSearchTerm } from "../../redux/selectors";
+import { setSearchTerm, setIsLoading } from "../../redux/actions";
+import {
+  getFilteredClients,
+  getSearchTerm,
+  isLoading,
+} from "../../redux/selectors";
 import { fetchClients } from "../../redux/actions";
 
 class ClientsContent extends React.Component {
@@ -14,6 +19,7 @@ class ClientsContent extends React.Component {
     super(props);
 
     this.props.fetchClients();
+    this.props.setIsLoading(true);
   }
 
   componentDidMount() {
@@ -35,7 +41,9 @@ class ClientsContent extends React.Component {
   }
 
   getContent() {
-    if (this.props.clients.length !== 0) {
+    if (this.props.isLoading) {
+      return <ToastLoading />;
+    } else if (this.props.clients.length !== 0 && !this.props.isLoading) {
       return <div className="container">{this.getClients()}</div>;
     } else {
       return (
@@ -62,9 +70,11 @@ class ClientsContent extends React.Component {
 const mapStateToProps = (state) => ({
   clients: getFilteredClients(state),
   searchTerm: getSearchTerm(state),
+  isLoading: isLoading(state),
 });
 
 export default connect(mapStateToProps, {
   fetchClients,
   setSearchTerm,
+  setIsLoading,
 })(ClientsContent);
