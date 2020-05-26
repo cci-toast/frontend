@@ -15,7 +15,7 @@ import {
   setActionItemListValue,
   toggleActionItem,
 } from "../../redux/actions";
-import { getActionItems, isLoading } from "../../redux/selectors";
+import { getActionItemsSorted, isLoading } from "../../redux/selectors";
 import ToastLoading from "../toast/toast-loading";
 
 class ActionItemsContent extends React.Component {
@@ -166,7 +166,7 @@ class ActionItemsContent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  actionItems: getActionItems(state),
+  actionItems: getActionItemsSorted(state),
   isLoading: isLoading(state),
 });
 
