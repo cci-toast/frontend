@@ -1,6 +1,7 @@
 import { calcMonthlyValue, calcSalaryAfterDebt } from "../utils/plan-utils";
 import { lookupUser } from "../utils/login-utils";
 import { filterClients } from "../utils/search-utils";
+import { sortItemsBackwards } from "../utils/action-items-utils";
 
 import { createSelector } from "reselect";
 
@@ -137,6 +138,11 @@ export const getSpendingMultiplier = (state) =>
 
 // action items
 export const getActionItems = (state) => state.actionItemsReducer.actionItems;
+
+export const getActionItemsSorted = createSelector(
+  [getActionItems],
+  sortItemsBackwards
+);
 
 // advisor
 export const getAdvisorId = (state) => state.advisorReducer.id;
