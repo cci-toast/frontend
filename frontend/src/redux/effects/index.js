@@ -569,6 +569,10 @@ function* loadingState() {
     ],
     function* (action) {
       yield put(Actions.setIsLoading(true));
+      let clientId = yield select(Selectors.getClientId);
+      if (clientId === "") {
+        yield put(Actions.setIsLoading(false));
+      }
     }
   );
 
