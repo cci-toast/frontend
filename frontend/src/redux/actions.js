@@ -52,6 +52,11 @@ export const setStep = (step) => ({
   payload: { step },
 });
 
+export const setIsLoading = (isLoading) => ({
+  type: "setIsLoading",
+  payload: { isLoading },
+});
+
 export const toggleShowPlanReady = () => ({
   type: "toggleShowPlanReady",
 });

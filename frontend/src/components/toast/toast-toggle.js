@@ -12,7 +12,7 @@ class ToastToggle extends React.Component {
 
     if (this.props.actionItems) {
       this.width = "8rem";
-      this.transform = "5.25rem";
+      this.transform = "5.125rem";
     } else {
       this.width = "10rem";
       this.transform = "5.875rem";
@@ -67,6 +67,8 @@ class ToastToggle extends React.Component {
           letter-spacing: 0.5px;
           text-transform: uppercase;
           cursor: pointer;
+          position: relative;
+          margin-right: 0.125rem;
       }
 
       label {
