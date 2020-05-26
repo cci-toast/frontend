@@ -1080,8 +1080,14 @@ export function* saveActionItems() {
         `${baseURL}/api/action_items`,
         body
       );
-
-      yield put(Actions.setActionItemListValue(i, "id", response.id));
+      yield put(
+        Actions.addActionItem({
+          id: response.id,
+          description: actionItems[i].description,
+          completed: actionItems[i].completed,
+        })
+      );
+      yield fetchActionItems();
     } else {
       let body = {
         description: actionItems[i].description,
