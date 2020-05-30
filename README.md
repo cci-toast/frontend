@@ -6,7 +6,7 @@
 npm i react-scripts
 npm i --save react-center
 npm i --save react-router-dom
-npm i style-it
+npm i style-it --save
 npm i redux react-redux
 npm i redux-saga
 npm i jest
