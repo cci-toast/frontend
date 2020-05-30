@@ -29,7 +29,7 @@
         "build": "react-scripts build",
         "test": "jest --coverage",
         "eject": "react-scripts eject",
-        "coveralls": "jest --coverage && cat ./tests/coverage/lcov-report/lcov.info | coveralls"
+        "coveralls": "jest --coverage && cat ./coverage/lcov-report/lcov.info | coveralls"
     },
     "eslintConfig": {
         "extends": "react-app"
