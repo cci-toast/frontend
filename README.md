@@ -18,7 +18,7 @@ npm i react-test-renderer
 npm i recharts
 npm i redux-persist
 npm i reselect
-npm install coveralls --save-dev
+npm i coveralls --save-dev
 ```
 
 ## Viewing the Application
