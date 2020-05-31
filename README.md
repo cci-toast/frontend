@@ -1,3 +1,6 @@
+![Build Status](https://travis-ci.org/cci-toast/frontend.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/cci-toast/frontend/badge.svg)](https://coveralls.io/github/cci-toast/frontend)
+
 # Toast Frontend
 
 ## Prerequisites
@@ -18,6 +21,7 @@ npm i react-test-renderer
 npm i recharts
 npm i redux-persist
 npm i reselect
+npm i coveralls --save-dev
 ```
 
 ## Viewing the Application

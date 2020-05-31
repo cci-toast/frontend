@@ -28,7 +28,8 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "jest --coverage",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -50,6 +51,7 @@
         "@babel/preset-env": "^7.9.5",
         "@babel/preset-react": "^7.9.4",
         "babel-jest": "^24.9.0",
+        "coveralls": "^3.1.0",
         "react-test-renderer": "^16.13.1"
     },
     "resolutions": {
