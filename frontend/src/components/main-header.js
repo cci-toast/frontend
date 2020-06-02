@@ -71,8 +71,7 @@ class MainHeader extends React.Component {
         <div
           className={this.props.autoSaveHeader ? "autosave" : "hide-autosave"}
         >
-          = Required field <br />
-          Your progress is autosaved
+          = Required field. Your progress is autosaved.
         </div>
       </div>
     );
