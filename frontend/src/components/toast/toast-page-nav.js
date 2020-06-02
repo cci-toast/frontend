@@ -15,7 +15,13 @@ class ToastPageNav extends React.Component {
   }
 
   handleClick(event) {
-    this.props.setStep(parseInt(event.target.getAttribute("name")));
+    if (this.props.enabled === undefined || this.props.enabled) {
+      this.props.setStep(parseInt(event.target.getAttribute("name")));
+    } else {
+      window.alert(
+        "Please fill out all required fields with an asterisk (*) beside it before continuing with the form."
+      );
+    }
   }
 
   isActive(title) {

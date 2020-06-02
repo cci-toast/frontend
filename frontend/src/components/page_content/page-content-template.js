@@ -8,6 +8,9 @@ import {
   getCurrentStep,
   getClientId,
   getFilteredClients,
+  getFirstName,
+  getLastName,
+  getSalaryAfterTax,
 } from "../../redux/selectors";
 import { incrementStep, decrementStep } from "../../redux/actions";
 
@@ -47,6 +50,12 @@ class PageContentTemplate extends React.Component {
   getHideSave() {
     if (this.props.user === "client" && this.props.page === "plan") {
       return this.props.clientId === "";
+    } else if (this.props.user === "client" && this.props.page === "profile") {
+      return (
+        !this.props.firstName ||
+        !this.props.lastName ||
+        !this.props.salaryAfterTax
+      );
     } else {
       return this.props.currentStep === 4 && this.props.page !== "profile";
     }
@@ -115,6 +124,9 @@ const mapStateToProps = (state) => ({
   currentStep: getCurrentStep(state),
   clientId: getClientId(state),
   clients: getFilteredClients(state),
+  firstName: getFirstName(state),
+  lastName: getLastName(state),
+  salaryAfterTax: getSalaryAfterTax(state),
 });
 
 export default connect(mapStateToProps, {

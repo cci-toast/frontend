@@ -17,12 +17,18 @@ import {
   getFirstName,
   getMiddleName,
   getLastName,
+  getSalaryAfterTax,
   getProfileTitlesList,
   getFactorsTitlesList,
   getClientId,
 } from "../redux/selectors";
 
 class PageTemplate extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.getLeftNavEnabled = this.getLeftNavEnabled.bind(this);
+  }
   getScreenContent() {
     switch (this.props.page) {
       case "advisorcontact":
@@ -36,11 +42,23 @@ class PageTemplate extends React.Component {
     }
   }
 
+  getLeftNavEnabled() {
+    return !(
+      !this.props.firstName ||
+      !this.props.lastName ||
+      !this.props.salaryAfterTax
+    );
+  }
+
   getLeftNav() {
     switch (this.props.page) {
       case "profile":
         return (
-          <ToastPageNav profile titlesList={this.props.profileTitlesList} />
+          <ToastPageNav
+            profile
+            titlesList={this.props.profileTitlesList}
+            enabled={this.getLeftNavEnabled()}
+          />
         );
       case "clients":
         return (
@@ -179,6 +197,7 @@ const mapStateToProps = (state) => ({
   firstName: getFirstName(state),
   middleName: getMiddleName(state),
   lastName: getLastName(state),
+  salaryAfterTax: getSalaryAfterTax(state),
   profileTitlesList: getProfileTitlesList(state),
   factorsTitlesList: getFactorsTitlesList(state),
   clientId: getClientId(state),
