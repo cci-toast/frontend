@@ -14,10 +14,10 @@ test("getStateCode - not found", () => {
 
 test("getBirthYearOptions - default maxOffset", () => {
   expect(getBirthYearOptions()[0]).toBe(new Date().getFullYear());
-  expect(getBirthYearOptions()[120]).toBe(1900);
+  expect(getBirthYearOptions()[120]).toBe(new Date().getFullYear() - 120);
 });
 
 test("getBirthYearOptions - custom maxOffset", () => {
   expect(getBirthYearOptions(50)[0]).toBe(new Date().getFullYear());
-  expect(getBirthYearOptions(50)[50]).toBe(1970);
+  expect(getBirthYearOptions(50)[50]).toBe(new Date().getFullYear() - 50);
 });
